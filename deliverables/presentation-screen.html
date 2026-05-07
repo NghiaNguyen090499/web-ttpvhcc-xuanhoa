@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xuân Hòa Presentation Screen</title>
+    <style>
+      :root {
+        --portal-red: #a61d21;
+        --portal-deep-red: #7b1216;
+        --portal-text: #2f241d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f6ede4;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      .canvas {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(240, 182, 84, 0.18), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(166, 29, 33, 0.12), transparent 30%),
+          linear-gradient(180deg, #fbf4ec 0%, #f4e7d7 100%);
+      }
+
+      .header {
+        position: absolute;
+        top: 3.2vw;
+        left: 4.6vw;
+        right: 4.6vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.6vw;
+        color: var(--portal-text);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.6vw;
+        color: var(--portal-red);
+        font-size: 1vw;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        margin: 0;
+        max-width: 48vw;
+        font-size: 3.35vw;
+        line-height: 1;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--portal-deep-red);
+      }
+
+      .subtitle {
+        margin: 1vw 0 0;
+        max-width: 44vw;
+        font-size: 1.15vw;
+        line-height: 1.55;
+        color: rgba(47, 36, 29, 0.78);
+      }
+
+      .stamp {
+        padding: 1vw 1.2vw;
+        border: 1px solid rgba(166, 29, 33, 0.14);
+        border-radius: 1.5vw;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: 0 18px 40px -30px rgba(80, 31, 21, 0.38);
+        text-align: right;
+      }
+
+      .stamp-label {
+        display: block;
+        margin-bottom: 0.45vw;
+        color: #8c6c57;
+        font-size: 0.72vw;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .stamp-value {
+        display: block;
+        color: var(--portal-red);
+        font-size: 1.4vw;
+        font-weight: 800;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .frame {
+        position: absolute;
+        left: 4.6vw;
+        right: 4.6vw;
+        top: 20vw;
+        bottom: 4.8vw;
+        overflow: hidden;
+        border: 1px solid rgba(231, 214, 197, 0.96);
+        border-radius: 2.2vw;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 34px 80px -42px rgba(84, 34, 20, 0.44);
+      }
+
+      .chrome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4vw;
+        padding: 0 1.5vw;
+        border-bottom: 1px solid rgba(231, 214, 197, 0.96);
+        background: linear-gradient(180deg, #fff8f1 0%, #fdf2e6 100%);
+      }
+
+      .dots {
+        display: flex;
+        gap: 0.45vw;
+      }
+
+      .dot {
+        width: 0.72vw;
+        height: 0.72vw;
+        border-radius: 999px;
+        background: #d5b59c;
+      }
+
+      .address {
+        color: #7a6558;
+        font-size: 0.95vw;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .badge {
+        padding: 0.55vw 0.9vw;
+        border-radius: 999px;
+        background: var(--portal-red);
+        color: #fff;
+        font-size: 0.78vw;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .viewport {
+        position: relative;
+        height: calc(100% - 4vw);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      iframe {
+        width: 118vw;
+        height: 118vw;
+        border: 0;
+        transform: translate(4.2vw, 0) scale(0.78);
+        transform-origin: top left;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="header">
+        <div>
+          <p class="eyebrow">Bản Gửi Đối Tác</p>
+          <h1 class="title">Giao Diện Cổng Thông Tin Phường Xuân Hòa</h1>
+          <p class="subtitle">
+            Ảnh trình bày giao diện ở định dạng ngang, dùng để gửi đối tác duyệt tổng thể.
+          </p>
+        </div>
+
+        <div class="stamp">
+          <span class="stamp-label">Xuất ảnh</span>
+          <span class="stamp-value">PNG Full HD</span>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="chrome">
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="address">congthongtin.xuanhoa.gov.vn</div>
+          <div class="badge">Portal Preview</div>
+        </div>
+
+        <div class="viewport">
+          <iframe src="/dist/"></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

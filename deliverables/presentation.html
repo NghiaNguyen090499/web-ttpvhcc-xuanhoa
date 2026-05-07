@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xuân Hòa Presentation</title>
+    <style>
+      :root {
+        --portal-red: #a61d21;
+        --portal-deep-red: #7b1216;
+        --portal-gold: #f0b654;
+        --portal-cream: #fbf4ec;
+        --portal-border: #e7d6c5;
+        --portal-text: #2f241d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f6ede4;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      .canvas {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(240, 182, 84, 0.18), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(166, 29, 33, 0.12), transparent 30%),
+          linear-gradient(180deg, #fbf4ec 0%, #f4e7d7 100%);
+      }
+
+      .canvas::before,
+      .canvas::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(8px);
+      }
+
+      .canvas::before {
+        top: -220px;
+        right: -180px;
+        width: 540px;
+        height: 540px;
+        background: rgba(166, 29, 33, 0.1);
+      }
+
+      .canvas::after {
+        left: -180px;
+        bottom: -180px;
+        width: 420px;
+        height: 420px;
+        background: rgba(240, 182, 84, 0.14);
+      }
+
+      .header {
+        position: absolute;
+        top: 46px;
+        left: 72px;
+        right: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        color: var(--portal-text);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--portal-red);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        margin: 0;
+        max-width: 860px;
+        font-size: 58px;
+        line-height: 1;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--portal-deep-red);
+      }
+
+      .subtitle {
+        margin: 16px 0 0;
+        max-width: 760px;
+        font-size: 22px;
+        line-height: 1.55;
+        color: rgba(47, 36, 29, 0.78);
+      }
+
+      .stamp {
+        padding: 18px 22px;
+        border: 1px solid rgba(166, 29, 33, 0.14);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: 0 18px 40px -30px rgba(80, 31, 21, 0.38);
+        text-align: right;
+      }
+
+      .stamp-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #8c6c57;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .stamp-value {
+        display: block;
+        color: var(--portal-red);
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .frame {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 240px;
+        bottom: 70px;
+        overflow: hidden;
+        border: 1px solid rgba(231, 214, 197, 0.96);
+        border-radius: 34px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 34px 80px -42px rgba(84, 34, 20, 0.44);
+      }
+
+      .chrome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+        padding: 0 22px;
+        border-bottom: 1px solid rgba(231, 214, 197, 0.96);
+        background: linear-gradient(180deg, #fff8f1 0%, #fdf2e6 100%);
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #d5b59c;
+      }
+
+      .address {
+        color: #7a6558;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .badge {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: var(--portal-red);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .viewport {
+        position: relative;
+        height: calc(100% - 56px);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      iframe {
+        width: 1600px;
+        height: 1600px;
+        border: 0;
+        transform: translate(95px, 0) scale(0.92);
+        transform-origin: top left;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="header">
+        <div>
+          <p class="eyebrow">Bản Gửi Đối Tác</p>
+          <h1 class="title">Giao Diện Cổng Thông Tin Phường Xuân Hòa</h1>
+          <p class="subtitle">
+            Ảnh trình bày Full HD từ giao diện đã hoàn thiện, dùng để gửi đối tác duyệt bố cục,
+            màu sắc và ngôn ngữ nhận diện tổng thể.
+          </p>
+        </div>
+
+        <div class="stamp">
+          <span class="stamp-label">Xuất ảnh</span>
+          <span class="stamp-value">1920 × 1080 PNG</span>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="chrome">
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="address">congthongtin.xuanhoa.gov.vn</div>
+          <div class="badge">Portal Preview</div>
+        </div>
+
+        <div class="viewport">
+          <iframe src="/dist/"></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

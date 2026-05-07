@@ -1,0 +1,9 @@
+export { ChatbotWidget } from '@/components/portal/ChatbotWidget';
+export { HeroSection } from '@/components/portal/HeroSection';
+export { NewsSection } from '@/components/portal/NewsSection';
+export { PortalFooter } from '@/components/portal/PortalFooter';
+export { PortalHeader } from '@/components/portal/PortalHeader';
+export { ResourcesSection } from '@/components/portal/ResourcesSection';
+export { ServicesSection } from '@/components/portal/ServicesSection';
+export { StatsStrip } from '@/components/portal/StatsStrip';
+export { TopBar } from '@/components/portal/TopBar';
