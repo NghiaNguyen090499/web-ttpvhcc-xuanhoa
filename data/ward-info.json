@@ -1,0 +1,37 @@
+{
+  "ward": {
+    "name": "Phường Xuân Hòa",
+    "fullName": "UBND Phường Xuân Hòa",
+    "address": "99 Trần Quốc Thảo, Phường Xuân Hòa, TP. Hồ Chí Minh",
+    "city": "TP. Hồ Chí Minh"
+  },
+  "center": {
+    "name": "Trung tâm Phục vụ Hành chính Công Phường Xuân Hòa",
+    "shortName": "TTPVHCC Phường Xuân Hòa",
+    "mission": "Tiếp nhận và giải quyết thủ tục hành chính cho công dân và tổ chức trên địa bàn phường Xuân Hòa",
+    "services": [
+      "Tiếp nhận hồ sơ thủ tục hành chính",
+      "Hướng dẫn tra cứu thủ tục online",
+      "Cung cấp biểu mẫu tải về",
+      "Điều hướng sang Cổng DVC quốc gia",
+      "Hỗ trợ tư vấn qua chatbot AI"
+    ]
+  },
+  "workingHours": {
+    "weekdays": "Thứ 2 - Thứ 6: 07:30 - 11:30, 13:00 - 17:00",
+    "saturday": "Thứ 7: 07:30 - 11:30 (sáng)",
+    "sunday": "Chủ nhật: Nghỉ"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/phuongxuanhoatphochiminh",
+    "zalo": ""
+  },
+  "dvcLinks": {
+    "national": "https://dichvucong.gov.vn",
+    "hcm": "https://dichvucong.hochiminhcity.gov.vn",
+    "traCuu": "https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html",
+    "thuTuc": "https://thutuc.dichvucong.gov.vn/p/home/dvc-tthc-trang-chu.html",
+    "danhGia": "https://kiosk.hochiminhcity.gov.vn/vi/kiosk/danhgiahcm",
+    "huongDan": "https://dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html"
+  }
+}

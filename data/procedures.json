@@ -1,0 +1,400 @@
+{
+  "metadata": {
+    "source": "local",
+    "crawledAt": "2026-05-08",
+    "totalCategories": 6,
+    "totalSubCategories": 20,
+    "totalPhiDiaGioi": 16,
+    "totalThuongGap": 8,
+    "note": "Dữ liệu TTHC cấp phường Xuân Hòa — lưu trữ local, ảnh + PDF từ Canva đã copy vào public/"
+  },
+  "categories": [
+    {
+      "id": "tu-phap",
+      "name": "Tư pháp",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-tu-phap",
+      "description": "Các thủ tục liên quan đến chứng thực, hộ tịch, nuôi con nuôi và phổ biến giáo dục pháp luật tại cấp phường.",
+      "subCategories": [
+        "Chứng thực",
+        "Hộ tịch",
+        "Nuôi con nuôi",
+        "Phổ biến giáo dục Pháp luật"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC phi địa giới — Tư pháp",
+          "type": "phi-dia-gioi",
+          "preview": "/images/procedures/linh-vuc-tu-phap_01-dag6hu9etjc.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-tu-phap_01-dag6hu9etjc.pdf",
+          "pageCount": 9
+        },
+        {
+          "title": "Thủ tục thường gặp — Tư pháp",
+          "type": "thuong-gap",
+          "preview": "/images/procedures/linh-vuc-tu-phap_13-dag7gnrk28w.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-tu-phap_13-dag7gnrk28w.pdf",
+          "pageCount": 2
+        }
+      ]
+    },
+    {
+      "id": "thanh-tra",
+      "name": "Thanh tra",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-thanh-tra",
+      "description": "Các thủ tục tiếp công dân, xử lý đơn, giải quyết khiếu nại, tố cáo và phòng chống tham nhũng.",
+      "subCategories": [
+        "Tiếp công dân",
+        "Xử lý đơn",
+        "Giải quyết khiếu nại",
+        "Giải quyết tố cáo",
+        "Phòng, chống tham nhũng"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC — Thanh tra",
+          "type": "cap-phuong",
+          "preview": "/images/procedures/linh-vuc-thanh-tra_22-dagx5evysyi.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-thanh-tra_22-dagx5evysyi.pdf",
+          "pageCount": 1
+        }
+      ]
+    },
+    {
+      "id": "xay-dung",
+      "name": "Xây dựng",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-xay-dung",
+      "description": "Các thủ tục về đường bộ, hàng hải, hoạt động xây dựng và nhà ở thuộc thẩm quyền cấp phường.",
+      "subCategories": [
+        "Đường bộ",
+        "Hàng hải và đường thủy nội địa",
+        "Hoạt động xây dựng",
+        "Nhà ở"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC phi địa giới — Xây dựng",
+          "type": "phi-dia-gioi",
+          "preview": "/images/procedures/linh-vuc-xay-dung_07-dag6tp6e4vm.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-xay-dung_07-dag6tp6e4vm.pdf",
+          "pageCount": 26
+        },
+        {
+          "title": "Thủ tục thường gặp — Xây dựng",
+          "type": "thuong-gap",
+          "preview": "/images/procedures/linh-vuc-xay-dung_15-dag7gdjxkpq.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-xay-dung_15-dag7gdjxkpq.pdf",
+          "pageCount": 1
+        },
+        {
+          "title": "Danh mục TTHC cấp phường — Xây dựng",
+          "type": "cap-phuong",
+          "preview": "/images/procedures/linh-vuc-xay-dung_23-dagywrqaduy.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-xay-dung_23-dagywrqaduy.pdf",
+          "pageCount": 6
+        }
+      ]
+    },
+    {
+      "id": "y-te",
+      "name": "Y tế",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-y-te",
+      "description": "Các thủ tục về dân số, bà mẹ trẻ em, phòng chống tệ nạn xã hội và thi đua khen thưởng lĩnh vực y tế.",
+      "subCategories": [
+        "Dân số, bà mẹ và trẻ em",
+        "Phòng chống tệ nạn",
+        "Thi đua khen thưởng"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC phi địa giới — Y tế",
+          "type": "phi-dia-gioi",
+          "preview": "/images/procedures/linh-vuc-y-te_02-dag6g73snck.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-y-te_02-dag6g73snck.pdf",
+          "pageCount": 19
+        },
+        {
+          "title": "Danh mục TTHC cấp phường — Y tế",
+          "type": "cap-phuong",
+          "preview": "/images/procedures/linh-vuc-y-te_25-dag7m1yi4rk.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-y-te_25-dag7m1yi4rk.pdf",
+          "pageCount": 3
+        }
+      ]
+    },
+    {
+      "id": "tai-chinh",
+      "name": "Tài chính",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-tai-chinh",
+      "description": "Các thủ tục quản lý công sản, thành lập và hoạt động hỗ trợ tổ hợp tác, hợp tác xã.",
+      "subCategories": [
+        "Quản lý công sản",
+        "Thành lập và hoạt động hỗ trợ của tổ hợp tác, Hợp tác xã, liên hiệp Hợp tác xã"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC phi địa giới — Tài chính",
+          "type": "phi-dia-gioi",
+          "preview": "/images/procedures/linh-vuc-tai-chinh_10-dag64ujyot0.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-tai-chinh_10-dag64ujyot0.pdf",
+          "pageCount": 20
+        },
+        {
+          "title": "Danh mục TTHC cấp phường — Tài chính",
+          "type": "cap-phuong",
+          "preview": "/images/procedures/linh-vuc-tai-chinh_21-dagy0wuhpfq.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-tai-chinh_21-dagy0wuhpfq.pdf",
+          "pageCount": 4
+        }
+      ]
+    },
+    {
+      "id": "noi-vu",
+      "name": "Nội vụ",
+      "type": "cap-phuong",
+      "slug": "linh-vuc-noi-vu",
+      "description": "Các thủ tục về người có công và quản lý nhà nước về thi đua khen thưởng.",
+      "subCategories": [
+        "Người có công",
+        "Quản lý nhà nước về thi đua khen thưởng"
+      ],
+      "documents": [
+        {
+          "title": "Danh mục TTHC phi địa giới — Nội vụ",
+          "type": "phi-dia-gioi",
+          "preview": "/images/procedures/linh-vuc-noi-vu_12-dag6uwshfg4.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-noi-vu_12-dag6uwshfg4.pdf",
+          "pageCount": 20
+        },
+        {
+          "title": "Danh mục TTHC cấp phường — Nội vụ",
+          "type": "cap-phuong",
+          "preview": "/images/procedures/linh-vuc-noi-vu_24-dag7mznxcxu.jpg",
+          "pdf": "/pdf/procedures/linh-vuc-noi-vu_24-dag7mznxcxu.pdf",
+          "pageCount": 8
+        }
+      ]
+    }
+  ],
+  "phiDiaGioi": [
+    {
+      "id": "tu-phap-pdg",
+      "name": "Tư pháp",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-tu-phap",
+      "description": "Thủ tục tư pháp không phụ thuộc địa bàn hành chính",
+      "preview": "/images/procedures/linh-vuc-tu-phap_01-dag6hu9etjc.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-tu-phap_01-dag6hu9etjc.pdf",
+      "pageCount": 9
+    },
+    {
+      "id": "cong-thuong-pdg",
+      "name": "Công thương",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-cong-thuong",
+      "description": "Thủ tục công thương, thương mại phi địa giới",
+      "preview": "/images/procedures/linh-vuc-cong-thuong_04-dag6iu9lgvm.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-cong-thuong_04-dag6iu9lgvm.pdf",
+      "pageCount": 1
+    },
+    {
+      "id": "xay-dung-pdg",
+      "name": "Xây dựng",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-xay-dung",
+      "description": "Thủ tục xây dựng và quy hoạch kiến trúc phi địa giới",
+      "preview": "/images/procedures/linh-vuc-xay-dung_07-dag6tp6e4vm.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-xay-dung_07-dag6tp6e4vm.pdf",
+      "pageCount": 26
+    },
+    {
+      "id": "nong-nghiep-moi-truong-pdg",
+      "name": "Nông nghiệp & Môi trường",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-nong-nghiep",
+      "description": "Thủ tục nông nghiệp, tài nguyên và môi trường",
+      "preview": "/images/procedures/linh-vuc-nong-nghiep_05-dag6obq7ato.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-nong-nghiep_05-dag6obq7ato.pdf",
+      "pageCount": 42
+    },
+    {
+      "id": "y-te-pdg",
+      "name": "Y tế",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-y-te",
+      "description": "Thủ tục y tế, dược phẩm phi địa giới",
+      "preview": "/images/procedures/linh-vuc-y-te_02-dag6g73snck.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-y-te_02-dag6g73snck.pdf",
+      "pageCount": 19
+    },
+    {
+      "id": "dan-toc-ton-giao-pdg",
+      "name": "Dân tộc và Tôn giáo",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-dan-toc-va-ton-giao",
+      "description": "Thủ tục liên quan dân tộc, tôn giáo, tín ngưỡng",
+      "preview": "/images/procedures/linh-vuc-dan-toc-va-ton-giao_09-dag6uwy7o8q.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-dan-toc-va-ton-giao_09-dag6uwy7o8q.pdf",
+      "pageCount": 4
+    },
+    {
+      "id": "du-lich-pdg",
+      "name": "Du lịch",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-du-lich",
+      "description": "Thủ tục du lịch, lữ hành phi địa giới",
+      "preview": "/images/procedures/linh-vuc-du-lich_03-dag6ih0rey4.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-du-lich_03-dag6ih0rey4.pdf",
+      "pageCount": 4
+    },
+    {
+      "id": "khoa-hoc-cn-pdg",
+      "name": "Khoa học Công nghệ & Liên thông",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-khoa-hoc-cong-nghe",
+      "description": "Thủ tục khoa học công nghệ, liên thông điện tử",
+      "preview": "/images/procedures/linh-vuc-khoa-hoc-cong-nghe_08-dag6umtftle.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-khoa-hoc-cong-nghe_08-dag6umtftle.pdf",
+      "pageCount": 25
+    },
+    {
+      "id": "the-duc-the-thao-pdg",
+      "name": "Thể dục thể thao",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-the-duc-va-the-thao",
+      "description": "Thủ tục thể dục thể thao phi địa giới",
+      "preview": "/images/procedures/linh-vuc-the-duc-va-the-thao_11-dag64zbpfey.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-the-duc-va-the-thao_11-dag64zbpfey.pdf",
+      "pageCount": 17
+    },
+    {
+      "id": "noi-vu-pdg",
+      "name": "Nội vụ",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-noi-vu",
+      "description": "Thủ tục nội vụ phi địa giới",
+      "preview": "/images/procedures/linh-vuc-noi-vu_12-dag6uwshfg4.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-noi-vu_12-dag6uwshfg4.pdf",
+      "pageCount": 20
+    },
+    {
+      "id": "tai-chinh-pdg",
+      "name": "Tài chính",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-tai-chinh",
+      "description": "Thủ tục tài chính phi địa giới",
+      "preview": "/images/procedures/linh-vuc-tai-chinh_10-dag64ujyot0.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-tai-chinh_10-dag64ujyot0.pdf",
+      "pageCount": 20
+    },
+    {
+      "id": "giao-duc-dao-tao-pdg",
+      "name": "Giáo dục & Đào tạo",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-giao-duc-va-dao-tao",
+      "description": "Thủ tục giáo dục, đào tạo phi địa giới",
+      "preview": "/images/procedures/linh-vuc-giao-duc-va-dao-tao_06-dag6uut9dxi.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-giao-duc-va-dao-tao_06-dag6uut9dxi.pdf",
+      "pageCount": 14
+    },
+    {
+      "id": "van-hoa-xa-hoi-pdg",
+      "name": "Văn hóa - Xã hội",
+      "type": "phi-dia-gioi",
+      "slug": "linh-vuc-van-hoa-xa-hoi",
+      "description": "Thủ tục văn hóa, xã hội phi địa giới",
+      "preview": "/images/procedures/linh-vuc-van-hoa-xa-hoi_19-dagy4vw6f0c.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-van-hoa-xa-hoi_19-dagy4vw6f0c.pdf",
+      "pageCount": 6
+    }
+  ],
+  "thuongGap": [
+    {
+      "id": "tu-phap-tg",
+      "name": "Tư pháp",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-tu-phap",
+      "description": "Chứng thực bản sao, hộ tịch — thủ tục phổ biến nhất",
+      "preview": "/images/procedures/linh-vuc-tu-phap_13-dag7gnrk28w.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-tu-phap_13-dag7gnrk28w.pdf",
+      "pageCount": 2
+    },
+    {
+      "id": "cong-thuong-tg",
+      "name": "Công thương",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-cong-thuong",
+      "description": "Đăng ký kinh doanh hộ cá thể, giấy phép",
+      "preview": "/images/procedures/linh-vuc-cong-thuong_16-dag7ghq06gw.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-cong-thuong_16-dag7ghq06gw.pdf",
+      "pageCount": 1
+    },
+    {
+      "id": "xay-dung-tg",
+      "name": "Xây dựng",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-xay-dung",
+      "description": "Cấp phép xây dựng, sửa chữa nhà ở",
+      "preview": "/images/procedures/linh-vuc-xay-dung_15-dag7gdjxkpq.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-xay-dung_15-dag7gdjxkpq.pdf",
+      "pageCount": 1
+    },
+    {
+      "id": "nong-nghiep-mt-tg",
+      "name": "Nông nghiệp & Môi trường",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-nong-nghiep",
+      "description": "Thủ tục về môi trường, cây xanh, vệ sinh",
+      "preview": "/images/procedures/linh-vuc-nong-nghiep_14-dag7gkk35z8.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-nong-nghiep_14-dag7gkk35z8.pdf",
+      "pageCount": 1
+    },
+    {
+      "id": "giao-duc-tg",
+      "name": "Giáo dục",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-giao-duc",
+      "description": "Xác nhận cư trú cho nhập học, chuyển trường",
+      "preview": "/images/procedures/linh-vuc-giao-duc_18-dag7gav8mqu.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-giao-duc_18-dag7gav8mqu.pdf",
+      "pageCount": 1
+    },
+    {
+      "id": "bao-tro-xh-tg",
+      "name": "Bảo trợ xã hội - Nội vụ",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-bao-tro-xa-hoi",
+      "description": "Trợ cấp xã hội, người có công, hộ nghèo",
+      "preview": "/images/procedures/linh-vuc-bao-tro-xa-hoi_17-dag7gkkpr5y.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-bao-tro-xa-hoi_17-dag7gkkpr5y.pdf",
+      "pageCount": 3
+    },
+    {
+      "id": "khoa-hoc-cn-tg",
+      "name": "Khoa học Công nghệ & Thông tin liên lạc",
+      "type": "thuong-gap",
+      "slug": "linh-vuc-khoa-hoc-cong-nghe",
+      "description": "Thủ tục về CNTT, viễn thông thường gặp",
+      "preview": "/images/procedures/linh-vuc-khoa-hoc-cong-nghe_20-dag7gmm8ymw.jpg",
+      "pdf": "/pdf/procedures/linh-vuc-khoa-hoc-cong-nghe_20-dag7gmm8ymw.pdf",
+      "pageCount": 1
+    }
+  ],
+  "externalLinks": {
+    "bieuMau": "https://drive.google.com/drive/folders/1FHrz0OVdExpG8zpzZ0xQhY82BePZUx1Q",
+    "dvcTraCuu": "https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html",
+    "dvcThuTuc": "https://thutuc.dichvucong.gov.vn/p/home/dvc-tthc-trang-chu.html",
+    "dvcDanhGia": "https://kiosk.hochiminhcity.gov.vn/vi/kiosk/danhgiahcm",
+    "dvcHuongDan": "https://dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html",
+    "facebook": "https://www.facebook.com/phuongxuanhoatphochiminh"
+  },
+  "contactInfo": {
+    "address": "99 Trần Quốc Thảo, Phường Xuân Hòa, TP.HCM",
+    "ward": "Phường Xuân Hòa",
+    "district": "TP. Hồ Chí Minh"
+  }
+}

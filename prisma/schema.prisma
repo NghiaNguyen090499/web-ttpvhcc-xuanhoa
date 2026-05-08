@@ -1,0 +1,234 @@
+// ============================================================
+// @nhom        : Database Schema
+// @chucnang    : Định nghĩa cấu trúc DB cho TTPVHCC Xuân Hòa
+// @lienquan    : prisma.config.ts, src/lib/db.ts
+// @alias       : schema, prisma, database
+// ============================================================
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// QUẢN LÝ NGƯỜI DÙNG (Admin CMS)
+// ============================================================
+
+/// Vai trò người dùng trong hệ thống
+enum Role {
+  ADMIN       // Quản trị viên hệ thống
+  EDITOR      // Biên tập viên nội dung
+}
+
+/// Người dùng hệ thống (chỉ cán bộ quản trị)
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  image         String?  // Ảnh đại diện từ Google
+  role          Role     @default(EDITOR)
+  googleId      String?  @unique @map("google_id")
+  isActive      Boolean  @default(true) @map("is_active")
+  lastLoginAt   DateTime? @map("last_login_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Quan hệ
+  auditLogs     AuditLog[]
+  articles      Article[]
+
+  @@map("users")
+}
+
+// ============================================================
+// THỦ TỤC HÀNH CHÍNH (TTHC)
+// ============================================================
+
+/// Loại thủ tục
+enum ProcedureType {
+  CAP_PHUONG    // Thủ tục cấp phường
+  PHI_DIA_GIOI  // Thủ tục phi địa giới
+  THUONG_GAP    // Thủ tục thường gặp
+}
+
+/// Lĩnh vực thủ tục hành chính
+model Category {
+  id            String   @id @default(cuid())
+  name          String   // VD: "Tư pháp", "Thanh tra"
+  slug          String   @unique
+  description   String?  // Mô tả lĩnh vực
+  icon          String?  // Icon hiển thị (lucide icon name)
+  sortOrder     Int      @default(0) @map("sort_order")
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Quan hệ
+  procedures    Procedure[]
+
+  @@map("categories")
+}
+
+/// Thủ tục hành chính
+model Procedure {
+  id              String        @id @default(cuid())
+  name            String        // Tên thủ tục
+  slug            String        @unique
+  code            String?       // Mã thủ tục (nếu có)
+  type            ProcedureType @default(CAP_PHUONG)
+  description     String?       @db.Text // Mô tả chi tiết
+  legalBasis      String?       @db.Text @map("legal_basis") // Căn cứ pháp lý
+  requiredDocs    String?       @db.Text @map("required_docs") // Hồ sơ cần nộp
+  processingTime  String?       @map("processing_time") // Thời gian xử lý
+  fee             String?       // Lệ phí
+  result          String?       @db.Text // Kết quả
+  steps           String?       @db.Text // Quy trình thực hiện
+  formUrl         String?       @map("form_url") // Link biểu mẫu (Google Drive)
+  dvcUrl          String?       @map("dvc_url") // Link Cổng DVC
+  sortOrder       Int           @default(0) @map("sort_order")
+  isActive        Boolean       @default(true) @map("is_active")
+  isFeatured      Boolean       @default(false) @map("is_featured") // Hiển thị trang chủ
+  viewCount       Int           @default(0) @map("view_count")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Quan hệ
+  categoryId      String        @map("category_id")
+  category        Category      @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([type])
+  @@index([slug])
+  @@map("procedures")
+}
+
+// ============================================================
+// TIN TỨC / BÀI VIẾT
+// ============================================================
+
+/// Trạng thái bài viết
+enum ArticleStatus {
+  DRAFT         // Bản nháp
+  PUBLISHED     // Đã xuất bản
+  ARCHIVED      // Đã lưu trữ
+}
+
+/// Bài viết / Tin tức
+model Article {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  excerpt       String?       @db.Text // Tóm tắt
+  content       String        @db.Text // Nội dung HTML
+  coverImage    String?       @map("cover_image") // Ảnh bìa
+  status        ArticleStatus @default(DRAFT)
+  publishedAt   DateTime?     @map("published_at")
+  viewCount     Int           @default(0) @map("view_count")
+  isFeatured    Boolean       @default(false) @map("is_featured")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  // Quan hệ
+  authorId      String        @map("author_id")
+  author        User          @relation(fields: [authorId], references: [id])
+
+  @@index([status])
+  @@index([slug])
+  @@index([publishedAt])
+  @@map("articles")
+}
+
+// ============================================================
+// FAQ — Câu hỏi thường gặp (dùng cho Chatbot RAG)
+// ============================================================
+
+/// Câu hỏi thường gặp
+model Faq {
+  id            String   @id @default(cuid())
+  question      String   @db.Text
+  answer        String   @db.Text
+  category      String?  // Phân loại FAQ
+  sortOrder     Int      @default(0) @map("sort_order")
+  isActive      Boolean  @default(true) @map("is_active")
+  viewCount     Int      @default(0) @map("view_count")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("faqs")
+}
+
+// ============================================================
+// NỘI DUNG TRANG (CMS - các trang tĩnh)
+// ============================================================
+
+/// Nội dung trang tĩnh (Giới thiệu, Liên hệ, etc.)
+model PageContent {
+  id            String   @id @default(cuid())
+  pageKey       String   @unique @map("page_key") // VD: "about", "contact"
+  title         String
+  content       String   @db.Text // Nội dung HTML
+  metadata      Json?    // Dữ liệu bổ sung (địa chỉ, SĐT, giờ mở cửa...)
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("page_contents")
+}
+
+// ============================================================
+// PHẢN ÁNH / GÓP Ý CỦA NGƯỜI DÂN
+// ============================================================
+
+/// Trạng thái phản ánh
+enum FeedbackStatus {
+  PENDING       // Chờ xử lý
+  PROCESSING    // Đang xử lý
+  RESOLVED      // Đã giải quyết
+  REJECTED      // Từ chối
+}
+
+/// Phản ánh / Góp ý
+model Feedback {
+  id            String         @id @default(cuid())
+  name          String         // Họ tên người gửi (không lưu CMND/CCCD)
+  email         String?        // Email liên hệ (tùy chọn)
+  phone         String?        // SĐT (tùy chọn)
+  subject       String         // Tiêu đề
+  content       String         @db.Text // Nội dung phản ánh
+  status        FeedbackStatus @default(PENDING)
+  response      String?        @db.Text // Phản hồi từ cán bộ
+  respondedAt   DateTime?      @map("responded_at")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@map("feedbacks")
+}
+
+// ============================================================
+// NHẬT KÝ HOẠT ĐỘNG (Audit Log)
+// ============================================================
+
+/// Nhật ký hoạt động hệ thống
+model AuditLog {
+  id            String   @id @default(cuid())
+  action        String   // VD: "CREATE", "UPDATE", "DELETE", "LOGIN"
+  entity        String   // VD: "procedure", "article", "faq"
+  entityId      String?  @map("entity_id")
+  details       Json?    // Chi tiết thay đổi
+  ipAddress     String?  @map("ip_address")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Quan hệ
+  userId        String   @map("user_id")
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
