@@ -13,13 +13,24 @@
 import { prisma } from '@/lib/db'
 import type { ProcedureType, ArticleStatus, FeedbackStatus } from '@prisma/client'
 
+/**
+ * @chucnang    : Lấy Prisma Client — throw lỗi nếu chưa kết nối DB
+ * @output      : PrismaClient (non-null)
+ */
+function getPrisma() {
+  if (!prisma) {
+    throw new Error('Database chưa kết nối. Vui lòng cấu hình DATABASE_URL.')
+  }
+  return prisma
+}
+
 // ============================================================
 // CATEGORY — Lĩnh vực TTHC
 // ============================================================
 
 /** Lấy danh sách lĩnh vực đang hoạt động */
 export async function getActiveCategories() {
-  return prisma.category.findMany({
+  return getPrisma().category.findMany({
     where: { isActive: true },
     orderBy: { sortOrder: 'asc' },
     include: {
@@ -30,7 +41,7 @@ export async function getActiveCategories() {
 
 /** Lấy lĩnh vực theo slug */
 export async function getCategoryBySlug(slug: string) {
-  return prisma.category.findUnique({
+  return getPrisma().category.findUnique({
     where: { slug },
     include: {
       procedures: {
@@ -47,7 +58,7 @@ export async function getCategoryBySlug(slug: string) {
 
 /** Lấy danh sách thủ tục theo lĩnh vực */
 export async function getProceduresByCategory(categoryId: string) {
-  return prisma.procedure.findMany({
+  return getPrisma().procedure.findMany({
     where: { categoryId, isActive: true },
     orderBy: { sortOrder: 'asc' },
     include: { category: true }
@@ -56,7 +67,7 @@ export async function getProceduresByCategory(categoryId: string) {
 
 /** Lấy thủ tục theo slug */
 export async function getProcedureBySlug(slug: string) {
-  return prisma.procedure.findUnique({
+  return getPrisma().procedure.findUnique({
     where: { slug },
     include: { category: true }
   })
@@ -64,7 +75,7 @@ export async function getProcedureBySlug(slug: string) {
 
 /** Lấy thủ tục nổi bật (hiển thị trang chủ) */
 export async function getFeaturedProcedures(limit = 6) {
-  return prisma.procedure.findMany({
+  return getPrisma().procedure.findMany({
     where: { isActive: true, isFeatured: true },
     take: limit,
     orderBy: { viewCount: 'desc' },
@@ -74,7 +85,7 @@ export async function getFeaturedProcedures(limit = 6) {
 
 /** Tìm kiếm thủ tục */
 export async function searchProcedures(query: string, type?: ProcedureType) {
-  return prisma.procedure.findMany({
+  return getPrisma().procedure.findMany({
     where: {
       isActive: true,
       ...(type && { type }),
@@ -91,7 +102,7 @@ export async function searchProcedures(query: string, type?: ProcedureType) {
 
 /** Tăng lượt xem thủ tục */
 export async function incrementProcedureView(id: string) {
-  return prisma.procedure.update({
+  return getPrisma().procedure.update({
     where: { id },
     data: { viewCount: { increment: 1 } }
   })
@@ -106,14 +117,14 @@ export async function getPublishedArticles(page = 1, perPage = 10) {
   const skip = (page - 1) * perPage
 
   const [articles, total] = await Promise.all([
-    prisma.article.findMany({
+    getPrisma().article.findMany({
       where: { status: 'PUBLISHED' as ArticleStatus },
       orderBy: { publishedAt: 'desc' },
       skip,
       take: perPage,
       include: { author: { select: { name: true, image: true } } }
     }),
-    prisma.article.count({ where: { status: 'PUBLISHED' as ArticleStatus } })
+    getPrisma().article.count({ where: { status: 'PUBLISHED' as ArticleStatus } })
   ])
 
   return { articles, total, totalPages: Math.ceil(total / perPage) }
@@ -121,7 +132,7 @@ export async function getPublishedArticles(page = 1, perPage = 10) {
 
 /** Lấy bài viết theo slug */
 export async function getArticleBySlug(slug: string) {
-  return prisma.article.findUnique({
+  return getPrisma().article.findUnique({
     where: { slug },
     include: { author: { select: { name: true, image: true } } }
   })
@@ -129,7 +140,7 @@ export async function getArticleBySlug(slug: string) {
 
 /** Lấy bài viết nổi bật */
 export async function getFeaturedArticles(limit = 4) {
-  return prisma.article.findMany({
+  return getPrisma().article.findMany({
     where: { status: 'PUBLISHED' as ArticleStatus, isFeatured: true },
     take: limit,
     orderBy: { publishedAt: 'desc' },
@@ -143,7 +154,7 @@ export async function getFeaturedArticles(limit = 4) {
 
 /** Lấy danh sách FAQ đang hoạt động */
 export async function getActiveFaqs() {
-  return prisma.faq.findMany({
+  return getPrisma().faq.findMany({
     where: { isActive: true },
     orderBy: { sortOrder: 'asc' }
   })
@@ -151,7 +162,7 @@ export async function getActiveFaqs() {
 
 /** Tìm FAQ liên quan (dùng cho chatbot RAG) */
 export async function searchFaqs(query: string) {
-  return prisma.faq.findMany({
+  return getPrisma().faq.findMany({
     where: {
       isActive: true,
       OR: [
@@ -169,7 +180,7 @@ export async function searchFaqs(query: string) {
 
 /** Lấy nội dung trang theo key */
 export async function getPageContent(pageKey: string) {
-  return prisma.pageContent.findUnique({
+  return getPrisma().pageContent.findUnique({
     where: { pageKey }
   })
 }
@@ -186,7 +197,7 @@ export async function createFeedback(data: {
   subject: string
   content: string
 }) {
-  return prisma.feedback.create({ data })
+  return getPrisma().feedback.create({ data })
 }
 
 /** Lấy danh sách phản ánh (admin) */
@@ -194,13 +205,13 @@ export async function getFeedbacks(status?: FeedbackStatus, page = 1, perPage = 
   const skip = (page - 1) * perPage
 
   const [feedbacks, total] = await Promise.all([
-    prisma.feedback.findMany({
+    getPrisma().feedback.findMany({
       where: status ? { status } : undefined,
       orderBy: { createdAt: 'desc' },
       skip,
       take: perPage
     }),
-    prisma.feedback.count({ where: status ? { status } : undefined })
+    getPrisma().feedback.count({ where: status ? { status } : undefined })
   ])
 
   return { feedbacks, total, totalPages: Math.ceil(total / perPage) }
@@ -219,5 +230,5 @@ export async function createAuditLog(data: {
   details?: Record<string, string | number | boolean | null>
   ipAddress?: string
 }) {
-  return prisma.auditLog.create({ data })
+  return getPrisma().auditLog.create({ data })
 }
