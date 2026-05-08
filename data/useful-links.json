@@ -1,0 +1,153 @@
+{
+  "source": "https://ttpvhcc-phuongtamthang.com.vn",
+  "section": "Liên kết hữu ích - Liên kết website",
+  "iconLibrary": "FontAwesome 6.5.0",
+  "iconLibraryUrl": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css",
+  "note": "Trang dùng FontAwesome class cho icon, không có file ảnh icon riêng trong từng liên kết.",
+  "items": [
+    {
+      "index": 1,
+      "title": "Ủy ban MTTQ Việt Nam TP.HCM",
+      "url": "https://ubmttq.hochiminhcity.gov.vn/",
+      "category": "org",
+      "iconClass": "fas fa-flag text-red-600",
+      "iconUrl": null
+    },
+    {
+      "index": 2,
+      "title": "Đảng bộ TP.HCM",
+      "url": "https://www.hcmcpv.org.vn/",
+      "category": "gov",
+      "iconClass": "fas fa-star text-red-600",
+      "iconUrl": null
+    },
+    {
+      "index": 3,
+      "title": "HĐND TP.HCM",
+      "url": "https://hdnd.hochiminhcity.gov.vn/",
+      "category": "gov",
+      "iconClass": "fas fa-landmark text-amber-600",
+      "iconUrl": null
+    },
+    {
+      "index": 4,
+      "title": "Hội LHPN TP.HCM",
+      "url": "https://www.phunu.hochiminhcity.gov.vn/",
+      "category": "org",
+      "iconClass": "fas fa-female text-pink-600",
+      "iconUrl": null
+    },
+    {
+      "index": 5,
+      "title": "Liên đoàn Lao động TP.HCM",
+      "url": "https://www.congdoantphochiminh.org.vn/",
+      "category": "org",
+      "iconClass": "fas fa-hard-hat text-blue-600",
+      "iconUrl": null
+    },
+    {
+      "index": 6,
+      "title": "Thành đoàn TP.HCM",
+      "url": "https://www.thanhdoan.hochiminhcity.gov.vn/",
+      "category": "org",
+      "iconClass": "fas fa-users text-blue-600",
+      "iconUrl": null
+    },
+    {
+      "index": 7,
+      "title": "Sở Nội vụ",
+      "url": "https://sonoivu.hochiminhcity.gov.vn/web/snv/trang-chu",
+      "category": "dept",
+      "iconClass": "fas fa-user-tie text-green-600",
+      "iconUrl": null
+    },
+    {
+      "index": 8,
+      "title": "Sở LĐ-TB&XH",
+      "url": "https://sldtbxh.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-hands-helping text-orange-600",
+      "iconUrl": null
+    },
+    {
+      "index": 9,
+      "title": "Sở VH&TT",
+      "url": "https://svhtt.hochiminhcity.gov.vn/web/guest/trang-chu4",
+      "category": "dept",
+      "iconClass": "fas fa-theater-masks text-purple-600",
+      "iconUrl": null
+    },
+    {
+      "index": 10,
+      "title": "Sở KH&CN",
+      "url": "https://dost.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-flask text-cyan-600",
+      "iconUrl": null
+    },
+    {
+      "index": 11,
+      "title": "Sở Công Thương",
+      "url": "https://www.congthuong.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-industry text-indigo-600",
+      "iconUrl": null
+    },
+    {
+      "index": 12,
+      "title": "Sở Y tế",
+      "url": "https://medinet.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-heartbeat text-teal-600",
+      "iconUrl": null
+    },
+    {
+      "index": 13,
+      "title": "Sở NN&PTNT",
+      "url": "http://www.sonongnghiep.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-seedling text-lime-600",
+      "iconUrl": null
+    },
+    {
+      "index": 14,
+      "title": "Thanh tra TP",
+      "url": "http://www.thanhtra.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-search text-gray-600",
+      "iconUrl": null
+    },
+    {
+      "index": 15,
+      "title": "Văn phòng UBND TP",
+      "url": "https://vpub.hochiminhcity.gov.vn/portal/Home/default.aspx",
+      "category": "gov",
+      "iconClass": "fas fa-building-columns text-yellow-600",
+      "iconUrl": null
+    },
+    {
+      "index": 16,
+      "title": "Sở TT&TT",
+      "url": "https://www.ict-hcm.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-laptop-code text-sky-600",
+      "iconUrl": null
+    },
+    {
+      "index": 17,
+      "title": "Sở QH-KT",
+      "url": "https://www.qhkt.hochiminhcity.gov.vn/",
+      "category": "dept",
+      "iconClass": "fas fa-drafting-compass text-emerald-600",
+      "iconUrl": null
+    },
+    {
+      "index": 18,
+      "title": "Ban ATTP",
+      "url": "http://sattp.hochiminhcity.gov.vn/TrangChu.aspx",
+      "category": "dept",
+      "iconClass": "fas fa-utensils text-rose-600",
+      "iconUrl": null
+    }
+  ]
+}

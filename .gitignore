@@ -40,7 +40,7 @@ _backup/
 
 # Dữ liệu Canva gốc (đã copy assets cần thiết vào public/)
 canva-designs-by-field/
-useful-links.json
+/useful-links.json
 
 # Dữ liệu gốc Facebook (đã xử lý vào data/news.json)
 facebook-xuan-hoa-final/
