@@ -126,12 +126,13 @@ body {
 }
 
 /* Hero pattern */
+/* Trống đồng Đông Sơn — pattern ẩn dưới hero */
 .hero-pattern {
-  background:
-    radial-gradient(circle at center, rgba(255,255,255,0.15) 0, rgba(255,255,255,0.05) 28%, transparent 60%),
-    repeating-radial-gradient(circle at center, rgba(255,255,255,0.12) 0 2px, transparent 2px 64px);
-  opacity: 0.34;
-  transform: scale(1.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.8' opacity='0.12'%3E%3C!-- Các vòng đồng tâm trống đồng --%3E%3Ccircle cx='300' cy='300' r='40'/%3E%3Ccircle cx='300' cy='300' r='80'/%3E%3Ccircle cx='300' cy='300' r='120'/%3E%3Ccircle cx='300' cy='300' r='160'/%3E%3Ccircle cx='300' cy='300' r='200'/%3E%3Ccircle cx='300' cy='300' r='240'/%3E%3Ccircle cx='300' cy='300' r='280'/%3E%3C!-- Tia sáng từ tâm --%3E%3Cline x1='300' y1='300' x2='300' y2='20'/%3E%3Cline x1='300' y1='300' x2='498' y2='72'/%3E%3Cline x1='300' y1='300' x2='580' y2='300'/%3E%3Cline x1='300' y1='300' x2='498' y2='528'/%3E%3Cline x1='300' y1='300' x2='300' y2='580'/%3E%3Cline x1='300' y1='300' x2='102' y2='528'/%3E%3Cline x1='300' y1='300' x2='20' y2='300'/%3E%3Cline x1='300' y1='300' x2='102' y2='72'/%3E%3C!-- Hoa văn giữa các tia --%3E%3Cline x1='300' y1='300' x2='399' y2='34'/%3E%3Cline x1='300' y1='300' x2='553' y2='180'/%3E%3Cline x1='300' y1='300' x2='553' y2='420'/%3E%3Cline x1='300' y1='300' x2='399' y2='566'/%3E%3Cline x1='300' y1='300' x2='201' y2='566'/%3E%3Cline x1='300' y1='300' x2='47' y2='420'/%3E%3Cline x1='300' y1='300' x2='47' y2='180'/%3E%3Cline x1='300' y1='300' x2='201' y2='34'/%3E%3C!-- Ngôi sao trung tâm --%3E%3Cpolygon points='300,270 308,290 330,290 312,304 320,325 300,312 280,325 288,304 270,290 292,290'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  opacity: 0.5;
 }
 
 /* Card styles — bo tròn lớn, shadow ấm */

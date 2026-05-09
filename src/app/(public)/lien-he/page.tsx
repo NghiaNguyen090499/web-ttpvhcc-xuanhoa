@@ -25,10 +25,10 @@ const SCHEDULE = [
 ]
 
 const CONTACTS = [
-  { icon: '📞', label: 'Điện thoại', value: '0996 233 983', href: 'tel:0996233983' },
-  { icon: '✉️', label: 'Email', value: 'ubndxuanhoa@tphcm.gov.vn', href: 'mailto:ubndxuanhoa@tphcm.gov.vn' },
+  { icon: '📞', label: 'Điện thoại', value: '028 3526220', href: 'tel:02835262200' },
+  { icon: '✉️', label: 'Email', value: 'xuanhoa@tphcm.gov.vn', href: 'mailto:xuanhoa@tphcm.gov.vn' },
   { icon: '📍', label: 'Địa chỉ', value: '99 Trần Quốc Thảo, P. Xuân Hòa, TP.HCM', href: undefined },
-  { icon: '🕐', label: 'Giờ làm việc', value: '07:30 – 17:00 (T2-T6)', href: undefined },
+  { icon: '🕐', label: 'Giờ làm việc', value: 'Sáng: 7h30–11h30 | Chiều: 13h00–17h00', href: undefined },
 ]
 
 export default function ContactPage() {
@@ -78,7 +78,7 @@ export default function ContactPage() {
               <div className="overflow-hidden rounded-2xl border border-border">
                 <iframe
                   title="Bản đồ UBND Phường Xuân Hòa"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5!2d106.68!3d10.78!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzQ4LjAiTiAxMDbCsDQwJzQ4LjAiRQ!5e0!3m2!1svi!2s!4v1620000000000!5m2!1svi!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4!2d106.6819!3d10.7813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c1f3b5e67%3A0x7e3a0a0b1c2d3e4f!2s99+Tr%E1%BA%A7n+Qu%E1%BB%91c+Th%E1%BA%A3o%2C+Ph%C6%B0%E1%BB%9Dng+V%C3%B5+Th%E1%BB%8B+S%C3%A1u%2C+Qu%E1%BA%ADn+3%2C+H%E1%BB%93+Ch%C3%AD+Minh!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
                   width="100%" height="300" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
@@ -121,7 +121,7 @@ export default function ContactPage() {
               <div className="mt-6">
                 <ContactForm />
               </div>
-              <p className="mt-4 text-[10px] leading-relaxed text-text-muted">
+              <p className="mt-4 text-xs font-semibold leading-relaxed text-text-secondary">
                 * Phản ánh sẽ được gửi qua email đến bộ phận tiếp nhận. Theo Luật BVDLCN, chúng tôi không lưu trữ thông tin cá nhân của bạn trong cơ sở dữ liệu.
               </p>
             </div>

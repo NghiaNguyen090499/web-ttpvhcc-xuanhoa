@@ -19,10 +19,11 @@ export default function HomePage() {
       <HeroBanner />
       <QuickAccess />
       <StatsStrip />
-      <ProcedureGrid />
 
-      {/* Section tin tức — layout 2 cột tham khảo hochiminhcity.gov.vn */}
+      {/* Section tin tức — đưa lên trước để bản tin nổi bật */}
       <NewsSection />
+
+      <ProcedureGrid />
 
       {/* CTA liên hệ */}
       <section className="py-12 bg-cream">

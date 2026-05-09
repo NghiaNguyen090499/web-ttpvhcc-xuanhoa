@@ -111,50 +111,7 @@ export default function ProceduresPage() {
             </div>
           </div>
 
-          {/* === Thủ tục phi địa giới === */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-1 h-8 bg-accent rounded-full" />
-              <div>
-                <h2 className="text-xl font-bold text-text-primary font-heading uppercase tracking-wide">Thủ tục phi địa giới hành chính</h2>
-                <p className="text-sm text-text-muted">{phiDiaGioi.length} lĩnh vực — không phụ thuộc địa bàn</p>
-              </div>
-            </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {phiDiaGioi.map((cat) => (
-                <div key={cat.id} className="rounded-2xl border border-border bg-white overflow-hidden hover:border-primary/30 hover:shadow-md btn-transition">
-                  {/* Ảnh preview thu nhỏ */}
-                  {cat.preview && (
-                    <div className="relative h-32 overflow-hidden bg-cream">
-                      <Image
-                        src={cat.preview}
-                        alt={`TTHC ${cat.name}`}
-                        fill
-                        className="object-cover object-top"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <span className="text-sm font-semibold text-text-primary">{cat.name}</span>
-                    <p className="text-xs text-text-muted mt-1 line-clamp-2">{cat.description}</p>
-                    {cat.pdf && (
-                      <a
-                        href={cat.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-                      >
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                        Tải PDF ({cat.pageCount} trang)
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* === Thủ tục thường gặp === */}
           {thuongGap && thuongGap.length > 0 && (
