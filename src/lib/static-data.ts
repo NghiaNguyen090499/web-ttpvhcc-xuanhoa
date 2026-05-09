@@ -222,3 +222,38 @@ export function getNewsData(): NewsItem[] {
 export function getNewsBySlug(slug: string): NewsItem | undefined {
   return getNewsData().find((n) => n.slug === slug)
 }
+
+// ============================================================
+// NIÊM YẾT — Types & Loaders
+// ============================================================
+
+/** Văn bản niêm yết công khai */
+export interface NiemYetItem {
+  id: string
+  title: string
+  category?: string
+  fileUrl: string
+  fileType: 'pdf' | 'image' | 'doc'
+  publishedAt: string
+  description?: string
+}
+
+// Cache niêm yết
+let _niemYetCache: NiemYetItem[] | null = null
+
+/**
+ * @chucnang    : Đọc danh sách niêm yết từ JSON
+ * @output      : NiemYetItem[]
+ */
+export function getNiemYetData(): NiemYetItem[] {
+  if (!_niemYetCache) {
+    try {
+      const raw = readFileSync(join(DATA_DIR, 'niem-yet.json'), 'utf-8')
+      _niemYetCache = JSON.parse(raw) as NiemYetItem[]
+    } catch {
+      // File chưa có hoặc rỗng — trả mảng rỗng
+      _niemYetCache = []
+    }
+  }
+  return _niemYetCache
+}

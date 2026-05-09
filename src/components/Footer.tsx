@@ -28,6 +28,7 @@ export function Footer() {
               <li><Link href="/thu-tuc" className="text-white/80 hover:text-white btn-transition">Thủ tục hành chính</Link></li>
               <li><Link href="/tra-cuu" className="text-white/80 hover:text-white btn-transition">Tra cứu & Đánh giá</Link></li>
               <li><Link href="/tin-tuc" className="text-white/80 hover:text-white btn-transition">Tin tức - Thông báo</Link></li>
+              <li><Link href="/niem-yet" className="text-white/80 hover:text-white btn-transition">Niêm yết công khai</Link></li>
               <li><Link href="/gioi-thieu" className="text-white/80 hover:text-white btn-transition">Giới thiệu</Link></li>
               <li><Link href="/lien-he" className="text-white/80 hover:text-white btn-transition">Liên hệ - Phản ánh</Link></li>
               <li><Link href="/lien-ket" className="text-white/80 hover:text-white btn-transition">Liên kết website</Link></li>

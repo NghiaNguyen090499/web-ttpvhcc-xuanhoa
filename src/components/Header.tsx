@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { label: 'Thủ tục HC', href: '/thu-tuc' },
   { label: 'Tra cứu', href: '/tra-cuu' },
   { label: 'Tin tức', href: '/tin-tuc' },
+  { label: 'Niêm yết', href: '/niem-yet' },
   { label: 'Giới thiệu', href: '/gioi-thieu' },
   { label: 'Liên kết', href: '/lien-ket' },
   { label: 'Liên hệ', href: '/lien-he' },
