@@ -41,6 +41,7 @@ export function Footer() {
               <li><a href="https://dichvucong.hochiminhcity.gov.vn" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white btn-transition">Cổng DVC TP.HCM ↗</a></li>
               <li><a href="https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white btn-transition">Tra cứu hồ sơ ↗</a></li>
               <li><a href="https://www.facebook.com/phuongxuanhoatphochiminh" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white btn-transition">Facebook chính thức ↗</a></li>
+              <li><a href="https://zalo.me/4078461959342244319" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white btn-transition">Zalo phường ↗</a></li>
             </ul>
           </div>
         </div>

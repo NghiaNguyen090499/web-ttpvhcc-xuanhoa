@@ -392,7 +392,7 @@ export const siteContent = {
       {
         label: 'Zalo',
         description: 'Nhắn tin và nhận cập nhật nhanh từ phường',
-        href: '#',
+        href: 'https://zalo.me/4078461959342244319',
         icon: MessageCircle,
         buttonClass:
           'border-[#1d88e5] bg-[linear-gradient(135deg,#1f9bf0_0%,#0c62cf_100%)] hover:brightness-110',

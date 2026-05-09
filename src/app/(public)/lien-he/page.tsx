@@ -74,11 +74,11 @@ export default function ContactPage() {
                 })}
               </div>
 
-              {/* Google Maps */}
+              {/* Google My Maps — Bản đồ tùy chỉnh với marker */}
               <div className="overflow-hidden rounded-2xl border border-border">
                 <iframe
                   title="Bản đồ UBND Phường Xuân Hòa"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3715480598416!2d106.68358741138519!3d10.782828889321944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2e420aa229%3A0xa606de185bdf3f73!2zOTkgVHLhuqduIFF14buRYyBUaOG6o28sIFh1w6JuIEjDsmEsIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2sus!4v1778333793080!5m2!1svi!2sus"
+                  src="https://www.google.com/maps/d/u/0/embed?mid=1UUIrmBXAXwRRTm6ihEXdisbRusP2OwI&ll=10.77999210806022,106.69278881827886&z=15"
                   width="100%" height="300" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
