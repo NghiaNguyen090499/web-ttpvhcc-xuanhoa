@@ -78,7 +78,7 @@ export default function ContactPage() {
               <div className="overflow-hidden rounded-2xl border border-border">
                 <iframe
                   title="Bản đồ UBND Phường Xuân Hòa"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4!2d106.6819!3d10.7813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c1f3b5e67%3A0x7e3a0a0b1c2d3e4f!2s99+Tr%E1%BA%A7n+Qu%E1%BB%91c+Th%E1%BA%A3o%2C+Ph%C6%B0%E1%BB%9Dng+V%C3%B5+Th%E1%BB%8B+S%C3%A1u%2C+Qu%E1%BA%ADn+3%2C+H%E1%BB%93+Ch%C3%AD+Minh!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3715480598416!2d106.68358741138519!3d10.782828889321944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2e420aa229%3A0xa606de185bdf3f73!2zOTkgVHLhuqduIFF14buRYyBUaOG6o28sIFh1w6JuIEjDsmEsIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2sus!4v1778333793080!5m2!1svi!2sus"
                   width="100%" height="300" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
