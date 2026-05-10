@@ -1,0 +1,122 @@
+[
+  {
+    "id": "vb-001",
+    "soKyHieu": "157/KH-UBND",
+    "loai": "Kế hoạch",
+    "trichYeu": "Kế hoạch triển khai ứng dụng công nghệ thông tin và chuyển đổi số năm 2026 trên địa bàn phường Xuân Hòa",
+    "ngayBanHanh": "2026-05-05",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Chuyển đổi số",
+    "fileUrl": "/files/van-ban/157-KH-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-002",
+    "soKyHieu": "42/QĐ-UBND",
+    "loai": "Quyết định",
+    "trichYeu": "Quyết định ban hành Quy chế tiếp nhận, xử lý và trả kết quả giải quyết thủ tục hành chính theo cơ chế một cửa, một cửa liên thông",
+    "ngayBanHanh": "2026-04-28",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Cải cách hành chính",
+    "fileUrl": "/files/van-ban/42-QD-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-003",
+    "soKyHieu": "89/TB-UBND",
+    "loai": "Thông báo",
+    "trichYeu": "Thông báo về việc tiếp nhận hồ sơ trực tuyến toàn trình đối với 25 thủ tục hành chính cấp phường",
+    "ngayBanHanh": "2026-04-20",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "PCT phụ trách",
+    "linhVuc": "Thủ tục hành chính",
+    "fileUrl": "/files/van-ban/89-TB-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-004",
+    "soKyHieu": "234/CV-UBND",
+    "loai": "Công văn",
+    "trichYeu": "Về việc tăng cường công tác phòng, chống dịch bệnh trong mùa mưa năm 2026",
+    "ngayBanHanh": "2026-04-15",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "PCT phụ trách Văn xã",
+    "linhVuc": "Y tế",
+    "fileUrl": "/files/van-ban/234-CV-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-005",
+    "soKyHieu": "35/QĐ-UBND",
+    "loai": "Quyết định",
+    "trichYeu": "Quyết định phân công nhiệm vụ các thành viên UBND phường nhiệm kỳ 2021–2026",
+    "ngayBanHanh": "2026-04-10",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Tổ chức – Nội vụ",
+    "fileUrl": "/files/van-ban/35-QD-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-006",
+    "soKyHieu": "78/KH-UBND",
+    "loai": "Kế hoạch",
+    "trichYeu": "Kế hoạch tổ chức phong trào 'Toàn dân đoàn kết xây dựng đời sống văn hóa' năm 2026",
+    "ngayBanHanh": "2026-04-05",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "PCT phụ trách Văn xã",
+    "linhVuc": "Văn hóa – Xã hội",
+    "fileUrl": "/files/van-ban/78-KH-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-007",
+    "soKyHieu": "201/CV-UBND",
+    "loai": "Công văn",
+    "trichYeu": "Về việc rà soát, cập nhật danh sách hộ nghèo, hộ cận nghèo năm 2026",
+    "ngayBanHanh": "2026-03-28",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "PCT phụ trách Văn xã",
+    "linhVuc": "Chính sách xã hội",
+    "fileUrl": "/files/van-ban/201-CV-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-008",
+    "soKyHieu": "156/TB-UBND",
+    "loai": "Thông báo",
+    "trichYeu": "Thông báo lịch tiếp công dân định kỳ của Chủ tịch UBND phường năm 2026",
+    "ngayBanHanh": "2026-03-15",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Tiếp dân",
+    "fileUrl": "/files/van-ban/156-TB-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-009",
+    "soKyHieu": "12/QĐ-UBND",
+    "loai": "Quyết định",
+    "trichYeu": "Quyết định ban hành Quy chế quản lý, vận hành Cổng thông tin điện tử phường Xuân Hòa",
+    "ngayBanHanh": "2026-03-01",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Chuyển đổi số",
+    "fileUrl": "/files/van-ban/12-QD-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  },
+  {
+    "id": "vb-010",
+    "soKyHieu": "45/KH-UBND",
+    "loai": "Kế hoạch",
+    "trichYeu": "Kế hoạch cải cách hành chính nhà nước phường Xuân Hòa năm 2026",
+    "ngayBanHanh": "2026-02-20",
+    "coQuanBanHanh": "UBND Phường Xuân Hòa",
+    "nguoiKy": "Chủ tịch UBND",
+    "linhVuc": "Cải cách hành chính",
+    "fileUrl": "/files/van-ban/45-KH-UBND.pdf",
+    "trangThai": "Có hiệu lực"
+  }
+]

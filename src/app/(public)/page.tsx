@@ -1,14 +1,20 @@
 /**
  * @nhom        : Pages / Trang chủ
- * @chucnang    : Trang chủ — Hero, QuickAccess, StatsStrip, ProcedureGrid, NewsSection, CTA
+ * @chucnang    : Trang chủ — Hero, AnnouncementBanner, QuickAccess, TransparencyStats,
+ *                NewsSection (+ Góc tiện ích), ProcedureGrid, DigitalAndNotices,
+ *                Văn bản chỉ đạo, ServiceBySubject, CTA, UsefulLinks
  * @lienquan    : src/components/*
  * @alias       : home, trang-chu
  */
 
 import { HeroBanner } from '@/components/HeroBanner'
+import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { QuickAccess } from '@/components/QuickAccess'
-import { StatsStrip } from '@/components/StatsStrip'
+import { TransparencyStats } from '@/components/TransparencyStats'
 import { ProcedureGrid } from '@/components/ProcedureGrid'
+import { ServiceBySubject } from '@/components/ServiceBySubject'
+import { DigitalAndNotices } from '@/components/DigitalAndNotices'
+import { DocumentDirective } from '@/components/DocumentDirective'
 import UsefulLinks from '@/components/UsefulLinks'
 import NewsSection from '@/components/NewsSection'
 import Link from 'next/link'
@@ -16,14 +22,32 @@ import Link from 'next/link'
 export default function HomePage() {
   return (
     <>
+      {/* Hero Banner — ảnh nền + search bar + CTA */}
       <HeroBanner />
+
+      {/* Thanh thông báo trượt — carousel auto-slide (P0-1) */}
+      <AnnouncementBanner />
+
+      {/* 6 ô truy cập nhanh + tra cứu hồ sơ inline (P0-3 & P1-8) */}
       <QuickAccess />
-      <StatsStrip />
+
+      {/* Thống kê minh bạch — count-up animation (P0-4) */}
+      <TransparencyStats />
 
       {/* Section tin tức — đưa lên trước để bản tin nổi bật */}
       <NewsSection />
 
+      {/* Lĩnh vực thủ tục hành chính — 6 card logo tròn */}
       <ProcedureGrid />
+
+      {/* Chuyển đổi số & Niêm yết công khai — 2 cột */}
+      <DigitalAndNotices />
+
+      {/* Văn bản chỉ đạo điều hành (Nhóm A) */}
+      <DocumentDirective />
+
+      {/* Phân loại theo đối tượng: Công dân & Doanh nghiệp (P0-2) */}
+      <ServiceBySubject />
 
       {/* CTA liên hệ */}
       <section className="py-12 bg-cream">

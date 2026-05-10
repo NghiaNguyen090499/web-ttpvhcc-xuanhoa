@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "thang": 5,
+    "nam": 2026,
+    "capNhat": "2026-05-01",
+    "canCu": "Luật Tiếp công dân 2013, Luật Thực hiện dân chủ ở cơ sở 2022"
+  },
+  "lichThang": [
+    {
+      "ngay": "2026-05-06",
+      "buoi": "Sáng",
+      "thoiGian": "08:00 – 11:30",
+      "nguoiTiep": "Ông Nguyễn Văn A — Chủ tịch UBND Phường",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận khiếu nại, tố cáo, phản ánh kiến nghị của công dân",
+      "ghiChu": ""
+    },
+    {
+      "ngay": "2026-05-13",
+      "buoi": "Sáng",
+      "thoiGian": "08:00 – 11:30",
+      "nguoiTiep": "Ông Nguyễn Văn A — Chủ tịch UBND Phường",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận khiếu nại, tố cáo, phản ánh kiến nghị của công dân",
+      "ghiChu": ""
+    },
+    {
+      "ngay": "2026-05-15",
+      "buoi": "Chiều",
+      "thoiGian": "14:00 – 16:30",
+      "nguoiTiep": "Bà Trần Thị B — PCT phụ trách Văn xã",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận phản ánh lĩnh vực văn hóa – xã hội, giáo dục, y tế",
+      "ghiChu": ""
+    },
+    {
+      "ngay": "2026-05-20",
+      "buoi": "Sáng",
+      "thoiGian": "08:00 – 11:30",
+      "nguoiTiep": "Ông Nguyễn Văn A — Chủ tịch UBND Phường",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận khiếu nại, tố cáo, phản ánh kiến nghị của công dân",
+      "ghiChu": ""
+    },
+    {
+      "ngay": "2026-05-22",
+      "buoi": "Chiều",
+      "thoiGian": "14:00 – 16:30",
+      "nguoiTiep": "Ông Lê Văn C — PCT phụ trách Đô thị",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận phản ánh lĩnh vực đất đai, xây dựng, trật tự đô thị",
+      "ghiChu": ""
+    },
+    {
+      "ngay": "2026-05-27",
+      "buoi": "Sáng",
+      "thoiGian": "08:00 – 11:30",
+      "nguoiTiep": "Ông Nguyễn Văn A — Chủ tịch UBND Phường",
+      "diaDiem": "Phòng tiếp công dân — Trụ sở UBND Phường Xuân Hòa",
+      "loai": "Định kỳ",
+      "noiDung": "Tiếp nhận khiếu nại, tố cáo, phản ánh kiến nghị của công dân",
+      "ghiChu": ""
+    }
+  ],
+  "quyDinh": {
+    "dinhKy": "Chủ tịch UBND Phường tiếp công dân định kỳ vào thứ Ba tuần thứ 1 và thứ 3 hàng tháng (buổi sáng).",
+    "phoChutich": "Phó Chủ tịch tiếp công dân theo lĩnh vực phụ trách: thứ Năm tuần thứ 2 và thứ 4.",
+    "dotXuat": "Trường hợp đột xuất, vụ việc phức tạp, đông người — Chủ tịch tiếp ngoài lịch định kỳ.",
+    "diaDiem": "Phòng tiếp công dân, tầng 1, Trụ sở UBND Phường Xuân Hòa, 99 Trần Quốc Thảo, TP.HCM.",
+    "dienThoai": "028 3829 xxxx"
+  }
+}

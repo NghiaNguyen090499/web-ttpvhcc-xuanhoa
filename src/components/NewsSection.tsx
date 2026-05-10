@@ -2,16 +2,17 @@
  * @nhom        : Components / Tin tức
  * @chucnang    : Section tin tức trang chủ — layout 2 cột 7:3
  *                Cột trái: Tin nổi bật + 3 tin nhỏ
- *                Cột phải: Banner tuyên truyền + Tổng đài 1022
+ *                Cột phải: Góc tiện ích (bấm mở modal) + Tổng đài 1022
  *                Tham khảo: ảnh mockup Xuân Hòa + hochiminhcity.gov.vn
- * @lienquan    : src/components/NewsTabs.tsx, src/lib/static-data.ts
+ * @lienquan    : src/components/NewsTabs.tsx, src/lib/static-data.ts, src/components/UtilityCorner.tsx
  * @alias       : news-section, tin-tuc-trang-chu
  */
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { getNewsData } from '@/lib/static-data'
+import { getNewsData, getTuyenTruyenData } from '@/lib/static-data'
 import { TAG_COLORS } from '@/components/NewsTabs'
+import { UtilityCorner } from '@/components/UtilityCorner'
 
 /**
  * @chucnang    : Format ngày từ ISO sang dạng DD/MM/YYYY
@@ -40,30 +41,7 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diffDays / 30)} tháng trước`
 }
 
-// Dữ liệu banner tuyên truyền — có thể đổi sang CMS sau
-const BANNERS = [
-  {
-    icon: '📱',
-    label: 'TUYÊN TRUYỀN',
-    title: 'Ưu tiên nộp hồ sơ trực tuyến để giảm thời gian chờ',
-    desc: 'Khuyến khích người dân nộp hồ sơ trực tuyến tại dichvucong.gov.vn để rút ngắn thời gian xử lý.',
-    color: 'bg-primary',
-  },
-  {
-    icon: '🛡️',
-    label: 'AN NINH',
-    title: 'Cảnh giác với lừa đảo qua mạng xã hội và điện thoại',
-    desc: 'Công an phường khuyến cáo không cung cấp thông tin cá nhân, OTP cho người lạ.',
-    color: 'bg-blue-600',
-  },
-  {
-    icon: '🌿',
-    label: 'MÔI TRƯỜNG',
-    title: 'Phân loại rác tại nguồn — cùng xây dựng phường xanh',
-    desc: 'Thực hiện phân loại rác sinh hoạt theo quy định, góp phần bảo vệ môi trường.',
-    color: 'bg-emerald-600',
-  },
-]
+// Dữ liệu tuyên truyền giờ đọc từ JSON — xem data/tuyen-truyen.json
 
 /**
  * @chucnang    : Section tin tức cho trang chủ — Server Component
@@ -75,6 +53,9 @@ export default function NewsSection() {
   const allNews = getNewsData()
   const featured = allNews[0]
   const smallNews = allNews.slice(1, 4) // 3 bài tin nhỏ bên dưới
+
+  // Lấy bài tuyên truyền cho Góc tiện ích (cột phải)
+  const tuyenTruyenItems = getTuyenTruyenData()
 
   if (!featured) return null
 
@@ -182,37 +163,8 @@ export default function NewsSection() {
           {/* ========== CỘT PHẢI — 3/10 ========== */}
           <div className="lg:col-span-3 flex flex-col gap-4">
 
-            {/* --- Banner tuyên truyền --- */}
-            <div className="rounded-2xl border border-border bg-white overflow-hidden flex-1">
-              {/* Header */}
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-cream/60">
-                <span className="text-sm">📢</span>
-                <h4 className="text-xs font-bold text-text-primary uppercase tracking-wide">
-                  Góc tiện ích
-                </h4>
-              </div>
-
-              {/* Banner content — hiển thị banner đầu tiên, có thể carousel hóa sau */}
-              <div className="p-4">
-                {BANNERS.map((banner, i) => (
-                  <div
-                    key={i}
-                    className={`rounded-xl p-4 text-white mb-3 last:mb-0 ${banner.color}`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-lg">{banner.icon}</span>
-                      <span className="text-[9px] font-bold uppercase tracking-wider opacity-80">{banner.label}</span>
-                    </div>
-                    <h5 className="text-sm font-bold leading-snug mb-1.5">
-                      {banner.title}
-                    </h5>
-                    <p className="text-[11px] opacity-80 leading-relaxed line-clamp-2">
-                      {banner.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* --- Góc tiện ích — bấm mở modal bài viết --- */}
+            <UtilityCorner items={tuyenTruyenItems} />
 
             {/* --- Tổng đài 1022 --- */}
             <div className="rounded-2xl border border-border bg-white overflow-hidden">

@@ -257,3 +257,189 @@ export function getNiemYetData(): NiemYetItem[] {
   }
   return _niemYetCache
 }
+
+// ============================================================
+// LỊCH CÔNG TÁC — Types & Loaders
+// ============================================================
+
+/** Một mục trong lịch công tác */
+export interface LichCongTacEntry {
+  thoiGian: string
+  noiDung: string
+  chuTri: string
+  diaDiem: string
+  ghiChu: string
+}
+
+/** Lịch 1 ngày trong tuần */
+export interface LichNgay {
+  thu: string
+  ngay: string
+  items: LichCongTacEntry[]
+}
+
+/** Cấu trúc file lich-cong-tac.json */
+export interface LichCongTacData {
+  metadata: {
+    tuanSo: number
+    tuanTu: string
+    tuanDen: string
+    capNhat: string
+    nguoiDuyet: string
+  }
+  lichTuan: LichNgay[]
+}
+
+// Cache lịch công tác
+let _lichCongTacCache: LichCongTacData | null = null
+
+/**
+ * @chucnang    : Đọc lịch công tác tuần từ JSON
+ * @output      : LichCongTacData
+ */
+export function getLichCongTac(): LichCongTacData {
+  if (!_lichCongTacCache) {
+    try {
+      const raw = readFileSync(join(DATA_DIR, 'lich-cong-tac.json'), 'utf-8')
+      _lichCongTacCache = JSON.parse(raw) as LichCongTacData
+    } catch {
+      _lichCongTacCache = {
+        metadata: { tuanSo: 0, tuanTu: '', tuanDen: '', capNhat: '', nguoiDuyet: '' },
+        lichTuan: []
+      }
+    }
+  }
+  return _lichCongTacCache
+}
+
+// ============================================================
+// LỊCH TIẾP CÔNG DÂN — Types & Loaders
+// ============================================================
+
+/** Một buổi tiếp công dân */
+export interface LichTiepDanEntry {
+  ngay: string
+  buoi: string
+  thoiGian: string
+  nguoiTiep: string
+  diaDiem: string
+  loai: string
+  noiDung: string
+  ghiChu: string
+}
+
+/** Quy định tiếp dân */
+export interface QuyDinhTiepDan {
+  dinhKy: string
+  phoChutich: string
+  dotXuat: string
+  diaDiem: string
+  dienThoai: string
+}
+
+/** Cấu trúc file lich-tiep-dan.json */
+export interface LichTiepDanData {
+  metadata: {
+    thang: number
+    nam: number
+    capNhat: string
+    canCu: string
+  }
+  lichThang: LichTiepDanEntry[]
+  quyDinh: QuyDinhTiepDan
+}
+
+// Cache lịch tiếp dân
+let _lichTiepDanCache: LichTiepDanData | null = null
+
+/**
+ * @chucnang    : Đọc lịch tiếp công dân từ JSON
+ * @output      : LichTiepDanData
+ */
+export function getLichTiepDan(): LichTiepDanData {
+  if (!_lichTiepDanCache) {
+    try {
+      const raw = readFileSync(join(DATA_DIR, 'lich-tiep-dan.json'), 'utf-8')
+      _lichTiepDanCache = JSON.parse(raw) as LichTiepDanData
+    } catch {
+      _lichTiepDanCache = {
+        metadata: { thang: 0, nam: 0, capNhat: '', canCu: '' },
+        lichThang: [],
+        quyDinh: { dinhKy: '', phoChutich: '', dotXuat: '', diaDiem: '', dienThoai: '' }
+      }
+    }
+  }
+  return _lichTiepDanCache
+}
+
+// ============================================================
+// VĂN BẢN CHỈ ĐẠO ĐIỀU HÀNH — Types & Loaders
+// ============================================================
+
+/** Một văn bản chỉ đạo */
+export interface VanBanItem {
+  id: string
+  soKyHieu: string
+  loai: string
+  trichYeu: string
+  ngayBanHanh: string
+  coQuanBanHanh: string
+  nguoiKy: string
+  linhVuc: string
+  fileUrl: string
+  trangThai: string
+}
+
+// Cache văn bản
+let _vanBanCache: VanBanItem[] | null = null
+
+/**
+ * @chucnang    : Đọc danh sách văn bản chỉ đạo từ JSON
+ * @output      : VanBanItem[]
+ */
+export function getVanBanData(): VanBanItem[] {
+  if (!_vanBanCache) {
+    try {
+      const raw = readFileSync(join(DATA_DIR, 'van-ban.json'), 'utf-8')
+      _vanBanCache = JSON.parse(raw) as VanBanItem[]
+    } catch {
+      _vanBanCache = []
+    }
+  }
+  return _vanBanCache
+}
+
+// ============================================================
+// TUYÊN TRUYỀN CỘNG ĐỒNG — Types & Loaders
+// ============================================================
+
+/** Một bài tuyên truyền */
+export interface TuyenTruyenItem {
+  id: string
+  icon: string
+  tag: string
+  tagColor: string
+  title: string
+  summary: string
+  content: string       // Nội dung HTML đầy đủ cho modal
+  publishedAt: string
+}
+
+// Cache tuyên truyền
+let _tuyenTruyenCache: TuyenTruyenItem[] | null = null
+
+/**
+ * @chucnang    : Đọc danh sách bài tuyên truyền từ JSON
+ * @output      : TuyenTruyenItem[]
+ */
+export function getTuyenTruyenData(): TuyenTruyenItem[] {
+  if (!_tuyenTruyenCache) {
+    try {
+      const raw = readFileSync(join(DATA_DIR, 'tuyen-truyen.json'), 'utf-8')
+      _tuyenTruyenCache = JSON.parse(raw) as TuyenTruyenItem[]
+    } catch {
+      _tuyenTruyenCache = []
+    }
+  }
+  return _tuyenTruyenCache
+}

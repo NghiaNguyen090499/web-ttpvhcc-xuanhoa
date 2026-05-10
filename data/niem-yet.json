@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "id": "ny-001",
+    "title": "Danh mục thủ tục hành chính cấp xã thuộc phạm vi quản lý của UBND Phường Xuân Hòa",
+    "category": "Thủ tục HC",
+    "fileUrl": "/pdf/procedures/linh-vuc-tu-phap_01-dag6hu9etjc.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-05-01",
+    "description": "Quyết định công bố danh mục thủ tục hành chính áp dụng tại cấp xã/phường"
+  },
+  {
+    "id": "ny-002",
+    "title": "Niêm yết lệ phí đăng ký hộ tịch năm 2026",
+    "category": "Tư pháp",
+    "fileUrl": "/pdf/procedures/linh-vuc-tu-phap_13-dag7gnrk28w.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-04-15",
+    "description": "Bảng niêm yết lệ phí đăng ký khai sinh, khai tử, kết hôn và các thủ tục hộ tịch khác"
+  },
+  {
+    "id": "ny-003",
+    "title": "Quy trình tiếp nhận và trả kết quả hồ sơ hành chính",
+    "category": "Quy trình",
+    "fileUrl": "/pdf/procedures/linh-vuc-noi-vu_12-dag6uwshfg4.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-04-10",
+    "description": "Quy trình giải quyết thủ tục hành chính tại Bộ phận Một cửa phường Xuân Hòa"
+  },
+  {
+    "id": "ny-004",
+    "title": "Niêm yết phí, lệ phí cấp giấy phép xây dựng",
+    "category": "Xây dựng",
+    "fileUrl": "/pdf/procedures/linh-vuc-xay-dung_07-dag6tp6e4vm.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-03-20",
+    "description": "Bảng niêm yết mức thu phí, lệ phí cấp phép xây dựng nhà ở riêng lẻ"
+  },
+  {
+    "id": "ny-005",
+    "title": "Công khai danh mục chế độ bảo trợ xã hội",
+    "category": "Chính sách XH",
+    "fileUrl": "/pdf/procedures/linh-vuc-noi-vu_24-dag7mznxcxu.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-03-01",
+    "description": "Danh mục đối tượng hưởng trợ cấp bảo trợ xã hội hàng tháng trên địa bàn phường"
+  },
+  {
+    "id": "ny-006",
+    "title": "Niêm yết thủ tục đăng ký thuế hộ kinh doanh",
+    "category": "Tài chính",
+    "fileUrl": "/pdf/procedures/linh-vuc-tai-chinh_10-dag64ujyot0.pdf",
+    "fileType": "pdf",
+    "publishedAt": "2026-02-15",
+    "description": "Hướng dẫn đăng ký thuế cho hộ kinh doanh cá thể trên địa bàn phường"
+  }
+]

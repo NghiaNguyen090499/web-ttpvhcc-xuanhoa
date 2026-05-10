@@ -101,6 +101,26 @@ body {
   to { transform: translateX(100%); }
 }
 
+/* Slide-in cho announcement banner */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Progress bar — chạy từ 0% → 100% width */
+@keyframes progressBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.35s ease-out forwards;
+}
+
+.animate-progress {
+  animation: progressBar linear forwards;
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
@@ -187,4 +207,82 @@ body {
 }
 @media (min-width: 768px) {
   .section-padding { padding: 3.5rem 1.5rem; }
+}
+
+/* ============================================================
+   MODAL ANIMATIONS
+   ============================================================ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   PROSE — Nội dung bài tuyên truyền trong modal
+   ============================================================ */
+.prose-community {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: #5a453a;
+}
+
+.prose-community h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #231815;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-community h3:first-child {
+  margin-top: 0;
+}
+
+.prose-community p {
+  margin-bottom: 0.75rem;
+}
+
+.prose-community ul, .prose-community ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.prose-community ul {
+  list-style-type: disc;
+}
+
+.prose-community ol {
+  list-style-type: decimal;
+}
+
+.prose-community li {
+  margin-bottom: 0.35rem;
+}
+
+.prose-community strong {
+  color: #231815;
+  font-weight: 600;
+}
+
+.prose-community a {
+  color: #a61d21;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-community a:hover {
+  color: #7b1216;
+}
+
+.prose-community em {
+  color: #8a776a;
 }

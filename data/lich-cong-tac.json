@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "tuanSo": 20,
+    "tuanTu": "2026-05-11",
+    "tuanDen": "2026-05-17",
+    "capNhat": "2026-05-10",
+    "nguoiDuyet": "Văn phòng UBND Phường Xuân Hòa"
+  },
+  "lichTuan": [
+    {
+      "thu": "Thứ Hai",
+      "ngay": "2026-05-12",
+      "items": [
+        {
+          "thoiGian": "08:00 – 11:30",
+          "noiDung": "Họp giao ban đầu tuần — đánh giá công tác tuần trước, triển khai nhiệm vụ tuần mới",
+          "chuTri": "Chủ tịch UBND",
+          "diaDiem": "Phòng họp UBND Phường",
+          "ghiChu": ""
+        },
+        {
+          "thoiGian": "14:00 – 16:30",
+          "noiDung": "Làm việc với Tổ dân phố 5, 6 về công tác quản lý trật tự đô thị",
+          "chuTri": "PCT phụ trách Đô thị",
+          "diaDiem": "Tổ dân phố 5",
+          "ghiChu": "Mời đại diện khu phố"
+        }
+      ]
+    },
+    {
+      "thu": "Thứ Ba",
+      "ngay": "2026-05-13",
+      "items": [
+        {
+          "thoiGian": "08:00 – 11:30",
+          "noiDung": "Tiếp công dân định kỳ",
+          "chuTri": "Chủ tịch UBND",
+          "diaDiem": "Phòng tiếp dân — Trụ sở UBND",
+          "ghiChu": "Theo lịch tiếp dân"
+        },
+        {
+          "thoiGian": "14:00 – 16:00",
+          "noiDung": "Họp triển khai kế hoạch phòng chống thiên tai và tìm kiếm cứu nạn năm 2026",
+          "chuTri": "PCT phụ trách Kinh tế",
+          "diaDiem": "Hội trường UBND Phường",
+          "ghiChu": ""
+        }
+      ]
+    },
+    {
+      "thu": "Thứ Tư",
+      "ngay": "2026-05-14",
+      "items": [
+        {
+          "thoiGian": "08:00 – 11:00",
+          "noiDung": "Kiểm tra tiến độ giải quyết hồ sơ TTHC tại Bộ phận Một cửa",
+          "chuTri": "Chủ tịch UBND",
+          "diaDiem": "Bộ phận Một cửa",
+          "ghiChu": ""
+        },
+        {
+          "thoiGian": "14:00 – 16:30",
+          "noiDung": "Họp về công tác chuyển đổi số và cải cách hành chính",
+          "chuTri": "PCT phụ trách Văn xã",
+          "diaDiem": "Phòng họp UBND Phường",
+          "ghiChu": "Trực tuyến kết hợp"
+        }
+      ]
+    },
+    {
+      "thu": "Thứ Năm",
+      "ngay": "2026-05-15",
+      "items": [
+        {
+          "thoiGian": "08:00 – 11:30",
+          "noiDung": "Dự Hội nghị Ban Chấp hành Đảng bộ phường lần thứ 12",
+          "chuTri": "Bí thư Đảng ủy",
+          "diaDiem": "Hội trường Đảng ủy Phường",
+          "ghiChu": ""
+        },
+        {
+          "thoiGian": "14:00 – 16:00",
+          "noiDung": "Làm việc với Ban Quản lý chợ về vệ sinh an toàn thực phẩm",
+          "chuTri": "PCT phụ trách Kinh tế",
+          "diaDiem": "Chợ Xuân Hòa",
+          "ghiChu": ""
+        }
+      ]
+    },
+    {
+      "thu": "Thứ Sáu",
+      "ngay": "2026-05-16",
+      "items": [
+        {
+          "thoiGian": "08:00 – 11:00",
+          "noiDung": "Họp tổng kết công tác tuần, triển khai nhiệm vụ tuần tới",
+          "chuTri": "Chủ tịch UBND",
+          "diaDiem": "Phòng họp UBND Phường",
+          "ghiChu": ""
+        },
+        {
+          "thoiGian": "14:00 – 16:30",
+          "noiDung": "Tiếp và làm việc với Đoàn kiểm tra cải cách hành chính Quận",
+          "chuTri": "Chủ tịch UBND",
+          "diaDiem": "Hội trường UBND Phường",
+          "ghiChu": "Chuẩn bị báo cáo"
+        }
+      ]
+    },
+    {
+      "thu": "Thứ Bảy",
+      "ngay": "2026-05-17",
+      "items": [
+        {
+          "thoiGian": "07:30 – 11:30",
+          "noiDung": "Trực giải quyết hồ sơ TTHC theo lịch",
+          "chuTri": "Cán bộ trực",
+          "diaDiem": "Bộ phận Một cửa",
+          "ghiChu": "Sáng thứ Bảy"
+        }
+      ]
+    }
+  ]
+}
