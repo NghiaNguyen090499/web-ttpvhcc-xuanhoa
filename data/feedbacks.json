@@ -1,0 +1,62 @@
+[
+  {
+    "id": "fb-001",
+    "name": "Nguyễn Văn A",
+    "email": "nguyenvana@email.com",
+    "phone": "0901234567",
+    "subject": "Phản ánh thái độ phục vụ tại quầy số 3",
+    "content": "Sáng ngày 10/5/2026, tôi đến TTPVHCC phường Xuân Hòa làm thủ tục chứng thực. Tuy nhiên cán bộ tại quầy số 3 có thái độ không nhiệt tình, không hướng dẫn rõ ràng về hồ sơ cần bổ sung. Kính đề nghị lãnh đạo phường xem xét, chấn chỉnh.",
+    "status": "PROCESSING",
+    "response": "UBND phường đã tiếp nhận phản ánh và đang xác minh thông tin. Xin cảm ơn công dân đã góp ý.",
+    "respondedAt": "2026-05-11T09:00:00.000Z",
+    "createdAt": "2026-05-10T08:30:00.000Z"
+  },
+  {
+    "id": "fb-002",
+    "name": "Trần Thị B",
+    "email": "tranthib@gmail.com",
+    "phone": null,
+    "subject": "Kiến nghị về tình trạng ngập nước đường Nguyễn Huệ",
+    "content": "Đoạn đường Nguyễn Huệ (gần chợ Xuân Hòa) thường xuyên ngập nước mỗi khi mưa lớn, gây khó khăn cho việc đi lại của người dân. Kính đề nghị UBND phường phối hợp với các đơn vị liên quan khắc phục tình trạng này.",
+    "status": "PENDING",
+    "response": null,
+    "respondedAt": null,
+    "createdAt": "2026-05-12T14:20:00.000Z"
+  },
+  {
+    "id": "fb-003",
+    "name": "Lê Minh C",
+    "email": null,
+    "phone": "0987654321",
+    "subject": "Hỏi về tiến độ xử lý hồ sơ khai sinh",
+    "content": "Tôi đã nộp hồ sơ đăng ký khai sinh cho con từ ngày 05/5/2026 (mã biên nhận: XH-2026-0512) nhưng đến nay chưa nhận được kết quả. Xin hỏi tiến độ xử lý hồ sơ của tôi.",
+    "status": "RESOLVED",
+    "response": "Hồ sơ của công dân đã được giải quyết vào ngày 08/5/2026. Công dân vui lòng đến TTPVHCC nhận kết quả. Xin lỗi vì sự chậm trễ trong thông báo.",
+    "respondedAt": "2026-05-09T10:30:00.000Z",
+    "createdAt": "2026-05-08T16:45:00.000Z"
+  },
+  {
+    "id": "fb-004",
+    "name": "Phạm Đức D",
+    "email": "phamducd@email.com",
+    "phone": "0912345678",
+    "subject": "Đề xuất lắp thêm camera an ninh khu phố 5",
+    "content": "Khu phố 5 gần đây xảy ra một số vụ trộm cắp vặt. Cư dân khu phố kiến nghị UBND phường xem xét lắp đặt thêm camera an ninh tại các ngã ba, ngã tư trong khu vực để đảm bảo an ninh trật tự.",
+    "status": "PENDING",
+    "response": null,
+    "respondedAt": null,
+    "createdAt": "2026-05-13T11:00:00.000Z"
+  },
+  {
+    "id": "fb-005",
+    "name": "Hoàng Thị E",
+    "email": "hoanге@email.com",
+    "phone": null,
+    "subject": "Cảm ơn TTPVHCC phường Xuân Hòa",
+    "content": "Tôi xin gửi lời cảm ơn đến cán bộ TTPVHCC phường Xuân Hòa đã hỗ trợ nhiệt tình trong quá trình làm thủ tục xác nhận tình trạng hôn nhân. Thủ tục nhanh gọn, thái độ phục vụ rất tốt.",
+    "status": "RESOLVED",
+    "response": "Xin cảm ơn sự ghi nhận của công dân. TTPVHCC phường Xuân Hòa sẽ tiếp tục nâng cao chất lượng phục vụ.",
+    "respondedAt": "2026-05-07T15:00:00.000Z",
+    "createdAt": "2026-05-07T10:15:00.000Z"
+  }
+]

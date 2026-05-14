@@ -11,7 +11,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
-  LayoutDashboard, Newspaper, MessageSquare, FileText,
+  LayoutDashboard, Newspaper, MessageSquare, FileText, HelpCircle,
   Settings, LogOut, Menu, X, ChevronRight
 } from 'lucide-react'
 
@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { label: 'Tin tức', href: '/admin/tin-tuc', icon: Newspaper },
   { label: 'Phản ánh', href: '/admin/phan-anh', icon: MessageSquare },
   { label: 'Thủ tục HC', href: '/admin/thu-tuc', icon: FileText },
+  { label: 'FAQ', href: '/admin/faq', icon: HelpCircle },
   { label: 'Cài đặt', href: '/admin/cai-dat', icon: Settings },
 ]
 
