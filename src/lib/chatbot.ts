@@ -1,7 +1,7 @@
 /**
  * @nhom        : Lib / Chatbot
  * @chucnang    : System prompt + context builder cho Gemini chatbot
- * @lienquan    : data/procedures.json, data/news.json, src/lib/static-data.ts
+ * @lienquan    : data/procedures.json, data/news.json, data/faq.json, src/lib/static-data.ts
  * @alias       : chatbot-context, system-prompt
  *
  * Xây dựng context đầy đủ từ dữ liệu local để Gemini trả lời chính xác.
@@ -82,12 +82,41 @@ function buildNewsContext(): string {
 }
 
 /**
+ * @chucnang    : Đọc faq.json và tạo context FAQ cho chatbot
+ * @output      : String câu hỏi thường gặp
+ */
+function buildFaqContext(): string {
+  try {
+    const filePath = path.join(process.cwd(), 'data', 'faq.json')
+    const raw = fs.readFileSync(filePath, 'utf-8')
+    const faqs = JSON.parse(raw) as Array<{
+      question: string; answer: string; category: string; isActive: boolean
+    }>
+
+    const activeFaqs = faqs.filter(f => f.isActive !== false)
+    if (activeFaqs.length === 0) return ''
+
+    const lines: string[] = ['## CÂU HỎI THƯỜNG GẶP (FAQ)']
+    for (const faq of activeFaqs) {
+      lines.push(`### Hỏi: ${faq.question}`)
+      lines.push(`Trả lời: ${faq.answer}`)
+      lines.push(`Danh mục: ${faq.category}`)
+      lines.push('')
+    }
+    return lines.join('\n')
+  } catch {
+    return ''
+  }
+}
+
+/**
  * @chucnang    : Tạo system prompt đầy đủ cho Gemini
  * @output      : String system instruction
  */
 export function buildSystemPrompt(): string {
   const procedures = buildProceduresContext()
   const news = buildNewsContext()
+  const faq = buildFaqContext()
 
   return `Bạn là trợ lý AI của Trung tâm Phục vụ Hành chính Công (TTPVHCC) Phường Xuân Hòa, TP. Hồ Chí Minh.
 
@@ -120,6 +149,8 @@ Nếu câu hỏi nằm ngoài phạm vi hoặc bạn không chắc chắn, hãy 
 ${procedures}
 
 ${news}
+
+${faq}
 
 ## PHONG CÁCH TRẢ LỜI
 - Gọi người dùng là "bạn" hoặc "anh/chị"

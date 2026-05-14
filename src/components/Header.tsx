@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { label: 'Lịch công tác', href: '/lich-cong-tac' },
   { label: 'Tiếp dân', href: '/lich-tiep-dan' },
   { label: 'Niêm yết', href: '/niem-yet' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'Liên hệ', href: '/lien-he' },
 ]
 

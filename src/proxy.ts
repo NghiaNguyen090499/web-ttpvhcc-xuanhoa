@@ -1,8 +1,8 @@
 /**
- * @nhom        : Bảo mật / Middleware
+ * @nhom        : Bảo mật / Proxy (thay thế middleware — Next.js 16)
  * @chucnang    : Bảo vệ routes admin — kiểm tra JWT session trước khi cho truy cập
  * @lienquan    : src/lib/auth.ts, src/app/admin/
- * @alias       : middleware, route-guard, bao-ve
+ * @alias       : proxy, route-guard, bao-ve
  *
  * Matcher:
  * - /admin/* (trừ /admin/login) → redirect đến login nếu chưa đăng nhập
@@ -36,7 +36,7 @@ async function isValidToken(token: string): Promise<boolean> {
   }
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // --- Bảo vệ trang admin (trừ login) ---

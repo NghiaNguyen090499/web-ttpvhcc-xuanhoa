@@ -8,7 +8,7 @@
 
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import NewsTabs, { TAG_COLORS, NewsSearch } from '@/components/NewsTabs'
@@ -58,9 +58,12 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diffDays / 30)} tháng trước`
 }
 
+const ITEMS_PER_PAGE = 9 // Số bài trong grid mỗi trang
+
 export default function NewsPageClient({ news }: NewsPageClientProps) {
-  // State tìm kiếm
+  // State tìm kiếm + phân trang
   const [searchQuery, setSearchQuery] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Lọc theo search query
   const searchFilteredNews = useMemo(() => {
@@ -217,7 +220,7 @@ export default function NewsPageClient({ news }: NewsPageClientProps) {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {filteredNews.slice(6).map((item) => (
+                          {filteredNews.slice(6, 6 + currentPage * ITEMS_PER_PAGE).map((item) => (
                             <article
                               key={item.id}
                               className="rounded-2xl border border-border bg-white overflow-hidden hover:-translate-y-0.5 hover:shadow-lg btn-transition"
@@ -251,6 +254,17 @@ export default function NewsPageClient({ news }: NewsPageClientProps) {
                             </article>
                           ))}
                         </div>
+                        {/* Nút xem thêm */}
+                        {filteredNews.length > 6 + currentPage * ITEMS_PER_PAGE && (
+                          <div className="col-span-full flex justify-center pt-4">
+                            <button
+                              onClick={() => setCurrentPage(p => p + 1)}
+                              className="px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark btn-transition"
+                            >
+                              Xem thêm tin tức ({filteredNews.length - 6 - currentPage * ITEMS_PER_PAGE} bài còn lại)
+                            </button>
+                          </div>
+                        )}
                       </>
                     )}
                   </>
