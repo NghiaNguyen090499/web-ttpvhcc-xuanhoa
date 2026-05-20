@@ -72,7 +72,7 @@ function PostModal({ item, onClose }: { item: TuyenTruyenItem | null; onClose: (
             {item.icon}
           </span>
           <div className="flex-1 min-w-0">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
+            <span className={`text-xs px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
               {item.tag}
             </span>
             <h2 className="mt-1 text-lg font-bold text-text-primary font-heading leading-snug">
@@ -106,7 +106,7 @@ function PostModal({ item, onClose }: { item: TuyenTruyenItem | null; onClose: (
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-white border-t border-border px-6 py-3 flex items-center justify-between">
-          <span className="text-[10px] text-text-muted">UBND Phường Xuân Hòa</span>
+          <span className="text-sm text-text-muted">UBND Phường Xuân Hòa</span>
           <button
             onClick={onClose}
             className="text-xs font-semibold text-primary hover:text-primary-dark btn-transition"
@@ -155,7 +155,7 @@ export function UtilityCorner({ items }: { items: TuyenTruyenItem[] }) {
                 {/* Icon + Tag */}
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">{item.icon}</span>
-                  <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${colors.tagBg} ${colors.tagText}`}>
+                  <span className={`text-xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${colors.tagBg} ${colors.tagText}`}>
                     {item.tag}
                   </span>
                 </div>
@@ -164,11 +164,11 @@ export function UtilityCorner({ items }: { items: TuyenTruyenItem[] }) {
                   {item.title}
                 </h5>
                 {/* Mô tả ngắn */}
-                <p className="text-[11px] opacity-80 leading-relaxed line-clamp-2">
+                <p className="text-sm opacity-80 leading-relaxed line-clamp-2">
                   {item.summary}
                 </p>
                 {/* "Xem chi tiết" */}
-                <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold opacity-70 group-hover:opacity-100 btn-transition">
+                <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold opacity-70 group-hover:opacity-100 btn-transition">
                   Xem chi tiết
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />

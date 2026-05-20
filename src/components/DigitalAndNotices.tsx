@@ -60,7 +60,7 @@ function formatDate(dateStr: string): string {
 function DigitalTransformColumn() {
   return (
     <div className="bg-white rounded-2xl border border-border overflow-hidden h-full flex flex-col">
-      {/* Header — nền đỏ đậm */}
+      {/* Header — nền xanh đậm */}
       <div className="bg-primary-dark px-5 py-3.5 flex items-center gap-2">
         <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -82,13 +82,13 @@ function DigitalTransformColumn() {
             <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0 group-hover:scale-125 btn-transition" />
 
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
+              <p className="text-sm font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
                 {item.title}
               </p>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-[10px] text-text-muted">{formatDate(item.date)}</span>
+                <span className="text-sm text-text-muted">{formatDate(item.date)}</span>
                 {item.tag && (
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-success text-white font-bold uppercase">
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-success text-white font-bold uppercase">
                     {item.tag}
                   </span>
                 )}
@@ -157,17 +157,17 @@ function PublicNoticesColumn({ items }: { items: NiemYetItem[] }) {
               </span>
 
               <div className="min-w-0 flex-1">
-                <p className="text-[13px] font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
+                <p className="text-sm font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
                   {item.title}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[10px] text-text-muted">{formatDate(item.publishedAt)}</span>
+                  <span className="text-sm text-text-muted">{formatDate(item.publishedAt)}</span>
                   {item.category && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-text-secondary font-medium">
+                    <span className="text-xs px-1.5 py-0.5 rounded-full bg-cream text-text-secondary font-medium">
                       {item.category}
                     </span>
                   )}
-                  <span className="text-[10px] font-semibold text-primary flex items-center gap-0.5 ml-auto">
+                  <span className="text-sm font-semibold text-primary flex items-center gap-0.5 ml-auto">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -200,7 +200,7 @@ export function DigitalAndNotices() {
   const niemYetItems = getNiemYetData()
 
   return (
-    <section className="py-10 md:py-14" id="digital-notices">
+    <section className="py-8 md:py-10" id="digital-notices">
       <div className="container-main">
         {/* Heading */}
         <div className="text-center mb-8">

@@ -209,7 +209,7 @@ function ServiceColumn({
 
 export function ServiceBySubject() {
   return (
-    <section className="py-10 md:py-14 bg-cream/50" id="service-by-subject">
+    <section className="py-8 md:py-10 bg-cream/50" id="service-by-subject">
       <div className="container-main">
         {/* Heading */}
         <div className="text-center mb-8">
@@ -231,7 +231,7 @@ export function ServiceBySubject() {
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-border p-5 md:p-6">
             <ServiceColumn
               title="Công dân"
-              color="#a61d21"
+              color="#0878c9"
               iconBg="rgba(166, 29, 33, 0.08)"
               items={CITIZEN_SERVICES}
             />

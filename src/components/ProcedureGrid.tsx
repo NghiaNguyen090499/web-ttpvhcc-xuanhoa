@@ -45,7 +45,7 @@ export function ProcedureGrid() {
   const categories = data.categories
 
   return (
-    <section className="py-10 md:py-14" id="procedure-grid">
+    <section className="py-8 md:py-10" id="procedure-grid">
       <div className="container-main">
         {/* Heading */}
         <div className="text-center mb-8">
@@ -104,7 +104,7 @@ export function ProcedureGrid() {
 
                 {/* Nút truy cập dịch vụ */}
                 <span
-                  className="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] md:text-xs font-bold text-white btn-transition group-hover:opacity-90"
+                  className="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold text-white btn-transition group-hover:opacity-90"
                   style={{ backgroundColor: meta?.color || 'var(--color-primary)' }}
                 >
                   Truy cập dịch vụ

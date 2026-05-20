@@ -50,7 +50,7 @@ export default function HomePage() {
       <ServiceBySubject />
 
       {/* CTA liên hệ */}
-      <section className="py-12 bg-cream">
+      <section className="bg-cream py-8 md:py-10">
         <div className="container-main text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-heading uppercase tracking-wide">
             Cần hỗ trợ?

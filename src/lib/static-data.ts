@@ -20,15 +20,6 @@ const DATA_DIR = join(process.cwd(), 'data')
 // TYPES — Kiểu dữ liệu cho JSON
 // ============================================================
 
-/** Tài liệu thủ tục (preview + PDF — lưu local) */
-export interface DocumentData {
-  title: string
-  type: string
-  preview: string
-  pdf: string
-  pageCount: number
-}
-
 /** Lĩnh vực TTHC cấp phường */
 export interface CategoryData {
   id: string
@@ -37,7 +28,6 @@ export interface CategoryData {
   slug: string
   description: string
   subCategories: string[]
-  documents?: DocumentData[]
 }
 
 /** Lĩnh vực phi địa giới / thường gặp */
@@ -47,9 +37,33 @@ export interface SimpleCategoryData {
   type: string
   slug?: string
   description: string
-  preview?: string
-  pdf?: string
-  pageCount?: number
+}
+
+/** Link thủ tục hành chính trên Cổng DVC Quốc gia */
+export interface ProcedureLinkItem {
+  id: string
+  name: string
+  code: string | null
+  url: string
+}
+
+/** Nhóm link thủ tục theo lĩnh vực */
+export interface ProcedureLinkGroup {
+  name: string
+  slug: string
+  items: ProcedureLinkItem[]
+}
+
+/** Cấu trúc file procedure-links.json */
+export interface ProcedureLinksData {
+  metadata: {
+    sourceFile: string
+    importedAt: string
+    totalGroups: number
+    totalLinks: number
+    note: string
+  }
+  groups: ProcedureLinkGroup[]
 }
 
 /** Links liên kết ngoài */
@@ -118,6 +132,28 @@ export interface WardInfoData {
   }
 }
 
+export type OrganizationNodeType = 'chairman' | 'vice' | 'department'
+
+/** Một ô trong sơ đồ cơ cấu tổ chức */
+export interface OrganizationNode {
+  id: string
+  title: string
+  type: OrganizationNodeType
+  parentId: string | null
+  order: number
+  isActive: boolean
+}
+
+/** Cấu trúc file organization.json */
+export interface OrganizationData {
+  metadata: {
+    title: string
+    updatedAt: string
+    note: string
+  }
+  nodes: OrganizationNode[]
+}
+
 // ============================================================
 // DATA LOADERS — Hàm đọc dữ liệu
 // ============================================================
@@ -125,6 +161,8 @@ export interface WardInfoData {
 // Cache dữ liệu trong bộ nhớ — tránh đọc file nhiều lần
 let _proceduresCache: ProceduresData | null = null
 let _wardInfoCache: WardInfoData | null = null
+let _procedureLinksCache: ProcedureLinksData | null = null
+let _organizationCache: OrganizationData | null = null
 
 /**
  * @chucnang    : Đọc dữ liệu thủ tục hành chính từ JSON
@@ -139,6 +177,28 @@ export function getProceduresData(): ProceduresData {
 }
 
 /**
+ * @chucnang    : Đọc danh sách đường dẫn thủ tục hành chính từ Excel đã import
+ * @output      : ProcedureLinksData
+ */
+export function getProcedureLinksData(): ProcedureLinksData {
+  if (!_procedureLinksCache) {
+    const raw = readFileSync(join(DATA_DIR, 'procedure-links.json'), 'utf-8')
+    _procedureLinksCache = JSON.parse(raw) as ProcedureLinksData
+  }
+  return _procedureLinksCache
+}
+
+/**
+ * @chucnang    : Lấy nhóm link thủ tục theo slug lĩnh vực
+ * @input       : slug (string)
+ * @output      : ProcedureLinkGroup | undefined
+ */
+export function getProcedureLinkGroupBySlug(slug: string): ProcedureLinkGroup | undefined {
+  const data = getProcedureLinksData()
+  return data.groups.find((g) => g.slug === slug)
+}
+
+/**
  * @chucnang    : Đọc thông tin phường từ JSON
  * @output      : WardInfoData
  */
@@ -148,6 +208,18 @@ export function getWardInfo(): WardInfoData {
     _wardInfoCache = JSON.parse(raw) as WardInfoData
   }
   return _wardInfoCache
+}
+
+/**
+ * @chucnang    : Đọc dữ liệu cơ cấu tổ chức từ JSON
+ * @output      : OrganizationData
+ */
+export function getOrganizationData(): OrganizationData {
+  if (!_organizationCache) {
+    const raw = readFileSync(join(DATA_DIR, 'organization.json'), 'utf-8')
+    _organizationCache = JSON.parse(raw) as OrganizationData
+  }
+  return _organizationCache
 }
 
 /**

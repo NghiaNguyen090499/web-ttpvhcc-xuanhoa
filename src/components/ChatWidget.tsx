@@ -175,7 +175,7 @@ export default function ChatWidget() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold">Trợ lý TTPVHCC</p>
-              <p className="text-[10px] text-white/70">Phường Xuân Hòa • Hỗ trợ tham khảo</p>
+              <p className="text-xs text-white/70">Phường Xuân Hòa • Hỗ trợ tham khảo</p>
             </div>
             <button onClick={() => setIsOpen(false)} className="w-7 h-7 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
@@ -195,7 +195,7 @@ export default function ChatWidget() {
                   Tôi là trợ lý AI của TTPVHCC Phường Xuân Hòa.<br />
                   Hãy hỏi về thủ tục hành chính, biểu mẫu, giờ làm việc...
                 </p>
-                <p className="text-[10px] text-text-muted/70 italic mb-4">
+                <p className="text-xs text-text-muted/70 italic mb-4">
                   ⚠️ Thông tin chỉ mang tính tham khảo
                 </p>
 
@@ -205,7 +205,7 @@ export default function ChatWidget() {
                     <button
                       key={s}
                       onClick={() => sendMessage(s)}
-                      className="px-3 py-1.5 rounded-full bg-white border border-border text-[11px] font-medium text-text-primary hover:border-primary/40 hover:text-primary transition-colors"
+                      className="px-3 py-1.5 rounded-full bg-white border border-border text-sm font-medium text-text-primary hover:border-primary/40 hover:text-primary transition-colors"
                     >
                       {s}
                     </button>
@@ -217,7 +217,7 @@ export default function ChatWidget() {
             {/* Danh sách tin nhắn */}
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed whitespace-pre-wrap ${
+                <div className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === 'user'
                     ? 'bg-primary text-white rounded-br-md'
                     : 'bg-white border border-border text-text-primary rounded-bl-md shadow-sm'
@@ -230,7 +230,7 @@ export default function ChatWidget() {
             {/* Đang stream */}
             {isLoading && streamText && (
               <div className="flex justify-start">
-                <div className="max-w-[85%] px-3.5 py-2.5 rounded-2xl rounded-bl-md bg-white border border-border text-text-primary text-[13px] leading-relaxed whitespace-pre-wrap shadow-sm">
+                <div className="max-w-[85%] px-3.5 py-2.5 rounded-2xl rounded-bl-md bg-white border border-border text-text-primary text-sm leading-relaxed whitespace-pre-wrap shadow-sm">
                   {streamText}
                   <span className="inline-block w-1.5 h-4 bg-primary/60 ml-0.5 animate-pulse rounded-sm" />
                 </div>
@@ -255,7 +255,7 @@ export default function ChatWidget() {
 
           {/* Disclaimer */}
           <div className="px-4 py-1.5 bg-amber-50 border-t border-amber-100">
-            <p className="text-[9px] text-amber-700 text-center">
+            <p className="text-xs text-amber-700 text-center">
               ⚠️ Thông tin tham khảo — Liên hệ TTPVHCC để được tư vấn chính thức
             </p>
           </div>

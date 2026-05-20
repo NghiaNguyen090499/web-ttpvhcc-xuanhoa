@@ -68,30 +68,30 @@ function ReceptionEntry({ entry }: { entry: LichTiepDanEntry }) {
         today ? 'bg-primary text-white' : past ? 'bg-gray-100 text-text-muted' : 'bg-cream text-primary'
       }`}>
         <span className="text-sm font-bold leading-none">{formatDate(entry.ngay).split('/')[0]}</span>
-        <span className="text-[9px] uppercase">Th{formatDate(entry.ngay).split('/')[1]}</span>
+        <span className="text-sm uppercase">Th{formatDate(entry.ngay).split('/')[1]}</span>
       </div>
 
       {/* Nội dung */}
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <p className="text-[12px] font-semibold text-text-primary truncate">
+          <p className="text-sm font-semibold text-text-primary truncate">
             {getDayName(entry.ngay)} — {entry.buoi}
           </p>
           {today && (
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-success text-white font-bold shrink-0">
+            <span className="text-xs px-1.5 py-0.5 rounded-full bg-success text-white font-bold shrink-0">
               HÔM NAY
             </span>
           )}
           {past && (
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-gray-200 text-text-muted font-medium shrink-0">
+            <span className="text-xs px-1.5 py-0.5 rounded-full bg-gray-200 text-text-muted font-medium shrink-0">
               Đã qua
             </span>
           )}
         </div>
-        <p className="text-[11px] text-text-secondary mt-0.5 line-clamp-1">
+        <p className="text-sm text-text-secondary mt-0.5 line-clamp-1">
           {entry.nguoiTiep}
         </p>
-        <p className="text-[10px] text-text-muted mt-0.5">
+        <p className="text-sm text-text-muted mt-0.5">
           {entry.thoiGian}
         </p>
       </div>
@@ -129,7 +129,7 @@ export function CitizenReception() {
           Lịch tiếp công dân
         </h3>
         {monthName && (
-          <span className="ml-auto text-[10px] text-white/60">
+          <span className="ml-auto text-sm text-white/60">
             {monthName}
           </span>
         )}
@@ -151,7 +151,7 @@ export function CitizenReception() {
       {/* Quy định ngắn gọn */}
       {data.quyDinh.dinhKy && (
         <div className="px-4 py-2 bg-cream/50 border-t border-border">
-          <p className="text-[10px] text-text-muted leading-relaxed line-clamp-2">
+          <p className="text-sm text-text-muted leading-relaxed line-clamp-2">
             <strong className="text-text-secondary">Quy định:</strong> {data.quyDinh.dinhKy}
           </p>
         </div>

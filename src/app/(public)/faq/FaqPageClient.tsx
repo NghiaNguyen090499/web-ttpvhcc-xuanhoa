@@ -137,7 +137,7 @@ export default function FaqPageClient({ faqs }: FaqPageClientProps) {
                           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-wrap">
                             {faq.answer}
                           </p>
-                          <span className="inline-block mt-3 text-[10px] px-2 py-0.5 rounded-full bg-cream text-text-muted font-medium">
+                          <span className="inline-block mt-3 text-xs px-2 py-0.5 rounded-full bg-cream text-text-muted font-medium">
                             📂 {faq.category}
                           </span>
                         </div>

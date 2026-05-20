@@ -19,8 +19,8 @@ const ITEMS = [
     desc: 'Nộp qua Cổng DVC Quốc gia',
     href: 'https://dichvucong.gov.vn',
     external: true,
-    color: '#a61d21',
-    bgColor: 'rgba(166, 29, 33, 0.08)',
+    color: '#0878c9',
+    bgColor: 'rgba(8, 120, 201, 0.08)',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -135,20 +135,10 @@ export function QuickAccess() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {ITEMS.map((item) => {
             const isExternal = item.external
-            const Tag = isExternal ? 'a' : (item as { isLookup?: boolean }).isLookup || (item as { isChatbot?: boolean }).isChatbot ? 'button' : Link
-            const linkProps = isExternal
-              ? { href: item.href, target: '_blank', rel: 'noopener noreferrer' }
-              : (item as { isLookup?: boolean }).isLookup || (item as { isChatbot?: boolean }).isChatbot
-                ? { type: 'button' as const }
-                : { href: item.href }
-
-            return (
-              <Tag
-                key={item.title}
-                {...(linkProps as any)}
-                onClick={(e: React.MouseEvent) => handleItemClick(item, e)}
-                className="group flex flex-col items-center text-center p-4 md:p-5 rounded-2xl border border-border bg-white hover:border-transparent hover:-translate-y-1 hover:shadow-xl btn-transition"
-              >
+            const isAction = (item as { isLookup?: boolean; isChatbot?: boolean }).isLookup || (item as { isLookup?: boolean; isChatbot?: boolean }).isChatbot
+            const itemClass = "group flex flex-col items-center text-center p-4 md:p-5 rounded-2xl border border-border bg-white hover:border-transparent hover:-translate-y-1 hover:shadow-xl btn-transition"
+            const content = (
+              <>
                 {/* Icon vòng tròn */}
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-2xl mb-3 group-hover:scale-110 btn-transition"
@@ -163,17 +153,56 @@ export function QuickAccess() {
                 </h3>
 
                 {/* Mô tả — ẩn trên mobile */}
-                <p className="hidden sm:block mt-1 text-[11px] text-text-muted leading-tight">
+                <p className="hidden sm:block mt-1 text-xs text-text-muted leading-tight">
                   {item.desc}
                 </p>
 
                 {/* Badge external */}
                 {isExternal && (
-                  <span className="mt-2 text-[10px] font-semibold text-primary bg-primary/5 px-2 py-0.5 rounded-full">
+                  <span className="mt-2 text-xs font-semibold text-primary bg-primary/5 px-2 py-0.5 rounded-full">
                     DVC Quốc gia ↗
                   </span>
                 )}
-              </Tag>
+              </>
+            )
+
+            if (isExternal) {
+              return (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => handleItemClick(item, e)}
+                  className={itemClass}
+                >
+                  {content}
+                </a>
+              )
+            }
+
+            if (isAction) {
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  onClick={(e) => handleItemClick(item, e)}
+                  className={itemClass}
+                >
+                  {content}
+                </button>
+              )
+            }
+
+            return (
+              <Link
+                key={item.title}
+                href={item.href}
+                onClick={(e) => handleItemClick(item, e)}
+                className={itemClass}
+              >
+                {content}
+              </Link>
             )
           })}
         </div>

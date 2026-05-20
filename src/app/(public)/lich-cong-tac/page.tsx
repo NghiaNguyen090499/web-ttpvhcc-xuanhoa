@@ -107,7 +107,7 @@ export default function LichCongTacPage() {
                       {formatDate(ngay.ngay)}
                     </span>
                     {today && (
-                      <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-white font-bold">
+                      <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold">
                         HÔM NAY
                       </span>
                     )}

@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "title": "Cơ cấu tổ chức",
+    "updatedAt": "2026-05-20",
+    "note": "Dữ liệu sơ đồ tổ chức hiển thị tại trang giới thiệu và có thể chỉnh sửa qua admin."
+  },
+  "nodes": [
+    {
+      "id": "chu-tich",
+      "title": "Chủ tịch",
+      "type": "chairman",
+      "parentId": null,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
+      "title": "Phó Chủ tịch - Phụ trách Kinh tế - Hạ tầng - Đô thị - Văn phòng",
+      "type": "vice",
+      "parentId": "chu-tich",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "pho-chu-tich-van-hoa-xa-hoi",
+      "title": "Phó Chủ tịch - Phụ trách Văn hóa - Xã hội",
+      "type": "vice",
+      "parentId": "chu-tich",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "van-phong-hdnd-va-ubnd",
+      "title": "Văn phòng Hội đồng Nhân dân và Ủy ban Nhân dân",
+      "type": "department",
+      "parentId": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "phong-kinh-te-ha-tang-va-do-thi",
+      "title": "Phòng Kinh tế, Hạ tầng và Đô thị",
+      "type": "department",
+      "parentId": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "phong-van-hoa-xa-hoi",
+      "title": "Phòng Văn hóa - Xã hội",
+      "type": "department",
+      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "tram-y-te",
+      "title": "Trạm Y tế",
+      "type": "department",
+      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "trung-tam-phuc-vu-hanh-chinh-cong",
+      "title": "Trung tâm Phục vụ Hành chính Công",
+      "type": "department",
+      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "trung-tam-cung-ung-dich-vu-cong",
+      "title": "Trung tâm Cung ứng Dịch vụ Công",
+      "type": "department",
+      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "order": 4,
+      "isActive": true
+    }
+  ]
+}

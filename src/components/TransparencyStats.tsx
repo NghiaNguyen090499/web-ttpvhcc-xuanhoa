@@ -57,8 +57,8 @@ const STATS_DATA = {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
       ),
-      color: '#a61d21',
-      bgColor: 'rgba(166, 29, 33, 0.1)',
+      color: '#0878c9',
+      bgColor: 'rgba(8, 120, 201, 0.1)',
     },
   ],
 }
@@ -175,10 +175,10 @@ export function TransparencyStats() {
   }, [handleIntersect])
 
   return (
-    <section className="py-10 md:py-14 bg-surface" id="transparency-stats" ref={ref}>
+    <section className="bg-surface py-8 md:pt-10 md:pb-6" id="transparency-stats" ref={ref}>
       <div className="container-main">
         {/* Heading */}
-        <div className="text-center mb-8">
+        <div className="mb-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             Minh bạch & Hiệu quả
           </p>
@@ -199,7 +199,7 @@ export function TransparencyStats() {
         </div>
 
         {/* Ghi chú nguồn dữ liệu */}
-        <p className="text-center text-xs text-text-muted mt-6">
+        <p className="mt-4 text-center text-xs text-text-muted">
           * Số liệu được cập nhật hàng tháng từ hệ thống quản lý hồ sơ hành chính công
         </p>
       </div>

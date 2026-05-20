@@ -42,14 +42,14 @@ function DayRow({ lichNgay }: { lichNgay: LichNgay }) {
     <div className={`px-3 py-2.5 rounded-xl ${today ? 'bg-primary/5 ring-1 ring-primary/20' : 'hover:bg-cream'} btn-transition`}>
       {/* Header ngày */}
       <div className="flex items-center gap-2 mb-1.5">
-        <span className={`text-[11px] font-bold uppercase tracking-wide ${today ? 'text-primary' : 'text-text-muted'}`}>
+        <span className={`text-sm font-bold uppercase tracking-wide ${today ? 'text-primary' : 'text-text-muted'}`}>
           {lichNgay.thu}
         </span>
-        <span className={`text-[10px] px-1.5 py-0.5 rounded ${today ? 'bg-primary text-white' : 'bg-gray-100 text-text-muted'}`}>
+        <span className={`text-xs px-1.5 py-0.5 rounded ${today ? 'bg-primary text-white' : 'bg-gray-100 text-text-muted'}`}>
           {formatShortDate(lichNgay.ngay)}
         </span>
         {today && (
-          <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-success text-white font-bold ml-auto">
+          <span className="text-xs px-1.5 py-0.5 rounded-full bg-success text-white font-bold ml-auto">
             HÔM NAY
           </span>
         )}
@@ -60,17 +60,17 @@ function DayRow({ lichNgay }: { lichNgay: LichNgay }) {
         {lichNgay.items.slice(0, 2).map((item, i) => (
           <div key={i} className="flex items-start gap-2">
             {/* Thời gian */}
-            <span className="text-[10px] text-text-muted whitespace-nowrap mt-0.5 w-24 shrink-0">
+            <span className="text-sm text-text-muted whitespace-nowrap mt-0.5 w-24 shrink-0">
               {item.thoiGian}
             </span>
             {/* Nội dung */}
-            <p className="text-[12px] text-text-primary leading-snug line-clamp-1 flex-1">
+            <p className="text-sm text-text-primary leading-snug line-clamp-1 flex-1">
               {item.noiDung}
             </p>
           </div>
         ))}
         {lichNgay.items.length > 2 && (
-          <p className="text-[10px] text-text-muted italic pl-24">
+          <p className="text-sm text-text-muted italic pl-24">
             +{lichNgay.items.length - 2} hoạt động khác
           </p>
         )}
@@ -98,7 +98,7 @@ export function WorkSchedule() {
           Lịch công tác tuần
         </h3>
         {data.metadata.tuanSo > 0 && (
-          <span className="ml-auto text-[10px] text-white/60">
+          <span className="ml-auto text-sm text-white/60">
             Tuần {data.metadata.tuanSo}
           </span>
         )}

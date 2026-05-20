@@ -93,11 +93,11 @@ export default function LichTiepDanPage() {
                       <td className="px-4 py-3 text-text-secondary hidden md:table-cell">{entry.noiDung}</td>
                       <td className="px-4 py-3 text-center">
                         {today ? (
-                          <span className="inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-500 text-white">Hôm nay</span>
+                          <span className="inline-flex px-2 py-0.5 rounded-full text-sm font-bold bg-green-500 text-white">Hôm nay</span>
                         ) : past ? (
-                          <span className="inline-flex px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-200 text-gray-500">Đã qua</span>
+                          <span className="inline-flex px-2 py-0.5 rounded-full text-sm font-medium bg-gray-200 text-gray-500">Đã qua</span>
                         ) : (
-                          <span className="inline-flex px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-50 text-blue-600">Sắp tới</span>
+                          <span className="inline-flex px-2 py-0.5 rounded-full text-sm font-medium bg-blue-50 text-blue-600">Sắp tới</span>
                         )}
                       </td>
                     </tr>

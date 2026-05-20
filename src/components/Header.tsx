@@ -1,6 +1,6 @@
 /**
  * @nhom        : Components / Layout
- * @chucnang    : Header — tông đỏ chính phủ, Barlow Condensed heading
+ * @chucnang    : Header — tông xanh công nghệ, Barlow Condensed heading
  * @lienquan    : src/components/MobileMenu.tsx
  * @alias       : header, navbar
  */
@@ -25,7 +25,7 @@ const NAV_ITEMS = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-border">
-      {/* Top bar — đỏ chính phủ */}
+      {/* Top bar — xanh công nghệ */}
       <div className="bg-primary text-white text-xs hidden md:block">
         <div className="container-main flex justify-between items-center py-1.5">
           <span className="flex items-center gap-1.5 opacity-90">
@@ -45,7 +45,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <Image src="/images/logo.png" alt="Logo TTPVHCC" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12 object-contain" priority />
             <div className="hidden sm:block">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-text-muted leading-tight">Trung tâm Phục vụ Hành chính Công</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-muted leading-tight">Trung tâm Phục vụ Hành chính Công</p>
               <p className="text-sm md:text-base font-bold text-primary leading-tight font-heading uppercase tracking-wide">Phường Xuân Hòa</p>
             </div>
           </Link>
@@ -53,7 +53,7 @@ export function Header() {
           <ul className="hidden nav:flex items-center gap-0.5" role="menubar">
             {NAV_ITEMS.map((item) => (
               <li key={item.href} role="none">
-                <Link href={item.href} role="menuitem" className="px-2.5 py-2 text-[13px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap">
+                <Link href={item.href} role="menuitem" className="px-2.5 py-2 text-[14px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap">
                   {item.label}
                 </Link>
               </li>
@@ -67,7 +67,7 @@ export function Header() {
               24/7
             </span>
             <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
-              className="hidden nav:inline-flex items-center gap-2 px-3.5 py-2 bg-accent text-[#5a3200] text-[13px] font-bold rounded-xl hover:bg-accent-dark btn-transition shadow-sm" id="btn-nop-ho-so">
+              className="hidden nav:inline-flex items-center gap-2 px-3.5 py-2 bg-accent text-[#5a3200] text-[14px] font-bold rounded-xl hover:bg-accent-dark btn-transition shadow-sm" id="btn-nop-ho-so">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               Nộp hồ sơ online
             </a>

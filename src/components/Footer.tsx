@@ -1,6 +1,6 @@
 /**
  * @nhom        : Components / Layout
- * @chucnang    : Footer — tông đỏ đậm, nền ấm
+ * @chucnang    : Footer — tông xanh đậm
  * @lienquan    : src/app/(public)/layout.tsx
  * @alias       : footer
  */

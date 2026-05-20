@@ -2,7 +2,7 @@
 
 /**
  * @nhom        : Components / Layout
- * @chucnang    : Menu mobile — slide-in tông đỏ
+ * @chucnang    : Menu mobile — slide-in tông xanh công nghệ
  * @lienquan    : src/components/Header.tsx
  * @alias       : mobile-menu, hamburger
  */

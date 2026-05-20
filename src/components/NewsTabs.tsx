@@ -123,7 +123,7 @@ export default function NewsTabs({ allNews, children }: NewsTabsProps) {
               {tag !== 'Tất cả' && <span className="text-sm">{icon}</span>}
               {tag}
               <span className={`
-                text-[10px] px-1.5 py-0.5 rounded-full font-bold
+                text-xs px-1.5 py-0.5 rounded-full font-bold
                 ${isActive ? 'bg-white/20 text-white' : 'bg-cream text-text-muted'}
               `}>
                 {count}

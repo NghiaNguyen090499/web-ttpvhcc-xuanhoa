@@ -46,7 +46,7 @@ function PostCard({ item, onClick }: { item: TuyenTruyenItem; onClick: () => voi
         <span className={`flex items-center justify-center w-11 h-11 rounded-xl text-xl ${style.iconBg}`}>
           {item.icon}
         </span>
-        <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
+        <span className={`text-xs px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
           {item.tag}
         </span>
       </div>
@@ -62,7 +62,7 @@ function PostCard({ item, onClick }: { item: TuyenTruyenItem; onClick: () => voi
       </p>
 
       {/* Đọc thêm */}
-      <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-semibold text-primary group-hover:gap-2 btn-transition">
+      <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 btn-transition">
         Đọc bài viết
         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -101,7 +101,7 @@ function PostModal({ item, onClose }: { item: TuyenTruyenItem | null; onClose: (
             {item.icon}
           </span>
           <div className="flex-1 min-w-0">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
+            <span className={`text-xs px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${style.bg} ${style.text}`}>
               {item.tag}
             </span>
             <h2 className="mt-1 text-lg font-bold text-text-primary font-heading leading-snug">
@@ -139,7 +139,7 @@ function PostModal({ item, onClose }: { item: TuyenTruyenItem | null; onClose: (
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-white border-t border-border px-6 py-3 flex items-center justify-between">
-          <span className="text-[10px] text-text-muted">
+          <span className="text-sm text-text-muted">
             UBND Phường Xuân Hòa
           </span>
           <button

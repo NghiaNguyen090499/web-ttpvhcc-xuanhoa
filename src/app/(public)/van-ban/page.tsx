@@ -102,7 +102,7 @@ export default function VanBanPage() {
                       </p>
                       <div className="flex flex-wrap items-center gap-3 mt-2">
                         <span className="text-xs font-bold text-primary">{item.soKyHieu}</span>
-                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${color.bg} ${color.text}`}>{item.loai}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${color.bg} ${color.text}`}>{item.loai}</span>
                         <span className="text-xs text-text-muted">{formatDate(item.ngayBanHanh)}</span>
                         <span className="text-xs text-text-muted hidden sm:inline">· {item.linhVuc}</span>
                         <span className="text-xs text-text-muted hidden sm:inline">· {item.nguoiKy}</span>

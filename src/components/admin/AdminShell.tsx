@@ -12,7 +12,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Newspaper, MessageSquare, FileText, HelpCircle,
-  Settings, LogOut, Menu, X, ChevronRight
+  Settings, LogOut, Menu, X, ChevronRight, Building2
 } from 'lucide-react'
 
 // Menu sidebar
@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { label: 'Tin tức', href: '/admin/tin-tuc', icon: Newspaper },
   { label: 'Phản ánh', href: '/admin/phan-anh', icon: MessageSquare },
   { label: 'Thủ tục HC', href: '/admin/thu-tuc', icon: FileText },
+  { label: 'Giới thiệu', href: '/admin/gioi-thieu', icon: Building2 },
   { label: 'FAQ', href: '/admin/faq', icon: HelpCircle },
   { label: 'Cài đặt', href: '/admin/cai-dat', icon: Settings },
 ]
@@ -70,7 +71,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
               </div>
               <div>
                 <p className="text-xs font-bold text-white leading-tight">TTPVHCC</p>
-                <p className="text-[10px] text-gray-400">Xuân Hòa Admin</p>
+                <p className="text-sm text-gray-400">Xuân Hòa Admin</p>
               </div>
             </Link>
             <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-400 hover:text-white">
@@ -112,7 +113,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">{userName}</p>
-                <p className="text-[10px] text-gray-500 truncate">{userEmail}</p>
+                <p className="text-sm text-gray-500 truncate">{userEmail}</p>
               </div>
             </div>
             <button
@@ -141,7 +142,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] px-2 py-1 rounded-full bg-primary/10 text-primary font-semibold uppercase">
+            <span className="text-sm px-2 py-1 rounded-full bg-primary/10 text-primary font-semibold uppercase">
               {userRole}
             </span>
             <Link href="/" target="_blank" className="text-xs text-gray-400 hover:text-primary transition-colors">

@@ -157,7 +157,7 @@ export function ContactForm() {
           placeholder="Mô tả chi tiết nội dung phản ánh, kiến nghị..."
           maxLength={5000}
         />
-        <p className="mt-1 text-right text-[10px] text-text-muted">
+        <p className="mt-1 text-right text-sm text-text-muted">
           {formData.message.length}/5000
         </p>
       </div>

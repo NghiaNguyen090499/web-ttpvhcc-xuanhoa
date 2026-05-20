@@ -22,7 +22,6 @@ interface CategoryItem {
   slug: string
   description: string
   subCategories: string[]
-  documents?: Array<{ title: string; type: string; preview: string; pdf: string; pageCount: number }>
 }
 
 // Kiểu dữ liệu file procedures.json

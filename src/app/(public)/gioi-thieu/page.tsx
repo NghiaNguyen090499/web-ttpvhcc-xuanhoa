@@ -1,12 +1,13 @@
 /**
  * @nhom        : Pages / Giới thiệu
- * @chucnang    : Trang giới thiệu — mission cards + cơ cấu tổ chức (kế thừa backup)
- * @lienquan    : data/ward-info.json, _backup/src_vite/pages/AboutPage.tsx
+ * @chucnang    : Trang giới thiệu — mission cards + cơ cấu tổ chức
+ * @lienquan    : data/ward-info.json, data/organization.json
  * @alias       : about, gioi-thieu
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getOrganizationData, type OrganizationNode } from '@/lib/static-data'
 
 export const metadata: Metadata = {
   title: 'Giới thiệu',
@@ -20,16 +21,31 @@ const MISSION = [
   { icon: '🏆', title: 'Chất lượng', desc: 'Đạt tiêu chuẩn ISO 9001:2015 trong quản lý chất lượng dịch vụ hành chính công.' },
 ]
 
-const ORG_CHART = [
-  { role: 'Chủ tịch UBND phường', desc: 'Phụ trách chung, điều hành hoạt động UBND phường' },
-  { role: 'Phó Chủ tịch UBND phường', desc: 'Phụ trách các lĩnh vực được phân công' },
-  { role: 'Công chức Tư pháp – Hộ tịch', desc: 'Đăng ký kết hôn, khai sinh, khai tử, chứng thực' },
-  { role: 'Công chức Địa chính – Xây dựng', desc: 'Quản lý đất đai, cấp phép xây dựng' },
-  { role: 'Công chức Văn hóa – Xã hội', desc: 'Lao động, thương binh, xã hội, y tế, giáo dục' },
-  { role: 'Bộ phận Tiếp nhận và Trả kết quả', desc: 'Tiếp nhận, xử lý, trả kết quả TTHC' },
-]
+function OrgBox({ node }: { node: OrganizationNode }) {
+  const styles = {
+    chairman: 'bg-[#006f8b] text-white shadow-[#006f8b]/20',
+    vice: 'bg-[#f37021] text-white shadow-[#f37021]/20',
+    department: 'bg-[#006b16] text-white shadow-[#006b16]/20',
+  }
+
+  return (
+    <div className={`flex min-h-20 items-center justify-center rounded-sm px-5 py-4 text-center font-heading text-sm font-bold uppercase leading-tight shadow-lg ${styles[node.type]}`}>
+      {node.title}
+    </div>
+  )
+}
 
 export default function AboutPage() {
+  const organization = getOrganizationData()
+  const nodes = organization.nodes
+    .filter((node) => node.isActive)
+    .sort((a, b) => a.order - b.order)
+  const chairman = nodes.find((node) => node.type === 'chairman')
+  const viceNodes = nodes.filter((node) => node.type === 'vice' && node.parentId === chairman?.id)
+  const getChildren = (parentId: string) => nodes
+    .filter((node) => node.type === 'department' && node.parentId === parentId)
+    .sort((a, b) => a.order - b.order)
+
   return (
     <>
       {/* Hero */}
@@ -86,22 +102,65 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Cơ cấu tổ chức — kế thừa backup */}
+          {/* Cơ cấu tổ chức */}
           <div>
             <h2 className="text-xl font-bold text-text-primary font-heading uppercase tracking-wide mb-6">
-              Cơ cấu tổ chức
+              {organization.metadata.title}
             </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {ORG_CHART.map((item, i) => (
-                <div key={i} className="rounded-2xl border border-border bg-white p-5 hover:shadow-md btn-transition">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">
-                    {i + 1}
+
+            {chairman && (
+              <>
+                <div className="hidden overflow-x-auto rounded-2xl border border-border bg-white p-6 lg:block">
+                  <div className="relative grid min-w-[920px] grid-cols-[240px_280px_1fr] grid-rows-2 items-center gap-x-14 gap-y-20 py-4">
+                    <div className="absolute left-[240px] top-1/2 h-px w-14 bg-emerald-700/50" />
+                    <div className="absolute left-[294px] top-[22%] h-[56%] w-px bg-emerald-700/50" />
+                    <div className="row-span-2">
+                      <OrgBox node={chairman} />
+                    </div>
+
+                    {viceNodes.map((vice) => {
+                      const children = getChildren(vice.id)
+                      return (
+                        <div key={vice.id} className="contents">
+                          <div className="relative">
+                            <div className="absolute -left-14 top-1/2 h-px w-14 bg-emerald-700/50" />
+                            <div className="absolute -right-14 top-1/2 h-px w-14 bg-emerald-700/50" />
+                            <OrgBox node={vice} />
+                          </div>
+                          <div className="relative">
+                            {children.length > 1 && (
+                              <div className="absolute -left-7 top-10 bottom-10 w-px bg-emerald-700/50" />
+                            )}
+                            <div className="space-y-6">
+                              {children.map((child) => (
+                                <div key={child.id} className="relative">
+                                  <div className="absolute -left-7 top-1/2 h-px w-7 bg-emerald-700/50" />
+                                  <OrgBox node={child} />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
-                  <h3 className="mt-3 text-sm font-bold text-text-primary">{item.role}</h3>
-                  <p className="mt-1 text-xs text-text-muted">{item.desc}</p>
                 </div>
-              ))}
-            </div>
+
+                <div className="space-y-4 lg:hidden">
+                  <OrgBox node={chairman} />
+                  {viceNodes.map((vice) => (
+                    <div key={vice.id} className="rounded-2xl border border-border bg-white p-4">
+                      <OrgBox node={vice} />
+                      <div className="mt-4 space-y-3 pl-4">
+                        {getChildren(vice.id).map((child) => (
+                          <OrgBox key={child.id} node={child} />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>

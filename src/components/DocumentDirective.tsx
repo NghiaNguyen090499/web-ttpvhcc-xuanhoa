@@ -58,20 +58,20 @@ function DocumentRow({ item }: { item: VanBanItem }) {
 
       {/* Nội dung */}
       <div className="min-w-0 flex-1">
-        <p className="text-[12px] font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
+        <p className="text-sm font-medium text-text-primary group-hover:text-primary btn-transition line-clamp-2 leading-snug">
           {item.trichYeu}
         </p>
         <div className="flex items-center gap-2 mt-1 flex-wrap">
           {/* Số ký hiệu */}
-          <span className="text-[10px] font-semibold text-primary">
+          <span className="text-sm font-semibold text-primary">
             {item.soKyHieu}
           </span>
           {/* Loại văn bản */}
-          <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-medium ${typeColor.bg} ${typeColor.text}`}>
+          <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${typeColor.bg} ${typeColor.text}`}>
             {item.loai}
           </span>
           {/* Ngày */}
-          <span className="text-[10px] text-text-muted">
+          <span className="text-sm text-text-muted">
             {formatDate(item.ngayBanHanh)}
           </span>
         </div>
@@ -104,7 +104,7 @@ export function DocumentDirective() {
   }, {} as Record<string, number>)
 
   return (
-    <section className="py-10 md:py-14 bg-cream/30" id="van-ban-chi-dao">
+    <section className="py-8 md:py-10 bg-cream/30" id="van-ban-chi-dao">
       <div className="container-main">
         {/* Heading */}
         <div className="text-center mb-8">
@@ -125,7 +125,7 @@ export function DocumentDirective() {
           {Object.entries(countByType).map(([loai, count]) => {
             const color = getTypeColor(loai)
             return (
-              <span key={loai} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium ${color.bg} ${color.text}`}>
+              <span key={loai} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${color.bg} ${color.text}`}>
                 {loai}
                 <span className="font-bold">{count}</span>
               </span>
@@ -149,7 +149,7 @@ export function DocumentDirective() {
 
           {/* Footer */}
           <div className="border-t border-border px-5 py-3 flex items-center justify-between">
-            <span className="text-[10px] text-text-muted">
+            <span className="text-sm text-text-muted">
               Tổng: {vanBanList.length} văn bản
             </span>
             <Link

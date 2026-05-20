@@ -106,7 +106,7 @@ export function AnnouncementBanner() {
               className="absolute inset-0 flex items-center gap-2 animate-slide-in hover:text-primary btn-transition"
             >
               {/* Badge loại */}
-              <span className={`shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${style.bg} ${style.text}`}>
+              <span className={`shrink-0 px-2 py-0.5 rounded text-sm font-bold uppercase ${style.bg} ${style.text}`}>
                 {style.label}
               </span>
               {/* Tiêu đề */}
@@ -133,7 +133,7 @@ export function AnnouncementBanner() {
             </button>
 
             {/* Chỉ số trang */}
-            <span className="text-[10px] text-text-muted font-mono tabular-nums min-w-[2rem] text-center">
+            <span className="text-sm text-text-muted font-mono tabular-nums min-w-[2rem] text-center">
               {current + 1}/{total}
             </span>
 

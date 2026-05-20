@@ -1,17 +1,16 @@
 /**
  * @nhom        : Pages / Chi tiết lĩnh vực
- * @chucnang    : Trang chi tiết lĩnh vực TTHC — hiển thị nhóm thủ tục + tài liệu PDF + preview
+ * @chucnang    : Trang chi tiết lĩnh vực TTHC — hiển thị nhóm thủ tục + link DVC
  * @lienquan    : src/lib/static-data.ts, data/procedures.json
  * @alias       : category-detail, chi-tiet-linh-vuc
  *
- * Dữ liệu 100% local — ảnh + PDF từ public/, không phụ thuộc Canva
+ * Dữ liệu 100% local — không phụ thuộc Canva.
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getProceduresData, getCategoryBySlug } from '@/lib/static-data'
+import { getProceduresData, getCategoryBySlug, getProcedureLinkGroupBySlug } from '@/lib/static-data'
 
 // Tạo danh sách slug tĩnh cho SSG
 export function generateStaticParams() {
@@ -34,6 +33,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
   const { slug } = await params
   const category = getCategoryBySlug(slug)
   if (!category) notFound()
+  const dvcGroup = getProcedureLinkGroupBySlug(category.id)
 
   return (
     <>
@@ -53,55 +53,6 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
       </section>
 
       <div className="container-main section-padding">
-        {/* === Tài liệu PDF (preview + tải) === */}
-        {category.documents && category.documents.length > 0 && (
-          <div className="mb-10">
-            <h2 className="text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-              Tài liệu thủ tục
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {category.documents.map((doc, i) => (
-                <div key={i} className="rounded-2xl border border-border bg-white overflow-hidden hover:shadow-lg btn-transition">
-                  {/* Preview ảnh */}
-                  <div className="relative h-52 overflow-hidden bg-cream">
-                    <Image
-                      src={doc.preview}
-                      alt={doc.title}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    {/* Badge loại tài liệu */}
-                    <span className={`absolute top-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${
-                      doc.type === 'thuong-gap' ? 'bg-success/90 text-white' :
-                      doc.type === 'phi-dia-gioi' ? 'bg-accent/90 text-[#5a3200]' :
-                      'bg-primary/90 text-white'
-                    }`}>
-                      {doc.type === 'thuong-gap' ? 'Thường gặp' :
-                       doc.type === 'phi-dia-gioi' ? 'Phi địa giới' : 'Cấp phường'}
-                    </span>
-                  </div>
-                  {/* Info + download */}
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold text-text-primary line-clamp-2">{doc.title}</h3>
-                    <p className="text-xs text-text-muted mt-1">{doc.pageCount} trang</p>
-                    <a
-                      href={doc.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-xl hover:bg-primary-dark btn-transition"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                      Tải PDF
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* === Danh sách nhóm thủ tục === */}
         <div className="mb-10">
           <h2 className="text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
@@ -124,6 +75,41 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
             ))}
           </div>
         </div>
+
+        {/* === Đường dẫn DVC Quốc gia theo từng thủ tục === */}
+        {dvcGroup && dvcGroup.items.length > 0 && (
+          <div className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-text-primary">
+              <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-7.5M15 4h5m0 0v5m0-5L10 14" />
+              </svg>
+              Link nộp/tra cứu thủ tục trực tuyến ({dvcGroup.items.length})
+            </h2>
+            <div className="rounded-2xl border border-border bg-white p-3">
+              <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
+                {dvcGroup.items.map((item) => (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-cream btn-transition"
+                  >
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-7.5M15 4h5m0 0v5m0-5L10 14" />
+                      </svg>
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold leading-snug text-text-primary">{item.name}</span>
+                      {item.code && <span className="mt-1 block text-xs text-text-muted">Mã thủ tục: {item.code}</span>}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Mô tả lĩnh vực */}
         {category.description && (

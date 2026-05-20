@@ -28,27 +28,20 @@ function buildProceduresContext(): string {
     lines.push(`### ${cat.name} (${cat.slug})`)
     lines.push(`Mô tả: ${cat.description}`)
     lines.push(`Nhóm thủ tục: ${cat.subCategories.join(', ')}`)
-    if (cat.documents?.length) {
-      for (const doc of cat.documents) {
-        lines.push(`- Tài liệu: ${doc.title} — ${doc.pageCount} trang — Tải PDF: ${doc.pdf}`)
-      }
-    }
     lines.push('')
   }
 
   // Thủ tục phi địa giới
   lines.push('## THỦ TỤC PHI ĐỊA GIỚI HÀNH CHÍNH')
   for (const cat of data.phiDiaGioi) {
-    const pdfInfo = cat.pdf ? ` — Tải PDF: ${cat.pdf}` : ''
-    lines.push(`- ${cat.name}: ${cat.description}${pdfInfo}`)
+    lines.push(`- ${cat.name}: ${cat.description}`)
   }
   lines.push('')
 
   // Thủ tục thường gặp
   lines.push('## THỦ TỤC THƯỜNG GẶP')
   for (const cat of data.thuongGap) {
-    const pdfInfo = cat.pdf ? ` — Tải PDF: ${cat.pdf}` : ''
-    lines.push(`- ${cat.name}: ${cat.description}${pdfInfo}`)
+    lines.push(`- ${cat.name}: ${cat.description}`)
   }
   lines.push('')
 
@@ -57,6 +50,7 @@ function buildProceduresContext(): string {
   lines.push(`- Biểu mẫu: ${data.externalLinks.bieuMau}`)
   lines.push(`- Tra cứu hồ sơ DVC: ${data.externalLinks.dvcTraCuu}`)
   lines.push(`- Thủ tục DVC: ${data.externalLinks.dvcThuTuc}`)
+  lines.push('- Danh sách link thủ tục trực tuyến theo từng lĩnh vực: /thu-tuc')
   lines.push(`- Đánh giá DVC: ${data.externalLinks.dvcDanhGia}`)
   lines.push(`- Hướng dẫn DVC: ${data.externalLinks.dvcHuongDan}`)
   lines.push(`- Facebook: ${data.externalLinks.facebook}`)
@@ -123,7 +117,7 @@ export function buildSystemPrompt(): string {
 ## VAI TRÒ
 - Hỗ trợ người dân tra cứu thủ tục hành chính, cung cấp thông tin tham khảo.
 - Trả lời ngắn gọn, rõ ràng, thân thiện, bằng tiếng Việt.
-- Khi trả lời về thủ tục, kèm link tải PDF nếu có (bắt đầu bằng /pdf/procedures/...).
+- Khi trả lời về thủ tục, hướng dẫn người dân vào /thu-tuc để chọn link DVC trực tuyến theo từng lĩnh vực.
 - Khi người dân cần nộp hồ sơ → hướng dẫn qua Cổng DVC: https://dichvucong.gov.vn
 
 ## LƯU Ý QUAN TRỌNG
@@ -155,7 +149,7 @@ ${faq}
 ## PHONG CÁCH TRẢ LỜI
 - Gọi người dùng là "bạn" hoặc "anh/chị"
 - Dùng emoji phù hợp (📋, 📍, 🕐, 📱, ✅) để dễ đọc
-- Nếu có link PDF → ghi rõ "Tải danh mục PDF tại: [link]"
+- Không cung cấp link PDF thủ tục cũ; các link này đã bị loại bỏ khỏi hệ thống.
 - Kết thúc bằng: "💡 Lưu ý: Thông tin trên chỉ mang tính tham khảo. Vui lòng liên hệ TTPVHCC để được hướng dẫn chính xác nhất."
 `
 }

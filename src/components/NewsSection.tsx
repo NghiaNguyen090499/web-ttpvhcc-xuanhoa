@@ -24,23 +24,6 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
 
-/**
- * @chucnang    : Tính thời gian tương đối (3 ngày trước, 2 tuần trước, etc.)
- * @input       : dateStr (string) — ngày dạng YYYY-MM-DD
- * @output      : string
- */
-function timeAgo(dateStr: string): string {
-  const now = new Date()
-  const d = new Date(dateStr)
-  const diffMs = now.getTime() - d.getTime()
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-  if (diffDays === 0) return 'Hôm nay'
-  if (diffDays === 1) return 'Hôm qua'
-  if (diffDays < 7) return `${diffDays} ngày trước`
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)} tuần trước`
-  return `${Math.floor(diffDays / 30)} tháng trước`
-}
-
 // Dữ liệu tuyên truyền giờ đọc từ JSON — xem data/tuyen-truyen.json
 
 /**
@@ -60,10 +43,10 @@ export default function NewsSection() {
   if (!featured) return null
 
   return (
-    <section className="py-10 md:py-14" id="tin-tuc">
+    <section className="pt-6 pb-8 md:pt-8 md:pb-10" id="tin-tuc">
       <div className="container-main">
         {/* Tiêu đề section — căn trái theo mockup */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="mb-5 flex items-center gap-3">
           <div className="w-1 h-6 bg-primary rounded-full" />
           <h2 className="text-lg md:text-xl font-bold text-text-primary font-heading uppercase tracking-wide">
             Bản tin mới nhất
@@ -89,12 +72,12 @@ export default function NewsSection() {
               href={`/tin-tuc/${featured.slug}`}
               className="group block rounded-2xl border border-border bg-white overflow-hidden hover:shadow-xl btn-transition mb-4"
             >
-              <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+              <div className="relative overflow-hidden bg-surface" style={{ aspectRatio: '16/9' }}>
                 <Image
                   src={featured.image}
                   alt={featured.title}
                   fill
-                  className="object-cover object-top group-hover:scale-105 btn-transition"
+                  className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   priority
                 />
@@ -102,10 +85,10 @@ export default function NewsSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 {/* Tags trên ảnh */}
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-primary text-white backdrop-blur-sm">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary text-white backdrop-blur-sm">
                     TRỰC TUYẾN
                   </span>
-                  <span className={`text-[10px] font-bold px-3 py-1 rounded-full backdrop-blur-sm ${TAG_COLORS[featured.tag] || 'bg-white/20 text-white'}`}>
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm ${TAG_COLORS[featured.tag] || 'bg-white/20 text-white'}`}>
                     {featured.tag}
                   </span>
                 </div>
@@ -128,29 +111,29 @@ export default function NewsSection() {
                   className="group flex flex-col rounded-2xl border border-border bg-white overflow-hidden hover:-translate-y-0.5 hover:shadow-lg btn-transition"
                 >
                   {/* Ảnh nhỏ */}
-                  <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                  <div className="relative overflow-hidden bg-surface" style={{ aspectRatio: '16/10' }}>
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover object-top group-hover:scale-105 btn-transition"
+                      className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                       sizes="(max-width: 768px) 100vw, 22vw"
                     />
                     {/* Tag overlay */}
                     <div className="absolute top-2 left-2">
-                      <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm ${TAG_COLORS[item.tag] || 'bg-white/20 text-white'}`}>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full backdrop-blur-sm ${TAG_COLORS[item.tag] || 'bg-white/20 text-white'}`}>
                         {item.tag}
                       </span>
                     </div>
                   </div>
                   {/* Nội dung */}
                   <div className="p-3 flex-1 flex flex-col">
-                    <p className="text-[10px] text-text-muted mb-1">{formatDate(item.date)}</p>
-                    <h4 className="text-[13px] font-semibold text-text-primary leading-snug line-clamp-2 group-hover:text-primary btn-transition flex-1">
+                    <p className="text-xs text-text-muted mb-1">{formatDate(item.date)}</p>
+                    <h4 className="text-sm font-semibold text-text-primary leading-snug line-clamp-2 group-hover:text-primary btn-transition flex-1">
                       {item.title}
                     </h4>
-                    <p className="text-[11px] text-text-secondary mt-1.5 line-clamp-2">{item.excerpt}</p>
-                    <span className="text-[10px] text-primary font-semibold mt-2 inline-flex items-center gap-1 uppercase tracking-wide">
+                    <p className="text-sm text-text-secondary mt-1.5 line-clamp-2">{item.excerpt}</p>
+                    <span className="text-xs text-primary font-semibold mt-2 inline-flex items-center gap-1 uppercase tracking-wide">
                       Xem nguồn
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </span>
@@ -199,7 +182,7 @@ export default function NewsSection() {
         </div>
 
         {/* Link xem tất cả */}
-        <div className="text-center mt-8">
+        <div className="mt-6 text-center">
           <Link
             href="/tin-tuc"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-cream border border-border text-sm font-semibold text-primary hover:bg-primary hover:text-white hover:border-primary btn-transition"
