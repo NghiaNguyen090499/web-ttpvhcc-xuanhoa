@@ -67,7 +67,7 @@ export function HeroBanner() {
                 Tra cứu thủ tục
               </Link>
               <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
-                className="inline-flex w-full max-w-72 items-center justify-center gap-3 rounded-full border border-white/60 bg-primary/45 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-950/12 backdrop-blur-sm hover:bg-primary/70 btn-transition sm:w-auto sm:min-w-64 md:min-w-[19rem] md:text-lg" id="cta-nop-ho-so">
+                className="inline-flex w-full max-w-80 items-center justify-center gap-3 whitespace-nowrap rounded-full border border-white/60 bg-primary/45 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-950/12 backdrop-blur-sm hover:bg-primary/70 btn-transition sm:w-auto sm:min-w-64 md:min-w-[21rem] md:text-lg" id="cta-nop-ho-so">
                 <FileText className="h-6 w-6" strokeWidth={2.2} />
                 Nộp hồ sơ trực tuyến
                 <ExternalLink className="h-5 w-5" strokeWidth={2.1} />

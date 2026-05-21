@@ -120,12 +120,35 @@ body {
   to { width: 100%; }
 }
 
+@keyframes directiveScrollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
 .animate-slide-in {
   animation: slideIn 0.35s ease-out forwards;
 }
 
 .animate-progress {
   animation: progressBar linear forwards;
+}
+
+.animate-directive-scroll {
+  animation: directiveScrollUp 28s linear infinite;
+}
+
+.directive-marquee:hover .animate-directive-scroll {
+  animation-play-state: paused;
+}
+
+.directive-scroll-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-directive-scroll {
+    animation: none;
+  }
 }
 
 .animate-fade-in-up {

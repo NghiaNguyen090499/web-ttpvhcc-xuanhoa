@@ -1,81 +1,119 @@
 {
   "metadata": {
     "title": "Cơ cấu tổ chức",
-    "updatedAt": "2026-05-20",
+    "updatedAt": "2026-05-21",
     "note": "Dữ liệu sơ đồ tổ chức hiển thị tại trang giới thiệu và có thể chỉnh sửa qua admin."
   },
   "nodes": [
     {
-      "id": "chu-tich",
-      "title": "Chủ tịch",
+      "id": "giam-doc",
+      "title": "Giám đốc",
       "type": "chairman",
       "parentId": null,
       "order": 1,
-      "isActive": true
+      "isActive": true,
+      "role": "Giám đốc",
+      "phone": "",
+      "field": "Điều hành chung Trung tâm Phục vụ Hành chính Công"
     },
     {
-      "id": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
-      "title": "Phó Chủ tịch - Phụ trách Kinh tế - Hạ tầng - Đô thị - Văn phòng",
+      "id": "pho-giam-doc",
+      "title": "Phó Giám đốc",
       "type": "vice",
-      "parentId": "chu-tich",
+      "parentId": "giam-doc",
       "order": 1,
-      "isActive": true
+      "isActive": true,
+      "role": "Phó Giám đốc",
+      "phone": "",
+      "field": "Phụ trách tiếp nhận, xử lý và trả kết quả hồ sơ"
     },
     {
-      "id": "pho-chu-tich-van-hoa-xa-hoi",
-      "title": "Phó Chủ tịch - Phụ trách Văn hóa - Xã hội",
-      "type": "vice",
-      "parentId": "chu-tich",
-      "order": 2,
-      "isActive": true
-    },
-    {
-      "id": "van-phong-hdnd-va-ubnd",
-      "title": "Văn phòng Hội đồng Nhân dân và Ủy ban Nhân dân",
+      "id": "bo-phan-tiep-nhan-ho-so",
+      "title": "Bộ phận tiếp nhận hồ sơ",
       "type": "department",
-      "parentId": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
+      "parentId": "pho-giam-doc",
       "order": 1,
-      "isActive": true
+      "isActive": true,
+      "role": "Cán bộ chuyên môn",
+      "phone": "",
+      "field": "Tiếp nhận hồ sơ, hướng dẫn thủ tục và luân chuyển hồ sơ"
     },
     {
-      "id": "phong-kinh-te-ha-tang-va-do-thi",
-      "title": "Phòng Kinh tế, Hạ tầng và Đô thị",
+      "id": "bo-phan-ho-tich-chung-thuc",
+      "title": "Bộ phận hộ tịch - chứng thực",
       "type": "department",
-      "parentId": "pho-chu-tich-kinh-te-ha-tang-do-thi-van-phong",
+      "parentId": "pho-giam-doc",
       "order": 2,
-      "isActive": true
+      "isActive": true,
+      "role": "Cán bộ chuyên môn",
+      "phone": "",
+      "field": "Hộ tịch, chứng thực, cư trú và giấy tờ cá nhân"
     },
     {
-      "id": "phong-van-hoa-xa-hoi",
-      "title": "Phòng Văn hóa - Xã hội",
+      "id": "bo-phan-dat-dai-xay-dung",
+      "title": "Bộ phận đất đai - xây dựng",
       "type": "department",
-      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
-      "order": 1,
-      "isActive": true
-    },
-    {
-      "id": "tram-y-te",
-      "title": "Trạm Y tế",
-      "type": "department",
-      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
-      "order": 2,
-      "isActive": true
-    },
-    {
-      "id": "trung-tam-phuc-vu-hanh-chinh-cong",
-      "title": "Trung tâm Phục vụ Hành chính Công",
-      "type": "department",
-      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "parentId": "pho-giam-doc",
       "order": 3,
-      "isActive": true
+      "isActive": true,
+      "role": "Cán bộ chuyên môn",
+      "phone": "",
+      "field": "Đất đai, xây dựng, đô thị và môi trường"
     },
     {
-      "id": "trung-tam-cung-ung-dich-vu-cong",
-      "title": "Trung tâm Cung ứng Dịch vụ Công",
+      "id": "bo-phan-van-hoa-xa-hoi",
+      "title": "Bộ phận văn hóa - xã hội",
       "type": "department",
-      "parentId": "pho-chu-tich-van-hoa-xa-hoi",
+      "parentId": "pho-giam-doc",
       "order": 4,
-      "isActive": true
+      "isActive": true,
+      "role": "Cán bộ chuyên môn",
+      "phone": "",
+      "field": "Văn hóa, giáo dục, y tế và chính sách xã hội"
+    },
+    {
+      "id": "ho-tro-dvc-truc-tuyen",
+      "title": "Hỗ trợ DVC trực tuyến",
+      "type": "department",
+      "parentId": "bo-phan-tiep-nhan-ho-so",
+      "order": 1,
+      "isActive": true,
+      "role": "Hỗ trợ dịch vụ công",
+      "phone": "",
+      "field": "Hướng dẫn tài khoản, nộp hồ sơ trực tuyến và tra cứu kết quả"
+    },
+    {
+      "id": "so-hoa-luu-tru-ho-so",
+      "title": "Số hóa - lưu trữ hồ sơ",
+      "type": "department",
+      "parentId": "bo-phan-ho-tich-chung-thuc",
+      "order": 2,
+      "isActive": true,
+      "role": "Cán bộ số hóa",
+      "phone": "",
+      "field": "Số hóa thành phần hồ sơ, lưu trữ và quản trị dữ liệu"
+    },
+    {
+      "id": "thu-phi-le-phi",
+      "title": "Thu phí, lệ phí",
+      "type": "department",
+      "parentId": "bo-phan-dat-dai-xay-dung",
+      "order": 3,
+      "isActive": true,
+      "role": "Cán bộ tài chính",
+      "phone": "",
+      "field": "Thu phí, lệ phí và hỗ trợ thanh toán trực tuyến"
+    },
+    {
+      "id": "tra-ket-qua-ho-so",
+      "title": "Trả kết quả hồ sơ",
+      "type": "department",
+      "parentId": "bo-phan-van-hoa-xa-hoi",
+      "order": 4,
+      "isActive": true,
+      "role": "Bộ phận trả kết quả",
+      "phone": "",
+      "field": "Theo dõi tiến độ, trả kết quả và tiếp nhận phản ánh"
     }
   ]
 }

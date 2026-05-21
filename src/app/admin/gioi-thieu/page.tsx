@@ -8,7 +8,7 @@
  */
 
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowLeft, Building2, Edit3, Plus, Save, Trash2 } from 'lucide-react'
+import { ArrowLeft, Building2, Edit3, Image as ImageIcon, Plus, Save, Trash2 } from 'lucide-react'
 
 type NodeType = 'chairman' | 'vice' | 'department'
 
@@ -19,6 +19,11 @@ interface OrganizationNode {
   parentId: string | null
   order: number
   isActive: boolean
+  name?: string
+  role?: string
+  phone?: string
+  field?: string
+  imageUrl?: string
 }
 
 interface OrganizationData {
@@ -31,9 +36,9 @@ interface OrganizationData {
 }
 
 const NODE_TYPES: Array<{ value: NodeType; label: string }> = [
-  { value: 'chairman', label: 'Chủ tịch' },
-  { value: 'vice', label: 'Phó Chủ tịch' },
-  { value: 'department', label: 'Phòng / Trung tâm' },
+  { value: 'chairman', label: 'Giám đốc' },
+  { value: 'vice', label: 'Phó Giám đốc' },
+  { value: 'department', label: 'Bộ phận / Nhân sự' },
 ]
 
 function getTypeLabel(type: NodeType) {
@@ -56,6 +61,11 @@ export default function AdminAboutPage() {
   const [metadataForm, setMetadataForm] = useState({ title: '', note: '' })
   const [formData, setFormData] = useState({
     title: '',
+    name: '',
+    role: '',
+    phone: '',
+    field: '',
+    imageUrl: '',
     type: 'department' as NodeType,
     parentId: '',
     order: 1,
@@ -91,6 +101,11 @@ export default function AdminAboutPage() {
     setEditingNode(null)
     setFormData({
       title: '',
+      name: '',
+      role: '',
+      phone: '',
+      field: '',
+      imageUrl: '',
       type: 'department',
       parentId: '',
       order: nodes.length + 1,
@@ -103,6 +118,11 @@ export default function AdminAboutPage() {
     setEditingNode(node)
     setFormData({
       title: node.title,
+      name: node.name || '',
+      role: node.role || '',
+      phone: node.phone || '',
+      field: node.field || '',
+      imageUrl: node.imageUrl || '',
       type: node.type,
       parentId: node.parentId || '',
       order: node.order,
@@ -149,6 +169,17 @@ export default function AdminAboutPage() {
     }
   }
 
+  const handleImageFile = (file: File | undefined) => {
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setFormData((current) => ({ ...current, imageUrl: reader.result as string }))
+      }
+    }
+    reader.readAsDataURL(file)
+  }
+
   const deleteNode = async (node: OrganizationNode) => {
     if (!confirm(`Xóa "${node.title}"? Các ô con trực tiếp cũng sẽ bị xóa.`)) return
     try {
@@ -183,7 +214,7 @@ export default function AdminAboutPage() {
 
         <div className="space-y-5 rounded-2xl border border-gray-100 bg-white p-6">
           <div>
-            <label className="mb-1.5 block text-xs font-semibold text-gray-600">Tên hiển thị *</label>
+            <label className="mb-1.5 block text-xs font-semibold text-gray-600">Tên ô / đơn vị hiển thị *</label>
             <textarea
               rows={3}
               value={formData.title}
@@ -192,6 +223,80 @@ export default function AdminAboutPage() {
               placeholder="Ví dụ: Phòng Văn hóa - Xã hội"
             />
           </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-gray-600">Họ tên nhân sự</label>
+              <input
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
+                placeholder="Ví dụ: Nguyễn Văn A"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-gray-600">Chức vụ</label>
+              <input
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
+                placeholder="Ví dụ: Giám đốc"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-gray-600">Số điện thoại</label>
+              <input
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
+                placeholder="Ví dụ: 028 3829 xxxx"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-gray-600">Ảnh đại diện</label>
+              <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-dashed border-gray-300 px-4 py-3 text-sm font-medium text-gray-600 hover:border-primary hover:text-primary">
+                <ImageIcon className="h-4 w-4" />
+                Tải ảnh từ máy
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageFile(e.target.files?.[0])}
+                  className="sr-only"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-xs font-semibold text-gray-600">Lĩnh vực phụ trách / mô tả ngắn</label>
+            <textarea
+              rows={3}
+              value={formData.field}
+              onChange={(e) => setFormData({ ...formData, field: e.target.value })}
+              className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
+              placeholder="Ví dụ: Tiếp nhận hồ sơ, hướng dẫn thủ tục và trả kết quả"
+            />
+          </div>
+
+          {formData.imageUrl && (
+            <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gray-50 p-4">
+              <div
+                className="h-16 w-16 shrink-0 rounded-full border border-gray-200 bg-cover bg-center"
+                style={{ backgroundImage: `url(${formData.imageUrl})` }}
+              />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-semibold text-gray-900">Ảnh đại diện đã chọn</p>
+                <p className="mt-1 line-clamp-1 text-xs text-gray-500">Ảnh sẽ được lưu cùng dữ liệu cơ cấu tổ chức.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, imageUrl: '' })}
+                className="rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+              >
+                Xóa ảnh
+              </button>
+            </div>
+          )}
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
@@ -332,6 +437,11 @@ export default function AdminAboutPage() {
                   <p className="mt-1 text-sm text-gray-500">
                     Cấp trên: {parent?.title || 'Không có'} · Thứ tự: {node.order}
                   </p>
+                  {(node.name || node.role || node.field || node.phone) && (
+                    <p className="mt-1 line-clamp-2 text-sm text-gray-500">
+                      {[node.name, node.role, node.phone, node.field].filter(Boolean).join(' · ')}
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <button

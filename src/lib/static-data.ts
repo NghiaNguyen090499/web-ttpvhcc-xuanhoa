@@ -142,6 +142,11 @@ export interface OrganizationNode {
   parentId: string | null
   order: number
   isActive: boolean
+  name?: string
+  role?: string
+  phone?: string
+  field?: string
+  imageUrl?: string
 }
 
 /** Cấu trúc file organization.json */
@@ -215,10 +220,8 @@ export function getWardInfo(): WardInfoData {
  * @output      : OrganizationData
  */
 export function getOrganizationData(): OrganizationData {
-  if (!_organizationCache) {
-    const raw = readFileSync(join(DATA_DIR, 'organization.json'), 'utf-8')
-    _organizationCache = JSON.parse(raw) as OrganizationData
-  }
+  const raw = readFileSync(join(DATA_DIR, 'organization.json'), 'utf-8')
+  _organizationCache = JSON.parse(raw) as OrganizationData
   return _organizationCache
 }
 

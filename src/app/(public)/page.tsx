@@ -1,7 +1,7 @@
 /**
  * @nhom        : Pages / Trang chủ
  * @chucnang    : Trang chủ — Hero, AnnouncementBanner, QuickAccess, TransparencyStats,
- *                HomeContentLayout, DocumentDirective, ServiceBySubject, CTA, UsefulLinks
+ *                HomeContentLayout, ServiceBySubject, CTA, UsefulLinks
  * @lienquan    : src/components/*
  * @alias       : home, trang-chu
  */
@@ -11,7 +11,6 @@ import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { QuickAccess } from '@/components/QuickAccess'
 import { TransparencyStats } from '@/components/TransparencyStats'
 import { ServiceBySubject } from '@/components/ServiceBySubject'
-import { DocumentDirective } from '@/components/DocumentDirective'
 import UsefulLinks from '@/components/UsefulLinks'
 import { HomeContentLayout } from '@/components/HomeContentLayout'
 import Link from 'next/link'
@@ -33,9 +32,6 @@ export default function HomePage() {
 
       {/* Nội dung chính — tin tức, tuyên truyền, lĩnh vực TTHC + sidebar */}
       <HomeContentLayout />
-
-      {/* Văn bản chỉ đạo điều hành (Nhóm A) */}
-      <DocumentDirective />
 
       {/* Phân loại theo đối tượng: Công dân & Doanh nghiệp (P0-2) */}
       <ServiceBySubject />

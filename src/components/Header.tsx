@@ -42,11 +42,11 @@ export function Header() {
       {/* Navigation */}
       <div className="container-main">
         <nav className="flex items-center justify-between h-16 md:h-20" aria-label="Main navigation">
-          <Link href="/" className="flex items-center gap-3 shrink-0">
+          <Link href="/" className="flex items-center gap-4 shrink-0 md:gap-5">
             <Image src="/images/logo.png" alt="Logo TTPVHCC" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12 object-contain" priority />
-            <div className="hidden sm:block">
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-muted leading-tight">Trung tâm Phục vụ Hành chính Công</p>
-              <p className="text-sm md:text-base font-bold text-primary leading-tight font-heading uppercase tracking-wide">Phường Xuân Hòa</p>
+            <div className="hidden sm:block space-y-0.5">
+              <p className="whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-text-muted leading-tight">Trung tâm Phục vụ Hành chính Công</p>
+              <p className="whitespace-nowrap text-sm md:text-base font-bold text-primary leading-tight font-heading uppercase tracking-[0.08em]">Phường Xuân Hòa</p>
             </div>
           </Link>
 
@@ -67,7 +67,7 @@ export function Header() {
               24/7
             </span>
             <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
-              className="hidden nav:inline-flex items-center gap-2 px-3.5 py-2 bg-accent text-[#5a3200] text-[14px] font-bold rounded-xl hover:bg-accent-dark btn-transition shadow-sm" id="btn-nop-ho-so">
+              className="hidden nav:inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 bg-accent text-[#5a3200] text-[14px] font-bold rounded-xl hover:bg-accent-dark btn-transition shadow-sm" id="btn-nop-ho-so">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               Nộp hồ sơ online
             </a>

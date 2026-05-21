@@ -20,6 +20,11 @@ interface OrganizationNode {
   parentId: string | null
   order: number
   isActive: boolean
+  name?: string
+  role?: string
+  phone?: string
+  field?: string
+  imageUrl?: string
 }
 
 interface OrganizationFile {
@@ -75,6 +80,12 @@ function isValidType(type: string): type is OrganizationNodeType {
   return ['chairman', 'vice', 'department'].includes(type)
 }
 
+function cleanOptional(value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined
+  const trimmed = value.trim()
+  return trimmed || undefined
+}
+
 /** GET — Lấy cơ cấu tổ chức */
 export async function GET() {
   const organization = readOrganization()
@@ -107,6 +118,11 @@ export async function POST(request: NextRequest) {
       parentId: body.parentId || null,
       order: Number(body.order) || data.nodes.length + 1,
       isActive: body.isActive ?? true,
+      name: cleanOptional(body.name),
+      role: cleanOptional(body.role),
+      phone: cleanOptional(body.phone),
+      field: cleanOptional(body.field),
+      imageUrl: cleanOptional(body.imageUrl),
     }
 
     data.nodes.push(newNode)
@@ -156,6 +172,11 @@ export async function PUT(request: NextRequest) {
       parentId: body.parentId || null,
       order: Number(body.order) || data.nodes[index].order,
       isActive: body.isActive ?? data.nodes[index].isActive,
+      name: cleanOptional(body.name),
+      role: cleanOptional(body.role),
+      phone: cleanOptional(body.phone),
+      field: cleanOptional(body.field),
+      imageUrl: cleanOptional(body.imageUrl),
     }
 
     writeOrganization(data)

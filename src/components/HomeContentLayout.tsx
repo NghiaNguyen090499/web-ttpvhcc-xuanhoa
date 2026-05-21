@@ -1,7 +1,7 @@
 /**
  * @nhom        : Components / Trang chủ
  * @chucnang    : Bố cục nội dung chính trang chủ — 2 cột 70/30 theo mockup
- * @lienquan    : src/lib/static-data.ts, src/components/ProcedureGrid.tsx
+ * @lienquan    : src/lib/static-data.ts, src/components/ProcedureGrid.tsx, src/components/DocumentDirective.tsx
  * @alias       : home-content-layout, trang-chu-2-cot
  */
 
@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { getNewsData, getNiemYetData, getTuyenTruyenData } from '@/lib/static-data'
 import { ProcedureGrid } from '@/components/ProcedureGrid'
+import { DocumentDirective } from '@/components/DocumentDirective'
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
@@ -210,6 +211,7 @@ export function HomeContentLayout() {
             <FeaturedSidebarCard />
             <HotlineCard />
             <PublicNoticesSidebarCard />
+            <DocumentDirective />
           </aside>
         </div>
       </div>
