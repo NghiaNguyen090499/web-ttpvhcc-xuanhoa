@@ -1,119 +1,129 @@
 {
   "metadata": {
     "title": "Cơ cấu tổ chức",
-    "updatedAt": "2026-05-21",
-    "note": "Dữ liệu sơ đồ tổ chức hiển thị tại trang giới thiệu và có thể chỉnh sửa qua admin."
+    "updatedAt": "2026-05-25",
+    "note": "Dữ liệu sơ đồ tổ chức được OCR từ ảnh người dùng cung cấp và có thể chỉnh sửa qua admin."
   },
   "nodes": [
     {
-      "id": "giam-doc",
-      "title": "Giám đốc",
+      "id": "nguyen-thai-long-hai",
+      "title": "Nguyễn Thái Long Hải",
       "type": "chairman",
       "parentId": null,
       "order": 1,
       "isActive": true,
-      "role": "Giám đốc",
-      "phone": "",
-      "field": "Điều hành chung Trung tâm Phục vụ Hành chính Công"
+      "name": "Nguyễn Thái Long Hải",
+      "role": "Giám đốc Trung tâm Phục vụ Hành chính Công",
+      "phone": "0000000000",
+      "field": ""
     },
     {
-      "id": "pho-giam-doc",
-      "title": "Phó Giám đốc",
+      "id": "huynh-thi-minh-chau",
+      "title": "Huỳnh Thị Minh Châu",
       "type": "vice",
-      "parentId": "giam-doc",
+      "parentId": "nguyen-thai-long-hai",
       "order": 1,
       "isActive": true,
-      "role": "Phó Giám đốc",
-      "phone": "",
-      "field": "Phụ trách tiếp nhận, xử lý và trả kết quả hồ sơ"
+      "name": "Huỳnh Thị Minh Châu",
+      "role": "Phó Giám đốc Trung tâm Phục vụ Hành chính Công",
+      "phone": "0000000000",
+      "field": ""
     },
     {
-      "id": "bo-phan-tiep-nhan-ho-so",
-      "title": "Bộ phận tiếp nhận hồ sơ",
+      "id": "nguyen-hoang-vy",
+      "title": "Nguyễn Hoàng Vy",
       "type": "department",
-      "parentId": "pho-giam-doc",
+      "parentId": "huynh-thi-minh-chau",
       "order": 1,
       "isActive": true,
-      "role": "Cán bộ chuyên môn",
-      "phone": "",
-      "field": "Tiếp nhận hồ sơ, hướng dẫn thủ tục và luân chuyển hồ sơ"
+      "name": "Nguyễn Hoàng Vy",
+      "role": "Nhân viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Hộ tịch"
     },
     {
-      "id": "bo-phan-ho-tich-chung-thuc",
-      "title": "Bộ phận hộ tịch - chứng thực",
+      "id": "nguyen-hoang-vu",
+      "title": "Nguyễn Hoàng Vũ",
       "type": "department",
-      "parentId": "pho-giam-doc",
+      "parentId": "huynh-thi-minh-chau",
       "order": 2,
       "isActive": true,
-      "role": "Cán bộ chuyên môn",
-      "phone": "",
-      "field": "Hộ tịch, chứng thực, cư trú và giấy tờ cá nhân"
+      "name": "Nguyễn Hoàng Vũ",
+      "role": "Nhân viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Hộ tịch"
     },
     {
-      "id": "bo-phan-dat-dai-xay-dung",
-      "title": "Bộ phận đất đai - xây dựng",
+      "id": "nguyen-quoc-phuong",
+      "title": "Nguyễn Quốc Phương",
       "type": "department",
-      "parentId": "pho-giam-doc",
+      "parentId": "huynh-thi-minh-chau",
       "order": 3,
       "isActive": true,
-      "role": "Cán bộ chuyên môn",
-      "phone": "",
-      "field": "Đất đai, xây dựng, đô thị và môi trường"
+      "name": "Nguyễn Quốc Phương",
+      "role": "Chuyên viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Tư pháp"
     },
     {
-      "id": "bo-phan-van-hoa-xa-hoi",
-      "title": "Bộ phận văn hóa - xã hội",
+      "id": "nguyen-hong-que-anh",
+      "title": "Nguyễn Hồng Quế Anh",
       "type": "department",
-      "parentId": "pho-giam-doc",
+      "parentId": "huynh-thi-minh-chau",
       "order": 4,
       "isActive": true,
-      "role": "Cán bộ chuyên môn",
-      "phone": "",
-      "field": "Văn hóa, giáo dục, y tế và chính sách xã hội"
+      "name": "Nguyễn Hồng Quế Anh",
+      "role": "Nhân viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Tư pháp"
     },
     {
-      "id": "ho-tro-dvc-truc-tuyen",
-      "title": "Hỗ trợ DVC trực tuyến",
+      "id": "pham-thi-ngoc-nhung",
+      "title": "Phạm Thị Ngọc Nhung",
       "type": "department",
-      "parentId": "bo-phan-tiep-nhan-ho-so",
+      "parentId": "nguyen-hoang-vy",
       "order": 1,
       "isActive": true,
-      "role": "Hỗ trợ dịch vụ công",
-      "phone": "",
-      "field": "Hướng dẫn tài khoản, nộp hồ sơ trực tuyến và tra cứu kết quả"
+      "name": "Phạm Thị Ngọc Nhung",
+      "role": "Nhân viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Tư pháp"
     },
     {
-      "id": "so-hoa-luu-tru-ho-so",
-      "title": "Số hóa - lưu trữ hồ sơ",
+      "id": "nguyen-thi-phuong-thuy",
+      "title": "Nguyễn Thị Phương Thúy",
       "type": "department",
-      "parentId": "bo-phan-ho-tich-chung-thuc",
+      "parentId": "nguyen-hoang-vu",
       "order": 2,
       "isActive": true,
-      "role": "Cán bộ số hóa",
-      "phone": "",
-      "field": "Số hóa thành phần hồ sơ, lưu trữ và quản trị dữ liệu"
+      "name": "Nguyễn Thị Phương Thúy",
+      "role": "Chuyên viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Kinh tế - Hạ tầng - Đô thị"
     },
     {
-      "id": "thu-phi-le-phi",
-      "title": "Thu phí, lệ phí",
+      "id": "nguyen-ngoc-thi",
+      "title": "Nguyễn Ngọc Thi",
       "type": "department",
-      "parentId": "bo-phan-dat-dai-xay-dung",
+      "parentId": "nguyen-quoc-phuong",
       "order": 3,
       "isActive": true,
-      "role": "Cán bộ tài chính",
-      "phone": "",
-      "field": "Thu phí, lệ phí và hỗ trợ thanh toán trực tuyến"
+      "name": "Nguyễn Ngọc Thi",
+      "role": "Chuyên viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Kinh tế - Hạ tầng - Đô thị"
     },
     {
-      "id": "tra-ket-qua-ho-so",
-      "title": "Trả kết quả hồ sơ",
+      "id": "bui-thi-be-hien",
+      "title": "Bùi Thị Bé Hiền",
       "type": "department",
-      "parentId": "bo-phan-van-hoa-xa-hoi",
+      "parentId": "nguyen-hong-que-anh",
       "order": 4,
       "isActive": true,
-      "role": "Bộ phận trả kết quả",
-      "phone": "",
-      "field": "Theo dõi tiến độ, trả kết quả và tiếp nhận phản ánh"
+      "name": "Bùi Thị Bé Hiền",
+      "role": "Chuyên viên - TT.PVHCC",
+      "phone": "0000000000",
+      "field": "Phụ trách lĩnh vực Văn hóa - Xã hội"
     }
   ]
 }

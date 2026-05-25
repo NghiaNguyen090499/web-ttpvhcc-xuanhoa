@@ -8,10 +8,8 @@
  */
 
 import { useState, useEffect } from 'react'
-import {
-  Plus, Search, Edit3, Trash2, Eye, Calendar, Tag, X,
-  Save, ArrowLeft
-} from 'lucide-react'
+import { Plus, Search, Edit3, Trash2, Eye, Calendar, Tag, Save, ArrowLeft } from 'lucide-react'
+import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
 // Type bài viết
 interface NewsItem {
@@ -35,6 +33,7 @@ const AVAILABLE_TAGS = [
 ]
 
 export default function AdminArticlesPage() {
+  const { canEdit, canDelete } = useAdminRole()
   const [articles, setArticles] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -49,12 +48,7 @@ export default function AdminArticlesPage() {
   })
   const [saving, setSaving] = useState(false)
 
-  // Tải dữ liệu bài viết
-  useEffect(() => {
-    fetchArticles()
-  }, [])
-
-  const fetchArticles = async () => {
+  async function fetchArticles() {
     try {
       const res = await fetch('/api/admin/articles')
       const data = await res.json()
@@ -66,6 +60,25 @@ export default function AdminArticlesPage() {
     }
   }
 
+  // Tải dữ liệu bài viết
+  useEffect(() => {
+    let active = true
+
+    fetch('/api/admin/articles')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) setArticles(data.articles || [])
+      })
+      .catch(() => console.error('Lỗi tải dữ liệu'))
+      .finally(() => {
+        if (active) setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   // Tạo slug từ title
   const generateSlug = (title: string) =>
     title.toLowerCase()
@@ -76,6 +89,7 @@ export default function AdminArticlesPage() {
 
   // Mở editor tạo mới
   const handleCreate = () => {
+    if (!canEdit) return
     setEditingArticle(null)
     const today = new Date().toISOString().split('T')[0]
     setFormData({
@@ -88,6 +102,7 @@ export default function AdminArticlesPage() {
 
   // Mở editor sửa
   const handleEdit = (article: NewsItem) => {
+    if (!canEdit) return
     setEditingArticle(article)
     setFormData({
       title: article.title, slug: article.slug, date: article.date,
@@ -99,6 +114,7 @@ export default function AdminArticlesPage() {
 
   // Lưu bài viết
   const handleSave = async () => {
+    if (!canEdit) return
     if (!formData.title.trim() || !formData.content.trim()) return
     setSaving(true)
 
@@ -127,6 +143,7 @@ export default function AdminArticlesPage() {
 
   // Xóa bài viết
   const handleDelete = async (id: string) => {
+    if (!canDelete) return
     if (!confirm('Bạn chắc chắn muốn xóa bài viết này?')) return
 
     try {
@@ -283,13 +300,15 @@ export default function AdminArticlesPage() {
           <h1 className="text-2xl font-bold text-gray-900">Quản lý tin tức</h1>
           <p className="mt-1 text-sm text-gray-500">{articles.length} bài viết</p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
-        >
-          <Plus className="w-4 h-4" />
-          Tạo bài viết
-        </button>
+        {canEdit && (
+          <button
+            onClick={handleCreate}
+            className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
+          >
+            <Plus className="w-4 h-4" />
+            Tạo bài viết
+          </button>
+        )}
       </div>
 
       {/* Filter bar */}
@@ -356,20 +375,24 @@ export default function AdminArticlesPage() {
                         >
                           <Eye className="w-4 h-4" />
                         </a>
-                        <button
-                          onClick={() => handleEdit(article)}
-                          className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
-                          title="Sửa"
-                        >
-                          <Edit3 className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(article.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-                          title="Xóa"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        {canEdit && (
+                          <button
+                            onClick={() => handleEdit(article)}
+                            className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                            title="Sửa"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                        )}
+                        {canDelete && (
+                          <button
+                            onClick={() => handleDelete(article.id)}
+                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                            title="Xóa"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

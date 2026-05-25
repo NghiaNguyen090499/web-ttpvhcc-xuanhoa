@@ -10,7 +10,12 @@
     "db:generate": "npx prisma generate",
     "db:push": "npx prisma db push",
     "db:seed": "npx tsx prisma/seed.ts",
-    "db:studio": "npx prisma studio"
+    "db:studio": "npx prisma studio",
+    "db:up": "docker compose --env-file .env.postgres -f docker-compose.postgres.yml up -d",
+    "db:down": "docker compose --env-file .env.postgres -f docker-compose.postgres.yml down",
+    "db:logs": "docker compose --env-file .env.postgres -f docker-compose.postgres.yml logs -f postgres",
+    "db:backup": "bash scripts/postgres-backup.sh",
+    "db:restore": "bash scripts/postgres-restore.sh"
   },
   "dependencies": {
     "@google/genai": "^2.0.0",
@@ -32,6 +37,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.22.3",
     "typescript": "^5"
   }
 }

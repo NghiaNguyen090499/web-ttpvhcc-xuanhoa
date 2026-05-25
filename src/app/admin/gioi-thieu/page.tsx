@@ -9,6 +9,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowLeft, Building2, Edit3, Image as ImageIcon, Plus, Save, Trash2 } from 'lucide-react'
+import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
 type NodeType = 'chairman' | 'vice' | 'department'
 
@@ -53,6 +54,7 @@ function sortNodes(nodes: OrganizationNode[]) {
 }
 
 export default function AdminAboutPage() {
+  const { canEdit, canDelete } = useAdminRole()
   const [organization, setOrganization] = useState<OrganizationData | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -98,6 +100,7 @@ export default function AdminAboutPage() {
   }, [])
 
   const openCreate = () => {
+    if (!canEdit) return
     setEditingNode(null)
     setFormData({
       title: '',
@@ -115,6 +118,7 @@ export default function AdminAboutPage() {
   }
 
   const openEdit = (node: OrganizationNode) => {
+    if (!canEdit) return
     setEditingNode(node)
     setFormData({
       title: node.title,
@@ -132,6 +136,7 @@ export default function AdminAboutPage() {
   }
 
   const saveMetadata = async () => {
+    if (!canEdit) return
     setSaving(true)
     try {
       const res = await fetch('/api/admin/organization', {
@@ -148,6 +153,7 @@ export default function AdminAboutPage() {
   }
 
   const saveNode = async () => {
+    if (!canEdit) return
     if (!formData.title.trim()) return
     setSaving(true)
     try {
@@ -181,6 +187,7 @@ export default function AdminAboutPage() {
   }
 
   const deleteNode = async (node: OrganizationNode) => {
+    if (!canDelete) return
     if (!confirm(`Xóa "${node.title}"? Các ô con trực tiếp cũng sẽ bị xóa.`)) return
     try {
       await fetch('/api/admin/organization', {
@@ -373,15 +380,18 @@ export default function AdminAboutPage() {
           <h1 className="text-2xl font-bold text-gray-900">Giới thiệu</h1>
           <p className="mt-1 text-sm text-gray-500">Quản lý cơ cấu tổ chức hiển thị ở trang giới thiệu</p>
         </div>
-        <button
-          onClick={openCreate}
-          className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark"
-        >
-          <Plus className="h-4 w-4" />
-          Thêm ô cơ cấu
-        </button>
+        {canEdit && (
+          <button
+            onClick={openCreate}
+            className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark"
+          >
+            <Plus className="h-4 w-4" />
+            Thêm ô cơ cấu
+          </button>
+        )}
       </div>
 
+      {canEdit && (
       <div className="rounded-2xl border border-gray-100 bg-white p-6">
         <h2 className="mb-4 text-base font-bold text-gray-900">Tiêu đề sơ đồ</h2>
         <div className="grid gap-4 lg:grid-cols-[280px_1fr_auto]">
@@ -407,6 +417,7 @@ export default function AdminAboutPage() {
           </button>
         </div>
       </div>
+      )}
 
       <div className="rounded-2xl border border-gray-100 bg-white">
         <div className="flex items-center gap-3 border-b border-gray-100 p-5">
@@ -443,22 +454,28 @@ export default function AdminAboutPage() {
                     </p>
                   )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => openEdit(node)}
-                    className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:border-primary/30 hover:text-primary"
-                  >
-                    <Edit3 className="h-4 w-4" />
-                    Sửa
-                  </button>
-                  <button
-                    onClick={() => deleteNode(node)}
-                    className="flex items-center gap-1.5 rounded-lg border border-red-100 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                    Xóa
-                  </button>
-                </div>
+                {(canEdit || canDelete) && (
+                  <div className="flex items-center gap-2">
+                    {canEdit && (
+                      <button
+                        onClick={() => openEdit(node)}
+                        className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:border-primary/30 hover:text-primary"
+                      >
+                        <Edit3 className="h-4 w-4" />
+                        Sửa
+                      </button>
+                    )}
+                    {canDelete && (
+                      <button
+                        onClick={() => deleteNode(node)}
+                        className="flex items-center gap-1.5 rounded-lg border border-red-100 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Xóa
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             )
           })}

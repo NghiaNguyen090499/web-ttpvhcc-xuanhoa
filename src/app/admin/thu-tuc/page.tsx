@@ -12,6 +12,7 @@ import {
   Plus, Search, Edit3, Trash2, FolderOpen, ChevronDown, ChevronRight,
   Save, ArrowLeft, X, FileText, Layers
 } from 'lucide-react'
+import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
 // Kiểu dữ liệu lĩnh vực
 interface CategoryItem {
@@ -24,6 +25,7 @@ interface CategoryItem {
 }
 
 export default function AdminProceduresPage() {
+  const { canEdit, canDelete } = useAdminRole()
   const [categories, setCategories] = useState<CategoryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -43,12 +45,7 @@ export default function AdminProceduresPage() {
   const [addingToCat, setAddingToCat] = useState<string | null>(null)
   const [newProcName, setNewProcName] = useState('')
 
-  // Tải dữ liệu
-  useEffect(() => {
-    fetchCategories()
-  }, [])
-
-  const fetchCategories = async () => {
+  async function fetchCategories() {
     try {
       const res = await fetch('/api/admin/procedures')
       const data = await res.json()
@@ -59,6 +56,25 @@ export default function AdminProceduresPage() {
       setLoading(false)
     }
   }
+
+  // Tải dữ liệu
+  useEffect(() => {
+    let active = true
+
+    fetch('/api/admin/procedures')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) setCategories(data.categories || [])
+      })
+      .catch(() => console.error('Lỗi tải dữ liệu thủ tục'))
+      .finally(() => {
+        if (active) setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
 
   // Tạo slug từ tên
   const generateSlug = (name: string) =>
@@ -72,13 +88,18 @@ export default function AdminProceduresPage() {
   const toggleExpand = (id: string) => {
     setExpandedCats((prev) => {
       const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
       return next
     })
   }
 
   // Mở editor tạo mới
   const handleCreate = () => {
+    if (!canEdit) return
     setEditingCategory(null)
     setFormData({ name: '', slug: '', description: '', type: 'cap-phuong', subCategories: '' })
     setShowEditor(true)
@@ -86,6 +107,7 @@ export default function AdminProceduresPage() {
 
   // Mở editor sửa
   const handleEdit = (cat: CategoryItem) => {
+    if (!canEdit) return
     setEditingCategory(cat)
     setFormData({
       name: cat.name,
@@ -99,6 +121,7 @@ export default function AdminProceduresPage() {
 
   // Lưu lĩnh vực
   const handleSave = async () => {
+    if (!canEdit) return
     if (!formData.name.trim()) return
     setSaving(true)
 
@@ -132,6 +155,7 @@ export default function AdminProceduresPage() {
 
   // Xóa lĩnh vực
   const handleDelete = async (id: string) => {
+    if (!canDelete) return
     if (!confirm('Xóa lĩnh vực này sẽ xóa tất cả thủ tục con. Tiếp tục?')) return
 
     try {
@@ -148,6 +172,7 @@ export default function AdminProceduresPage() {
 
   // Thêm thủ tục con nhanh
   const handleAddProcedure = async (categoryId: string) => {
+    if (!canEdit) return
     if (!newProcName.trim()) return
 
     try {
@@ -170,6 +195,7 @@ export default function AdminProceduresPage() {
 
   // Xóa thủ tục con
   const handleRemoveProcedure = async (categoryId: string, procedureName: string) => {
+    if (!canDelete) return
     if (!confirm(`Xóa thủ tục "${procedureName}"?`)) return
 
     try {
@@ -312,13 +338,15 @@ export default function AdminProceduresPage() {
             {categories.length} lĩnh vực · {totalProcedures} thủ tục
           </p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
-        >
-          <Plus className="w-4 h-4" />
-          Tạo lĩnh vực
-        </button>
+        {canEdit && (
+          <button
+            onClick={handleCreate}
+            className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
+          >
+            <Plus className="w-4 h-4" />
+            Tạo lĩnh vực
+          </button>
+        )}
       </div>
 
       {/* Search */}
@@ -364,20 +392,24 @@ export default function AdminProceduresPage() {
                     </p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => handleEdit(cat)}
-                      className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
-                      title="Sửa"
-                    >
-                      <Edit3 className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(cat.id)}
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-                      title="Xóa"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    {canEdit && (
+                      <button
+                        onClick={() => handleEdit(cat)}
+                        className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                        title="Sửa"
+                      >
+                        <Edit3 className="w-4 h-4" />
+                      </button>
+                    )}
+                    {canDelete && (
+                      <button
+                        onClick={() => handleDelete(cat.id)}
+                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                        title="Xóa"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -392,20 +424,22 @@ export default function AdminProceduresPage() {
                           <div key={i} className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white transition-colors group">
                             <FileText className="w-4 h-4 text-gray-300 shrink-0" />
                             <span className="text-sm text-gray-700 flex-1">{proc}</span>
-                            <button
-                              onClick={() => handleRemoveProcedure(cat.id, proc)}
-                              className="p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
-                              title="Xóa thủ tục"
-                            >
-                              <X className="w-3.5 h-3.5" />
-                            </button>
+                            {canDelete && (
+                              <button
+                                onClick={() => handleRemoveProcedure(cat.id, proc)}
+                                className="p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                                title="Xóa thủ tục"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+                            )}
                           </div>
                         ))}
                       </div>
                     )}
 
                     {/* Thêm thủ tục nhanh */}
-                    {addingToCat === cat.id ? (
+                    {canEdit && (addingToCat === cat.id ? (
                       <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-100">
                         <input
                           type="text" value={newProcName}
@@ -436,7 +470,7 @@ export default function AdminProceduresPage() {
                         <Plus className="w-3.5 h-3.5" />
                         Thêm thủ tục
                       </button>
-                    )}
+                    ))}
                   </div>
                 )}
               </div>

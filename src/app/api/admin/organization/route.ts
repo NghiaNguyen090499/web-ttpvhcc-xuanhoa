@@ -8,6 +8,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { requireAdminSession } from '@/lib/admin-auth'
+import { getAdminDb, hasDatabase, writeAuditLog } from '@/lib/admin-db'
 
 const ORG_FILE = join(process.cwd(), 'data', 'organization.json')
 
@@ -57,6 +59,36 @@ function writeOrganization(data: OrganizationFile) {
   writeFileSync(ORG_FILE, JSON.stringify(data, null, 2), 'utf-8')
 }
 
+async function readOrganizationFromDb(): Promise<OrganizationFile> {
+  const content = await getAdminDb().pageContent.findUnique({
+    where: { pageKey: 'organization' },
+  })
+  if (!content?.metadata || typeof content.metadata !== 'object') {
+    return readOrganization()
+  }
+  return content.metadata as unknown as OrganizationFile
+}
+
+async function writeOrganizationToDb(data: OrganizationFile) {
+  data.metadata.updatedAt = new Date().toISOString().slice(0, 10)
+  return getAdminDb().pageContent.upsert({
+    where: { pageKey: 'organization' },
+    update: {
+      title: data.metadata.title,
+      content: data.metadata.note,
+      metadata: data as unknown as object,
+      isActive: true,
+    },
+    create: {
+      pageKey: 'organization',
+      title: data.metadata.title,
+      content: data.metadata.note,
+      metadata: data as unknown as object,
+      isActive: true,
+    },
+  })
+}
+
 function generateSlug(value: string): string {
   return value.toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -88,7 +120,9 @@ function cleanOptional(value: unknown): string | undefined {
 
 /** GET — Lấy cơ cấu tổ chức */
 export async function GET() {
-  const organization = readOrganization()
+  const organization = hasDatabase()
+    ? await readOrganizationFromDb()
+    : readOrganization()
   return NextResponse.json({
     organization,
     total: organization.nodes.length,
@@ -98,6 +132,9 @@ export async function GET() {
 /** POST — Tạo node mới */
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
     const title = body.title?.trim()
     const type = body.type || 'department'
@@ -110,7 +147,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Loại ô cơ cấu không hợp lệ' }, { status: 400 })
     }
 
-    const data = readOrganization()
+    const data = hasDatabase()
+      ? await readOrganizationFromDb()
+      : readOrganization()
     const newNode: OrganizationNode = {
       id: createUniqueId(title, data.nodes),
       title,
@@ -126,7 +165,18 @@ export async function POST(request: NextRequest) {
     }
 
     data.nodes.push(newNode)
-    writeOrganization(data)
+    if (hasDatabase()) {
+      await writeOrganizationToDb(data)
+      await writeAuditLog({
+        ...auth.session,
+        action: 'CREATE',
+        entity: 'organization',
+        entityId: newNode.id,
+        details: { title: newNode.title },
+      })
+    } else {
+      writeOrganization(data)
+    }
 
     return NextResponse.json({ success: true, node: newNode })
   } catch (err) {
@@ -138,8 +188,13 @@ export async function POST(request: NextRequest) {
 /** PUT — Cập nhật metadata hoặc node */
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
-    const data = readOrganization()
+    const data = hasDatabase()
+      ? await readOrganizationFromDb()
+      : readOrganization()
 
     if (body.action === 'update-metadata') {
       data.metadata = {
@@ -147,7 +202,17 @@ export async function PUT(request: NextRequest) {
         title: body.title?.trim() || data.metadata.title,
         note: body.note?.trim() || data.metadata.note,
       }
-      writeOrganization(data)
+      if (hasDatabase()) {
+        await writeOrganizationToDb(data)
+        await writeAuditLog({
+          ...auth.session,
+          action: 'UPDATE',
+          entity: 'organization',
+          entityId: 'metadata',
+        })
+      } else {
+        writeOrganization(data)
+      }
       return NextResponse.json({ success: true, organization: data })
     }
 
@@ -179,7 +244,18 @@ export async function PUT(request: NextRequest) {
       imageUrl: cleanOptional(body.imageUrl),
     }
 
-    writeOrganization(data)
+    if (hasDatabase()) {
+      await writeOrganizationToDb(data)
+      await writeAuditLog({
+        ...auth.session,
+        action: 'UPDATE',
+        entity: 'organization',
+        entityId: data.nodes[index].id,
+        details: { title: data.nodes[index].title },
+      })
+    } else {
+      writeOrganization(data)
+    }
 
     return NextResponse.json({ success: true, node: data.nodes[index] })
   } catch (err) {
@@ -191,19 +267,34 @@ export async function PUT(request: NextRequest) {
 /** DELETE — Xóa node và các node con trực tiếp */
 export async function DELETE(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('ADMIN')
+    if (auth.response) return auth.response
+
     const body = await request.json()
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID ô cơ cấu' }, { status: 400 })
     }
 
-    const data = readOrganization()
+    const data = hasDatabase()
+      ? await readOrganizationFromDb()
+      : readOrganization()
     const exists = data.nodes.some((node) => node.id === body.id)
     if (!exists) {
       return NextResponse.json({ error: 'Không tìm thấy ô cơ cấu' }, { status: 404 })
     }
 
     data.nodes = data.nodes.filter((node) => node.id !== body.id && node.parentId !== body.id)
-    writeOrganization(data)
+    if (hasDatabase()) {
+      await writeOrganizationToDb(data)
+      await writeAuditLog({
+        ...auth.session,
+        action: 'DELETE',
+        entity: 'organization',
+        entityId: body.id,
+      })
+    } else {
+      writeOrganization(data)
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {

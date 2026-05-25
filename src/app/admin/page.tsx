@@ -13,6 +13,8 @@ import {
   TrendingUp, Eye, Layers
 } from 'lucide-react'
 import Link from 'next/link'
+import { getSession } from '@/lib/auth'
+import { hasDatabase } from '@/lib/admin-db'
 
 // Đọc dữ liệu feedback/faq từ JSON
 function getFeedbackCount(): number {
@@ -37,7 +39,11 @@ function getPendingFeedbackCount(): number {
   } catch { return 0 }
 }
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const session = await getSession()
+  const canEdit = session?.role === 'ADMIN' || session?.role === 'EDITOR'
+  const databaseConnected = hasDatabase()
+
   // Đọc dữ liệu tĩnh cho thống kê
   const news = getNewsData()
   const procedures = getProceduresData()
@@ -161,13 +167,15 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-2xl border border-gray-100 p-6">
           <h2 className="text-base font-bold text-gray-900 mb-4">Thao tác nhanh</h2>
           <div className="space-y-3">
-            <Link
-              href="/admin/tin-tuc?action=create"
-              className="flex items-center gap-3 p-3 rounded-xl bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
-            >
-              <Newspaper className="w-5 h-5" />
-              <span className="text-sm font-medium">Tạo bài viết mới</span>
-            </Link>
+            {canEdit && (
+              <Link
+                href="/admin/tin-tuc?action=create"
+                className="flex items-center gap-3 p-3 rounded-xl bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
+              >
+                <Newspaper className="w-5 h-5" />
+                <span className="text-sm font-medium">Tạo bài viết mới</span>
+              </Link>
+            )}
             <Link
               href="/admin/phan-anh"
               className="flex items-center gap-3 p-3 rounded-xl bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors"
@@ -214,7 +222,7 @@ export default function AdminDashboard() {
                 <span className="text-gray-600">Database</span>
                 <span className="flex items-center gap-1 text-amber-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  JSON (fallback)
+                  {databaseConnected ? 'PostgreSQL' : 'JSON (fallback)'}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs">

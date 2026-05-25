@@ -7,9 +7,23 @@
 
 import { getWardInfo } from '@/lib/static-data'
 import { Shield, Database, Globe, Server, Clock, MapPin } from 'lucide-react'
+import { getSession } from '@/lib/auth'
+import { hasDatabase } from '@/lib/admin-db'
+import { AdminUsersManager } from '@/components/admin/AdminUsersManager'
 
-export default function AdminSettingsPage() {
+export default async function AdminSettingsPage() {
+  const session = await getSession()
+  if (session?.role !== 'ADMIN') {
+    return (
+      <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
+        <h1 className="text-lg font-bold text-amber-900">Không đủ quyền</h1>
+        <p className="mt-2 text-sm text-amber-800">Chỉ ADMIN mới được truy cập trang cài đặt và phân quyền.</p>
+      </div>
+    )
+  }
+
   const wardInfo = getWardInfo()
+  const databaseConnected = hasDatabase()
 
   // Thông tin cấu hình hiện tại
   const configs = [
@@ -34,14 +48,14 @@ export default function AdminSettingsPage() {
   const systemStatus = [
     {
       label: 'Database',
-      status: 'warning' as const,
-      detail: 'JSON fallback — chưa kết nối Supabase',
+      status: databaseConnected ? 'ok' as const : 'warning' as const,
+      detail: databaseConnected ? 'PostgreSQL + Prisma' : 'JSON fallback — chưa kết nối PostgreSQL',
       icon: Database,
     },
     {
       label: 'Authentication',
       status: 'ok' as const,
-      detail: 'JWT + Google OAuth 2.0',
+      detail: 'Tài khoản nội bộ + JWT',
       icon: Shield,
     },
     {
@@ -107,13 +121,17 @@ export default function AdminSettingsPage() {
         </div>
       </div>
 
+      <AdminUsersManager />
+
       {/* Ghi chú */}
-      <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
-        <p className="text-sm text-amber-800 font-medium">⚠️ Hệ thống đang chạy ở chế độ Demo</p>
-        <p className="text-xs text-amber-700 mt-1">
-          Dữ liệu được đọc/ghi từ file JSON. Khi kết nối Supabase (DATABASE_URL), hệ thống sẽ tự động chuyển sang Prisma ORM.
-        </p>
-      </div>
+      {!databaseConnected && (
+        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
+          <p className="text-sm text-amber-800 font-medium">Hệ thống đang chạy ở chế độ Demo</p>
+          <p className="text-xs text-amber-700 mt-1">
+            Dữ liệu được đọc/ghi từ file JSON. Khi kết nối PostgreSQL qua DATABASE_URL, hệ thống sẽ chuyển sang Prisma ORM.
+          </p>
+        </div>
+      )}
     </div>
   )
 }

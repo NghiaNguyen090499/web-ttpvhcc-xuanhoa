@@ -10,11 +10,13 @@ import Link from 'next/link'
 import {
   ArrowRight,
   CalendarDays,
+  Download,
+  ExternalLink,
   FileText,
   Megaphone,
   Phone,
+  PlayCircle,
   Tag,
-  UploadCloud,
 } from 'lucide-react'
 import { getNewsData, getNiemYetData, getTuyenTruyenData } from '@/lib/static-data'
 import { ProcedureGrid } from '@/components/ProcedureGrid'
@@ -23,6 +25,24 @@ import { DocumentDirective } from '@/components/DocumentDirective'
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
+}
+
+function getYoutubeEmbedUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url)
+    if (parsed.hostname.includes('youtube.com')) {
+      const videoId = parsed.searchParams.get('v')
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null
+    }
+    if (parsed.hostname.includes('youtu.be')) {
+      const videoId = parsed.pathname.replace('/', '')
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null
+    }
+  } catch {
+    return null
+  }
+
+  return null
 }
 
 function NewsCards() {
@@ -81,18 +101,131 @@ function NewsCards() {
   )
 }
 
-function PropagandaUploadCard() {
+function PropagandaMediaCard() {
+  const items = getTuyenTruyenData()
+    .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
+    .slice(0, 3)
+
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-      <div className="flex min-h-[170px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#c7b8ff] bg-gradient-to-br from-primary-50 via-white to-[#f3edff] px-6 py-8 text-center">
-        <UploadCloud className="h-14 w-14 text-primary" strokeWidth={1.8} aria-hidden="true" />
-        <h2 className="mt-3 font-heading text-2xl font-bold uppercase tracking-wide text-[#7c63f0] md:text-3xl">
-          Video/File/Tuyên truyền
-        </h2>
-        <p className="mt-2 text-sm text-text-secondary">
-          Kéo thả tập tin vào đây hoặc <span className="font-bold text-primary">chọn tệp</span> để tải lên
-        </p>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <Megaphone className="h-5 w-5 text-primary" aria-hidden="true" />
+          <h2 className="font-heading text-lg font-bold uppercase text-text-primary">
+            Video/File/Tuyên truyền
+          </h2>
+        </div>
       </div>
+
+      {items.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-border bg-surface px-5 py-8 text-center">
+          <p className="text-sm font-semibold text-text-primary">Chưa có video/file tuyên truyền</p>
+          <p className="mt-1 text-sm text-text-secondary">
+            Nội dung sẽ hiển thị tại đây sau khi cán bộ đăng trong CMS.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {items.map((item) => {
+          const isVideo = item.mediaType === 'video'
+          const isFile = item.mediaType === 'file'
+          const Icon = isVideo ? PlayCircle : isFile ? Download : FileText
+          const youtubeEmbedUrl = item.mediaUrl ? getYoutubeEmbedUrl(item.mediaUrl) : null
+
+          if (isVideo) {
+            return (
+              <article
+                key={item.id}
+                className="flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-border bg-surface"
+              >
+                <div className="aspect-video bg-black">
+                  {youtubeEmbedUrl ? (
+                    <iframe
+                      src={youtubeEmbedUrl}
+                      title={item.title}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  ) : item.mediaUrl ? (
+                    <video
+                      src={item.mediaUrl}
+                      controls
+                      preload="metadata"
+                      className="h-full w-full bg-black"
+                    >
+                      Trình duyệt không hỗ trợ phát video.
+                    </video>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-white">
+                      Chưa có video
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-4">
+                  <span className="mb-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-bold uppercase text-primary">
+                    <PlayCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                    Video
+                  </span>
+                  <h3 className="line-clamp-2 text-sm font-bold leading-snug text-text-primary">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
+                    {item.summary}
+                  </p>
+                </div>
+              </article>
+            )
+          }
+
+          if (!item.mediaUrl) {
+            return (
+              <article
+                key={item.id}
+                className="group flex min-h-[128px] flex-col rounded-xl border border-border bg-surface p-4"
+              >
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-bold uppercase text-primary">
+                    <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                    {isFile ? 'File' : item.tag}
+                  </span>
+                </div>
+                <h3 className="line-clamp-2 text-sm font-bold leading-snug text-text-primary">
+                  {item.title}
+                </h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
+                  {item.summary}
+                </p>
+              </article>
+            )
+          }
+
+          return (
+            <a
+              key={item.id}
+              href={item.mediaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex min-h-[128px] flex-col rounded-xl border border-border bg-surface p-4 transition hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary-50"
+            >
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-bold uppercase text-primary">
+                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {isVideo ? 'Video' : isFile ? 'File' : item.tag}
+                </span>
+                {item.mediaUrl && <ExternalLink className="h-4 w-4 text-text-muted group-hover:text-primary" aria-hidden="true" />}
+              </div>
+              <h3 className="line-clamp-2 text-sm font-bold leading-snug text-text-primary group-hover:text-primary">
+                {item.title}
+              </h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
+                {item.summary}
+              </p>
+            </a>
+          )
+          })}
+        </div>
+      )}
     </section>
   )
 }
@@ -137,10 +270,20 @@ function HotlineCard() {
         <Phone className="h-5 w-5 text-danger" aria-hidden="true" />
         <h3 className="text-sm font-bold uppercase tracking-wide text-text-primary">Số tổng đài</h3>
       </div>
-      <div className="px-6 py-7 text-center">
+      <a href="tel:1022" className="block bg-[#dff1ff] transition hover:opacity-95" aria-label="Gọi Tổng đài 1022">
+        <Image
+          src="/images/hotline-1022.png"
+          alt="Tổng đài 1022 - 5 kênh phản ánh 24/7"
+          width={1952}
+          height={806}
+          className="h-auto w-full"
+          sizes="(max-width: 1024px) 100vw, 320px"
+        />
+      </a>
+      <div className="px-6 py-6 text-center">
         <p className="text-xs font-bold uppercase tracking-wide text-text-muted">Tổng đài</p>
-        <p className="mt-2 font-heading text-6xl font-bold leading-none text-primary">1022</p>
-        <p className="mx-auto mt-4 max-w-[220px] text-sm leading-relaxed text-text-secondary">
+        <p className="mt-1 font-heading text-4xl font-bold leading-none text-primary">1022</p>
+        <p className="mx-auto mt-3 max-w-[240px] text-sm leading-relaxed text-text-secondary">
           Kênh tiếp nhận phản ánh, kiến nghị và hỗ trợ thông tin nhanh liên quan đến TTHC
         </p>
         <a
@@ -203,7 +346,7 @@ export function HomeContentLayout() {
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
           <main className="space-y-6">
             <NewsCards />
-            <PropagandaUploadCard />
+            <PropagandaMediaCard />
             <ProcedureGrid embedded />
           </main>
 

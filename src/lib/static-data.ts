@@ -498,6 +498,10 @@ export interface TuyenTruyenItem {
   summary: string
   content: string       // Nội dung HTML đầy đủ cho modal
   publishedAt: string
+  mediaType?: 'article' | 'video' | 'file'
+  mediaUrl?: string
+  fileName?: string
+  fileSize?: number
 }
 
 // Cache tuyên truyền

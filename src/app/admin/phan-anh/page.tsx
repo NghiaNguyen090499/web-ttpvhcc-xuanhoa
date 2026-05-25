@@ -12,6 +12,7 @@ import {
   MessageSquare, Clock, CheckCircle, XCircle, AlertCircle,
   Send, Filter, ChevronRight
 } from 'lucide-react'
+import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
 // Kiểu dữ liệu phản ánh
 interface FeedbackItem {
@@ -36,6 +37,7 @@ const STATUS_CONFIG = {
 } as const
 
 export default function AdminFeedbackPage() {
+  const { canEdit } = useAdminRole()
   const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedFeedback, setSelectedFeedback] = useState<FeedbackItem | null>(null)
@@ -44,12 +46,7 @@ export default function AdminFeedbackPage() {
   const [sending, setSending] = useState(false)
   const [statusChanging, setStatusChanging] = useState(false)
 
-  // Tải dữ liệu
-  useEffect(() => {
-    fetchFeedbacks()
-  }, [])
-
-  const fetchFeedbacks = async () => {
+  async function fetchFeedbacks() {
     try {
       const res = await fetch('/api/admin/feedback')
       const data = await res.json()
@@ -61,8 +58,28 @@ export default function AdminFeedbackPage() {
     }
   }
 
+  // Tải dữ liệu
+  useEffect(() => {
+    let active = true
+
+    fetch('/api/admin/feedback')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) setFeedbacks(data.feedbacks || [])
+      })
+      .catch(() => console.error('Lỗi tải dữ liệu phản ánh'))
+      .finally(() => {
+        if (active) setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   // Gửi phản hồi
   const handleSendResponse = async () => {
+    if (!canEdit) return
     if (!selectedFeedback || !responseText.trim()) return
     setSending(true)
 
@@ -97,6 +114,7 @@ export default function AdminFeedbackPage() {
 
   // Đổi trạng thái
   const handleChangeStatus = async (id: string, status: FeedbackItem['status']) => {
+    if (!canEdit) return
     setStatusChanging(true)
     try {
       const res = await fetch('/api/admin/feedback', {
@@ -275,25 +293,27 @@ export default function AdminFeedbackPage() {
               </div>
 
               {/* Đổi trạng thái */}
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1.5">Trạng thái</label>
-                <div className="flex gap-1.5 flex-wrap">
-                  {(Object.entries(STATUS_CONFIG) as [FeedbackItem['status'], typeof STATUS_CONFIG[keyof typeof STATUS_CONFIG]][]).map(([key, config]) => (
-                    <button
-                      key={key}
-                      onClick={() => handleChangeStatus(selectedFeedback.id, key)}
-                      disabled={statusChanging || selectedFeedback.status === key}
-                      className={`text-[10px] font-semibold px-2.5 py-1.5 rounded-lg transition-all ${
-                        selectedFeedback.status === key
-                          ? `${config.color} ring-1 ring-offset-1`
-                          : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
-                      }`}
-                    >
-                      {config.label}
-                    </button>
-                  ))}
+              {canEdit && (
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1.5">Trạng thái</label>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {(Object.entries(STATUS_CONFIG) as [FeedbackItem['status'], typeof STATUS_CONFIG[keyof typeof STATUS_CONFIG]][]).map(([key, config]) => (
+                      <button
+                        key={key}
+                        onClick={() => handleChangeStatus(selectedFeedback.id, key)}
+                        disabled={statusChanging || selectedFeedback.status === key}
+                        className={`text-[10px] font-semibold px-2.5 py-1.5 rounded-lg transition-all ${
+                          selectedFeedback.status === key
+                            ? `${config.color} ring-1 ring-offset-1`
+                            : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
+                        }`}
+                      >
+                        {config.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Phản hồi cũ */}
               {selectedFeedback.response && selectedFeedback.respondedAt && (
@@ -306,26 +326,28 @@ export default function AdminFeedbackPage() {
               )}
 
               {/* Form phản hồi */}
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1.5">
-                  {selectedFeedback.response ? 'Cập nhật phản hồi' : 'Phản hồi'}
-                </label>
-                <textarea
-                  rows={4}
-                  value={responseText}
-                  onChange={(e) => setResponseText(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary resize-none"
-                  placeholder="Nhập phản hồi cho người dân..."
-                />
-                <button
-                  onClick={handleSendResponse}
-                  disabled={sending || !responseText.trim()}
-                  className="mt-2 flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all disabled:opacity-50"
-                >
-                  <Send className="w-4 h-4" />
-                  {sending ? 'Đang gửi...' : 'Gửi phản hồi'}
-                </button>
-              </div>
+              {canEdit && (
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1.5">
+                    {selectedFeedback.response ? 'Cập nhật phản hồi' : 'Phản hồi'}
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={responseText}
+                    onChange={(e) => setResponseText(e.target.value)}
+                    className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary resize-none"
+                    placeholder="Nhập phản hồi cho người dân..."
+                  />
+                  <button
+                    onClick={handleSendResponse}
+                    disabled={sending || !responseText.trim()}
+                    className="mt-2 flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all disabled:opacity-50"
+                  >
+                    <Send className="w-4 h-4" />
+                    {sending ? 'Đang gửi...' : 'Gửi phản hồi'}
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center h-fit">

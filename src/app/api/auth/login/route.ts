@@ -1,17 +1,18 @@
 /**
  * @nhom        : API Routes / Auth
- * @chucnang    : POST /api/auth/login — đăng nhập dev mode cho admin
+ * @chucnang    : POST /api/auth/login — đăng nhập tài khoản nội bộ CMS
  * @input       : { email, password } (JSON body)
  * @output      : { success, redirect } hoặc { error }
  * @lienquan    : src/lib/auth.ts
  * @alias       : login-api, dang-nhap
  *
- * Dev mode: kiểm tra ADMIN_EMAILS + DEV_ADMIN_PASSWORD từ .env
- * Production: route này bị vô hiệu hóa, chỉ dùng Google OAuth
+ * Production: xác thực bằng email + mật khẩu hash trong database
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createSession } from '@/lib/auth'
+import { getAdminDb, hasDatabase, writeAuditLog } from '@/lib/admin-db'
+import { verifyPassword } from '@/lib/password'
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,37 +25,59 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Danh sách email admin được phép (mặc định cho dev)
-    const allowedEmails = (process.env.ADMIN_EMAILS || 'admin@xuanhoa.gov.vn')
-      .split(',')
-      .map((e) => e.trim().toLowerCase())
+    const normalizedEmail = email.toLowerCase().trim()
+    let user = null
 
-    // Mật khẩu dev (chỉ dùng trong development)
-    const devPassword = process.env.DEV_ADMIN_PASSWORD || 'admin123'
+    if (hasDatabase()) {
+      user = await getAdminDb().user.findUnique({
+        where: { email: normalizedEmail },
+        select: { id: true, email: true, name: true, role: true, isActive: true, passwordHash: true },
+      })
 
-    // Kiểm tra email có trong danh sách
-    if (!allowedEmails.includes(email.toLowerCase())) {
+      if (!user || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
+        return NextResponse.json({ error: 'Email hoặc mật khẩu không đúng' }, { status: 401 })
+      }
+
+      if (!user.isActive) {
+        return NextResponse.json({ error: 'Tài khoản đã bị khóa' }, { status: 403 })
+      }
+
+      await getAdminDb().user.update({
+        where: { id: user.id },
+        data: { lastLoginAt: new Date() },
+      })
+    } else if (process.env.NODE_ENV !== 'production') {
+      const allowedEmails = (process.env.ADMIN_EMAILS || 'admin@xuanhoa.gov.vn')
+        .split(',')
+        .map((e) => e.trim().toLowerCase())
+      const devPassword = process.env.DEV_ADMIN_PASSWORD || 'admin123'
+
+      if (!allowedEmails.includes(normalizedEmail) || password !== devPassword) {
+        return NextResponse.json({ error: 'Email hoặc mật khẩu không đúng' }, { status: 401 })
+      }
+    } else {
       return NextResponse.json(
-        { error: 'Email không có quyền truy cập admin' },
-        { status: 403 }
+        { error: 'Database chưa kết nối. Không thể đăng nhập production.' },
+        { status: 503 }
       )
     }
 
-    // Kiểm tra mật khẩu
-    if (password !== devPassword) {
-      return NextResponse.json(
-        { error: 'Mật khẩu không đúng' },
-        { status: 401 }
-      )
+    const session = {
+      userId: user?.id || 'dev-admin',
+      email: normalizedEmail,
+      name: user?.name || 'Admin',
+      role: user?.role || 'ADMIN',
+    } as const
+
+    if (hasDatabase()) {
+      await writeAuditLog({
+        ...session,
+        action: 'LOGIN',
+        entity: 'auth',
+      })
     }
 
-    // Tạo session
-    await createSession({
-      userId: 'dev-admin',
-      email: email.toLowerCase(),
-      name: 'Admin (Dev)',
-      role: 'ADMIN',
-    })
+    await createSession(session)
 
     // Lấy redirect URL từ query hoặc mặc định /admin
     const from = request.nextUrl.searchParams.get('from') || '/admin'

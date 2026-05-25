@@ -13,7 +13,27 @@ import { TransparencyStats } from '@/components/TransparencyStats'
 import { ServiceBySubject } from '@/components/ServiceBySubject'
 import UsefulLinks from '@/components/UsefulLinks'
 import { HomeContentLayout } from '@/components/HomeContentLayout'
+import Image from 'next/image'
 import Link from 'next/link'
+
+function PartyResolutionBanner() {
+  return (
+    <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px]">
+      <div className="mx-auto max-w-[1200px] px-4 pb-8">
+        <div className="overflow-hidden rounded-xl border border-[#f1d27a] bg-[#d71920] shadow-[0_10px_28px_rgba(160,23,23,0.12)]">
+          <Image
+            src="/images/xuanhoa-banner.jpg"
+            alt="Banner tuyên truyền Xuân Hòa"
+            width={1184}
+            height={338}
+            className="h-auto w-full"
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -32,6 +52,9 @@ export default function HomePage() {
 
       {/* Nội dung chính — tin tức, tuyên truyền, lĩnh vực TTHC + sidebar */}
       <HomeContentLayout />
+
+      {/* Banner tuyên truyền */}
+      <PartyResolutionBanner />
 
       {/* Phân loại theo đối tượng: Công dân & Doanh nghiệp (P0-2) */}
       <ServiceBySubject />

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 768" role="img" aria-label="Đưa Nghị quyết của Đảng vào cuộc sống">
+  <defs>
+    <linearGradient id="redOrange" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e51012"/>
+      <stop offset="0.42" stop-color="#ef2514"/>
+      <stop offset="0.72" stop-color="#ff6a12"/>
+      <stop offset="1" stop-color="#ff9f17"/>
+    </linearGradient>
+    <radialGradient id="rightGlow" cx="82%" cy="38%" r="52%">
+      <stop offset="0" stop-color="#ffe066" stop-opacity="0.72"/>
+      <stop offset="0.35" stop-color="#ffb22c" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#ff6a12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldText" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff34b"/>
+      <stop offset="0.45" stop-color="#ffe000"/>
+      <stop offset="1" stop-color="#ffc000"/>
+    </linearGradient>
+    <filter id="textShadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="5" dy="8" stdDeviation="3.5" flood-color="#8c1606" flood-opacity="0.55"/>
+    </filter>
+    <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="7" flood-color="#8c1606" flood-opacity="0.42"/>
+    </filter>
+    <pattern id="softSpark" width="82" height="82" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="18" r="2" fill="#fff3a0" opacity="0.2"/>
+      <circle cx="64" cy="57" r="3" fill="#ffd86a" opacity="0.15"/>
+    </pattern>
+  </defs>
+
+  <rect width="1792" height="768" fill="url(#redOrange)"/>
+  <rect width="1792" height="768" fill="url(#rightGlow)"/>
+  <rect width="1792" height="768" fill="url(#softSpark)"/>
+
+  <path d="M0 0h1792v768H0z" fill="#d60c12" opacity="0.08"/>
+  <path d="M-80 520C80 445 235 438 395 510c166 75 328 88 493 15 178-79 340-69 498 26 130 78 266 83 486 7v210H-80Z" fill="#8a080d" opacity="0.16"/>
+  <path d="M-40 584c210-87 372-70 522 0 153 72 332 68 480-12 160-86 340-59 505 36 88 50 195 54 365 6v154H-40Z" fill="#ffb11c" opacity="0.12"/>
+
+  <g transform="translate(1390 280)" opacity="0.33" stroke="#ffd55d" fill="none">
+    <circle r="360" stroke-width="26"/>
+    <circle r="312" stroke-width="7"/>
+    <circle r="254" stroke-width="12"/>
+    <circle r="190" stroke-width="5"/>
+    <circle r="126" stroke-width="6"/>
+    <path d="M0-168 24-50 142-102 72 0 142 102 24 50 0 168-24 50-142 102-72 0-142-102-24-50Z" stroke-width="5"/>
+    <g stroke-width="8">
+      <path d="M0-330v42M0 288v42M330 0h-42M-330 0h42"/>
+      <path d="M233-233l-30 30M233 233l-30-30M-233 233l30-30M-233-233l30 30"/>
+    </g>
+    <g stroke-width="4">
+      <circle r="278" stroke-dasharray="12 18"/>
+      <circle r="226" stroke-dasharray="36 18"/>
+    </g>
+  </g>
+
+  <text
+    x="292"
+    y="506"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="350"
+    font-weight="700"
+    fill="url(#goldText)"
+    filter="url(#logoShadow)"
+  >☭</text>
+
+  <g
+    font-family="Arial Black, Impact, 'Be Vietnam Pro', Arial, sans-serif"
+    font-weight="900"
+    font-size="104"
+    letter-spacing="3"
+    fill="url(#goldText)"
+    filter="url(#textShadow)"
+    text-anchor="middle"
+  >
+    <text x="1006" y="342">ĐƯA NGHỊ QUYẾT</text>
+    <text x="1128" y="500">CỦA ĐẢNG VÀO CUỘC SỐNG</text>
+  </g>
+</svg>

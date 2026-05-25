@@ -8,6 +8,7 @@
 import type { Metadata } from 'next'
 import { getSession } from '@/lib/auth'
 import { AdminShell } from '@/components/admin/AdminShell'
+import type { AdminRole } from '@/components/admin/AdminRoleContext'
 
 export const metadata: Metadata = {
   title: { default: 'Quản trị | TTPVHCC Xuân Hòa', template: '%s | Quản trị TTPVHCC' },
@@ -20,7 +21,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <AdminShell
       userName={session?.name || 'Admin'}
       userEmail={session?.email || ''}
-      userRole={session?.role || 'EDITOR'}
+      userRole={(session?.role || 'VIEWER') as AdminRole}
     >
       {children}
     </AdminShell>

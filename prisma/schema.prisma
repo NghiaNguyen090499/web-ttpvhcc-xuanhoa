@@ -21,6 +21,7 @@ datasource db {
 enum Role {
   ADMIN       // Quản trị viên hệ thống
   EDITOR      // Biên tập viên nội dung
+  VIEWER      // Chỉ xem dữ liệu CMS
 }
 
 /// Người dùng hệ thống (chỉ cán bộ quản trị)
@@ -30,6 +31,7 @@ model User {
   name          String?
   image         String?  // Ảnh đại diện từ Google
   role          Role     @default(EDITOR)
+  passwordHash  String?  @map("password_hash") // Mật khẩu nội bộ đã hash
   googleId      String?  @unique @map("google_id")
   isActive      Boolean  @default(true) @map("is_active")
   lastLoginAt   DateTime? @map("last_login_at")
@@ -121,9 +123,12 @@ model Article {
   id            String        @id @default(cuid())
   title         String
   slug          String        @unique
+  tag           String?       // Chuyên mục hiển thị trên portal
   excerpt       String?       @db.Text // Tóm tắt
   content       String        @db.Text // Nội dung HTML
   coverImage    String?       @map("cover_image") // Ảnh bìa
+  images        Json?         // Gallery ảnh nếu có
+  source        String?       // Nguồn tin
   status        ArticleStatus @default(DRAFT)
   publishedAt   DateTime?     @map("published_at")
   viewCount     Int           @default(0) @map("view_count")

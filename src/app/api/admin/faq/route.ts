@@ -11,6 +11,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { requireAdminSession } from '@/lib/admin-auth'
+import { getAdminDb, hasDatabase, writeAuditLog } from '@/lib/admin-db'
 
 const FAQ_FILE = join(process.cwd(), 'data', 'faq.json')
 
@@ -42,6 +44,13 @@ function writeFaqs(data: FaqItem[]) {
 
 /** GET — Lấy danh sách FAQ */
 export async function GET() {
+  if (hasDatabase()) {
+    const faqs = await getAdminDb().faq.findMany({
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+    })
+    return NextResponse.json({ faqs, total: faqs.length })
+  }
+
   const faqs = readFaqs()
   return NextResponse.json({ faqs, total: faqs.length })
 }
@@ -49,6 +58,9 @@ export async function GET() {
 /** POST — Tạo FAQ mới */
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.question?.trim() || !body.answer?.trim()) {
@@ -56,6 +68,26 @@ export async function POST(request: NextRequest) {
         { error: 'Câu hỏi và câu trả lời là bắt buộc' },
         { status: 400 }
       )
+    }
+
+    if (hasDatabase()) {
+      const faq = await getAdminDb().faq.create({
+        data: {
+          question: body.question.trim(),
+          answer: body.answer.trim(),
+          category: body.category?.trim() || 'Chung',
+          sortOrder: Number(body.sortOrder) || 0,
+          isActive: body.isActive ?? true,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'CREATE',
+        entity: 'faq',
+        entityId: faq.id,
+        details: { question: faq.question.slice(0, 120) },
+      })
+      return NextResponse.json({ success: true, faq })
     }
 
     const faqs = readFaqs()
@@ -82,10 +114,34 @@ export async function POST(request: NextRequest) {
 /** PUT — Cập nhật FAQ */
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID câu hỏi' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      const faq = await getAdminDb().faq.update({
+        where: { id: body.id },
+        data: {
+          question: body.question?.trim(),
+          answer: body.answer?.trim(),
+          category: body.category?.trim(),
+          sortOrder: body.sortOrder,
+          isActive: body.isActive,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'UPDATE',
+        entity: 'faq',
+        entityId: faq.id,
+        details: { question: faq.question.slice(0, 120) },
+      })
+      return NextResponse.json({ success: true, faq })
     }
 
     const faqs = readFaqs()
@@ -116,10 +172,24 @@ export async function PUT(request: NextRequest) {
 /** DELETE — Xóa FAQ */
 export async function DELETE(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('ADMIN')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID câu hỏi' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      await getAdminDb().faq.delete({ where: { id: body.id } })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'DELETE',
+        entity: 'faq',
+        entityId: body.id,
+      })
+      return NextResponse.json({ success: true })
     }
 
     const faqs = readFaqs()

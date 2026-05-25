@@ -12,25 +12,33 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Newspaper, MessageSquare, FileText, HelpCircle,
-  Settings, LogOut, Menu, X, ChevronRight, Building2
+  Settings, LogOut, Menu, X, ChevronRight, Building2, Megaphone
 } from 'lucide-react'
+import { AdminRoleProvider, type AdminRole } from '@/components/admin/AdminRoleContext'
 
 // Menu sidebar
 const NAV_ITEMS = [
-  { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { label: 'Tin tức', href: '/admin/tin-tuc', icon: Newspaper },
-  { label: 'Phản ánh', href: '/admin/phan-anh', icon: MessageSquare },
-  { label: 'Thủ tục HC', href: '/admin/thu-tuc', icon: FileText },
-  { label: 'Giới thiệu', href: '/admin/gioi-thieu', icon: Building2 },
-  { label: 'FAQ', href: '/admin/faq', icon: HelpCircle },
-  { label: 'Cài đặt', href: '/admin/cai-dat', icon: Settings },
+  { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, minRole: 'VIEWER' },
+  { label: 'Tin tức', href: '/admin/tin-tuc', icon: Newspaper, minRole: 'VIEWER' },
+  { label: 'Tuyên truyền', href: '/admin/tuyen-truyen', icon: Megaphone, minRole: 'VIEWER' },
+  { label: 'Phản ánh', href: '/admin/phan-anh', icon: MessageSquare, minRole: 'VIEWER' },
+  { label: 'Thủ tục HC', href: '/admin/thu-tuc', icon: FileText, minRole: 'VIEWER' },
+  { label: 'Giới thiệu', href: '/admin/gioi-thieu', icon: Building2, minRole: 'VIEWER' },
+  { label: 'FAQ', href: '/admin/faq', icon: HelpCircle, minRole: 'VIEWER' },
+  { label: 'Cài đặt', href: '/admin/cai-dat', icon: Settings, minRole: 'ADMIN' },
 ]
+
+const ROLE_RANK: Record<AdminRole, number> = {
+  VIEWER: 0,
+  EDITOR: 1,
+  ADMIN: 2,
+}
 
 interface AdminShellProps {
   children: React.ReactNode
   userName: string
   userEmail: string
-  userRole: string
+  userRole: AdminRole
 }
 
 export function AdminShell({ children, userName, userEmail, userRole }: AdminShellProps) {
@@ -48,8 +56,10 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
 
   const isActive = (href: string) =>
     href === '/admin' ? pathname === '/admin' : pathname.startsWith(href)
+  const visibleNavItems = NAV_ITEMS.filter((item) => ROLE_RANK[userRole] >= ROLE_RANK[item.minRole as AdminRole])
 
   return (
+    <AdminRoleProvider role={userRole}>
     <div className="flex h-screen bg-gray-50">
       {/* Overlay mobile */}
       {sidebarOpen && (
@@ -81,7 +91,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
 
           {/* Navigation */}
           <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-            {NAV_ITEMS.map((item) => {
+            {visibleNavItems.map((item) => {
               const Icon = item.icon
               const active = isActive(item.href)
               return (
@@ -137,7 +147,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
             </button>
             <div className="text-sm text-gray-500">
               <span className="font-medium text-gray-900">
-                {NAV_ITEMS.find((i) => isActive(i.href))?.label || 'Admin'}
+                {visibleNavItems.find((i) => isActive(i.href))?.label || 'Admin'}
               </span>
             </div>
           </div>
@@ -157,5 +167,6 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
         </main>
       </div>
     </div>
+    </AdminRoleProvider>
   )
 }

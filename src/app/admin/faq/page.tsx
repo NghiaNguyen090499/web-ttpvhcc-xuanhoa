@@ -12,6 +12,7 @@ import {
   Plus, Search, Edit3, Trash2, Save, ArrowLeft,
   MessageCircle, ToggleLeft, ToggleRight, HelpCircle
 } from 'lucide-react'
+import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
 // Kiểu dữ liệu FAQ
 interface FaqItem {
@@ -28,6 +29,7 @@ interface FaqItem {
 const FAQ_CATEGORIES = ['Chung', 'Tư pháp', 'Cư trú', 'Hướng dẫn', 'Đất đai', 'Xây dựng', 'Y tế', 'Giáo dục']
 
 export default function AdminFaqPage() {
+  const { canEdit, canDelete } = useAdminRole()
   const [faqs, setFaqs] = useState<FaqItem[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -42,12 +44,7 @@ export default function AdminFaqPage() {
   })
   const [saving, setSaving] = useState(false)
 
-  // Tải dữ liệu
-  useEffect(() => {
-    fetchFaqs()
-  }, [])
-
-  const fetchFaqs = async () => {
+  async function fetchFaqs() {
     try {
       const res = await fetch('/api/admin/faq')
       const data = await res.json()
@@ -59,8 +56,28 @@ export default function AdminFaqPage() {
     }
   }
 
+  // Tải dữ liệu
+  useEffect(() => {
+    let active = true
+
+    fetch('/api/admin/faq')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) setFaqs(data.faqs || [])
+      })
+      .catch(() => console.error('Lỗi tải dữ liệu FAQ'))
+      .finally(() => {
+        if (active) setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   // Mở editor tạo mới
   const handleCreate = () => {
+    if (!canEdit) return
     setEditingFaq(null)
     setFormData({
       question: '', answer: '', category: FAQ_CATEGORIES[0],
@@ -71,6 +88,7 @@ export default function AdminFaqPage() {
 
   // Mở editor sửa
   const handleEdit = (faq: FaqItem) => {
+    if (!canEdit) return
     setEditingFaq(faq)
     setFormData({
       question: faq.question, answer: faq.answer,
@@ -82,6 +100,7 @@ export default function AdminFaqPage() {
 
   // Lưu FAQ
   const handleSave = async () => {
+    if (!canEdit) return
     if (!formData.question.trim() || !formData.answer.trim()) return
     setSaving(true)
 
@@ -110,6 +129,7 @@ export default function AdminFaqPage() {
 
   // Xóa FAQ
   const handleDelete = async (id: string) => {
+    if (!canDelete) return
     if (!confirm('Xóa câu hỏi này?')) return
 
     try {
@@ -126,6 +146,7 @@ export default function AdminFaqPage() {
 
   // Toggle trạng thái active
   const handleToggleActive = async (faq: FaqItem) => {
+    if (!canEdit) return
     try {
       await fetch('/api/admin/faq', {
         method: 'PUT',
@@ -275,13 +296,15 @@ export default function AdminFaqPage() {
             {faqs.length} câu hỏi · Dùng cho Chatbot AI + Trang FAQ
           </p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
-        >
-          <Plus className="w-4 h-4" />
-          Tạo câu hỏi
-        </button>
+        {canEdit && (
+          <button
+            onClick={handleCreate}
+            className="flex items-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all"
+          >
+            <Plus className="w-4 h-4" />
+            Tạo câu hỏi
+          </button>
+        )}
       </div>
 
       {/* Filter */}
@@ -341,31 +364,37 @@ export default function AdminFaqPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    onClick={() => handleToggleActive(faq)}
-                    className={`p-2 rounded-lg transition-all ${
-                      faq.isActive
-                        ? 'text-green-500 hover:bg-green-50'
-                        : 'text-gray-300 hover:bg-gray-50'
-                    }`}
-                    title={faq.isActive ? 'Ẩn' : 'Hiện'}
-                  >
-                    {faq.isActive ? <ToggleRight className="w-4 h-4" /> : <ToggleLeft className="w-4 h-4" />}
-                  </button>
-                  <button
-                    onClick={() => handleEdit(faq)}
-                    className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
-                    title="Sửa"
-                  >
-                    <Edit3 className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(faq.id)}
-                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-                    title="Xóa"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  {canEdit && (
+                    <>
+                      <button
+                        onClick={() => handleToggleActive(faq)}
+                        className={`p-2 rounded-lg transition-all ${
+                          faq.isActive
+                            ? 'text-green-500 hover:bg-green-50'
+                            : 'text-gray-300 hover:bg-gray-50'
+                        }`}
+                        title={faq.isActive ? 'Ẩn' : 'Hiện'}
+                      >
+                        {faq.isActive ? <ToggleRight className="w-4 h-4" /> : <ToggleLeft className="w-4 h-4" />}
+                      </button>
+                      <button
+                        onClick={() => handleEdit(faq)}
+                        className="p-2 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                        title="Sửa"
+                      >
+                        <Edit3 className="w-4 h-4" />
+                      </button>
+                    </>
+                  )}
+                  {canDelete && (
+                    <button
+                      onClick={() => handleDelete(faq.id)}
+                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                      title="Xóa"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

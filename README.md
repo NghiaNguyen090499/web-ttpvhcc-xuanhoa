@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Web TTPVHCC Xuân Hòa
 
-# Run and deploy your AI Studio app
+Cổng thông tin Trung tâm Phục vụ Hành chính Công phường Xuân Hòa.
 
-This contains everything you need to run your app locally.
+## Chạy local
 
-View your app in AI Studio: https://ai.studio/apps/bbdab995-3bcb-43ad-b83f-1fda57ec1496
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-## Run Locally
+Khi chưa cấu hình `DATABASE_URL`, app chạy chế độ demo bằng dữ liệu JSON trong `data/`.
 
-**Prerequisites:**  Node.js
+## PostgreSQL self-host
 
+Dự án ưu tiên production với PostgreSQL thuần + Prisma.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+cp .env.postgres.example .env.postgres
+npm run db:up
+npm run db:push
+npm run db:seed
+```
+
+Chi tiết: [docs/DEPLOY_POSTGRES_SELF_HOST.md](docs/DEPLOY_POSTGRES_SELF_HOST.md)
+
+## Kiểm tra
+
+```bash
+npm run lint
+npm run build
+```

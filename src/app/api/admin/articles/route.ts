@@ -11,6 +11,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { requireAdminSession } from '@/lib/admin-auth'
+import {
+  ensureCmsUser,
+  generateSlug,
+  getAdminDb,
+  hasDatabase,
+  toArticleStatus,
+  writeAuditLog,
+} from '@/lib/admin-db'
 
 const NEWS_FILE = join(process.cwd(), 'data', 'news.json')
 
@@ -31,6 +40,30 @@ function writeNews(data: Array<Record<string, unknown>>) {
 
 /** GET — Lấy danh sách bài viết */
 export async function GET() {
+  if (hasDatabase()) {
+    const articles = await getAdminDb().article.findMany({
+      orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
+      include: { author: { select: { name: true, email: true } } },
+    })
+
+    return NextResponse.json({
+      articles: articles.map((article) => ({
+        id: article.id,
+        title: article.title,
+        slug: article.slug,
+        date: (article.publishedAt || article.createdAt).toISOString().slice(0, 10),
+        tag: article.tag || 'Hành chính',
+        image: article.coverImage || '/images/news/post-01.jpg',
+        images: article.images,
+        excerpt: article.excerpt || '',
+        content: article.content,
+        source: article.source || article.author.name || 'UBND Phường Xuân Hòa',
+        status: article.status,
+      })),
+      total: articles.length,
+    })
+  }
+
   const articles = readNews()
   return NextResponse.json({ articles, total: articles.length })
 }
@@ -38,10 +71,46 @@ export async function GET() {
 /** POST — Tạo bài viết mới */
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.title?.trim() || !body.content?.trim()) {
       return NextResponse.json({ error: 'Tiêu đề và nội dung là bắt buộc' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      const user = await ensureCmsUser({
+        userId: auth.session.userId,
+        email: auth.session.email,
+        name: auth.session.name,
+        role: auth.session.role,
+      })
+      const publishedAt = body.date ? new Date(`${body.date}T00:00:00.000Z`) : new Date()
+      const article = await getAdminDb().article.create({
+        data: {
+          title: body.title.trim(),
+          slug: body.slug || generateSlug(body.title),
+          tag: body.tag || 'Hành chính',
+          excerpt: body.excerpt?.trim() || `${body.content.trim().slice(0, 150)}...`,
+          content: body.content.trim(),
+          coverImage: body.image || '/images/news/post-01.jpg',
+          images: body.images,
+          source: body.source || 'UBND Phường Xuân Hòa',
+          status: toArticleStatus(body.status),
+          publishedAt,
+          authorId: user.id,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'CREATE',
+        entity: 'article',
+        entityId: article.id,
+        details: { title: article.title },
+      })
+      return NextResponse.json({ success: true, article })
     }
 
     const articles = readNews()
@@ -72,10 +141,39 @@ export async function POST(request: NextRequest) {
 /** PUT — Cập nhật bài viết */
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID bài viết' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      const article = await getAdminDb().article.update({
+        where: { id: body.id },
+        data: {
+          title: body.title?.trim(),
+          slug: body.slug,
+          tag: body.tag,
+          excerpt: body.excerpt?.trim(),
+          content: body.content?.trim(),
+          coverImage: body.image,
+          images: body.images,
+          source: body.source,
+          status: body.status ? toArticleStatus(body.status) : undefined,
+          publishedAt: body.date ? new Date(`${body.date}T00:00:00.000Z`) : undefined,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'UPDATE',
+        entity: 'article',
+        entityId: article.id,
+        details: { title: article.title },
+      })
+      return NextResponse.json({ success: true, article })
     }
 
     const articles = readNews()
@@ -110,10 +208,24 @@ export async function PUT(request: NextRequest) {
 /** DELETE — Xóa bài viết */
 export async function DELETE(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('ADMIN')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID bài viết' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      await getAdminDb().article.delete({ where: { id: body.id } })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'DELETE',
+        entity: 'article',
+        entityId: body.id,
+      })
+      return NextResponse.json({ success: true })
     }
 
     const articles = readNews()

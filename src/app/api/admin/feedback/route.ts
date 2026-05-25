@@ -11,6 +11,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { requireAdminSession } from '@/lib/admin-auth'
+import { getAdminDb, hasDatabase, toFeedbackStatus, writeAuditLog } from '@/lib/admin-db'
+import { decryptOptional } from '@/lib/crypto'
 
 const FEEDBACK_FILE = join(process.cwd(), 'data', 'feedbacks.json')
 
@@ -45,46 +48,58 @@ function writeFeedbacks(data: FeedbackItem[]) {
 
 /** GET — Lấy danh sách phản ánh */
 export async function GET() {
-  try {
-    // Thử đọc từ DB trước
-    const { getFeedbacks } = await import('@/lib/queries')
-    const result = await getFeedbacks(undefined, 1, 50)
-    return NextResponse.json({
-      feedbacks: result.feedbacks,
-      total: result.total,
+  const auth = await requireAdminSession('EDITOR')
+  if (auth.response) return auth.response
+
+  if (hasDatabase()) {
+    const feedbacks = await getAdminDb().feedback.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 50,
     })
-  } catch {
-    // DB chưa kết nối — fallback đọc JSON
-    const feedbacks = readFeedbacks()
-    return NextResponse.json({ feedbacks, total: feedbacks.length })
+    return NextResponse.json({
+      feedbacks: feedbacks.map((feedback) => ({
+        ...feedback,
+        name: decryptOptional(feedback.name) || feedback.name,
+        email: decryptOptional(feedback.email),
+        phone: decryptOptional(feedback.phone),
+      })),
+      total: feedbacks.length,
+    })
   }
+
+  const feedbacks = readFeedbacks()
+  return NextResponse.json({ feedbacks, total: feedbacks.length })
 }
 
 /** PUT — Phản hồi phản ánh + đổi trạng thái */
 export async function PUT(request: NextRequest) {
   try {
+    const auth = await requireAdminSession('EDITOR')
+    if (auth.response) return auth.response
+
     const body = await request.json()
 
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID phản ánh' }, { status: 400 })
     }
 
-    // Thử cập nhật trong DB trước
-    try {
-      const { prisma } = await import('@/lib/db')
-      if (prisma) {
-        const updated = await prisma.feedback.update({
-          where: { id: body.id },
-          data: {
-            status: body.status || 'PROCESSING',
-            response: body.response?.trim() || undefined,
-            respondedAt: body.response ? new Date() : undefined,
-          },
-        })
-        return NextResponse.json({ success: true, feedback: updated })
-      }
-    } catch {
-      // DB không khả dụng — tiếp tục với JSON
+    if (hasDatabase()) {
+      const updated = await getAdminDb().feedback.update({
+        where: { id: body.id },
+        data: {
+          status: toFeedbackStatus(body.status || 'PROCESSING'),
+          response: body.response?.trim() || undefined,
+          respondedAt: body.response ? new Date() : undefined,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'UPDATE',
+        entity: 'feedback',
+        entityId: updated.id,
+        details: { status: updated.status },
+      })
+      return NextResponse.json({ success: true, feedback: updated })
     }
 
     // Fallback: cập nhật trong JSON
