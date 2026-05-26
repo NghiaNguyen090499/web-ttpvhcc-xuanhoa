@@ -7,7 +7,7 @@
  */
 
 import type { Metadata } from 'next'
-import { getNewsData } from '@/lib/static-data'
+import { getPortalNewsData } from '@/lib/portal-db'
 import NewsPageClient from './NewsPageClient'
 
 export const metadata: Metadata = {
@@ -15,13 +15,14 @@ export const metadata: Metadata = {
   description: 'Tin tức, thông báo mới nhất từ TTPVHCC Phường Xuân Hòa, TP.HCM.',
 }
 
+export const revalidate = 60
+
 /**
  * @chucnang    : Server component — đọc data và truyền xuống client
  * @output      : JSX trang tin tức
  */
-export default function NewsPage() {
-  // Đọc dữ liệu tin tức tĩnh — Server Component
-  const news = getNewsData()
+export default async function NewsPage() {
+  const news = await getPortalNewsData()
 
   return <NewsPageClient news={news} />
 }

@@ -10,7 +10,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getProceduresData, getCategoryBySlug, getProcedureLinkGroupBySlug } from '@/lib/static-data'
+import { getProceduresData, getProcedureLinkGroupBySlug } from '@/lib/static-data'
+import { getPortalProceduresData } from '@/lib/portal-db'
+
+export const revalidate = 60
 
 // Tạo danh sách slug tĩnh cho SSG
 export function generateStaticParams() {
@@ -21,7 +24,8 @@ export function generateStaticParams() {
 // SEO metadata động
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const cat = getCategoryBySlug(slug)
+  const data = await getPortalProceduresData()
+  const cat = data.categories.find((category) => category.slug === slug)
   if (!cat) return { title: 'Không tìm thấy' }
   return {
     title: `Lĩnh vực ${cat.name}`,
@@ -31,7 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CategoryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
+  const data = await getPortalProceduresData()
+  const category = data.categories.find((cat) => cat.slug === slug)
   if (!category) notFound()
   const dvcGroup = getProcedureLinkGroupBySlug(category.id)
 

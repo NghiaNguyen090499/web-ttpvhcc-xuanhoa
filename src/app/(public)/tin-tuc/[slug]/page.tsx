@@ -9,8 +9,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getNewsBySlug, getNewsData } from '@/lib/static-data'
+import { getNewsData } from '@/lib/static-data'
+import { getPortalNewsBySlug, getPortalNewsData } from '@/lib/portal-db'
 import NewsDetailGallery from './NewsDetailGallery'
+
+export const revalidate = 60
 
 /**
  * @chucnang    : Tạo metadata SEO cho trang chi tiết tin tức
@@ -19,7 +22,7 @@ import NewsDetailGallery from './NewsDetailGallery'
  */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const news = getNewsBySlug(slug)
+  const news = await getPortalNewsBySlug(slug)
   if (!news) return { title: 'Không tìm thấy bài viết' }
   return {
     title: news.title,
@@ -67,12 +70,12 @@ const TAG_COLORS: Record<string, string> = {
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const news = getNewsBySlug(slug)
+  const news = await getPortalNewsBySlug(slug)
 
   if (!news) notFound()
 
   // Lấy bài liên quan (cùng tag, loại trừ bài hiện tại)
-  const allNews = getNewsData()
+  const allNews = await getPortalNewsData()
   const related = allNews
     .filter((n) => n.id !== news.id && n.tag === news.tag)
     .slice(0, 3)

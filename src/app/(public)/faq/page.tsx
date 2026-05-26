@@ -6,8 +6,7 @@
  */
 
 import type { Metadata } from 'next'
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { getPortalFaqData } from '@/lib/portal-db'
 import FaqPageClient from './FaqPageClient'
 
 export const metadata: Metadata = {
@@ -15,18 +14,9 @@ export const metadata: Metadata = {
   description: 'Giải đáp các thắc mắc thường gặp về thủ tục hành chính tại TTPVHCC Phường Xuân Hòa, TP.HCM.',
 }
 
-// Đọc FAQ từ JSON
-function getFaqData() {
-  try {
-    const raw = readFileSync(join(process.cwd(), 'data', 'faq.json'), 'utf-8')
-    return JSON.parse(raw) as Array<{
-      id: string; question: string; answer: string; category: string;
-      isActive: boolean; sortOrder: number; viewCount: number
-    }>
-  } catch { return [] }
-}
+export const revalidate = 60
 
-export default function FaqPage() {
-  const faqs = getFaqData().filter(f => f.isActive !== false)
+export default async function FaqPage() {
+  const faqs = await getPortalFaqData()
   return <FaqPageClient faqs={faqs} />
 }

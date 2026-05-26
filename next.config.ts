@@ -7,6 +7,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   async headers() {
     return [
       {
@@ -23,6 +24,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https:",
+              "media-src 'self' blob: https:",
               "font-src 'self' data:",
               "connect-src 'self' https://generativelanguage.googleapis.com https://oauth2.googleapis.com https://www.googleapis.com",
               "frame-ancestors 'none'",

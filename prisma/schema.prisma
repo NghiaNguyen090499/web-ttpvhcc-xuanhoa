@@ -118,6 +118,13 @@ enum ArticleStatus {
   ARCHIVED      // Đã lưu trữ
 }
 
+/// Loại nội dung tuyên truyền
+enum MediaType {
+  ARTICLE
+  VIDEO
+  FILE
+}
+
 /// Bài viết / Tin tức
 model Article {
   id            String        @id @default(cuid())
@@ -163,6 +170,81 @@ model Faq {
   updatedAt     DateTime @updatedAt @map("updated_at")
 
   @@map("faqs")
+}
+
+// ============================================================
+// TUYÊN TRUYỀN / VIDEO / FILE
+// ============================================================
+
+/// Nội dung tuyên truyền cộng đồng, video hoặc file
+model PropagandaContent {
+  id            String    @id @default(cuid())
+  icon          String    @default("📢")
+  tag           String    @default("Tuyên truyền")
+  tagColor      String    @default("blue") @map("tag_color")
+  title         String
+  summary       String    @db.Text
+  content       String    @db.Text
+  publishedAt   DateTime  @default(now()) @map("published_at")
+  mediaType     MediaType @default(ARTICLE) @map("media_type")
+  mediaUrl      String?   @map("media_url")
+  fileName      String?   @map("file_name")
+  fileSize      Int?      @map("file_size")
+  sortOrder     Int       @default(0) @map("sort_order")
+  isActive      Boolean   @default(true) @map("is_active")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@index([publishedAt])
+  @@index([mediaType])
+  @@map("propaganda_contents")
+}
+
+// ============================================================
+// NIÊM YẾT CÔNG KHAI
+// ============================================================
+
+/// File/văn bản niêm yết công khai
+model PublicNotice {
+  id            String   @id @default(cuid())
+  title         String
+  category      String?
+  fileUrl       String   @map("file_url")
+  fileType      String   @default("pdf") @map("file_type")
+  publishedAt   DateTime @default(now()) @map("published_at")
+  description   String?  @db.Text
+  sortOrder     Int      @default(0) @map("sort_order")
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([publishedAt])
+  @@map("public_notices")
+}
+
+// ============================================================
+// VĂN BẢN CHỈ ĐẠO ĐIỀU HÀNH
+// ============================================================
+
+/// Văn bản chỉ đạo điều hành
+model DirectiveDocument {
+  id              String   @id @default(cuid())
+  soKyHieu        String   @map("so_ky_hieu")
+  loai            String
+  trichYeu        String   @db.Text @map("trich_yeu")
+  ngayBanHanh     DateTime @map("ngay_ban_hanh")
+  coQuanBanHanh   String   @map("co_quan_ban_hanh")
+  nguoiKy         String   @map("nguoi_ky")
+  linhVuc         String   @map("linh_vuc")
+  fileUrl         String   @map("file_url")
+  trangThai       String   @default("Có hiệu lực") @map("trang_thai")
+  sortOrder       Int      @default(0) @map("sort_order")
+  isActive        Boolean  @default(true) @map("is_active")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@index([ngayBanHanh])
+  @@map("directive_documents")
 }
 
 // ============================================================

@@ -7,12 +7,14 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getVanBanData } from '@/lib/static-data'
+import { getPortalVanBanData } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
   title: 'Văn bản chỉ đạo điều hành',
   description: 'Danh sách văn bản chỉ đạo, quyết định, kế hoạch, thông báo do UBND Phường Xuân Hòa ban hành.',
 }
+
+export const revalidate = 60
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
@@ -29,8 +31,8 @@ function getTypeColor(loai: string): { bg: string; text: string; border: string 
   }
 }
 
-export default function VanBanPage() {
-  const vanBanList = getVanBanData()
+export default async function VanBanPage() {
+  const vanBanList = await getPortalVanBanData()
   const sorted = [...vanBanList].sort(
     (a, b) => new Date(b.ngayBanHanh).getTime() - new Date(a.ngayBanHanh).getTime()
   )

@@ -8,12 +8,15 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getNiemYetData, type NiemYetItem } from '@/lib/static-data'
+import { getPortalNiemYetData } from '@/lib/portal-db'
+import type { NiemYetItem } from '@/lib/static-data'
 
 export const metadata: Metadata = {
   title: 'Niêm yết',
   description: 'Danh sách văn bản niêm yết công khai tại TTPVHCC Phường Xuân Hòa, TP.HCM.',
 }
+
+export const revalidate = 60
 
 /**
  * @chucnang    : Icon theo loại file (pdf, image, doc)
@@ -52,8 +55,8 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
 
-export default function NiemYetPage() {
-  const items: NiemYetItem[] = getNiemYetData()
+export default async function NiemYetPage() {
+  const items: NiemYetItem[] = await getPortalNiemYetData()
 
   return (
     <>

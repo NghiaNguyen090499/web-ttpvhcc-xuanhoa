@@ -16,6 +16,8 @@ import { HomeContentLayout } from '@/components/HomeContentLayout'
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const revalidate = 60
+
 function PartyResolutionBanner() {
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px]">

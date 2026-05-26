@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { requireAdminSession } from '@/lib/admin-auth'
+import { getAdminDb, hasDatabase, writeAuditLog } from '@/lib/admin-db'
 
 const PROPAGANDA_FILE = join(process.cwd(), 'data', 'tuyen-truyen.json')
 
@@ -45,6 +46,18 @@ function normalizeMediaType(value: unknown): PropagandaItem['mediaType'] {
   return 'article'
 }
 
+function toDbMediaType(value: unknown) {
+  if (value === 'video') return 'VIDEO' as const
+  if (value === 'file') return 'FILE' as const
+  return 'ARTICLE' as const
+}
+
+function fromDbMediaType(value: 'ARTICLE' | 'VIDEO' | 'FILE'): PropagandaItem['mediaType'] {
+  if (value === 'VIDEO') return 'video'
+  if (value === 'FILE') return 'file'
+  return 'article'
+}
+
 function buildItem(body: Record<string, unknown>, fallback?: PropagandaItem): PropagandaItem {
   const title = String(body.title || fallback?.title || '').trim()
   const content = String(body.content || fallback?.content || '').trim()
@@ -68,6 +81,29 @@ function buildItem(body: Record<string, unknown>, fallback?: PropagandaItem): Pr
 }
 
 export async function GET() {
+  if (hasDatabase()) {
+    const items = await getAdminDb().propagandaContent.findMany({
+      orderBy: [{ publishedAt: 'desc' }, { sortOrder: 'asc' }],
+    })
+    return NextResponse.json({
+      items: items.map((item) => ({
+        id: item.id,
+        icon: item.icon,
+        tag: item.tag,
+        tagColor: item.tagColor,
+        title: item.title,
+        summary: item.summary,
+        content: item.content,
+        publishedAt: item.publishedAt.toISOString().slice(0, 10),
+        mediaType: fromDbMediaType(item.mediaType),
+        mediaUrl: item.mediaUrl,
+        fileName: item.fileName,
+        fileSize: item.fileSize,
+      })),
+      total: items.length,
+    })
+  }
+
   const items = readItems()
   return NextResponse.json({ items, total: items.length })
 }
@@ -82,8 +118,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Tiêu đề là bắt buộc' }, { status: 400 })
     }
 
-    const items = readItems()
     const item = buildItem(body)
+    if (hasDatabase()) {
+      const dbItem = await getAdminDb().propagandaContent.create({
+        data: {
+          icon: item.icon,
+          tag: item.tag,
+          tagColor: item.tagColor,
+          title: item.title,
+          summary: item.summary,
+          content: item.content,
+          publishedAt: new Date(`${item.publishedAt}T00:00:00.000Z`),
+          mediaType: toDbMediaType(item.mediaType),
+          mediaUrl: item.mediaUrl,
+          fileName: item.fileName,
+          fileSize: item.fileSize,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'CREATE',
+        entity: 'propaganda',
+        entityId: dbItem.id,
+        details: { title: dbItem.title },
+      })
+      return NextResponse.json({ success: true, item: dbItem })
+    }
+
+    const items = readItems()
     items.unshift(item)
     writeItems(items)
 
@@ -102,6 +164,34 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID nội dung' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      const item = buildItem(body)
+      const dbItem = await getAdminDb().propagandaContent.update({
+        where: { id: String(body.id) },
+        data: {
+          icon: item.icon,
+          tag: item.tag,
+          tagColor: item.tagColor,
+          title: item.title,
+          summary: item.summary,
+          content: item.content,
+          publishedAt: new Date(`${item.publishedAt}T00:00:00.000Z`),
+          mediaType: toDbMediaType(item.mediaType),
+          mediaUrl: item.mediaUrl,
+          fileName: item.fileName,
+          fileSize: item.fileSize,
+        },
+      })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'UPDATE',
+        entity: 'propaganda',
+        entityId: dbItem.id,
+        details: { title: dbItem.title },
+      })
+      return NextResponse.json({ success: true, item: dbItem })
     }
 
     const items = readItems()
@@ -128,6 +218,17 @@ export async function DELETE(request: NextRequest) {
     const body = await request.json()
     if (!body.id) {
       return NextResponse.json({ error: 'Thiếu ID nội dung' }, { status: 400 })
+    }
+
+    if (hasDatabase()) {
+      await getAdminDb().propagandaContent.delete({ where: { id: String(body.id) } })
+      await writeAuditLog({
+        ...auth.session,
+        action: 'DELETE',
+        entity: 'propaganda',
+        entityId: String(body.id),
+      })
+      return NextResponse.json({ success: true })
     }
 
     const items = readItems()

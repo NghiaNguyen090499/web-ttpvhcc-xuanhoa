@@ -10,7 +10,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { getNewsData, getTuyenTruyenData } from '@/lib/static-data'
+import { getPortalNewsData, getPortalTuyenTruyenData } from '@/lib/portal-db'
 import { TAG_COLORS } from '@/components/NewsTabs'
 import { UtilityCorner } from '@/components/UtilityCorner'
 
@@ -31,14 +31,14 @@ function formatDate(dateStr: string): string {
  *                Layout 7:3: Tin nổi bật + 3 tin nhỏ (trái) | Banner + Tổng đài 1022 (phải)
  * @output      : JSX section
  */
-export default function NewsSection() {
+export default async function NewsSection() {
   // Lấy tin tức — bài đầu featured, 3 bài nhỏ
-  const allNews = getNewsData()
+  const allNews = await getPortalNewsData()
   const featured = allNews[0]
   const smallNews = allNews.slice(1, 4) // 3 bài tin nhỏ bên dưới
 
   // Lấy bài tuyên truyền cho Góc tiện ích (cột phải)
-  const tuyenTruyenItems = getTuyenTruyenData()
+  const tuyenTruyenItems = await getPortalTuyenTruyenData()
 
   if (!featured) return null
 

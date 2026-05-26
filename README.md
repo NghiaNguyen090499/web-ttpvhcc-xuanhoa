@@ -25,6 +25,19 @@ npm run db:seed
 
 Chi tiết: [docs/DEPLOY_POSTGRES_SELF_HOST.md](docs/DEPLOY_POSTGRES_SELF_HOST.md)
 
+## Deploy server riêng
+
+Production self-host dùng Docker Compose + PostgreSQL + Nginx:
+
+```bash
+cp .env.production.example .env.production
+docker compose --env-file .env.production -f docker-compose.prod.yml up -d postgres
+docker compose --env-file .env.production -f docker-compose.prod.yml --profile setup run --rm migrate
+docker compose --env-file .env.production -f docker-compose.prod.yml up -d app
+```
+
+Chi tiết: [docs/DEPLOY_SELF_HOST.md](docs/DEPLOY_SELF_HOST.md)
+
 ## Kiểm tra
 
 ```bash

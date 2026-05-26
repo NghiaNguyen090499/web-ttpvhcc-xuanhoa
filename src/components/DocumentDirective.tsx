@@ -7,7 +7,8 @@
  */
 
 import Link from 'next/link'
-import { getVanBanData, type VanBanItem } from '@/lib/static-data'
+import { getPortalVanBanData } from '@/lib/portal-db'
+import type { VanBanItem } from '@/lib/static-data'
 
 /**
  * @chucnang    : Format ngày từ ISO sang DD/MM/YYYY
@@ -63,8 +64,8 @@ function DocumentRow({ item }: { item: VanBanItem }) {
  * @chucnang    : Card văn bản chỉ đạo điều hành — hiển thị ở sidebar trang chủ
  * @output      : JSX section
  */
-export function DocumentDirective() {
-  const vanBanList = getVanBanData()
+export async function DocumentDirective() {
+  const vanBanList = await getPortalVanBanData()
 
   /* Sắp xếp theo ngày mới nhất và nhân đôi danh sách để tạo hiệu ứng cuộn liên tục */
   const latest = [...vanBanList]

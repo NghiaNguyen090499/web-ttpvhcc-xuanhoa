@@ -7,7 +7,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { getProceduresData } from '@/lib/static-data'
+import { getPortalProceduresData } from '@/lib/portal-db'
 
 /**
  * @chucnang    : Mapping logo + màu viền cho từng lĩnh vực
@@ -40,8 +40,8 @@ const CATEGORY_META: Record<string, { logo: string; color: string }> = {
   },
 }
 
-export function ProcedureGrid({ embedded = false }: { embedded?: boolean }) {
-  const data = getProceduresData()
+export async function ProcedureGrid({ embedded = false }: { embedded?: boolean }) {
+  const data = await getPortalProceduresData()
   const categories = data.categories
 
   const content = (

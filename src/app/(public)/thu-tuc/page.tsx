@@ -7,15 +7,18 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getProcedureLinksData, getProceduresData } from '@/lib/static-data'
+import { getProcedureLinksData } from '@/lib/static-data'
+import { getPortalProceduresData } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
   title: 'Thủ tục Hành chính',
   description: 'Tra cứu danh mục thủ tục hành chính thuộc thẩm quyền giải quyết tại TTPVHCC Phường Xuân Hòa, TP.HCM.',
 }
 
-export default function ProceduresPage() {
-  const data = getProceduresData()
+export const revalidate = 60
+
+export default async function ProceduresPage() {
+  const data = await getPortalProceduresData()
   const categories = data.categories
   const thuongGap = data.thuongGap
   const procedureLinks = getProcedureLinksData()

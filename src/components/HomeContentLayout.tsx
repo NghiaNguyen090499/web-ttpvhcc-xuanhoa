@@ -17,7 +17,12 @@ import {
   PlayCircle,
   Tag,
 } from 'lucide-react'
-import { getNewsData, getNiemYetData, getTuyenTruyenData } from '@/lib/static-data'
+import {
+  getPortalNewsData,
+  getPortalNiemYetData,
+  getPortalTuyenTruyenData,
+} from '@/lib/portal-db'
+import type { NewsItem, NiemYetItem, TuyenTruyenItem } from '@/lib/static-data'
 import { ProcedureGrid } from '@/components/ProcedureGrid'
 import { DocumentDirective } from '@/components/DocumentDirective'
 
@@ -44,8 +49,7 @@ function getYoutubeEmbedUrl(url: string): string | null {
   return null
 }
 
-function NewsCards() {
-  const allNews = getNewsData()
+function NewsCards({ allNews }: { allNews: NewsItem[] }) {
   const latestNews = allNews.slice(0, 3)
 
   return (
@@ -100,8 +104,8 @@ function NewsCards() {
   )
 }
 
-function PropagandaMediaCard() {
-  const items = getTuyenTruyenData()
+function PropagandaMediaCard({ data }: { data: TuyenTruyenItem[] }) {
+  const items = data
     .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
     .slice(0, 3)
   const featuredVideoId = items.find((item) => item.mediaType === 'video')?.id
@@ -231,9 +235,7 @@ function PropagandaMediaCard() {
   )
 }
 
-function FeaturedSidebarCard() {
-  const [featured] = getTuyenTruyenData()
-
+function FeaturedSidebarCard({ featured }: { featured?: TuyenTruyenItem }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
       <Link
@@ -281,8 +283,8 @@ function HotlineCard({ className = '' }: { className?: string }) {
   )
 }
 
-function PublicNoticesSidebarCard() {
-  const latest = getNiemYetData().slice(0, 5)
+function PublicNoticesSidebarCard({ data }: { data: NiemYetItem[] }) {
+  const latest = data.slice(0, 5)
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -329,27 +331,34 @@ function PublicNoticesSidebarCard() {
   )
 }
 
-export function HomeContentLayout() {
+export async function HomeContentLayout() {
+  const [news, propaganda, notices] = await Promise.all([
+    getPortalNewsData(),
+    getPortalTuyenTruyenData(),
+    getPortalNiemYetData(),
+  ])
+  const [featuredPropaganda] = propaganda
+
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-8 md:py-10">
       <div className="mx-auto max-w-[1200px] px-4">
         <div className="space-y-6">
           <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
-            <NewsCards />
+            <NewsCards allNews={news} />
             <aside className="flex h-full flex-col gap-5">
-              <FeaturedSidebarCard />
+              <FeaturedSidebarCard featured={featuredPropaganda} />
               <HotlineCard className="lg:flex-1" />
             </aside>
           </div>
 
           <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
             <main className="space-y-6">
-              <PropagandaMediaCard />
+              <PropagandaMediaCard data={propaganda} />
               <ProcedureGrid embedded />
             </main>
 
             <aside className="flex flex-col gap-5">
-              <PublicNoticesSidebarCard />
+              <PublicNoticesSidebarCard data={notices} />
               <DocumentDirective />
             </aside>
           </div>

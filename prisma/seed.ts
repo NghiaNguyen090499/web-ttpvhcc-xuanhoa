@@ -59,6 +59,44 @@ type FeedbackItem = {
   createdAt?: string
 }
 
+type PropagandaItem = {
+  id?: string
+  icon?: string
+  tag?: string
+  tagColor?: string
+  title: string
+  summary?: string
+  content?: string
+  publishedAt?: string
+  mediaType?: 'article' | 'video' | 'file'
+  mediaUrl?: string
+  fileName?: string
+  fileSize?: number
+}
+
+type PublicNoticeItem = {
+  id?: string
+  title: string
+  category?: string
+  fileUrl: string
+  fileType?: string
+  publishedAt?: string
+  description?: string
+}
+
+type DirectiveDocumentItem = {
+  id?: string
+  soKyHieu: string
+  loai: string
+  trichYeu: string
+  ngayBanHanh: string
+  coQuanBanHanh: string
+  nguoiKy: string
+  linhVuc: string
+  fileUrl: string
+  trangThai: string
+}
+
 function readJson<T>(fileName: string): T {
   return JSON.parse(readFileSync(join(process.cwd(), 'data', fileName), 'utf-8')) as T
 }
@@ -75,6 +113,12 @@ function toProcedureType(value?: string) {
   if (value === 'phi-dia-gioi') return 'PHI_DIA_GIOI' as const
   if (value === 'thuong-gap') return 'THUONG_GAP' as const
   return 'CAP_PHUONG' as const
+}
+
+function toMediaType(value?: string) {
+  if (value === 'video') return 'VIDEO' as const
+  if (value === 'file') return 'FILE' as const
+  return 'ARTICLE' as const
 }
 
 async function main() {
@@ -226,6 +270,109 @@ async function main() {
         response: item.response,
         respondedAt: item.respondedAt ? new Date(item.respondedAt) : undefined,
         createdAt: item.createdAt ? new Date(item.createdAt) : undefined,
+      },
+    })
+  }
+
+  const propaganda = readJson<PropagandaItem[]>('tuyen-truyen.json')
+  for (const [index, item] of propaganda.entries()) {
+    const id = item.id || `tt-${index + 1}`
+    await prisma.propagandaContent.upsert({
+      where: { id },
+      update: {
+        icon: item.icon || '📢',
+        tag: item.tag || 'Tuyên truyền',
+        tagColor: item.tagColor || 'blue',
+        title: item.title,
+        summary: item.summary || item.title,
+        content: item.content || item.summary || item.title,
+        publishedAt: item.publishedAt ? new Date(`${item.publishedAt}T00:00:00.000Z`) : new Date(),
+        mediaType: toMediaType(item.mediaType),
+        mediaUrl: item.mediaUrl,
+        fileName: item.fileName,
+        fileSize: item.fileSize,
+        sortOrder: index + 1,
+        isActive: true,
+      },
+      create: {
+        id,
+        icon: item.icon || '📢',
+        tag: item.tag || 'Tuyên truyền',
+        tagColor: item.tagColor || 'blue',
+        title: item.title,
+        summary: item.summary || item.title,
+        content: item.content || item.summary || item.title,
+        publishedAt: item.publishedAt ? new Date(`${item.publishedAt}T00:00:00.000Z`) : new Date(),
+        mediaType: toMediaType(item.mediaType),
+        mediaUrl: item.mediaUrl,
+        fileName: item.fileName,
+        fileSize: item.fileSize,
+        sortOrder: index + 1,
+        isActive: true,
+      },
+    })
+  }
+
+  const publicNotices = readJson<PublicNoticeItem[]>('niem-yet.json')
+  for (const [index, item] of publicNotices.entries()) {
+    const id = item.id || `ny-${index + 1}`
+    await prisma.publicNotice.upsert({
+      where: { id },
+      update: {
+        title: item.title,
+        category: item.category,
+        fileUrl: item.fileUrl,
+        fileType: item.fileType || 'pdf',
+        publishedAt: item.publishedAt ? new Date(`${item.publishedAt}T00:00:00.000Z`) : new Date(),
+        description: item.description,
+        sortOrder: index + 1,
+        isActive: true,
+      },
+      create: {
+        id,
+        title: item.title,
+        category: item.category,
+        fileUrl: item.fileUrl,
+        fileType: item.fileType || 'pdf',
+        publishedAt: item.publishedAt ? new Date(`${item.publishedAt}T00:00:00.000Z`) : new Date(),
+        description: item.description,
+        sortOrder: index + 1,
+        isActive: true,
+      },
+    })
+  }
+
+  const directiveDocuments = readJson<DirectiveDocumentItem[]>('van-ban.json')
+  for (const [index, item] of directiveDocuments.entries()) {
+    const id = item.id || `vb-${index + 1}`
+    await prisma.directiveDocument.upsert({
+      where: { id },
+      update: {
+        soKyHieu: item.soKyHieu,
+        loai: item.loai,
+        trichYeu: item.trichYeu,
+        ngayBanHanh: new Date(`${item.ngayBanHanh}T00:00:00.000Z`),
+        coQuanBanHanh: item.coQuanBanHanh,
+        nguoiKy: item.nguoiKy,
+        linhVuc: item.linhVuc,
+        fileUrl: item.fileUrl,
+        trangThai: item.trangThai,
+        sortOrder: index + 1,
+        isActive: true,
+      },
+      create: {
+        id,
+        soKyHieu: item.soKyHieu,
+        loai: item.loai,
+        trichYeu: item.trichYeu,
+        ngayBanHanh: new Date(`${item.ngayBanHanh}T00:00:00.000Z`),
+        coQuanBanHanh: item.coQuanBanHanh,
+        nguoiKy: item.nguoiKy,
+        linhVuc: item.linhVuc,
+        fileUrl: item.fileUrl,
+        trangThai: item.trangThai,
+        sortOrder: index + 1,
+        isActive: true,
       },
     })
   }
