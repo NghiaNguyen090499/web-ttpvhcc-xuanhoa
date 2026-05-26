@@ -45,7 +45,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-4 shrink-0 md:gap-5">
             <Image src="/images/logo.png" alt="Logo TTPVHCC" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12 object-contain" priority />
             <div className="hidden sm:block space-y-0.5">
-              <p className="whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-text-muted leading-tight">Trung tâm Phục vụ Hành chính Công</p>
+              <p className="whitespace-nowrap text-xs font-semibold uppercase tracking-[0.06em] text-text-muted leading-tight md:text-[13px]">Trung tâm Phục vụ Hành chính Công</p>
               <p className="whitespace-nowrap text-sm md:text-base font-bold text-primary leading-tight font-heading uppercase tracking-[0.08em]">Phường Xuân Hòa</p>
             </div>
           </Link>

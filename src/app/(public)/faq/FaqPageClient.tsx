@@ -24,6 +24,42 @@ interface FaqPageClientProps {
   faqs: FaqItem[]
 }
 
+function FormattedFaqAnswer({ answer }: { answer: string }) {
+  const sentences = answer.trim().split(/(?<=\.)\s+/).filter(Boolean)
+
+  return (
+    <div className="space-y-3 text-sm leading-relaxed text-text-secondary">
+      {sentences.map((sentence, sentenceIndex) => {
+        const dossierMatch = sentence.match(/^(Hồ sơ(?: gồm)?):\s*(.+)$/)
+
+        if (dossierMatch) {
+          const items = dossierMatch[2].split(/,\s*(?=\(\d+\))/).map((item) => (
+            item.replace(/^\(\d+\)\s*/, '').replace(/\.$/, '').trim()
+          ))
+
+          return (
+            <div key={`${sentence}-${sentenceIndex}`} className="space-y-2">
+              <p className="font-semibold text-text-primary">{dossierMatch[1]}:</p>
+              <ul className="space-y-2">
+                {items.map((item, itemIndex) => (
+                  <li key={`${item}-${itemIndex}`} className="flex gap-2">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                      {itemIndex + 1}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        return <p key={`${sentence}-${sentenceIndex}`}>{sentence}</p>
+      })}
+    </div>
+  )
+}
+
 export default function FaqPageClient({ faqs }: FaqPageClientProps) {
   const [search, setSearch] = useState('')
   const [filterCat, setFilterCat] = useState('')
@@ -134,11 +170,9 @@ export default function FaqPageClient({ faqs }: FaqPageClientProps) {
                     {isOpen && (
                       <div className="px-5 pb-5">
                         <div className="pl-9 border-l-2 border-primary/20">
-                          <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-wrap">
-                            {faq.answer}
-                          </p>
-                          <span className="inline-block mt-3 text-xs px-2 py-0.5 rounded-full bg-cream text-text-muted font-medium">
-                            📂 {faq.category}
+                          <FormattedFaqAnswer answer={faq.answer} />
+                          <span className="mt-4 inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                            {faq.category}
                           </span>
                         </div>
                       </div>

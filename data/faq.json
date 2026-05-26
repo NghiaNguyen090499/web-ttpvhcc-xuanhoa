@@ -2,7 +2,7 @@
   {
     "id": "faq-01",
     "question": "Thủ tục đăng ký khai sinh tại phường Xuân Hòa cần những giấy tờ gì?",
-    "answer": "Hồ sơ gồm: (1) Tờ khai đăng ký khai sinh, (2) Giấy chứng sinh hoặc giấy tờ thay thế, (3) CMND/CCCD của cha/mẹ. Nộp tại Bộ phận Tư pháp — TTPVHCC phường Xuân Hòa. Thời gian giải quyết: trong ngày làm việc. Lệ phí: Miễn phí.",
+    "answer": "Hồ sơ gồm: (1) Tờ khai đăng ký khai sinh, (2) Giấy chứng sinh hoặc giấy tờ thay thế, (3) CMND/CCCD của cha/mẹ. Nộp tại Bộ phận Tư pháp — TTPVHCC phường Xuân Hòa. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành.",
     "category": "Tư pháp",
     "sortOrder": 1,
     "isActive": true,
@@ -29,7 +29,7 @@
   {
     "id": "faq-04",
     "question": "Thủ tục xác nhận tình trạng hôn nhân cần gì?",
-    "answer": "Hồ sơ gồm: (1) Tờ khai xác nhận tình trạng hôn nhân (theo mẫu), (2) CMND/CCCD, (3) Sổ hộ khẩu hoặc giấy xác nhận cư trú. Nộp tại Bộ phận Tư pháp. Thời gian: 3 ngày làm việc. Lệ phí: 10.000 VNĐ.",
+    "answer": "Hồ sơ gồm: (1) Tờ khai xác nhận tình trạng hôn nhân (theo mẫu), (2) CMND/CCCD, (3) Sổ hộ khẩu hoặc giấy xác nhận cư trú. Nộp tại Bộ phận Tư pháp. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành.",
     "category": "Tư pháp",
     "sortOrder": 4,
     "isActive": true,
@@ -38,7 +38,7 @@
   {
     "id": "faq-05",
     "question": "Làm thế nào để gửi phản ánh, kiến nghị đến UBND phường?",
-    "answer": "Có 3 cách: (1) Trực tiếp tại TTPVHCC phường Xuân Hòa, (2) Qua form trực tuyến trên website mục 'Liên hệ', (3) Gửi email qua địa chỉ liên hệ trên website. Phản ánh sẽ được tiếp nhận và phản hồi trong vòng 5-10 ngày làm việc.",
+    "answer": "Có 3 cách: (1) Trực tiếp tại TTPVHCC phường Xuân Hòa, (2) Qua form trực tuyến trên website mục 'Liên hệ', (3) Gửi email qua địa chỉ liên hệ trên website. Phản ánh, kiến nghị sẽ được tiếp nhận và phản hồi theo quy định hiện hành.",
     "category": "Hướng dẫn",
     "sortOrder": 5,
     "isActive": true,
@@ -47,7 +47,7 @@
   {
     "id": "faq-06",
     "question": "Thủ tục đăng ký tạm trú, tạm vắng tại phường?",
-    "answer": "Đăng ký tạm trú: Nộp Tờ khai thay đổi thông tin cư trú + CMND/CCCD + Giấy tờ chứng minh chỗ ở hợp pháp (hợp đồng thuê nhà). Nộp tại Công an phường. Thời gian: Trong ngày. Lệ phí: Miễn phí.",
+    "answer": "Đăng ký tạm trú: Nộp Tờ khai thay đổi thông tin cư trú + CMND/CCCD + Giấy tờ chứng minh chỗ ở hợp pháp (hợp đồng thuê nhà). Nộp tại Công an phường. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành.",
     "category": "Cư trú",
     "sortOrder": 6,
     "isActive": true,
@@ -65,7 +65,7 @@
   {
     "id": "faq-08",
     "question": "Thủ tục chứng thực bản sao từ bản chính tại phường?",
-    "answer": "Hồ sơ: (1) Bản chính giấy tờ cần chứng thực, (2) Bản sao cần chứng thực. Nộp tại TTPVHCC phường. Thời gian: Trong ngày. Lệ phí: 2.000 VNĐ/trang (từ trang thứ 3) hoặc miễn phí trang 1-2.",
+    "answer": "Hồ sơ: (1) Bản chính giấy tờ cần chứng thực, (2) Bản sao cần chứng thực. Nộp tại TTPVHCC phường. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành.",
     "category": "Tư pháp",
     "sortOrder": 8,
     "isActive": true,

@@ -14,7 +14,6 @@ import {
   ExternalLink,
   FileText,
   Megaphone,
-  Phone,
   PlayCircle,
   Tag,
 } from 'lucide-react'
@@ -105,6 +104,7 @@ function PropagandaMediaCard() {
   const items = getTuyenTruyenData()
     .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
     .slice(0, 3)
+  const featuredVideoId = items.find((item) => item.mediaType === 'video')?.id
 
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -118,9 +118,9 @@ function PropagandaMediaCard() {
       </div>
 
       {items.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border bg-surface px-5 py-8 text-center">
-          <p className="text-sm font-semibold text-text-primary">Chưa có video/file tuyên truyền</p>
-          <p className="mt-1 text-sm text-text-secondary">
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-xl border border-dashed border-border bg-surface px-5 py-10 text-center md:min-h-[360px]">
+          <p className="text-base font-semibold text-text-primary">Chưa có video/file tuyên truyền</p>
+          <p className="mt-2 max-w-[620px] text-base leading-relaxed text-text-secondary">
             Nội dung sẽ hiển thị tại đây sau khi cán bộ đăng trong CMS.
           </p>
         </div>
@@ -129,6 +129,7 @@ function PropagandaMediaCard() {
           {items.map((item) => {
           const isVideo = item.mediaType === 'video'
           const isFile = item.mediaType === 'file'
+          const isFeaturedVideo = item.id === featuredVideoId
           const Icon = isVideo ? PlayCircle : isFile ? Download : FileText
           const youtubeEmbedUrl = item.mediaUrl ? getYoutubeEmbedUrl(item.mediaUrl) : null
 
@@ -136,9 +137,9 @@ function PropagandaMediaCard() {
             return (
               <article
                 key={item.id}
-                className="flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-border bg-surface"
+                className={`${isFeaturedVideo ? 'md:col-span-3' : ''} flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-border bg-surface`}
               >
-                <div className="aspect-video bg-black">
+                <div className={`${isFeaturedVideo ? 'md:min-h-[360px]' : ''} aspect-video bg-black`}>
                   {youtubeEmbedUrl ? (
                     <iframe
                       src={youtubeEmbedUrl}
@@ -263,43 +264,25 @@ function FeaturedSidebarCard() {
   )
 }
 
-function HotlineCard() {
+function HotlineCard({ className = '' }: { className?: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-      <div className="flex items-center gap-3 border-b border-border px-5 py-4">
-        <Phone className="h-5 w-5 text-danger" aria-hidden="true" />
-        <h3 className="text-sm font-bold uppercase tracking-wide text-text-primary">Số tổng đài</h3>
-      </div>
-      <a href="tel:1022" className="block bg-[#dff1ff] transition hover:opacity-95" aria-label="Gọi Tổng đài 1022">
+    <div className={`overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)] ${className}`}>
+      <a href="tel:1022" className="block h-full bg-[#dff1ff] transition hover:opacity-95" aria-label="Gọi Tổng đài 1022">
         <Image
           src="/images/hotline-1022.png"
           alt="Tổng đài 1022 - 5 kênh phản ánh 24/7"
           width={1952}
           height={806}
-          className="h-auto w-full"
-          sizes="(max-width: 1024px) 100vw, 320px"
+          className="h-full w-[106%] max-w-none -translate-x-[3%] object-cover"
+          sizes="(max-width: 1024px) 106vw, 340px"
         />
       </a>
-      <div className="px-6 py-6 text-center">
-        <p className="text-xs font-bold uppercase tracking-wide text-text-muted">Tổng đài</p>
-        <p className="mt-1 font-heading text-4xl font-bold leading-none text-primary">1022</p>
-        <p className="mx-auto mt-3 max-w-[240px] text-sm leading-relaxed text-text-secondary">
-          Kênh tiếp nhận phản ánh, kiến nghị và hỗ trợ thông tin nhanh liên quan đến TTHC
-        </p>
-        <a
-          href="tel:1022"
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary-dark"
-        >
-          <Phone className="h-4 w-4" aria-hidden="true" />
-          Gọi ngay
-        </a>
-      </div>
     </div>
   )
 }
 
 function PublicNoticesSidebarCard() {
-  const latest = getNiemYetData().slice(0, 4)
+  const latest = getNiemYetData().slice(0, 5)
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -307,7 +290,7 @@ function PublicNoticesSidebarCard() {
         <FileText className="h-5 w-5 text-accent" aria-hidden="true" />
         <h3 className="text-sm font-bold uppercase tracking-wide">Niêm yết công khai</h3>
       </div>
-      <div className="divide-y divide-border px-4">
+      <div className="divide-y divide-border p-[15px]">
         {latest.length === 0 ? (
           <p className="py-8 text-center text-sm text-text-muted">Chưa có văn bản niêm yết</p>
         ) : (
@@ -335,6 +318,13 @@ function PublicNoticesSidebarCard() {
           ))
         )}
       </div>
+      <Link
+        href="/niem-yet"
+        className="flex items-center justify-center gap-2 border-t border-border px-4 py-3 text-sm font-bold text-primary transition hover:bg-primary-50"
+      >
+        Xem tất cả niêm yết
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
     </div>
   )
 }
@@ -343,19 +333,26 @@ export function HomeContentLayout() {
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-8 md:py-10">
       <div className="mx-auto max-w-[1200px] px-4">
-        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
-          <main className="space-y-6">
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
             <NewsCards />
-            <PropagandaMediaCard />
-            <ProcedureGrid embedded />
-          </main>
+            <aside className="flex h-full flex-col gap-5">
+              <FeaturedSidebarCard />
+              <HotlineCard className="lg:flex-1" />
+            </aside>
+          </div>
 
-          <aside className="flex flex-col gap-5">
-            <FeaturedSidebarCard />
-            <HotlineCard />
-            <PublicNoticesSidebarCard />
-            <DocumentDirective />
-          </aside>
+          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
+            <main className="space-y-6">
+              <PropagandaMediaCard />
+              <ProcedureGrid embedded />
+            </main>
+
+            <aside className="flex flex-col gap-5">
+              <PublicNoticesSidebarCard />
+              <DocumentDirective />
+            </aside>
+          </div>
         </div>
       </div>
     </section>

@@ -46,13 +46,13 @@ const FAQ = `
 ## Câu hỏi thường gặp
 
 ### Đăng ký kết hôn cần gì?
-Cần: Tờ khai đăng ký kết hôn, Giấy xác nhận tình trạng hôn nhân (nếu khác nơi cư trú), CMND/CCCD hai bên. Thời gian: trong ngày. Miễn phí. Có thể nộp online.
+Cần: Tờ khai đăng ký kết hôn, Giấy xác nhận tình trạng hôn nhân (nếu khác nơi cư trú), CMND/CCCD hai bên. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành. Có thể nộp online.
 
 ### Làm giấy khai sinh cần gì?
-Cần: Tờ khai đăng ký khai sinh, Giấy chứng sinh từ bệnh viện, CMND/CCCD người đi khai sinh. Thời gian: trong ngày. Miễn phí.
+Cần: Tờ khai đăng ký khai sinh, Giấy chứng sinh từ bệnh viện, CMND/CCCD người đi khai sinh. Thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành.
 
 ### Chứng thực bản sao mất bao lâu?
-Chứng thực bản sao từ bản chính: trong ngày (không quá 2 ngày nếu nhiều). Phí 2.000đ/trang. Cần mang bản gốc.
+Chứng thực bản sao từ bản chính: thời gian giải quyết và lệ phí thực hiện theo quy định hiện hành. Cần mang bản gốc.
 
 ### Giờ làm việc là mấy giờ?
 Thứ 2-6: Sáng 07:30-11:30, Chiều 13:00-17:00. Thứ 7: Sáng 07:30-11:30. CN nghỉ.

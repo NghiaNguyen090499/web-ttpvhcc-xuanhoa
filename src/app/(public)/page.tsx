@@ -22,10 +22,10 @@ function PartyResolutionBanner() {
       <div className="mx-auto max-w-[1200px] px-4 pb-8">
         <div className="overflow-hidden rounded-xl border border-[#f1d27a] bg-[#d71920] shadow-[0_10px_28px_rgba(160,23,23,0.12)]">
           <Image
-            src="/images/xuanhoa-banner.jpg"
+            src="/images/banner.jpg"
             alt="Banner tuyên truyền Xuân Hòa"
-            width={1184}
-            height={338}
+            width={1408}
+            height={230}
             className="h-auto w-full"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
