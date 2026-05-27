@@ -23,25 +23,16 @@ Sửa `.env.production`:
 - `POSTGRES_PASSWORD` và `DATABASE_URL` phải dùng cùng mật khẩu.
 - `NEXTAUTH_URL`, `NEXT_PUBLIC_APP_URL` đổi thành domain thật.
 - `NEXTAUTH_SECRET`, `ENCRYPTION_KEY`, `SEED_ADMIN_PASSWORD` đổi sang chuỗi mạnh.
-- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_STORAGE_BUCKET` dùng cho upload CMS.
+- `UPLOAD_DIR=/app/uploads` để file CMS được lưu vào Docker volume.
 
-## 3. Tạo bucket Supabase Storage
-
-Trong Supabase Dashboard:
-
-1. Vào Storage, tạo bucket `portal-uploads`.
-2. Đặt bucket public để các file CMS hiển thị được ngoài trang public.
-3. Copy `Project URL` vào `SUPABASE_URL`.
-4. Copy `service_role` key vào `SUPABASE_SERVICE_ROLE_KEY`.
-
-## 4. Khởi động DB và seed dữ liệu
+## 3. Khởi động DB và seed dữ liệu
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d postgres
 docker compose --env-file .env.production -f docker-compose.prod.yml --profile setup run --rm migrate
 ```
 
-## 5. Chạy app
+## 4. Chạy app
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d app
@@ -54,7 +45,9 @@ Kiểm tra nội bộ:
 curl -I http://127.0.0.1:3000
 ```
 
-## 6. Cấu hình Nginx và SSL
+File upload CMS được lưu trong Docker volume `uploads_data` và phục vụ qua đường dẫn `/uploads/...`.
+
+## 5. Cấu hình Nginx và SSL
 
 Copy file mẫu:
 
@@ -72,7 +65,7 @@ Cấp SSL:
 sudo certbot --nginx -d domain-cua-anh.vn -d www.domain-cua-anh.vn
 ```
 
-## 7. Deploy bản mới
+## 6. Deploy bản mới
 
 ```bash
 git pull
@@ -81,10 +74,19 @@ docker compose --env-file .env.production -f docker-compose.prod.yml --profile s
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d app
 ```
 
-## 8. Backup DB
+## 7. Backup DB và file upload
 
 ```bash
 mkdir -p backups/postgres
 docker compose --env-file .env.production -f docker-compose.prod.yml exec postgres \
   pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB" > backups/postgres/xuanhoa-$(date +%F-%H%M).sql
+```
+
+Backup file upload:
+
+```bash
+docker run --rm \
+  -v web-ttpvhcc-xuanhoa_uploads_data:/uploads:ro \
+  -v "$PWD/backups:/backups" \
+  alpine tar -czf /backups/uploads-$(date +%F-%H%M).tar.gz -C /uploads .
 ```

@@ -38,6 +38,8 @@ docker compose --env-file .env.production -f docker-compose.prod.yml up -d app
 
 Chi tiết: [docs/DEPLOY_SELF_HOST.md](docs/DEPLOY_SELF_HOST.md)
 
+Upload CMS trên server riêng được lưu trong Docker volume `uploads_data`, không phụ thuộc Supabase/Vercel.
+
 ## Kiểm tra
 
 ```bash

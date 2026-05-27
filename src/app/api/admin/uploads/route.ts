@@ -1,34 +1,18 @@
 /**
  * @nhom        : API Routes / Admin
- * @chucnang    : Upload file/video cho CMS tuyên truyền lên Supabase Storage
- * @lienquan    : @supabase/supabase-js
+ * @chucnang    : Upload file/video cho CMS tuyên truyền lên ổ đĩa server
+ * @lienquan    : src/app/uploads/[...path]/route.ts
  * @alias       : admin-upload-api
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-import { extname } from 'path'
+import { mkdir, writeFile } from 'fs/promises'
+import { extname, join } from 'path'
 import { requireAdminSession } from '@/lib/admin-auth'
 
 const MAX_UPLOAD_SIZE = 50 * 1024 * 1024
 const ALLOWED_MIME_PREFIXES = ['image/', 'video/', 'application/pdf']
-const DEFAULT_BUCKET = 'portal-uploads'
-
-function getStorageClient() {
-  const url = process.env.SUPABASE_URL
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (!url || !serviceRoleKey) {
-    return null
-  }
-
-  return createClient(url, serviceRoleKey, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-    },
-  })
-}
+const DEFAULT_UPLOAD_DIR = '/tmp/xuanhoa-uploads'
 
 function safeFileName(name: string) {
   const extension = extname(name).toLowerCase()
@@ -42,6 +26,10 @@ function safeFileName(name: string) {
     .slice(0, 80)
 
   return `${base || 'file'}-${Date.now()}${extension}`
+}
+
+function getUploadDir() {
+  return process.env.UPLOAD_DIR || DEFAULT_UPLOAD_DIR
 }
 
 export async function POST(request: NextRequest) {
@@ -65,33 +53,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Chỉ hỗ trợ ảnh, video hoặc PDF' }, { status: 400 })
     }
 
-    const storage = getStorageClient()
-    if (!storage) {
-      return NextResponse.json(
-        { error: 'Chưa cấu hình Supabase Storage' },
-        { status: 503 }
-      )
-    }
-
-    const bucket = process.env.SUPABASE_STORAGE_BUCKET || DEFAULT_BUCKET
     const fileName = safeFileName(file.name)
-    const filePath = `tuyen-truyen/${fileName}`
+    const folder = 'tuyen-truyen'
+    const uploadDir = join(getUploadDir(), folder)
+    const filePath = join(uploadDir, fileName)
     const buffer = Buffer.from(await file.arrayBuffer())
-    const { error } = await storage.storage.from(bucket).upload(filePath, buffer, {
-      contentType: file.type,
-      upsert: false,
-    })
 
-    if (error) {
-      console.error('[Admin/Uploads] Supabase Storage:', error)
-      return NextResponse.json({ error: 'Không thể lưu tệp lên storage' }, { status: 500 })
-    }
-
-    const { data } = storage.storage.from(bucket).getPublicUrl(filePath)
+    await mkdir(uploadDir, { recursive: true })
+    await writeFile(filePath, buffer)
 
     return NextResponse.json({
       success: true,
-      url: data.publicUrl,
+      url: `/uploads/${folder}/${fileName}`,
       fileName: file.name,
       fileSize: file.size,
       mimeType: file.type,
