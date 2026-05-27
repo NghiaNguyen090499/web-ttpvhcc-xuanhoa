@@ -11,6 +11,7 @@
 
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
+import { prisma } from '@/lib/db'
 
 // --- Hằng số ---
 const COOKIE_NAME = 'admin-session'
@@ -68,7 +69,27 @@ export async function getSession(): Promise<SessionPayload | null> {
 
   try {
     const { payload } = await jwtVerify(token, getJwtSecret())
-    return payload as unknown as SessionPayload
+    const session = payload as unknown as SessionPayload
+
+    if (!prisma || !session.email) return session
+
+    try {
+      const user = await prisma.user.findUnique({
+        where: { email: session.email.toLowerCase().trim() },
+        select: { id: true, email: true, name: true, role: true, isActive: true },
+      })
+
+      if (!user || !user.isActive) return null
+
+      return {
+        userId: user.id,
+        email: user.email,
+        name: user.name || session.name || 'Admin',
+        role: user.role,
+      }
+    } catch {
+      return session
+    }
   } catch {
     return null
   }
