@@ -24,6 +24,8 @@ const MISSION = [
 ]
 
 const LINE_COLOR = '#355b84'
+const ORG_CARD_WIDTH = 240
+const ORG_COLUMN_WIDTH = 272
 
 function getTypeLabel(type: OrganizationNode['type']) {
   if (type === 'chairman') return 'Giám đốc'
@@ -101,22 +103,22 @@ function PersonNode({ node }: { node: OrganizationNode }) {
   const phone = node.phone?.trim()
 
   return (
-    <article className="relative flex w-[180px] justify-center pt-10 text-center">
+    <article className="relative flex w-[240px] justify-center pt-10 text-center">
       <LandscapeAvatar imageUrl={node.imageUrl} />
-      <div className="min-h-[136px] w-full rounded-[22px] bg-[#083d6b] px-4 pb-4 pt-11 text-white shadow-[0_14px_26px_rgba(8,61,107,0.2)]">
-        <h3 className="text-[12px] font-extrabold uppercase leading-tight tracking-wide">
+      <div className="min-h-[148px] w-full rounded-[22px] bg-[#083d6b] px-5 pb-4 pt-11 text-white shadow-[0_14px_26px_rgba(8,61,107,0.2)]">
+        <h3 className="whitespace-nowrap text-[13px] font-extrabold uppercase leading-tight tracking-wide">
           {getNodeName(node)}
         </h3>
-        <p className="mt-1.5 text-[11px] font-bold leading-snug text-white/95">
+        <p className="mt-1.5 text-[12px] font-bold leading-snug text-white/95">
           {getNodeRole(node)}
         </p>
         {phone && (
-          <p className="mt-1.5 text-[10px] font-semibold leading-snug text-white/90">
+          <p className="mt-1.5 text-[11px] font-semibold leading-snug text-white/90">
             ĐT: {phone}
           </p>
         )}
         {field && (
-          <p className="mt-1.5 line-clamp-3 text-[10px] font-medium leading-snug text-white/80">
+          <p className="mt-1.5 line-clamp-3 text-[11px] font-medium leading-snug text-white/80">
             {field}
           </p>
         )}
@@ -169,12 +171,12 @@ function ColumnConnector({ count }: { count: number }) {
 }
 
 function OrgLevel({ nodes }: { nodes: OrganizationNode[] }) {
-  const width = Math.max(220, nodes.length * 212)
+  const width = Math.max(ORG_CARD_WIDTH, nodes.length * ORG_COLUMN_WIDTH)
 
   return (
     <div
       className="mx-auto grid justify-items-center gap-8"
-      style={{ width, gridTemplateColumns: `repeat(${nodes.length}, 180px)` }}
+      style={{ width, gridTemplateColumns: `repeat(${nodes.length}, ${ORG_CARD_WIDTH}px)` }}
     >
       {nodes.map((node) => (
         <PersonNode key={node.id} node={node} />
@@ -185,7 +187,7 @@ function OrgLevel({ nodes }: { nodes: OrganizationNode[] }) {
 
 function OrganizationChart({ nodes }: { nodes: OrganizationNode[] }) {
   const levels = buildOrgLevels(nodes)
-  const maxWidth = Math.max(640, ...levels.map((level) => level.length * 212))
+  const maxWidth = Math.max(640, ...levels.map((level) => level.length * ORG_COLUMN_WIDTH))
 
   if (levels.length === 0) {
     return (
@@ -212,7 +214,7 @@ function OrganizationChart({ nodes }: { nodes: OrganizationNode[] }) {
           style={{ minWidth: maxWidth + 80 }}
         >
           {levels.map((level, index) => (
-            <div key={index} className="mx-auto" style={{ width: Math.max(220, level.length * 212) }}>
+            <div key={index} className="mx-auto" style={{ width: Math.max(ORG_CARD_WIDTH, level.length * ORG_COLUMN_WIDTH) }}>
               {index === 1 && <SplitConnector count={1} />}
               {index === 2 && <SplitConnector count={level.length} />}
               {index >= 3 && <ColumnConnector count={level.length} />}
