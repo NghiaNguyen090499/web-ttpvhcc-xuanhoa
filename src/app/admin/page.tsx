@@ -41,48 +41,52 @@ function getPendingFeedbackCount(): number {
 
 async function getDashboardData() {
   if (hasDatabase()) {
-    const db = getAdminDb()
-    const [
-      articleCount,
-      categoryCount,
-      procedureCount,
-      feedbackCount,
-      pendingCount,
-      faqCount,
-      recentArticles,
-    ] = await Promise.all([
-      db.article.count(),
-      db.category.count(),
-      db.procedure.count(),
-      db.feedback.count(),
-      db.feedback.count({ where: { status: 'PENDING' } }),
-      db.faq.count(),
-      db.article.findMany({
-        orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
-        take: 5,
-        select: {
-          id: true,
-          title: true,
-          tag: true,
-          publishedAt: true,
-          createdAt: true,
-        },
-      }),
-    ])
+    try {
+      const db = getAdminDb()
+      const [
+        articleCount,
+        categoryCount,
+        procedureCount,
+        feedbackCount,
+        pendingCount,
+        faqCount,
+        recentArticles,
+      ] = await Promise.all([
+        db.article.count(),
+        db.category.count(),
+        db.procedure.count(),
+        db.feedback.count(),
+        db.feedback.count({ where: { status: 'PENDING' } }),
+        db.faq.count(),
+        db.article.findMany({
+          orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
+          take: 5,
+          select: {
+            id: true,
+            title: true,
+            tag: true,
+            publishedAt: true,
+            createdAt: true,
+          },
+        }),
+      ])
 
-    return {
-      newsCount: articleCount,
-      totalCategories: categoryCount,
-      totalSubCategories: procedureCount,
-      feedbackCount,
-      pendingCount,
-      faqCount,
-      recentNews: recentArticles.map((item) => ({
-        id: item.id,
-        title: item.title,
-        date: (item.publishedAt || item.createdAt).toISOString().slice(0, 10),
-        tag: item.tag || 'Hành chính',
-      })),
+      return {
+        newsCount: articleCount,
+        totalCategories: categoryCount,
+        totalSubCategories: procedureCount,
+        feedbackCount,
+        pendingCount,
+        faqCount,
+        recentNews: recentArticles.map((item) => ({
+          id: item.id,
+          title: item.title,
+          date: (item.publishedAt || item.createdAt).toISOString().slice(0, 10),
+          tag: item.tag || 'Hành chính',
+        })),
+      }
+    } catch (err) {
+      console.warn('[AdminDashboard] Fallback JSON:', err)
     }
   }
 

@@ -227,6 +227,31 @@ export async function getPortalProceduresData(): Promise<ProceduresData> {
       },
     })
 
+    const thuongGap = categories.flatMap((category) => (
+      category.procedures
+        .filter((procedure) => procedure.type === 'THUONG_GAP' || procedure.isFeatured)
+        .map((procedure) => ({
+          id: procedure.id,
+          name: procedure.name,
+          type: 'thuong-gap',
+          category: category.name,
+          slug: procedure.slug,
+          description: procedure.description || category.description || '',
+        }))
+    ))
+    const phiDiaGioi = categories.flatMap((category) => (
+      category.procedures
+        .filter((procedure) => procedure.type === 'PHI_DIA_GIOI')
+        .map((procedure) => ({
+          id: procedure.id,
+          name: procedure.name,
+          type: 'phi-dia-gioi',
+          category: category.name,
+          slug: procedure.slug,
+          description: procedure.description || category.description || '',
+        }))
+    ))
+
     return {
       ...fallback,
       metadata: {
@@ -242,30 +267,8 @@ export async function getPortalProceduresData(): Promise<ProceduresData> {
         description: category.description || '',
         subCategories: category.procedures.map((procedure) => procedure.name),
       })),
-      thuongGap: categories.flatMap((category) => (
-        category.procedures
-          .filter((procedure) => procedure.type === 'THUONG_GAP' || procedure.isFeatured)
-          .map((procedure) => ({
-            id: procedure.id,
-            name: procedure.name,
-            type: 'thuong-gap',
-            category: category.name,
-            slug: procedure.slug,
-            description: procedure.description || category.description || '',
-          }))
-      )),
-      phiDiaGioi: categories.flatMap((category) => (
-        category.procedures
-          .filter((procedure) => procedure.type === 'PHI_DIA_GIOI')
-          .map((procedure) => ({
-            id: procedure.id,
-            name: procedure.name,
-            type: 'phi-dia-gioi',
-            category: category.name,
-            slug: procedure.slug,
-            description: procedure.description || category.description || '',
-          }))
-      )),
+      thuongGap: thuongGap.length > 0 ? thuongGap : fallback.thuongGap,
+      phiDiaGioi: phiDiaGioi.length > 0 ? phiDiaGioi : fallback.phiDiaGioi,
     }
   } catch (err) {
     console.warn('[PortalDB] Fallback procedures JSON:', err)

@@ -44,6 +44,18 @@ type ProceduresFile = {
     description?: string
     subCategories?: string[]
   }>
+  phiDiaGioi?: Array<{
+    id?: string
+    name: string
+    slug?: string
+    description?: string
+  }>
+  thuongGap?: Array<{
+    id?: string
+    name: string
+    slug?: string
+    description?: string
+  }>
 }
 
 type FeedbackItem = {
@@ -113,6 +125,61 @@ function toProcedureType(value?: string) {
   if (value === 'phi-dia-gioi') return 'PHI_DIA_GIOI' as const
   if (value === 'thuong-gap') return 'THUONG_GAP' as const
   return 'CAP_PHUONG' as const
+}
+
+async function upsertProcedureCategory(db: PrismaClient, input: {
+  name: string
+  slug?: string
+  description?: string
+  sortOrder: number
+}) {
+  const slug = input.slug || generateSlug(input.name)
+  return db.category.upsert({
+    where: { slug },
+    update: {
+      name: input.name,
+      description: input.description || '',
+      sortOrder: input.sortOrder,
+      isActive: true,
+    },
+    create: {
+      name: input.name,
+      slug,
+      description: input.description || '',
+      sortOrder: input.sortOrder,
+      isActive: true,
+    },
+  })
+}
+
+async function upsertProcedure(db: PrismaClient, input: {
+  categoryId: string
+  name: string
+  slug: string
+  type?: string
+  description?: string
+  sortOrder: number
+}) {
+  await db.procedure.upsert({
+    where: { slug: input.slug },
+    update: {
+      name: input.name,
+      type: toProcedureType(input.type),
+      description: input.description || '',
+      sortOrder: input.sortOrder,
+      isActive: true,
+      categoryId: input.categoryId,
+    },
+    create: {
+      name: input.name,
+      slug: input.slug,
+      type: toProcedureType(input.type),
+      description: input.description || '',
+      sortOrder: input.sortOrder,
+      isActive: true,
+      categoryId: input.categoryId,
+    },
+  })
 }
 
 function toMediaType(value?: string) {
@@ -205,44 +272,62 @@ async function main() {
   const procedures = readJson<ProceduresFile>('procedures.json')
   for (const [categoryIndex, item] of procedures.categories.entries()) {
     const slug = item.slug || generateSlug(item.name)
-    const category = await prisma.category.upsert({
-      where: { slug },
-      update: {
-        name: item.name,
-        description: item.description || '',
-        sortOrder: categoryIndex + 1,
-        isActive: true,
-      },
-      create: {
-        name: item.name,
-        slug,
-        description: item.description || '',
-        sortOrder: categoryIndex + 1,
-        isActive: true,
-      },
+    const category = await upsertProcedureCategory(prisma, {
+      name: item.name,
+      slug,
+      description: item.description,
+      sortOrder: categoryIndex + 1,
     })
 
     for (const [procedureIndex, procedureName] of (item.subCategories || []).entries()) {
       const procedureSlug = `${slug}-${generateSlug(procedureName)}-${procedureIndex + 1}`
-      await prisma.procedure.upsert({
-        where: { slug: procedureSlug },
-        update: {
-          name: procedureName,
-          type: toProcedureType(item.type),
-          sortOrder: procedureIndex + 1,
-          isActive: true,
-          categoryId: category.id,
-        },
-        create: {
-          name: procedureName,
-          slug: procedureSlug,
-          type: toProcedureType(item.type),
-          sortOrder: procedureIndex + 1,
-          isActive: true,
-          categoryId: category.id,
-        },
+      await upsertProcedure(prisma, {
+        categoryId: category.id,
+        name: procedureName,
+        slug: procedureSlug,
+        type: item.type,
+        description: item.description,
+        sortOrder: procedureIndex + 1,
       })
     }
+  }
+
+  await prisma.procedure.deleteMany({
+    where: { type: { in: ['PHI_DIA_GIOI', 'THUONG_GAP'] } },
+  })
+
+  const phiDiaGioiCategory = await upsertProcedureCategory(prisma, {
+    name: 'Thủ tục không phụ thuộc địa giới hành chính',
+    slug: 'phi-dia-gioi',
+    description: 'Các thủ tục hành chính có thể thực hiện không phụ thuộc địa giới hành chính.',
+    sortOrder: procedures.categories.length + 1,
+  })
+  for (const [index, item] of (procedures.phiDiaGioi || []).entries()) {
+    await upsertProcedure(prisma, {
+      categoryId: phiDiaGioiCategory.id,
+      name: item.name,
+      slug: `phi-dia-gioi-${item.slug || generateSlug(item.name)}-${index + 1}`,
+      type: 'phi-dia-gioi',
+      description: item.description,
+      sortOrder: index + 1,
+    })
+  }
+
+  const thuongGapCategory = await upsertProcedureCategory(prisma, {
+    name: 'Thủ tục thường gặp',
+    slug: 'thuong-gap',
+    description: 'Các thủ tục hành chính thường được người dân tra cứu và sử dụng.',
+    sortOrder: procedures.categories.length + 2,
+  })
+  for (const [index, item] of (procedures.thuongGap || []).entries()) {
+    await upsertProcedure(prisma, {
+      categoryId: thuongGapCategory.id,
+      name: item.name,
+      slug: `thuong-gap-${item.slug || generateSlug(item.name)}-${index + 1}`,
+      type: 'thuong-gap',
+      description: item.description,
+      sortOrder: index + 1,
+    })
   }
 
   const feedbacks = readJson<FeedbackItem[]>('feedbacks.json')
