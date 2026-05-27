@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     })
 
     // Gọi Gemini với streaming
-    const systemPrompt = buildSystemPrompt()
+    const systemPrompt = await buildSystemPrompt()
 
     const response = await ai.models.generateContentStream({
       model: 'gemini-2.0-flash',

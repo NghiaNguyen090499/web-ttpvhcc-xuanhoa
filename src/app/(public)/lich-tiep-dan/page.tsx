@@ -1,13 +1,13 @@
 /**
  * @nhom        : Pages / Lịch tiếp công dân
  * @chucnang    : Trang đầy đủ lịch tiếp công dân theo tháng + quy định
- * @lienquan    : src/lib/static-data.ts, data/lich-tiep-dan.json
+ * @lienquan    : src/lib/portal-db.ts, data/lich-tiep-dan.json fallback
  * @alias       : lich-tiep-dan-page
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getLichTiepDan } from '@/lib/static-data'
+import { getPortalLichTiepDan } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
   title: 'Lịch tiếp công dân',
@@ -28,8 +28,8 @@ function isToday(dateStr: string): boolean {
   return new Date().toDateString() === new Date(dateStr).toDateString()
 }
 
-export default function LichTiepDanPage() {
-  const data = getLichTiepDan()
+export default async function LichTiepDanPage() {
+  const data = await getPortalLichTiepDan()
   const sorted = [...data.lichThang].sort((a, b) => new Date(a.ngay).getTime() - new Date(b.ngay).getTime())
 
   return (

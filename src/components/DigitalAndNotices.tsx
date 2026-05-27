@@ -2,12 +2,13 @@
  * @nhom        : Components / Trang chủ
  * @chucnang    : Section 2 cột — Chuyển đổi số phường (trái) + Niêm yết công khai (phải)
  *                Học từ TTPVHCC Hà Nội: layout "Cải cách HC" + "Văn bản ban hành mới"
- * @lienquan    : src/lib/static-data.ts, data/niem-yet.json
+ * @lienquan    : src/lib/portal-db.ts, data/niem-yet.json fallback
  * @alias       : digital-notices, chuyen-doi-so, niem-yet-home
  */
 
 import Link from 'next/link'
-import { getNiemYetData, type NiemYetItem } from '@/lib/static-data'
+import { getPortalNiemYetData } from '@/lib/portal-db'
+import type { NiemYetItem } from '@/lib/static-data'
 
 /* Dữ liệu chuyển đổi số phường — tĩnh, cập nhật qua CMS sau */
 const DIGITAL_ITEMS = [
@@ -196,8 +197,8 @@ function PublicNoticesColumn({ items }: { items: NiemYetItem[] }) {
   )
 }
 
-export function DigitalAndNotices() {
-  const niemYetItems = getNiemYetData()
+export async function DigitalAndNotices() {
+  const niemYetItems = await getPortalNiemYetData()
 
   return (
     <section className="py-8 md:py-10" id="digital-notices">

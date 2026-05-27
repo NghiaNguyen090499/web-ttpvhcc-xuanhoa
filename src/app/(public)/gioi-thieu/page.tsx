@@ -1,13 +1,14 @@
 /**
  * @nhom        : Pages / Giới thiệu
  * @chucnang    : Trang giới thiệu — mission cards, chức năng nhiệm vụ, cơ cấu tổ chức từ admin
- * @lienquan    : data/organization.json, src/app/admin/gioi-thieu/page.tsx, src/lib/static-data.ts
+ * @lienquan    : src/lib/portal-db.ts, src/app/admin/gioi-thieu/page.tsx, src/lib/static-data.ts
  * @alias       : about, gioi-thieu, co-cau-to-chuc
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getOrganizationData, type OrganizationNode } from '@/lib/static-data'
+import { getPortalOrganizationData } from '@/lib/portal-db'
+import type { OrganizationNode } from '@/lib/static-data'
 
 export const dynamic = 'force-dynamic'
 
@@ -227,8 +228,8 @@ function OrganizationChart({ nodes }: { nodes: OrganizationNode[] }) {
   )
 }
 
-export default function AboutPage() {
-  const organization = getOrganizationData()
+export default async function AboutPage() {
+  const organization = await getPortalOrganizationData()
   const nodes = organization.nodes
     .filter((node) => node.isActive)
     .sort((a, b) => a.order - b.order)

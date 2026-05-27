@@ -2,12 +2,13 @@
  * @nhom        : Components / Trang chủ
  * @chucnang    : Lịch tiếp công dân — hiển thị lịch tiếp dân định kỳ tháng hiện tại
  *                Theo Luật Tiếp công dân 2013 + Luật Thực hiện dân chủ cơ sở 2022
- * @lienquan    : src/lib/static-data.ts, data/lich-tiep-dan.json
+ * @lienquan    : src/lib/portal-db.ts, data/lich-tiep-dan.json fallback
  * @alias       : citizen-reception, lich-tiep-dan, tiep-cong-dan
  */
 
 import Link from 'next/link'
-import { getLichTiepDan, type LichTiepDanEntry } from '@/lib/static-data'
+import { getPortalLichTiepDan } from '@/lib/portal-db'
+import type { LichTiepDanEntry } from '@/lib/static-data'
 
 /**
  * @chucnang    : Format ngày từ ISO sang DD/MM
@@ -103,8 +104,8 @@ function ReceptionEntry({ entry }: { entry: LichTiepDanEntry }) {
  * @chucnang    : Widget lịch tiếp công dân — hiển thị trên trang chủ
  * @output      : JSX component
  */
-export function CitizenReception() {
-  const data = getLichTiepDan()
+export async function CitizenReception() {
+  const data = await getPortalLichTiepDan()
 
   /* Lấy tối đa 4 buổi gần nhất (ưu tiên buổi sắp tới) */
   const sorted = [...data.lichThang].sort(

@@ -377,23 +377,63 @@ async function main() {
     })
   }
 
-  const organization = readJson<object>('organization.json')
-  await prisma.pageContent.upsert({
-    where: { pageKey: 'organization' },
-    update: {
-      title: 'Cơ cấu tổ chức',
-      content: 'Cơ cấu tổ chức TTPVHCC Xuân Hòa',
-      metadata: organization,
-      isActive: true,
-    },
-    create: {
+  const pageContents = [
+    {
       pageKey: 'organization',
       title: 'Cơ cấu tổ chức',
       content: 'Cơ cấu tổ chức TTPVHCC Xuân Hòa',
-      metadata: organization,
-      isActive: true,
+      metadata: readJson<object>('organization.json'),
     },
-  })
+    {
+      pageKey: 'procedure-links',
+      title: 'Link thủ tục hành chính DVC',
+      content: 'Danh sách đường dẫn thủ tục hành chính trên Cổng DVC Quốc gia',
+      metadata: readJson<object>('procedure-links.json'),
+    },
+    {
+      pageKey: 'lich-cong-tac',
+      title: 'Lịch công tác tuần',
+      content: 'Lịch công tác tuần của lãnh đạo UBND Phường Xuân Hòa',
+      metadata: readJson<object>('lich-cong-tac.json'),
+    },
+    {
+      pageKey: 'lich-tiep-dan',
+      title: 'Lịch tiếp công dân',
+      content: 'Lịch tiếp công dân định kỳ của UBND Phường Xuân Hòa',
+      metadata: readJson<object>('lich-tiep-dan.json'),
+    },
+    {
+      pageKey: 'useful-links',
+      title: 'Liên kết hữu ích',
+      content: 'Danh sách cổng thông tin liên kết',
+      metadata: readJson<object>('useful-links.json'),
+    },
+    {
+      pageKey: 'ward-info',
+      title: 'Thông tin phường',
+      content: 'Thông tin đơn vị, giờ làm việc và liên kết DVC',
+      metadata: readJson<object>('ward-info.json'),
+    },
+  ]
+
+  for (const page of pageContents) {
+    await prisma.pageContent.upsert({
+      where: { pageKey: page.pageKey },
+      update: {
+        title: page.title,
+        content: page.content,
+        metadata: page.metadata,
+        isActive: true,
+      },
+      create: {
+        pageKey: page.pageKey,
+        title: page.title,
+        content: page.content,
+        metadata: page.metadata,
+        isActive: true,
+      },
+    })
+  }
 
   await prisma.$disconnect()
   console.log('Seed completed: imported JSON data into PostgreSQL.')

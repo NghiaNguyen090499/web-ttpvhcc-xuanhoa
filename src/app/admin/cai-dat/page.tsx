@@ -1,15 +1,15 @@
 /**
  * @nhom        : Admin / Pages
  * @chucnang    : Trang cài đặt hệ thống — thông tin website + trạng thái kết nối
- * @lienquan    : src/lib/db.ts, src/lib/auth.ts
+ * @lienquan    : src/lib/db.ts, src/lib/auth.ts, src/lib/portal-db.ts
  * @alias       : admin-settings, cai-dat
  */
 
-import { getWardInfo } from '@/lib/static-data'
 import { Shield, Database, Globe, Server, Clock, MapPin } from 'lucide-react'
 import { getSession } from '@/lib/auth'
 import { hasDatabase } from '@/lib/admin-db'
 import { AdminUsersManager } from '@/components/admin/AdminUsersManager'
+import { getPortalWardInfo } from '@/lib/portal-db'
 
 export default async function AdminSettingsPage() {
   const session = await getSession()
@@ -22,7 +22,7 @@ export default async function AdminSettingsPage() {
     )
   }
 
-  const wardInfo = getWardInfo()
+  const wardInfo = await getPortalWardInfo()
   const databaseConnected = hasDatabase()
 
   // Thông tin cấu hình hiện tại

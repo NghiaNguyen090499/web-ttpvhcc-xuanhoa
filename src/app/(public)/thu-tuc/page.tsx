@@ -7,8 +7,7 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getProcedureLinksData } from '@/lib/static-data'
-import { getPortalProceduresData } from '@/lib/portal-db'
+import { getPortalProcedureLinksData, getPortalProceduresData } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
   title: 'Thủ tục Hành chính',
@@ -21,7 +20,7 @@ export default async function ProceduresPage() {
   const data = await getPortalProceduresData()
   const categories = data.categories
   const thuongGap = data.thuongGap
-  const procedureLinks = getProcedureLinksData()
+  const procedureLinks = await getPortalProcedureLinksData()
 
   return (
     <>

@@ -1,13 +1,13 @@
 /**
  * @nhom        : Pages / Lịch công tác
  * @chucnang    : Trang đầy đủ lịch công tác tuần — bảng chi tiết theo ngày
- * @lienquan    : src/lib/static-data.ts, data/lich-cong-tac.json
+ * @lienquan    : src/lib/portal-db.ts, data/lich-cong-tac.json fallback
  * @alias       : lich-cong-tac-page, work-schedule-page
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getLichCongTac } from '@/lib/static-data'
+import { getPortalLichCongTac } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
   title: 'Lịch công tác tuần',
@@ -38,8 +38,8 @@ function isToday(dateStr: string): boolean {
   return new Date().toDateString() === new Date(dateStr).toDateString()
 }
 
-export default function LichCongTacPage() {
-  const data = getLichCongTac()
+export default async function LichCongTacPage() {
+  const data = await getPortalLichCongTac()
 
   return (
     <>

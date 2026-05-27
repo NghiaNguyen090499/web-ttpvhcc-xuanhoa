@@ -1,25 +1,24 @@
 /**
  * @nhom        : Lib / Chatbot
  * @chucnang    : System prompt + context builder cho Gemini chatbot
- * @lienquan    : data/procedures.json, data/news.json, data/faq.json, src/lib/static-data.ts
+ * @lienquan    : src/lib/portal-db.ts, data/*.json fallback
  * @alias       : chatbot-context, system-prompt
  *
- * Xây dựng context đầy đủ từ dữ liệu local để Gemini trả lời chính xác.
+ * Xây dựng context đầy đủ từ DB-first loaders để Gemini trả lời chính xác.
  * Câu trả lời chỉ mang tính tham khảo — không thay thế tư vấn chính thức.
  */
 
-import fs from 'fs'
-import path from 'path'
+import { getPortalFaqData, getPortalNewsData, getPortalProcedureLinksData, getPortalProceduresData } from '@/lib/portal-db'
 
 /**
  * @chucnang    : Đọc procedures.json và tạo context text
  * @output      : String mô tả đầy đủ các lĩnh vực TTHC
  */
-function buildProceduresContext(): string {
-  const filePath = path.join(process.cwd(), 'data', 'procedures.json')
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const data = JSON.parse(raw)
-
+async function buildProceduresContext(): Promise<string> {
+  const [data, procedureLinks] = await Promise.all([
+    getPortalProceduresData(),
+    getPortalProcedureLinksData(),
+  ])
   const lines: string[] = []
 
   // Thủ tục cấp phường
@@ -54,6 +53,7 @@ function buildProceduresContext(): string {
   lines.push(`- Đánh giá DVC: ${data.externalLinks.dvcDanhGia}`)
   lines.push(`- Hướng dẫn DVC: ${data.externalLinks.dvcHuongDan}`)
   lines.push(`- Facebook: ${data.externalLinks.facebook}`)
+  lines.push(`- Link DVC chi tiết: ${procedureLinks.metadata.totalLinks} link trong ${procedureLinks.metadata.totalGroups} nhóm lĩnh vực tại /thu-tuc`)
 
   return lines.join('\n')
 }
@@ -62,11 +62,8 @@ function buildProceduresContext(): string {
  * @chucnang    : Đọc news.json và tạo context tin tức gần nhất
  * @output      : String 5 tin mới nhất
  */
-function buildNewsContext(): string {
-  const filePath = path.join(process.cwd(), 'data', 'news.json')
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const news = JSON.parse(raw)
-
+async function buildNewsContext(): Promise<string> {
+  const news = await getPortalNewsData()
   const lines: string[] = ['## TIN TỨC MỚI NHẤT']
   const recent = news.slice(0, 5)
   for (const n of recent) {
@@ -79,15 +76,10 @@ function buildNewsContext(): string {
  * @chucnang    : Đọc faq.json và tạo context FAQ cho chatbot
  * @output      : String câu hỏi thường gặp
  */
-function buildFaqContext(): string {
+async function buildFaqContext(): Promise<string> {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'faq.json')
-    const raw = fs.readFileSync(filePath, 'utf-8')
-    const faqs = JSON.parse(raw) as Array<{
-      question: string; answer: string; category: string; isActive: boolean
-    }>
-
-    const activeFaqs = faqs.filter(f => f.isActive !== false)
+    const faqs = await getPortalFaqData()
+    const activeFaqs = faqs.filter((faq: { isActive: boolean }) => faq.isActive !== false)
     if (activeFaqs.length === 0) return ''
 
     const lines: string[] = ['## CÂU HỎI THƯỜNG GẶP (FAQ)']
@@ -107,10 +99,12 @@ function buildFaqContext(): string {
  * @chucnang    : Tạo system prompt đầy đủ cho Gemini
  * @output      : String system instruction
  */
-export function buildSystemPrompt(): string {
-  const procedures = buildProceduresContext()
-  const news = buildNewsContext()
-  const faq = buildFaqContext()
+export async function buildSystemPrompt(): Promise<string> {
+  const [procedures, news, faq] = await Promise.all([
+    buildProceduresContext(),
+    buildNewsContext(),
+    buildFaqContext(),
+  ])
 
   return `Bạn là trợ lý AI của Trung tâm Phục vụ Hành chính Công (TTPVHCC) Phường Xuân Hòa, TP. Hồ Chí Minh.
 

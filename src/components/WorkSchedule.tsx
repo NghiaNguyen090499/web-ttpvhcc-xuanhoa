@@ -2,12 +2,13 @@
  * @nhom        : Components / Trang chủ
  * @chucnang    : Lịch công tác tuần — bảng lịch làm việc lãnh đạo UBND phường
  *                Hiển thị theo ngày trong tuần, mỗi ngày có danh sách công việc
- * @lienquan    : src/lib/static-data.ts, data/lich-cong-tac.json
+ * @lienquan    : src/lib/portal-db.ts, data/lich-cong-tac.json fallback
  * @alias       : work-schedule, lich-cong-tac, lich-tuan
  */
 
 import Link from 'next/link'
-import { getLichCongTac, type LichNgay } from '@/lib/static-data'
+import { getPortalLichCongTac } from '@/lib/portal-db'
+import type { LichNgay } from '@/lib/static-data'
 
 /**
  * @chucnang    : Format ngày từ ISO sang DD/MM
@@ -83,8 +84,8 @@ function DayRow({ lichNgay }: { lichNgay: LichNgay }) {
  * @chucnang    : Widget lịch công tác tuần — hiển thị trên trang chủ
  * @output      : JSX section
  */
-export function WorkSchedule() {
-  const data = getLichCongTac()
+export async function WorkSchedule() {
+  const data = await getPortalLichCongTac()
 
   return (
     <div className="bg-white rounded-2xl border border-border overflow-hidden h-full flex flex-col">

@@ -10,16 +10,39 @@ import {
   getNewsData as getStaticNewsData,
   getProceduresData as getStaticProceduresData,
   getNiemYetData as getStaticNiemYetData,
+  getOrganizationData as getStaticOrganizationData,
+  getProcedureLinksData as getStaticProcedureLinksData,
+  getLichCongTac as getStaticLichCongTac,
+  getLichTiepDan as getStaticLichTiepDan,
+  getWardInfo as getStaticWardInfo,
   getTuyenTruyenData as getStaticTuyenTruyenData,
   getVanBanData as getStaticVanBanData,
 } from '@/lib/static-data'
 import type {
+  LichCongTacData,
+  LichTiepDanData,
   NewsItem,
   NiemYetItem,
+  OrganizationData,
+  ProcedureLinkGroup,
+  ProcedureLinksData,
   ProceduresData,
   TuyenTruyenItem,
   VanBanItem,
+  WardInfoData,
 } from '@/lib/static-data'
+
+export interface UsefulLinkItem {
+  index: number
+  title: string
+  url: string
+  category: 'gov' | 'org' | 'dept'
+  iconClass: string
+}
+
+interface UsefulLinksData {
+  items: UsefulLinkItem[]
+}
 
 function formatDate(date: Date): string {
   return date.toISOString().slice(0, 10)
@@ -34,6 +57,39 @@ function toJsonString(value: unknown): string[] | undefined {
 function toNoticeFileType(value: string): 'pdf' | 'image' | 'doc' {
   if (value === 'image' || value === 'doc') return value
   return 'pdf'
+}
+
+function isOrganizationData(value: unknown): value is OrganizationData {
+  if (!value || typeof value !== 'object') return false
+  const data = value as Partial<OrganizationData>
+  return Boolean(
+    data.metadata
+    && typeof data.metadata.title === 'string'
+    && typeof data.metadata.updatedAt === 'string'
+    && typeof data.metadata.note === 'string'
+    && Array.isArray(data.nodes)
+  )
+}
+
+function hasArrayKey<T>(value: unknown, key: string): value is T {
+  return Boolean(value && typeof value === 'object' && Array.isArray((value as Record<string, unknown>)[key]))
+}
+
+async function getPageMetadata<T>(pageKey: string, fallback: T, isValid: (value: unknown) => value is T): Promise<T> {
+  if (!prisma) return fallback
+
+  try {
+    const content = await prisma.pageContent.findUnique({
+      where: { pageKey },
+      select: { metadata: true },
+    })
+
+    const metadata = content?.metadata
+    return isValid(metadata) ? metadata : fallback
+  } catch (err) {
+    console.warn(`[PortalDB] Fallback ${pageKey} JSON:`, err)
+    return fallback
+  }
 }
 
 export async function getPortalNewsData(): Promise<NewsItem[]> {
@@ -105,6 +161,54 @@ export async function getPortalFaqData() {
     const raw = readFileSync(join(process.cwd(), 'data', 'faq.json'), 'utf-8')
     return JSON.parse(raw)
   }
+}
+
+export async function getPortalOrganizationData(): Promise<OrganizationData> {
+  const fallback = getStaticOrganizationData()
+  return getPageMetadata('organization', fallback, isOrganizationData)
+}
+
+export async function getPortalProcedureLinksData(): Promise<ProcedureLinksData> {
+  const fallback = getStaticProcedureLinksData()
+  return getPageMetadata('procedure-links', fallback, (value): value is ProcedureLinksData => hasArrayKey(value, 'groups'))
+}
+
+export async function getPortalProcedureLinkGroupBySlug(slug: string): Promise<ProcedureLinkGroup | undefined> {
+  const data = await getPortalProcedureLinksData()
+  return data.groups.find((group) => group.slug === slug)
+}
+
+export async function getPortalLichCongTac(): Promise<LichCongTacData> {
+  const fallback = getStaticLichCongTac()
+  return getPageMetadata('lich-cong-tac', fallback, (value): value is LichCongTacData => hasArrayKey(value, 'lichTuan'))
+}
+
+export async function getPortalLichTiepDan(): Promise<LichTiepDanData> {
+  const fallback = getStaticLichTiepDan()
+  return getPageMetadata('lich-tiep-dan', fallback, (value): value is LichTiepDanData => hasArrayKey(value, 'lichThang'))
+}
+
+export async function getPortalUsefulLinks(): Promise<UsefulLinkItem[]> {
+  const fallback = await getUsefulLinksFallback()
+  const data = await getPageMetadata('useful-links', fallback, (value): value is UsefulLinksData => hasArrayKey(value, 'items'))
+  return data.items
+}
+
+async function getUsefulLinksFallback(): Promise<UsefulLinksData> {
+  const { readFileSync } = await import('fs')
+  const { join } = await import('path')
+  const raw = readFileSync(join(process.cwd(), 'data', 'useful-links.json'), 'utf-8')
+  return JSON.parse(raw) as UsefulLinksData
+}
+
+export async function getPortalWardInfo(): Promise<WardInfoData> {
+  const fallback = getStaticWardInfo()
+  return getPageMetadata('ward-info', fallback, (value): value is WardInfoData => Boolean(
+    value
+    && typeof value === 'object'
+    && (value as Partial<WardInfoData>).ward
+    && (value as Partial<WardInfoData>).center
+  ))
 }
 
 export async function getPortalProceduresData(): Promise<ProceduresData> {

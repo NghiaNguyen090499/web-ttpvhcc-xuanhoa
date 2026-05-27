@@ -1,7 +1,7 @@
 /**
  * @nhom        : Pages / Tin tức chi tiết
  * @chucnang    : Trang chi tiết bài viết tin tức — gallery ảnh, bài liên quan
- * @lienquan    : src/lib/static-data.ts, data/news.json
+ * @lienquan    : src/lib/portal-db.ts, data/news.json fallback
  * @alias       : news-detail, tin-tuc-slug
  */
 
@@ -9,7 +9,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getNewsData } from '@/lib/static-data'
 import { getPortalNewsBySlug, getPortalNewsData } from '@/lib/portal-db'
 import NewsDetailGallery from './NewsDetailGallery'
 
@@ -35,7 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
  * @output      : Array<{ slug: string }>
  */
 export async function generateStaticParams() {
-  return getNewsData().map((n) => ({ slug: n.slug }))
+  const news = await getPortalNewsData()
+  return news.map((n) => ({ slug: n.slug }))
 }
 
 /**

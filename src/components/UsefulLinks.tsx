@@ -1,7 +1,7 @@
 /**
  * @nhom        : Components
  * @chucnang    : Liên kết website — grid cards cho Sở, Ban, Ngành, Tổ chức TP.HCM
- * @lienquan    : data/useful-links.json
+ * @lienquan    : src/lib/portal-db.ts, data/useful-links.json fallback
  * @alias       : useful-links, lien-ket-website
  *
  * Không dùng FontAwesome — dùng lucide-react icons + emoji thay thế
@@ -9,6 +9,7 @@
  */
 
 import Link from 'next/link'
+import { getPortalUsefulLinks, type UsefulLinkItem } from '@/lib/portal-db'
 
 // Dữ liệu đọc trực tiếp — không cần import JSON runtime
 const CATEGORIES = {
@@ -39,31 +40,9 @@ const ICON_MAP: Record<string, string> = {
   'fas fa-utensils': '🍽️',
 }
 
-interface UsefulLink {
-  index: number
-  title: string
-  url: string
-  category: 'gov' | 'org' | 'dept'
-  iconClass: string
-}
-
 interface UsefulLinksProps {
   /** Hiển thị dạng compact (chỉ hiện 1 hàng ngang, dùng trên trang chủ) */
   compact?: boolean
-}
-
-import fs from 'fs'
-import path from 'path'
-
-/**
- * @chucnang    : Đọc dữ liệu liên kết từ JSON
- * @output      : Mảng UsefulLink
- */
-function getUsefulLinks(): UsefulLink[] {
-  const filePath = path.join(process.cwd(), 'data', 'useful-links.json')
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const data = JSON.parse(raw)
-  return data.items as UsefulLink[]
 }
 
 /**
@@ -74,8 +53,8 @@ function getIcon(iconClass: string): string {
   return ICON_MAP[key] || '🔗'
 }
 
-export default function UsefulLinks({ compact = false }: UsefulLinksProps) {
-  const links = getUsefulLinks()
+export default async function UsefulLinks({ compact = false }: UsefulLinksProps) {
+  const links = await getPortalUsefulLinks()
 
   // Nhóm theo category
   const grouped = {
@@ -127,7 +106,7 @@ export default function UsefulLinks({ compact = false }: UsefulLinksProps) {
   // Dạng đầy đủ — dùng trên trang /lien-ket
   return (
     <div className="space-y-8">
-      {(Object.entries(grouped) as [keyof typeof CATEGORIES, UsefulLink[]][]).map(([cat, items]) => {
+      {(Object.entries(grouped) as [keyof typeof CATEGORIES, UsefulLinkItem[]][]).map(([cat, items]) => {
         if (items.length === 0) return null
         const config = CATEGORIES[cat]
         return (

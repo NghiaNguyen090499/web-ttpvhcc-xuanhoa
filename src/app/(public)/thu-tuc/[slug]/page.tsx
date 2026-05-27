@@ -1,7 +1,7 @@
 /**
  * @nhom        : Pages / Chi tiết lĩnh vực
  * @chucnang    : Trang chi tiết lĩnh vực TTHC — hiển thị nhóm thủ tục + link DVC
- * @lienquan    : src/lib/static-data.ts, data/procedures.json
+ * @lienquan    : src/lib/portal-db.ts, data/*.json fallback
  * @alias       : category-detail, chi-tiet-linh-vuc
  *
  * Dữ liệu 100% local — không phụ thuộc Canva.
@@ -10,14 +10,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getProceduresData, getProcedureLinkGroupBySlug } from '@/lib/static-data'
-import { getPortalProceduresData } from '@/lib/portal-db'
+import { getPortalProcedureLinkGroupBySlug, getPortalProceduresData } from '@/lib/portal-db'
 
 export const revalidate = 60
 
 // Tạo danh sách slug tĩnh cho SSG
-export function generateStaticParams() {
-  const data = getProceduresData()
+export async function generateStaticParams() {
+  const data = await getPortalProceduresData()
   return data.categories.map((cat) => ({ slug: cat.slug }))
 }
 
@@ -38,7 +37,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
   const data = await getPortalProceduresData()
   const category = data.categories.find((cat) => cat.slug === slug)
   if (!category) notFound()
-  const dvcGroup = getProcedureLinkGroupBySlug(category.id)
+  const dvcGroup = await getPortalProcedureLinkGroupBySlug(category.id)
 
   return (
     <>

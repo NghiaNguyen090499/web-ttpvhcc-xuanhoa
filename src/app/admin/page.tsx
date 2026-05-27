@@ -1,7 +1,7 @@
 /**
  * @nhom        : Admin / Pages
- * @chucnang    : Dashboard — thống kê tổng quan hệ thống (dữ liệu tĩnh + JSON fallback)
- * @lienquan    : src/lib/static-data.ts, data/*.json
+ * @chucnang    : Dashboard — thống kê tổng quan hệ thống từ DB, fallback JSON
+ * @lienquan    : src/lib/admin-db.ts, src/lib/static-data.ts
  * @alias       : admin-dashboard, tong-quan
  */
 
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
-import { hasDatabase } from '@/lib/admin-db'
+import { getAdminDb, hasDatabase } from '@/lib/admin-db'
 
 // Đọc dữ liệu feedback/faq từ JSON
 function getFeedbackCount(): number {
@@ -39,27 +39,83 @@ function getPendingFeedbackCount(): number {
   } catch { return 0 }
 }
 
+async function getDashboardData() {
+  if (hasDatabase()) {
+    const db = getAdminDb()
+    const [
+      articleCount,
+      categoryCount,
+      procedureCount,
+      feedbackCount,
+      pendingCount,
+      faqCount,
+      recentArticles,
+    ] = await Promise.all([
+      db.article.count(),
+      db.category.count(),
+      db.procedure.count(),
+      db.feedback.count(),
+      db.feedback.count({ where: { status: 'PENDING' } }),
+      db.faq.count(),
+      db.article.findMany({
+        orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
+        take: 5,
+        select: {
+          id: true,
+          title: true,
+          tag: true,
+          publishedAt: true,
+          createdAt: true,
+        },
+      }),
+    ])
+
+    return {
+      newsCount: articleCount,
+      totalCategories: categoryCount,
+      totalSubCategories: procedureCount,
+      feedbackCount,
+      pendingCount,
+      faqCount,
+      recentNews: recentArticles.map((item) => ({
+        id: item.id,
+        title: item.title,
+        date: (item.publishedAt || item.createdAt).toISOString().slice(0, 10),
+        tag: item.tag || 'Hành chính',
+      })),
+    }
+  }
+
+  const news = getNewsData()
+  const procedures = getProceduresData()
+  return {
+    newsCount: news.length,
+    totalCategories: procedures.categories.length,
+    totalSubCategories: procedures.categories.reduce((sum, category) => sum + category.subCategories.length, 0),
+    feedbackCount: getFeedbackCount(),
+    pendingCount: getPendingFeedbackCount(),
+    faqCount: getFaqCount(),
+    recentNews: news.slice(0, 5).map((item) => ({
+      id: item.id,
+      title: item.title,
+      date: item.date,
+      tag: item.tag,
+    })),
+  }
+}
+
 export default async function AdminDashboard() {
   const session = await getSession()
   const canEdit = session?.role === 'ADMIN' || session?.role === 'EDITOR'
   const databaseConnected = hasDatabase()
 
-  // Đọc dữ liệu tĩnh cho thống kê
-  const news = getNewsData()
-  const procedures = getProceduresData()
-  const totalCategories = procedures.categories.length
-  const totalSubCategories = procedures.categories.reduce(
-    (sum, c) => sum + c.subCategories.length, 0
-  )
-  const feedbackCount = getFeedbackCount()
-  const faqCount = getFaqCount()
-  const pendingCount = getPendingFeedbackCount()
+  const dashboard = await getDashboardData()
 
   // Dữ liệu stat cards
   const stats = [
     {
       label: 'Bài viết',
-      value: news.length,
+      value: dashboard.newsCount,
       icon: Newspaper,
       color: 'bg-blue-500',
       lightColor: 'bg-blue-50 text-blue-600',
@@ -67,26 +123,26 @@ export default async function AdminDashboard() {
     },
     {
       label: 'Lĩnh vực TTHC',
-      value: totalCategories,
+      value: dashboard.totalCategories,
       icon: Layers,
       color: 'bg-emerald-500',
       lightColor: 'bg-emerald-50 text-emerald-600',
       href: '/admin/thu-tuc',
-      sub: `${totalSubCategories} thủ tục`,
+      sub: `${dashboard.totalSubCategories} thủ tục`,
     },
     {
       label: 'Phản ánh',
-      value: feedbackCount,
+      value: dashboard.feedbackCount,
       icon: MessageSquare,
       color: 'bg-amber-500',
       lightColor: 'bg-amber-50 text-amber-600',
       href: '/admin/phan-anh',
-      sub: pendingCount > 0 ? `${pendingCount} chờ xử lý` : undefined,
-      alert: pendingCount > 0,
+      sub: dashboard.pendingCount > 0 ? `${dashboard.pendingCount} chờ xử lý` : undefined,
+      alert: dashboard.pendingCount > 0,
     },
     {
       label: 'FAQ',
-      value: faqCount,
+      value: dashboard.faqCount,
       icon: HelpCircle,
       color: 'bg-purple-500',
       lightColor: 'bg-purple-50 text-purple-600',
@@ -147,7 +203,7 @@ export default async function AdminDashboard() {
             </Link>
           </div>
           <div className="space-y-3">
-            {news.slice(0, 5).map((item, i) => (
+            {dashboard.recentNews.map((item, i) => (
               <div
                 key={item.id}
                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors"
@@ -183,9 +239,9 @@ export default async function AdminDashboard() {
               <MessageSquare className="w-5 h-5" />
               <div className="flex-1">
                 <span className="text-sm font-medium">Xem phản ánh</span>
-                {pendingCount > 0 && (
+                {dashboard.pendingCount > 0 && (
                   <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 font-bold">
-                    {pendingCount} mới
+                    {dashboard.pendingCount} mới
                   </span>
                 )}
               </div>
@@ -229,7 +285,7 @@ export default async function AdminDashboard() {
                 <span className="text-gray-600">Dữ liệu</span>
                 <span className="flex items-center gap-1 text-green-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                  {news.length + totalSubCategories + feedbackCount + faqCount} bản ghi
+                  {dashboard.newsCount + dashboard.totalSubCategories + dashboard.feedbackCount + dashboard.faqCount} bản ghi
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs">
