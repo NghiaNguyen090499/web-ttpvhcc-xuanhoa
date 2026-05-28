@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
               "media-src 'self' blob: https:",
               "font-src 'self' data:",
               "connect-src 'self' https://generativelanguage.googleapis.com https://oauth2.googleapis.com https://www.googleapis.com",
+              "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
