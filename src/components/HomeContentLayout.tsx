@@ -111,9 +111,14 @@ function PropagandaMediaCard({
   data: TuyenTruyenItem[]
   featuredVideoId?: string
 }) {
-  const items = data
+  const mediaItems = data
     .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
-    .slice(0, 3)
+  const featuredItem = featuredVideoId
+    ? mediaItems.find((item) => item.id === featuredVideoId)
+    : undefined
+  const items = featuredItem
+    ? [featuredItem, ...mediaItems.filter((item) => item.id !== featuredItem.id).slice(0, 2)]
+    : mediaItems.slice(0, 3)
 
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
