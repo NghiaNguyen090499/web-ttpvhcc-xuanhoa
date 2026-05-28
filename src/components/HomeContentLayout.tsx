@@ -104,11 +104,16 @@ function NewsCards({ allNews }: { allNews: NewsItem[] }) {
   )
 }
 
-function PropagandaMediaCard({ data }: { data: TuyenTruyenItem[] }) {
+function PropagandaMediaCard({
+  data,
+  featuredVideoId,
+}: {
+  data: TuyenTruyenItem[]
+  featuredVideoId?: string
+}) {
   const items = data
     .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
     .slice(0, 3)
-  const featuredVideoId = items.find((item) => item.mediaType === 'video')?.id
 
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -116,9 +121,12 @@ function PropagandaMediaCard({ data }: { data: TuyenTruyenItem[] }) {
         <div className="flex items-center gap-2">
           <Megaphone className="h-5 w-5 text-primary" aria-hidden="true" />
           <h2 className="font-heading text-lg font-bold uppercase text-text-primary">
-            Video/File/Tuyên truyền
+            Video nổi bật / Tuyên truyền
           </h2>
         </div>
+        <Link href="/video-huong-dan" className="text-sm font-bold text-primary hover:text-primary-dark">
+          Tất cả video
+        </Link>
       </div>
 
       {items.length === 0 ? (
@@ -170,7 +178,7 @@ function PropagandaMediaCard({ data }: { data: TuyenTruyenItem[] }) {
                 <div className="flex flex-1 flex-col p-4">
                   <span className="mb-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-bold uppercase text-primary">
                     <PlayCircle className="h-3.5 w-3.5" aria-hidden="true" />
-                    Video
+                    {isFeaturedVideo ? 'Video nổi bật' : 'Video'}
                   </span>
                   <h3 className="line-clamp-2 text-sm font-bold leading-snug text-text-primary">
                     {item.title}
@@ -331,6 +339,69 @@ function PublicNoticesSidebarCard({ data }: { data: NiemYetItem[] }) {
   )
 }
 
+function VideoGuideSidebarCard({
+  data,
+  featuredVideoId,
+}: {
+  data: TuyenTruyenItem[]
+  featuredVideoId?: string
+}) {
+  const videos = data
+    .filter((item) => item.mediaType === 'video' && item.mediaUrl && item.id !== featuredVideoId)
+    .slice(0, 4)
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
+      <div className="flex items-center gap-3 bg-primary px-5 py-4 text-white">
+        <PlayCircle className="h-5 w-5 text-accent" aria-hidden="true" />
+        <h3 className="font-heading text-base font-bold uppercase tracking-wide">
+          Thư viện video
+        </h3>
+      </div>
+
+      <div className="divide-y divide-border p-4">
+        {videos.length > 0 ? (
+          videos.map((item) => (
+            <Link
+              key={item.id}
+              href="/video-huong-dan"
+              className="group flex gap-3 py-3 first:pt-0 last:pb-0"
+            >
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                <PlayCircle className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="line-clamp-2 text-sm font-semibold leading-snug text-text-primary group-hover:text-primary">
+                  {item.title}
+                </span>
+                <span className="mt-1 block text-xs text-text-muted">
+                  {formatDate(item.publishedAt)}
+                </span>
+              </span>
+            </Link>
+          ))
+        ) : (
+          <div className="flex min-h-[150px] flex-col items-center justify-center rounded-xl border border-dashed border-border bg-primary-50 px-4 text-center">
+            <PlayCircle className="h-10 w-10 text-primary" aria-hidden="true" />
+            <p className="mt-3 text-sm font-bold text-text-primary">Chưa có video khác</p>
+            <p className="mt-1 text-xs leading-relaxed text-text-secondary">
+              Khi có thêm clip, danh sách sẽ hiển thị tại đây.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <Link
+        href="/video-huong-dan"
+        className="flex items-center justify-center gap-2 border-t border-border px-4 py-3 text-sm font-bold text-primary transition hover:bg-primary-50"
+      >
+        Xem thêm clip
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
+    </div>
+  )
+}
+
 export async function HomeContentLayout() {
   const [news, propaganda, notices] = await Promise.all([
     getPortalNewsData(),
@@ -338,6 +409,7 @@ export async function HomeContentLayout() {
     getPortalNiemYetData(),
   ])
   const [featuredPropaganda] = propaganda
+  const featuredVideoId = propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl)?.id
 
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-8 md:py-10">
@@ -353,13 +425,14 @@ export async function HomeContentLayout() {
 
           <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
             <main className="space-y-6">
-              <PropagandaMediaCard data={propaganda} />
+              <PropagandaMediaCard data={propaganda} featuredVideoId={featuredVideoId} />
               <ProcedureGrid embedded />
             </main>
 
             <aside className="flex flex-col gap-5">
               <PublicNoticesSidebarCard data={notices} />
               <DocumentDirective />
+              <VideoGuideSidebarCard data={propaganda} featuredVideoId={featuredVideoId} />
             </aside>
           </div>
         </div>
