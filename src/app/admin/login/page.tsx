@@ -68,8 +68,8 @@ export default function AdminLoginPage() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm mb-4">
             <Image
-              src="/images/logo.png"
-              alt="Logo TTPVHCC"
+              src="/branding/xuan-hoa-logo.png"
+              alt="Logo phường Xuân Hòa"
               width={48}
               height={48}
               className="w-10 h-10 object-contain"

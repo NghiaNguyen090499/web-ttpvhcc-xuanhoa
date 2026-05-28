@@ -9,6 +9,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Newspaper, MessageSquare, FileText, HelpCircle,
@@ -76,8 +77,15 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
           {/* Logo */}
           <div className="flex items-center justify-between px-5 py-5 border-b border-white/10">
             <Link href="/admin" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-sm">XH</span>
+              <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-sm">
+                <Image
+                  src="/branding/xuan-hoa-logo.png"
+                  alt="Logo phường Xuân Hòa"
+                  width={36}
+                  height={36}
+                  className="h-full w-full object-contain"
+                  priority
+                />
               </div>
               <div>
                 <p className="text-xs font-bold text-white leading-tight">TTPVHCC</p>
