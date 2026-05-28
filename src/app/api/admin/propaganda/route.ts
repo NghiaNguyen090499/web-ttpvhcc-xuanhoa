@@ -26,6 +26,7 @@ type PropagandaItem = {
   mediaUrl?: string
   fileName?: string
   fileSize?: number
+  isFeatured?: boolean
 }
 
 function readItems(): PropagandaItem[] {
@@ -99,6 +100,7 @@ export async function GET() {
         mediaUrl: item.mediaUrl,
         fileName: item.fileName,
         fileSize: item.fileSize,
+        isFeatured: item.sortOrder < 0,
       })),
       total: items.length,
     })
@@ -167,6 +169,41 @@ export async function PUT(request: NextRequest) {
     }
 
     if (hasDatabase()) {
+      if (body.action === 'feature-video' || body.action === 'unfeature-video') {
+        const db = getAdminDb()
+        const existing = await db.propagandaContent.findUnique({ where: { id: String(body.id) } })
+        if (!existing || existing.mediaType !== 'VIDEO') {
+          return NextResponse.json({ error: 'Không tìm thấy video' }, { status: 404 })
+        }
+
+        if (body.action === 'feature-video') {
+          await db.$transaction([
+            db.propagandaContent.updateMany({
+              where: { mediaType: 'VIDEO', sortOrder: { lt: 0 } },
+              data: { sortOrder: 0 },
+            }),
+            db.propagandaContent.update({
+              where: { id: String(body.id) },
+              data: { sortOrder: -1 },
+            }),
+          ])
+        } else {
+          await db.propagandaContent.update({
+            where: { id: String(body.id) },
+            data: { sortOrder: 0 },
+          })
+        }
+
+        await writeAuditLog({
+          ...auth.session,
+          action: 'UPDATE',
+          entity: 'propaganda',
+          entityId: String(body.id),
+          details: { action: body.action, title: existing.title },
+        })
+        return NextResponse.json({ success: true })
+      }
+
       const item = buildItem(body)
       const dbItem = await getAdminDb().propagandaContent.update({
         where: { id: String(body.id) },
@@ -198,6 +235,24 @@ export async function PUT(request: NextRequest) {
     const index = items.findIndex((item) => item.id === body.id)
     if (index === -1) {
       return NextResponse.json({ error: 'Không tìm thấy nội dung' }, { status: 404 })
+    }
+
+    if (body.action === 'feature-video' || body.action === 'unfeature-video') {
+      if (items[index].mediaType !== 'video') {
+        return NextResponse.json({ error: 'Không tìm thấy video' }, { status: 404 })
+      }
+
+      if (body.action === 'feature-video') {
+        items.forEach((item) => {
+          if (item.mediaType === 'video') item.isFeatured = false
+        })
+        items[index].isFeatured = true
+      } else {
+        items[index].isFeatured = false
+      }
+
+      writeItems(items)
+      return NextResponse.json({ success: true })
     }
 
     items[index] = buildItem(body, items[index])

@@ -502,6 +502,7 @@ export interface TuyenTruyenItem {
   mediaUrl?: string
   fileName?: string
   fileSize?: number
+  isFeatured?: boolean
 }
 
 // Cache tuyên truyền

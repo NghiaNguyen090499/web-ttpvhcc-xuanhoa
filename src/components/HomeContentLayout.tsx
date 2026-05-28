@@ -409,7 +409,10 @@ export async function HomeContentLayout() {
     getPortalNiemYetData(),
   ])
   const [featuredPropaganda] = propaganda
-  const featuredVideoId = propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl)?.id
+  const featuredVideoId = (
+    propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl && item.isFeatured)
+    || propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl)
+  )?.id
 
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-8 md:py-10">

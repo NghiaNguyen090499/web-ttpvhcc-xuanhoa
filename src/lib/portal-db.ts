@@ -322,6 +322,7 @@ export async function getPortalTuyenTruyenData(): Promise<TuyenTruyenItem[]> {
       mediaUrl: item.mediaUrl || undefined,
       fileName: item.fileName || undefined,
       fileSize: item.fileSize || undefined,
+      isFeatured: item.sortOrder < 0,
     }))
   } catch (err) {
     console.warn('[PortalDB] Fallback propaganda JSON:', err)

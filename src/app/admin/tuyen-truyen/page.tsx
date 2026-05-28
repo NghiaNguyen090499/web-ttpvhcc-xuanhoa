@@ -10,7 +10,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowLeft, Calendar, Edit3, FileText, Link as LinkIcon,
-  Plus, Save, Search, Trash2, UploadCloud, Video
+  Plus, Save, Search, Star, StarOff, Trash2, UploadCloud, Video
 } from 'lucide-react'
 import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
@@ -29,6 +29,7 @@ interface PropagandaItem {
   mediaUrl?: string
   fileName?: string
   fileSize?: number
+  isFeatured?: boolean
 }
 
 interface UploadResult {
@@ -267,6 +268,19 @@ export default function AdminPropagandaPage() {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
+    })
+    await fetchItems()
+  }
+
+  const toggleFeaturedVideo = async (item: PropagandaItem) => {
+    if (!canEdit || item.mediaType !== 'video') return
+    await fetch('/api/admin/propaganda', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: item.id,
+        action: item.isFeatured ? 'unfeature-video' : 'feature-video',
+      }),
     })
     await fetchItems()
   }
@@ -532,6 +546,12 @@ export default function AdminPropagandaPage() {
                           <TypeIcon className="h-3 w-3" />
                           {item.mediaType === 'video' ? 'Video' : item.mediaType === 'file' ? 'File' : 'Bài viết'}
                         </span>
+                        {item.isFeatured && (
+                          <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+                            <Star className="h-3 w-3 fill-current" />
+                            Nổi bật
+                          </span>
+                        )}
                       </td>
                       <td className="hidden px-5 py-4 lg:table-cell">
                         <span className="inline-flex items-center gap-1 text-xs text-gray-500">
@@ -550,6 +570,19 @@ export default function AdminPropagandaPage() {
                             >
                               <LinkIcon className="h-4 w-4" />
                             </a>
+                          )}
+                          {canEdit && item.mediaType === 'video' && (
+                            <button
+                              onClick={() => toggleFeaturedVideo(item)}
+                              className={`rounded-lg p-2 transition-all ${
+                                item.isFeatured
+                                  ? 'text-amber-600 hover:bg-amber-50 hover:text-amber-700'
+                                  : 'text-gray-400 hover:bg-amber-50 hover:text-amber-600'
+                              }`}
+                              title={item.isFeatured ? 'Bỏ nổi bật' : 'Đặt video nổi bật'}
+                            >
+                              {item.isFeatured ? <StarOff className="h-4 w-4" /> : <Star className="h-4 w-4" />}
+                            </button>
                           )}
                           {canEdit && (
                             <button
