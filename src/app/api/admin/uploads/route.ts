@@ -6,13 +6,19 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { mkdir, writeFile } from 'fs/promises'
+import { createWriteStream } from 'fs'
+import { mkdir, rm } from 'fs/promises'
 import { extname, join } from 'path'
+import { Readable } from 'stream'
+import { pipeline } from 'stream/promises'
+import type { ReadableStream as NodeReadableStream } from 'stream/web'
 import { requireAdminSession } from '@/lib/admin-auth'
 
-const MAX_UPLOAD_SIZE = 50 * 1024 * 1024
+const MAX_UPLOAD_SIZE = 300 * 1024 * 1024
 const ALLOWED_MIME_PREFIXES = ['image/', 'video/', 'application/pdf']
 const DEFAULT_UPLOAD_DIR = '/tmp/xuanhoa-uploads'
+
+export const runtime = 'nodejs'
 
 function safeFileName(name: string) {
   const extension = extname(name).toLowerCase()
@@ -45,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (file.size > MAX_UPLOAD_SIZE) {
-      return NextResponse.json({ error: 'Tệp vượt quá dung lượng 50MB' }, { status: 400 })
+      return NextResponse.json({ error: 'Tệp vượt quá dung lượng 300MB' }, { status: 400 })
     }
 
     const allowed = ALLOWED_MIME_PREFIXES.some((prefix) => file.type.startsWith(prefix))
@@ -57,10 +63,18 @@ export async function POST(request: NextRequest) {
     const folder = 'tuyen-truyen'
     const uploadDir = join(getUploadDir(), folder)
     const filePath = join(uploadDir, fileName)
-    const buffer = Buffer.from(await file.arrayBuffer())
 
     await mkdir(uploadDir, { recursive: true })
-    await writeFile(filePath, buffer)
+
+    try {
+      await pipeline(
+        Readable.fromWeb(file.stream() as unknown as NodeReadableStream<Uint8Array>),
+        createWriteStream(filePath)
+      )
+    } catch (err) {
+      await rm(filePath, { force: true })
+      throw err
+    }
 
     return NextResponse.json({
       success: true,

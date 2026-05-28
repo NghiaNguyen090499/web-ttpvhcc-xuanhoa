@@ -48,7 +48,7 @@ function writeFeedbacks(data: FeedbackItem[]) {
 
 /** GET — Lấy danh sách phản ánh */
 export async function GET() {
-  const auth = await requireAdminSession('EDITOR')
+  const auth = await requireAdminSession('VIEWER')
   if (auth.response) return auth.response
 
   if (hasDatabase()) {

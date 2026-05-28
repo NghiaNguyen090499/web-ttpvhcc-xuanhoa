@@ -23,6 +23,7 @@ Sửa `.env.production`:
 - `POSTGRES_PASSWORD` và `DATABASE_URL` phải dùng cùng mật khẩu.
 - `NEXTAUTH_URL`, `NEXT_PUBLIC_APP_URL` đổi thành domain thật.
 - `NEXTAUTH_SECRET`, `ENCRYPTION_KEY`, `SEED_ADMIN_PASSWORD` đổi sang chuỗi mạnh.
+- `AUTH_COOKIE_SECURE=true` khi chạy HTTPS; chỉ đặt `false` nếu tạm vận hành qua HTTP/IP nội bộ.
 - `UPLOAD_DIR=/app/uploads` để file CMS được lưu vào Docker volume.
 
 ## 3. Khởi động DB và seed dữ liệu

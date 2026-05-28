@@ -8,6 +8,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  experimental: {
+    // src/proxy.ts bảo vệ /api/admin/*; đặt nhỉnh hơn giới hạn file 300MB để chừa multipart overhead.
+    proxyClientMaxBodySize: '310mb',
+  },
   async headers() {
     return [
       {

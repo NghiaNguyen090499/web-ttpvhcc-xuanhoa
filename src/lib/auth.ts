@@ -25,6 +25,11 @@ function getJwtSecret(): Uint8Array {
   return new TextEncoder().encode(secret)
 }
 
+function shouldUseSecureCookie(): boolean {
+  if (process.env.AUTH_COOKIE_SECURE === 'false') return false
+  return process.env.NODE_ENV === 'production'
+}
+
 /** Thông tin session admin */
 export interface SessionPayload {
   userId: string
@@ -48,7 +53,7 @@ export async function createSession(payload: SessionPayload): Promise<string> {
   const cookieStore = await cookies()
   cookieStore.set(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: shouldUseSecureCookie(),
     sameSite: 'lax',
     maxAge: SESSION_MAX_AGE,
     path: '/',

@@ -39,6 +39,8 @@ interface UploadResult {
 }
 
 const TAG_COLORS = ['blue', 'red', 'green', 'orange', 'teal', 'amber']
+const MAX_UPLOAD_SIZE = 300 * 1024 * 1024
+const ALLOWED_UPLOAD_MIME_PREFIXES = ['image/', 'video/', 'application/pdf']
 const DEFAULT_FORM = {
   icon: '📢',
   tag: 'Tuyên truyền',
@@ -61,6 +63,31 @@ function formatSize(size?: number) {
 
 function titleFromFileName(name: string) {
   return name.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ').trim()
+}
+
+async function readUploadError(res: Response) {
+  try {
+    const data = await res.json()
+    if (typeof data?.error === 'string') return data.error
+  } catch {
+    // Proxy/Nginx 413 có thể trả HTML hoặc body rỗng.
+  }
+
+  if (res.status === 413) return 'Tệp vượt quá dung lượng 300MB'
+  return 'Không thể tải tệp lên'
+}
+
+function validateUploadFile(file: File) {
+  if (file.size > MAX_UPLOAD_SIZE) {
+    return 'Tệp vượt quá dung lượng 300MB'
+  }
+
+  const allowed = ALLOWED_UPLOAD_MIME_PREFIXES.some((prefix) => file.type.startsWith(prefix))
+  if (!allowed) {
+    return 'Chỉ hỗ trợ ảnh, video hoặc PDF'
+  }
+
+  return null
 }
 
 export default function AdminPropagandaPage() {
@@ -142,19 +169,26 @@ export default function AdminPropagandaPage() {
   }
 
   const uploadFile = async (file: File): Promise<UploadResult | null> => {
+    const validationError = validateUploadFile(file)
+    if (validationError) {
+      alert(validationError)
+      setDragActive(false)
+      return null
+    }
+
     setUploading(true)
 
     try {
       const body = new FormData()
       body.append('file', file)
       const res = await fetch('/api/admin/uploads', { method: 'POST', body })
-      const data = await res.json()
 
       if (!res.ok) {
-        alert(data.error || 'Không thể tải tệp lên')
+        alert(await readUploadError(res))
         return null
       }
 
+      const data = await res.json()
       return data as UploadResult
     } catch {
       alert('Không thể tải tệp lên')
@@ -332,7 +366,7 @@ export default function AdminPropagandaPage() {
               <span className="mt-2 text-sm font-semibold text-gray-800">
                 {uploading ? 'Đang tải lên...' : 'Kéo thả tập tin vào đây hoặc chọn tệp để tải lên'}
               </span>
-              <span className="mt-1 text-xs text-gray-500">Hỗ trợ video, ảnh hoặc PDF, tối đa 50MB</span>
+              <span className="mt-1 text-xs text-gray-500">Hỗ trợ video, ảnh hoặc PDF, tối đa 300MB</span>
               <input
                 type="file"
                 accept="image/*,video/*,application/pdf"
