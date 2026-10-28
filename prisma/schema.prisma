@@ -318,3 +318,16 @@ model AuditLog {
   @@index([createdAt])
   @@map("audit_logs")
 }
+
+// ============================================================
+// THỐNG KÊ TRUY CẬP
+// ============================================================
+
+/// Bộ đếm tổng hợp (không lưu IP hay dữ liệu cá nhân người truy cập)
+model SiteCounter {
+  key           String   @id // VD: "site_visits"
+  value         Int      @default(0)
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("site_counters")
+}

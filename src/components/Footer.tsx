@@ -6,6 +6,7 @@
  */
 
 import Link from 'next/link'
+import { VisitCounter } from '@/components/VisitCounter'
 
 export function Footer() {
   const yr = new Date().getFullYear()
@@ -49,6 +50,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-main py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/50">
           <p>© {yr} UBND Phường Xuân Hòa. Bản quyền thuộc UBND Phường Xuân Hòa, TP.HCM.</p>
+          <VisitCounter />
           <p>Phiên bản 1.0 — ARAR</p>
         </div>
       </div>

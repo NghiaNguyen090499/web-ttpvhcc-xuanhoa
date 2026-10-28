@@ -109,6 +109,26 @@ export async function incrementProcedureView(id: string) {
 }
 
 // ============================================================
+// SITE COUNTER — Thống kê lượt truy cập
+// ============================================================
+
+/** Đọc giá trị bộ đếm (0 nếu chưa có) */
+export async function getSiteCounter(key: string) {
+  const counter = await getPrisma().siteCounter.findUnique({ where: { key } })
+  return counter?.value ?? 0
+}
+
+/** Tăng bộ đếm 1 đơn vị (atomic) và trả giá trị mới */
+export async function incrementSiteCounter(key: string) {
+  const counter = await getPrisma().siteCounter.upsert({
+    where: { key },
+    create: { key, value: 1 },
+    update: { value: { increment: 1 } },
+  })
+  return counter.value
+}
+
+// ============================================================
 // ARTICLE — Tin tức / Bài viết
 // ============================================================
 
