@@ -55,8 +55,8 @@
   --text-sm: 0.9375rem;
   --text-sm--line-height: 1.5rem;
 
-  /* Breakpoint tùy chỉnh — header nav cần khoảng 1100px để vừa 7 mục */
-  --breakpoint-nav: 1100px;
+  /* Breakpoint tùy chỉnh — header nav cần khoảng 1152px — giữ tối đa 6 mục cấp 1 (gom phần còn lại vào dropdown) */
+  --breakpoint-nav: 1152px;
 }
 
 /* ============================================================
@@ -125,6 +125,11 @@ body {
   to { transform: translateY(-50%); }
 }
 
+@keyframes imageScrollX {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .animate-slide-in {
   animation: slideIn 0.35s ease-out forwards;
 }
@@ -137,7 +142,15 @@ body {
   animation: directiveScrollUp 28s linear infinite;
 }
 
+.animate-image-scroll-x {
+  animation: imageScrollX 26s linear infinite;
+}
+
 .directive-marquee:hover .animate-directive-scroll {
+  animation-play-state: paused;
+}
+
+.image-marquee:hover .animate-image-scroll-x {
   animation-play-state: paused;
 }
 
@@ -145,8 +158,13 @@ body {
   mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
 
+.image-scroll-mask {
+  mask-image: linear-gradient(to right, #000 0%, #000 84%, transparent 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-directive-scroll {
+  .animate-directive-scroll,
+  .animate-image-scroll-x {
     animation: none;
   }
 }
@@ -316,4 +334,150 @@ body {
 
 .prose-community em {
   color: #6b8297;
+}
+
+/* ============================================================
+   PROSE — Nội dung chi tiết tin tức
+   ============================================================ */
+.prose-article {
+  color: #102033;
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.prose-article > * + * {
+  margin-top: 1rem;
+}
+
+.prose-article h2,
+.prose-article h3,
+.prose-article h4,
+.prose-article h5,
+.prose-article h6 {
+  color: #064f8f;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.6rem;
+}
+
+.prose-article h2 {
+  font-size: 1.45rem;
+}
+
+.prose-article h3 {
+  font-size: 1.2rem;
+}
+
+.prose-article h4,
+.prose-article h5,
+.prose-article h6 {
+  font-size: 1.05rem;
+}
+
+.prose-article p {
+  margin-bottom: 1rem;
+}
+
+.prose-article ul,
+.prose-article ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.prose-article ul {
+  list-style-type: disc;
+}
+
+.prose-article ol {
+  list-style-type: decimal;
+}
+
+.prose-article li {
+  margin-bottom: 0.4rem;
+}
+
+.prose-article a {
+  color: #0878c9;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-article a:hover {
+  color: #064f8f;
+}
+
+.prose-article blockquote {
+  border-left: 4px solid #0878c9;
+  color: #38566f;
+  margin: 1.25rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.prose-article img {
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  margin: 1.25rem auto;
+  max-width: 100%;
+}
+
+.prose-article figure {
+  margin: 1.25rem 0;
+}
+
+.prose-article figcaption {
+  color: #6b8297;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.prose-article table {
+  border-collapse: collapse;
+  display: block;
+  margin: 1.25rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.prose-article th,
+.prose-article td {
+  border: 1px solid #cfe4ef;
+  padding: 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose-article th {
+  background: #eef9ff;
+  color: #102033;
+  font-weight: 700;
+}
+
+.prose-article hr {
+  border: 0;
+  border-top: 1px solid #cfe4ef;
+  margin: 1.5rem 0;
+}
+
+.admin-input {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  color: #111827;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  padding: 0.7rem 0.8rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  width: 100%;
+}
+
+.admin-input:focus {
+  border-color: #0878c9;
+  box-shadow: 0 0 0 3px rgb(8 120 201 / 12%);
 }

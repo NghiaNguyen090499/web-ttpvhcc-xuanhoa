@@ -7,19 +7,47 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { MobileMenu } from './MobileMenu'
+import { MobileMenu, type NavItem } from './MobileMenu'
 
-const NAV_ITEMS = [
+const NAV_ITEMS: NavItem[] = [
   { label: 'Trang chủ', href: '/' },
-  { label: 'Thủ tục HC', href: '/thu-tuc' },
-  { label: 'Tra cứu', href: '/tra-cuu' },
-  { label: 'Tin tức', href: '/tin-tuc' },
-  { label: 'Văn bản', href: '/van-ban' },
-  { label: 'Lịch công tác', href: '/lich-cong-tac' },
-  { label: 'Tiếp dân', href: '/lich-tiep-dan' },
-  { label: 'Niêm yết', href: '/niem-yet' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Liên hệ', href: '/lien-he' },
+  {
+    label: 'Thủ tục HC',
+    href: '/thu-tuc',
+    children: [
+      { label: 'Thủ tục Hành chính', href: '/thu-tuc' },
+      { label: 'Câu hỏi thường gặp', href: '/faq' },
+      { label: 'Tra cứu', href: '/tra-cuu' },
+    ],
+  },
+  {
+    label: 'Thông tin',
+    href: '/van-ban',
+    children: [
+      { label: 'Văn bản', href: '/van-ban' },
+      { label: 'Lịch công tác', href: '/lich-cong-tac' },
+      { label: 'Niêm yết', href: '/niem-yet' },
+      { label: 'Chuyển đổi số', href: '/chuyen-doi-so' },
+    ],
+  },
+  {
+    label: 'Tuyên truyền',
+    href: '/tuyen-truyen',
+    children: [
+      { label: 'Bài viết tuyên truyền', href: '/tuyen-truyen' },
+      { label: 'Video hướng dẫn', href: '/video-huong-dan' },
+      { label: 'Thư viện hình ảnh', href: '/hinh-anh' },
+    ],
+  },
+  {
+    label: 'Liên hệ',
+    href: '/lien-he',
+    children: [
+      { label: 'Liên hệ & phản ánh', href: '/lien-he' },
+      { label: 'Khám phá Xuân Hòa', href: '/dia-diem-noi-bat' },
+    ],
+  },
+  { label: 'Cổng TP.HCM', href: 'https://hochiminhcity.gov.vn/', external: true },
 ]
 
 export function Header() {
@@ -51,26 +79,78 @@ export function Header() {
           </Link>
 
           <ul className="hidden nav:flex items-center gap-0.5" role="menubar">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href} role="none">
-                <Link href={item.href} role="menuitem" className="px-2.5 py-2 text-[14px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap">
-                  {item.label}
-                </Link>
+            {NAV_ITEMS.map((item, index) => (
+              <li key={item.href} role="none" className={item.children?.length ? 'relative group' : undefined}>
+                {item.children?.length ? (
+                  <>
+                    <Link
+                      href={item.href}
+                      role="menuitem"
+                      aria-haspopup="true"
+                      className="inline-flex items-center gap-1 px-2 py-2 text-[14px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap"
+                    >
+                      {item.label}
+                      <svg className="h-3.5 w-3.5 text-text-muted transition-transform group-hover:rotate-90 group-focus-within:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m9 5 7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <ul
+                      role="menu"
+                      className={`invisible absolute ${index >= NAV_ITEMS.length - 2 ? 'right-0' : 'left-0'} top-full z-20 min-w-36 translate-y-1 rounded-xl border border-border bg-white p-1 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100`}
+                    >
+                      {item.children.map((child) => (
+                        <li key={child.href} role="none">
+                          {child.external ? (
+                            <a
+                              href={child.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              role="menuitem"
+                              className="flex items-center justify-between gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-text-primary hover:bg-cream hover:text-primary btn-transition"
+                            >
+                              {child.label}
+                              <span aria-hidden="true">↗</span>
+                            </a>
+                          ) : (
+                            <Link
+                              href={child.href}
+                              role="menuitem"
+                              className="block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-text-primary hover:bg-cream hover:text-primary btn-transition"
+                            >
+                              {child.label}
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    role="menuitem"
+                    className="inline-flex items-center gap-1 px-2 py-2 text-[14px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap"
+                  >
+                    {item.label}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <Link href={item.href} role="menuitem" className="px-2 py-2 text-[14px] font-medium text-text-primary rounded-xl hover:text-primary hover:bg-cream btn-transition whitespace-nowrap">
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
 
           <div className="flex items-center gap-3">
-            {/* Badge 24/7 — hỗ trợ trực tuyến */}
-            <span className="hidden nav:inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              24/7
-            </span>
-            <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
-              className="hidden nav:inline-flex items-center gap-2 whitespace-nowrap px-3.5 py-2 bg-accent text-[#5a3200] text-[14px] font-bold rounded-xl hover:bg-accent-dark btn-transition shadow-sm" id="btn-nop-ho-so">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-              Nộp hồ sơ online
-            </a>
+            <Link href="/admin"
+              aria-label="Đăng nhập quản trị"
+              title="Đăng nhập quản trị"
+              className="hidden nav:inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-xl border border-primary/25 bg-primary text-white shadow-sm btn-transition hover:bg-primary-dark" id="btn-admin-login">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a3 3 0 11-6 0 3 3 0 016 0zM4 20a8 8 0 1116 0" /></svg>
+            </Link>
             <MobileMenu items={NAV_ITEMS} />
           </div>
         </nav>

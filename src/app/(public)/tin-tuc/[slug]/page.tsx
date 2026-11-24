@@ -9,8 +9,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getPortalNewsBySlug, getPortalNewsData } from '@/lib/portal-db'
+import { getPortalArticleComments, getPortalNewsBySlug, getPortalNewsData } from '@/lib/portal-db'
+import { normalizeArticleHtml } from '@/lib/html'
 import NewsDetailGallery from './NewsDetailGallery'
+import ArticleComments from './ArticleComments'
+import { ArticleImageViewerProvider, ZoomableArticleHtml, ZoomableCover } from './ArticleImageViewer'
 
 export const revalidate = 60
 
@@ -95,10 +98,9 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
     ? news.images
     : [news.image]
 
-  // Chia nội dung thành các đoạn để hiển thị dễ đọc
-  const contentParagraphs = news.content
-    .split(/\\n|\n/)
-    .filter((p) => p.trim().length > 0)
+  const articleHtml = normalizeArticleHtml(news.content)
+  const commentsEnabled = news.commentsEnabled !== false
+  const initialComments = commentsEnabled ? await getPortalArticleComments(news.id) : []
 
   return (
     <>
@@ -135,11 +137,10 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
       {/* Nội dung */}
       <section className="py-10 md:py-14">
         <div className="container-main max-w-3xl">
+          <ArticleImageViewerProvider>
           <article className="bg-white rounded-2xl border border-border overflow-hidden">
-            {/* Ảnh chính — hiển thị đủ ảnh, kể cả poster dọc */}
-            <div className="relative w-full bg-surface" style={{ aspectRatio: '16/10' }}>
-              <Image src={news.image} alt={news.title} fill className="object-contain" sizes="(max-width: 768px) 100vw, 720px" priority />
-            </div>
+            {/* Ảnh chính — hiển thị đủ ảnh, kể cả poster dọc; bấm để phóng to */}
+            <ZoomableCover src={news.image} images={allImages} title={news.title} />
 
             <div className="p-6 md:p-8">
               {/* Gallery ảnh phụ — client component có lightbox */}
@@ -152,12 +153,8 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
                 <p className="text-sm text-text-secondary italic leading-relaxed">{news.excerpt}</p>
               </div>
 
-              {/* Nội dung chính — render từng đoạn */}
-              <div className="prose prose-sm max-w-none text-text-primary leading-relaxed space-y-3">
-                {contentParagraphs.map((para, idx) => (
-                  <p key={idx}>{para}</p>
-                ))}
-              </div>
+              {/* Nội dung chính */}
+              <ZoomableArticleHtml className="prose-article" html={articleHtml} />
 
               {/* Chia sẻ + nguồn */}
               <div className="mt-8 pt-6 border-t border-border flex items-center justify-between flex-wrap gap-4">
@@ -173,6 +170,13 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
               </div>
             </div>
           </article>
+          </ArticleImageViewerProvider>
+
+          <ArticleComments
+            articleId={news.id}
+            commentsEnabled={commentsEnabled}
+            initialComments={initialComments}
+          />
 
           {/* Bài viết liên quan */}
           {relatedFinal.length > 0 && (

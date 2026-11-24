@@ -1,6 +1,6 @@
 /**
  * @nhom        : Components / Trang chủ
- * @chucnang    : Bố cục nội dung chính trang chủ — 2 cột 70/30 theo mockup
+ * @chucnang    : Bố cục nội dung chính trang chủ — khu vực TIN NỔI BẬT / TIN MỚI toàn chiều rộng + 2 cột 70/30 theo mockup
  * @lienquan    : src/lib/static-data.ts, src/components/ProcedureGrid.tsx, src/components/DocumentDirective.tsx
  * @alias       : home-content-layout, trang-chu-2-cot
  */
@@ -9,22 +9,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
-  CalendarDays,
   Download,
   ExternalLink,
   FileText,
+  Image as ImageIcon,
   Megaphone,
   PlayCircle,
-  Tag,
 } from 'lucide-react'
 import {
   getPortalNewsData,
   getPortalNiemYetData,
   getPortalTuyenTruyenData,
 } from '@/lib/portal-db'
-import type { NewsItem, NiemYetItem, TuyenTruyenItem } from '@/lib/static-data'
+import { getVerticalMarqueeDuration } from '@/lib/marquee'
+import type { NiemYetItem, TuyenTruyenItem } from '@/lib/static-data'
 import { ProcedureGrid } from '@/components/ProcedureGrid'
 import { DocumentDirective } from '@/components/DocumentDirective'
+import { getFeaturedPropagandaImage, isPropagandaImage } from '@/lib/propaganda-media'
+import { buildHomeNewsTabs } from '@/lib/home-news'
+import { HomeNewsTabs } from '@/components/HomeNewsTabs'
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
@@ -49,58 +52,42 @@ function getYoutubeEmbedUrl(url: string): string | null {
   return null
 }
 
-function NewsCards({ allNews }: { allNews: NewsItem[] }) {
-  const latestNews = allNews.slice(0, 3)
+function PropagandaImageFrame({
+  item,
+  className = '',
+  sizes,
+}: {
+  item: TuyenTruyenItem
+  className?: string
+  sizes: string
+}) {
+  const src = item.mediaUrl || ''
+  const isLocalImage = src.startsWith('/')
+  const isExternalImage = /^https?:\/\//i.test(src) || /^data:image\//i.test(src) || /^blob:/i.test(src)
 
   return (
-    <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {latestNews.map((item) => (
-          <Link
-            key={item.id}
-            href={`/tin-tuc/${item.slug}`}
-            className="group flex min-h-full flex-col overflow-hidden rounded-xl border border-border bg-white shadow-[0_10px_28px_rgba(8,79,143,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(8,79,143,0.14)]"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden bg-surface">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover transition duration-300 group-hover:scale-[1.03]"
-                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 35vw, 250px"
-              />
-            </div>
-            <div className="flex flex-1 flex-col p-4">
-              <div className="mb-2 flex items-center gap-2 text-xs font-medium text-text-muted">
-                <CalendarDays className="h-4 w-4 text-primary" aria-hidden="true" />
-                <span>{formatDate(item.date)}</span>
-              </div>
-              <h3 className="line-clamp-2 text-base font-bold uppercase leading-snug text-text-primary transition group-hover:text-primary">
-                {item.title}
-              </h3>
-              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
-                {item.excerpt}
-              </p>
-              <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-bold uppercase text-primary">
-                Xem ngay
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <div className="mt-6 text-center">
-        <Link
-          href="/tin-tuc"
-          className="inline-flex items-center justify-center gap-2 text-sm font-bold text-primary transition hover:text-primary-dark"
-        >
-          Xem tất cả tin tức
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          <span className="font-medium text-text-muted">({allNews.length} bài)</span>
-        </Link>
-      </div>
-    </section>
+    <div className={`relative overflow-hidden bg-surface ${className}`}>
+      {isLocalImage ? (
+        <Image
+          src={src}
+          alt={item.title}
+          fill
+          className="object-cover"
+          sizes={sizes}
+        />
+      ) : isExternalImage ? (
+        <div
+          role="img"
+          aria-label={item.title}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url("${src.replace(/"/g, '\\"')}")` }}
+        />
+      ) : (
+        <div className="flex h-full min-h-[180px] w-full items-center justify-center text-sm font-semibold text-text-muted">
+          Chưa có ảnh
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -112,13 +99,11 @@ function PropagandaMediaCard({
   featuredVideoId?: string
 }) {
   const mediaItems = data
-    .filter((item) => item.mediaType === 'video' || item.mediaType === 'file' || Boolean(item.mediaUrl))
+    .filter((item) => item.mediaType === 'video' || item.mediaType === 'file')
   const featuredItem = featuredVideoId
     ? mediaItems.find((item) => item.id === featuredVideoId)
     : undefined
-  const items = featuredItem
-    ? [featuredItem, ...mediaItems.filter((item) => item.id !== featuredItem.id).slice(0, 2)]
-    : mediaItems.slice(0, 3)
+  const items = featuredItem ? [featuredItem] : mediaItems.slice(0, 1)
 
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -248,37 +233,6 @@ function PropagandaMediaCard({
   )
 }
 
-function FeaturedSidebarCard({ featured }: { featured?: TuyenTruyenItem }) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-      <Link
-        href="/tin-tuc"
-        className="flex items-center gap-3 bg-primary px-5 py-4 text-white transition hover:bg-primary-dark"
-      >
-        <Megaphone className="h-5 w-5" aria-hidden="true" />
-        <span className="text-sm font-bold">Xem chi tiết</span>
-        <ArrowRight className="ml-auto h-4 w-4" aria-hidden="true" />
-      </Link>
-      <div className="bg-gradient-to-br from-emerald-600 to-emerald-500 p-5 text-white">
-        <div className="mb-4 flex items-center gap-2">
-          <Tag className="h-5 w-5" aria-hidden="true" />
-          <h3 className="text-sm font-bold uppercase tracking-wide">Nổi bật hôm nay</h3>
-        </div>
-        <h4 className="text-base font-bold leading-snug">
-          {featured?.title || 'Cập nhật thông tin tuyên truyền mới nhất'}
-        </h4>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/90">
-          {featured?.summary || 'Theo dõi các thông tin phục vụ người dân và hoạt động hành chính công tại phường Xuân Hòa.'}
-        </p>
-        <Link href="/tin-tuc" className="mt-5 inline-flex items-center gap-2 text-sm font-bold">
-          Xem chi tiết
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
-      </div>
-    </div>
-  )
-}
-
 function HotlineCard({ className = '' }: { className?: string }) {
   return (
     <div className={`overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)] ${className}`}>
@@ -297,7 +251,9 @@ function HotlineCard({ className = '' }: { className?: string }) {
 }
 
 function PublicNoticesSidebarCard({ data }: { data: NiemYetItem[] }) {
-  const latest = data.slice(0, 5)
+  const latest = [...data]
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  const scrollItems = [...latest, ...latest]
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -305,34 +261,39 @@ function PublicNoticesSidebarCard({ data }: { data: NiemYetItem[] }) {
         <FileText className="h-5 w-5 text-accent" aria-hidden="true" />
         <h3 className="text-sm font-bold uppercase tracking-wide">Niêm yết công khai</h3>
       </div>
-      <div className="divide-y divide-border p-[15px]">
-        {latest.length === 0 ? (
-          <p className="py-8 text-center text-sm text-text-muted">Chưa có văn bản niêm yết</p>
-        ) : (
-          latest.map((item) => (
-            <a
-              key={item.id}
-              href={item.fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex gap-3 py-4 transition hover:bg-primary-50"
-            >
-              <FileText className="mt-1 h-5 w-5 shrink-0 text-warning" aria-hidden="true" />
-              <div className="min-w-0 flex-1">
-                <p className="line-clamp-2 text-sm font-semibold leading-snug text-text-primary group-hover:text-primary">
-                  {item.title}
-                </p>
-                <div className="mt-2 flex items-center gap-2 text-xs text-text-muted">
-                  <span>{formatDate(item.publishedAt)}</span>
-                  {item.category && <span>•</span>}
-                  {item.category && <span className="line-clamp-1">{item.category}</span>}
-                  <span className="ml-auto font-bold text-primary">PDF</span>
+      {latest.length === 0 ? (
+        <p className="py-8 text-center text-sm text-text-muted">Chưa có văn bản niêm yết</p>
+      ) : (
+        <div className="directive-marquee directive-scroll-mask h-[320px] overflow-hidden px-4">
+          <div
+            className="animate-directive-scroll"
+            style={{ animationDuration: getVerticalMarqueeDuration(latest.length) }}
+          >
+            {scrollItems.map((item, index) => (
+              <a
+                key={`${item.id}-${index}`}
+                href={item.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex gap-3 border-b border-border py-4 transition hover:bg-primary-50"
+              >
+                <FileText className="mt-1 h-5 w-5 shrink-0 text-warning" aria-hidden="true" />
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-sm font-semibold leading-snug text-text-primary group-hover:text-primary">
+                    {item.title}
+                  </p>
+                  <div className="mt-2 flex items-center gap-2 text-xs text-text-muted">
+                    <span>{formatDate(item.publishedAt)}</span>
+                    {item.category && <span>•</span>}
+                    {item.category && <span className="line-clamp-1">{item.category}</span>}
+                    <span className="ml-auto font-bold text-primary">PDF</span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))
-        )}
-      </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
       <Link
         href="/niem-yet"
         className="flex items-center justify-center gap-2 border-t border-border px-4 py-3 text-sm font-bold text-primary transition hover:bg-primary-50"
@@ -353,7 +314,8 @@ function VideoGuideSidebarCard({
 }) {
   const videos = data
     .filter((item) => item.mediaType === 'video' && item.mediaUrl && item.id !== featuredVideoId)
-    .slice(0, 4)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  const scrollItems = [...videos, ...videos]
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
@@ -364,28 +326,35 @@ function VideoGuideSidebarCard({
         </h3>
       </div>
 
-      <div className="divide-y divide-border p-4">
-        {videos.length > 0 ? (
-          videos.map((item) => (
-            <Link
-              key={item.id}
-              href="/video-huong-dan"
-              className="group flex gap-3 py-3 first:pt-0 last:pb-0"
-            >
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
-                <PlayCircle className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="line-clamp-2 text-sm font-semibold leading-snug text-text-primary group-hover:text-primary">
-                  {item.title}
+      {videos.length > 0 ? (
+        <div className="directive-marquee directive-scroll-mask h-[320px] overflow-hidden px-4">
+          <div
+            className="animate-directive-scroll"
+            style={{ animationDuration: getVerticalMarqueeDuration(videos.length) }}
+          >
+            {scrollItems.map((item, index) => (
+              <Link
+                key={`${item.id}-${index}`}
+                href="/video-huong-dan"
+                className="group flex gap-3 border-b border-border py-4 transition hover:bg-primary-50"
+              >
+                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                  <PlayCircle className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <span className="mt-1 block text-xs text-text-muted">
-                  {formatDate(item.publishedAt)}
+                <span className="min-w-0 flex-1">
+                  <span className="line-clamp-2 text-sm font-semibold leading-snug text-text-primary group-hover:text-primary">
+                    {item.title}
+                  </span>
+                  <span className="mt-1 block text-xs text-text-muted">
+                    {formatDate(item.publishedAt)}
+                  </span>
                 </span>
-              </span>
-            </Link>
-          ))
-        ) : (
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="p-4">
           <div className="flex min-h-[150px] flex-col items-center justify-center rounded-xl border border-dashed border-border bg-primary-50 px-4 text-center">
             <PlayCircle className="h-10 w-10 text-primary" aria-hidden="true" />
             <p className="mt-3 text-sm font-bold text-text-primary">Chưa có video khác</p>
@@ -393,8 +362,8 @@ function VideoGuideSidebarCard({
               Khi có thêm clip, danh sách sẽ hiển thị tại đây.
             </p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <Link
         href="/video-huong-dan"
@@ -407,40 +376,97 @@ function VideoGuideSidebarCard({
   )
 }
 
+function ImageGallerySidebarCard({
+  data,
+  featuredImageId,
+}: {
+  data: TuyenTruyenItem[]
+  featuredImageId?: string
+}) {
+  const images = data.filter(isPropagandaImage)
+  const displayImages = images
+    .filter((item) => item.id !== featuredImageId)
+    .slice(0, 8)
+  const scrollItems = displayImages.length > 1 ? [...displayImages, ...displayImages] : displayImages
+
+  if (displayImages.length === 0) return null
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
+      <div className="flex items-center gap-3 bg-[#0f766e] px-5 py-4 text-white">
+        <ImageIcon className="h-5 w-5 text-accent" aria-hidden="true" />
+        <h3 className="font-heading text-base font-bold uppercase tracking-wide">
+          Hình ảnh tuyên truyền
+        </h3>
+      </div>
+
+      <div className="image-marquee image-scroll-mask overflow-hidden px-4 py-4">
+        <div className={`flex w-max gap-3 ${displayImages.length > 1 ? 'animate-image-scroll-x' : ''}`}>
+          {scrollItems.map((item, index) => (
+            <article
+              key={`${item.id}-${index}`}
+              className="w-56 shrink-0 overflow-hidden rounded-xl border border-border bg-surface"
+            >
+              <PropagandaImageFrame
+                item={item}
+                className="aspect-[4/3]"
+                sizes="224px"
+              />
+              <div className="p-3">
+                <p className="line-clamp-2 text-sm font-bold leading-snug text-text-primary">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-xs text-text-muted">
+                  {formatDate(item.publishedAt)}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <Link
+        href="/hinh-anh"
+        className="flex items-center justify-center gap-2 border-t border-border px-4 py-3 text-sm font-bold text-primary transition hover:bg-primary-50"
+      >
+        Xem tất cả hình ảnh
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
+    </div>
+  )
+}
+
 export async function HomeContentLayout() {
   const [news, propaganda, notices] = await Promise.all([
     getPortalNewsData(),
     getPortalTuyenTruyenData(),
     getPortalNiemYetData(),
   ])
-  const [featuredPropaganda] = propaganda
+  const homeNews = buildHomeNewsTabs(news)
   const featuredVideoId = (
     propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl && item.isFeatured)
     || propaganda.find((item) => item.mediaType === 'video' && item.mediaUrl)
   )?.id
+  const featuredImageId = getFeaturedPropagandaImage(propaganda)?.id
 
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-8 md:py-10">
       <div className="mx-auto max-w-[1200px] px-4">
         <div className="space-y-6">
-          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
-            <NewsCards allNews={news} />
-            <aside className="flex h-full flex-col gap-5">
-              <FeaturedSidebarCard featured={featuredPropaganda} />
-              <HotlineCard className="lg:flex-1" />
-            </aside>
-          </div>
+          <HomeNewsTabs {...homeNews} />
 
           <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,0.8fr)]">
-            <main className="space-y-6">
+            <main className="flex flex-col gap-4 lg:gap-5">
               <PropagandaMediaCard data={propaganda} featuredVideoId={featuredVideoId} />
-              <ProcedureGrid embedded />
+              <ProcedureGrid embedded className="-mt-[46px]" />
             </main>
 
             <aside className="flex flex-col gap-5">
+              <HotlineCard />
               <PublicNoticesSidebarCard data={notices} />
               <DocumentDirective />
               <VideoGuideSidebarCard data={propaganda} featuredVideoId={featuredVideoId} />
+              <ImageGallerySidebarCard data={propaganda} featuredImageId={featuredImageId} />
             </aside>
           </div>
         </div>

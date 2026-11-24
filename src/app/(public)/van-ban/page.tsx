@@ -8,6 +8,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPortalVanBanData } from '@/lib/portal-db'
+import { notFound } from 'next/navigation'
+import { Pagination } from '@/components/Pagination'
+import { paginate, parsePage, type PageSearchParams } from '@/lib/pagination'
 
 export const metadata: Metadata = {
   title: 'Văn bản chỉ đạo điều hành',
@@ -31,11 +34,14 @@ function getTypeColor(loai: string): { bg: string; text: string; border: string 
   }
 }
 
-export default async function VanBanPage() {
+export default async function VanBanPage({ searchParams }: { searchParams: PageSearchParams }) {
   const vanBanList = await getPortalVanBanData()
   const sorted = [...vanBanList].sort(
     (a, b) => new Date(b.ngayBanHanh).getTime() - new Date(a.ngayBanHanh).getTime()
   )
+
+  const { items: pageItems, page, totalPages, offset, outOfRange } = paginate(sorted, parsePage((await searchParams).page))
+  if (outOfRange) notFound()
 
   /* Đếm theo loại */
   const countByType = vanBanList.reduce((acc, vb) => {
@@ -67,6 +73,11 @@ export default async function VanBanPage() {
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
               Tổng cộng <strong>{vanBanList.length}</strong>
             </span>
+            {totalPages > 1 && (
+              <span className="inline-flex items-center px-3 py-1.5 text-xs text-text-muted">
+                Đang xem {offset + 1}–{offset + pageItems.length}
+              </span>
+            )}
             {Object.entries(countByType).map(([loai, count]) => {
               const color = getTypeColor(loai)
               return (
@@ -79,7 +90,7 @@ export default async function VanBanPage() {
 
           {/* Danh sách văn bản */}
           <div className="space-y-3">
-            {sorted.map((item) => {
+            {pageItems.map((item) => {
               const color = getTypeColor(item.loai)
               return (
                 <a
@@ -123,6 +134,8 @@ export default async function VanBanPage() {
               )
             })}
           </div>
+
+          <Pagination currentPage={page} totalPages={totalPages} basePath="/van-ban" />
 
           {/* Quay lại */}
           <div className="mt-8">

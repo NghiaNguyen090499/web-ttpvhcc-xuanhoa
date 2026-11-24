@@ -9,6 +9,9 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { Pagination } from '@/components/Pagination'
+import { PAGE_SIZE, parsePage } from '@/lib/pagination'
 import Image from 'next/image'
 import Link from 'next/link'
 import NewsTabs, { TAG_COLORS, NewsSearch } from '@/components/NewsTabs'
@@ -23,7 +26,6 @@ interface NewsItem {
   image: string
   images?: string[]
   excerpt: string
-  content: string
   source: string
 }
 
@@ -59,99 +61,22 @@ function timeAgo(dateStr: string): string {
 }
 
 /** Số bài trong grid mỗi trang */
-const ITEMS_PER_PAGE = 6
-
-/**
- * @chucnang    : Component phân trang (numbered pagination)
- * @input       : totalPages, currentPage, onPageChange
- * @output      : JSX pagination bar
- */
-function Pagination({
-  totalPages,
-  currentPage,
-  onPageChange,
-}: {
-  totalPages: number
-  currentPage: number
-  onPageChange: (page: number) => void
-}) {
-  if (totalPages <= 1) return null
-
-  // Tính danh sách trang hiển thị — tối đa 5 trang + ellipsis
-  const getPageNumbers = (): (number | '...')[] => {
-    const pages: (number | '...')[] = []
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i)
-    } else {
-      pages.push(1)
-      if (currentPage > 3) pages.push('...')
-      const start = Math.max(2, currentPage - 1)
-      const end = Math.min(totalPages - 1, currentPage + 1)
-      for (let i = start; i <= end; i++) pages.push(i)
-      if (currentPage < totalPages - 2) pages.push('...')
-      pages.push(totalPages)
-    }
-    return pages
-  }
-
-  return (
-    <nav className="flex items-center justify-center gap-1.5 mt-8" aria-label="Phân trang">
-      {/* Nút Trước */}
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage <= 1}
-        className="inline-flex items-center gap-1 px-3 py-2 text-xs font-medium rounded-lg border border-border bg-white text-text-primary hover:bg-cream disabled:opacity-30 disabled:cursor-not-allowed btn-transition"
-        aria-label="Trang trước"
-      >
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        Trước
-      </button>
-
-      {/* Số trang */}
-      {getPageNumbers().map((page, idx) =>
-        page === '...' ? (
-          <span key={`ellipsis-${idx}`} className="px-2 py-2 text-xs text-text-muted">
-            …
-          </span>
-        ) : (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`w-9 h-9 rounded-lg text-xs font-semibold btn-transition ${
-              page === currentPage
-                ? 'bg-primary text-white shadow-sm'
-                : 'border border-border bg-white text-text-primary hover:bg-cream'
-            }`}
-            aria-current={page === currentPage ? 'page' : undefined}
-            aria-label={`Trang ${page}`}
-          >
-            {page}
-          </button>
-        )
-      )}
-
-      {/* Nút Sau */}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage >= totalPages}
-        className="inline-flex items-center gap-1 px-3 py-2 text-xs font-medium rounded-lg border border-border bg-white text-text-primary hover:bg-cream disabled:opacity-30 disabled:cursor-not-allowed btn-transition"
-        aria-label="Trang sau"
-      >
-        Sau
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </nav>
-  )
-}
+const ITEMS_PER_PAGE = PAGE_SIZE
 
 export default function NewsPageClient({ news }: NewsPageClientProps) {
   // State tìm kiếm + phân trang
   const [searchQuery, setSearchQuery] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
+  // Trang hiện tại lưu trên URL (?page=N) — chia sẻ được link, nút Back hoạt động
+  const searchParams = useSearchParams()
+  const requestedPage = parsePage(searchParams.get('page'))
+
+  const setCurrentPage = useCallback((page: number, mode: 'push' | 'replace' = 'push') => {
+    const url = new URL(window.location.href)
+    if (page <= 1) url.searchParams.delete('page')
+    else url.searchParams.set('page', String(page))
+    if (url.href === window.location.href) return
+    window.history[mode === 'push' ? 'pushState' : 'replaceState'](null, '', url.pathname + url.search + url.hash)
+  }, [])
 
   // Lọc theo search query
   const searchFilteredNews = useMemo(() => {
@@ -168,8 +93,8 @@ export default function NewsPageClient({ news }: NewsPageClientProps) {
   // Reset trang khi đổi search/tab
   const handleSearch = useCallback((q: string) => {
     setSearchQuery(q)
-    setCurrentPage(1)
-  }, [])
+    setCurrentPage(1, 'replace')
+  }, [setCurrentPage])
 
   return (
     <>
@@ -201,11 +126,13 @@ export default function NewsPageClient({ news }: NewsPageClientProps) {
           </div>
 
           {/* Tabs + Nội dung */}
-          <NewsTabs allNews={searchFilteredNews}>
+          <NewsTabs allNews={searchFilteredNews} onTagChange={() => setCurrentPage(1, 'replace')}>
             {(filteredNews, activeTag) => {
               // Tính phân trang cho grid (bài thứ 7 trở đi)
               const gridNews = filteredNews.slice(6)
               const totalGridPages = Math.ceil(gridNews.length / ITEMS_PER_PAGE)
+              // Đổi tab/tìm kiếm làm giảm số trang → không để trang hiện tại vượt quá
+              const currentPage = Math.min(requestedPage, Math.max(1, totalGridPages))
               const paginatedGrid = gridNews.slice(
                 (currentPage - 1) * ITEMS_PER_PAGE,
                 currentPage * ITEMS_PER_PAGE

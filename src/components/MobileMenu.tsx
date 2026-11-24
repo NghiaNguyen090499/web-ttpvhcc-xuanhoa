@@ -10,7 +10,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-interface NavItem { label: string; href: string }
+export interface NavItem {
+  label: string
+  href: string
+  external?: boolean
+  children?: NavItem[]
+}
 
 export function MobileMenu({ items }: { items: NavItem[] }) {
   const [open, setOpen] = useState(false)
@@ -43,7 +48,56 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
 
         {/* Links */}
         <nav className="p-4 space-y-1">
-          {items.map((item) => (
+          {items.map((item) => item.children?.length ? (
+            <div key={item.href}>
+              <Link
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between px-4 py-3 text-sm font-medium text-text-primary rounded-xl hover:bg-cream hover:text-primary btn-transition"
+              >
+                {item.label}
+                <svg className="h-4 w-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m9 5 7 7-7 7" />
+                </svg>
+              </Link>
+              <div className="ml-4 border-l border-border pl-3">
+                {item.children.map((child) => child.external ? (
+                  <a
+                    key={child.href}
+                    href={child.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-between px-4 py-2.5 text-sm font-medium text-text-muted rounded-xl hover:bg-cream hover:text-primary btn-transition"
+                  >
+                    {child.label}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-2.5 text-sm font-medium text-text-muted rounded-xl hover:bg-cream hover:text-primary btn-transition"
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between px-4 py-3 text-sm font-medium text-text-primary rounded-xl hover:bg-cream hover:text-primary btn-transition"
+            >
+              {item.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
             <Link key={item.href} href={item.href} onClick={() => setOpen(false)}
               className="block px-4 py-3 text-sm font-medium text-text-primary rounded-xl hover:bg-cream hover:text-primary btn-transition">
               {item.label}
@@ -52,11 +106,11 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
         </nav>
 
         {/* CTA */}
-        <div className="p-4 mt-auto">
-          <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
+        <div className="mt-auto p-4">
+          <Link href="/admin" onClick={() => setOpen(false)}
             className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-dark btn-transition">
-            Nộp hồ sơ online ↗
-          </a>
+            Đăng nhập quản trị
+          </Link>
         </div>
       </div>
     </div>

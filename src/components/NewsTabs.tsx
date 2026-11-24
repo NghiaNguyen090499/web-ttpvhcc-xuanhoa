@@ -53,7 +53,7 @@ interface NewsItem {
   image: string
   images?: string[]
   excerpt: string
-  content: string
+  content?: string
   source: string
 }
 
@@ -62,6 +62,8 @@ interface NewsTabsProps {
   allNews: NewsItem[]
   /** Component render danh sách tin đã lọc */
   children: (filteredNews: NewsItem[], activeTag: string) => React.ReactNode
+  /** Gọi khi người dùng đổi tab (vd: reset phân trang) */
+  onTagChange?: (tag: string) => void
 }
 
 /**
@@ -69,7 +71,7 @@ interface NewsTabsProps {
  * @input       : allNews (NewsItem[]) — toàn bộ tin, children (render function)
  * @output      : JSX — tabs + rendered children
  */
-export default function NewsTabs({ allNews, children }: NewsTabsProps) {
+export default function NewsTabs({ allNews, children, onTagChange }: NewsTabsProps) {
   const [activeTag, setActiveTag] = useState('Tất cả')
 
   // Trích xuất danh sách tag duy nhất từ data, sắp xếp theo số lượng bài
@@ -94,7 +96,8 @@ export default function NewsTabs({ allNews, children }: NewsTabsProps) {
   // Xử lý chọn tab
   const handleTabClick = useCallback((tag: string) => {
     setActiveTag(tag)
-  }, [])
+    onTagChange?.(tag)
+  }, [onTagChange])
 
   return (
     <div>

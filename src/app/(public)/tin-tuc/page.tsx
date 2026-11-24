@@ -7,6 +7,7 @@
  */
 
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getPortalNewsData } from '@/lib/portal-db'
 import NewsPageClient from './NewsPageClient'
 
@@ -23,6 +24,14 @@ export const revalidate = 60
  */
 export default async function NewsPage() {
   const news = await getPortalNewsData()
+  // Không gửi nội dung HTML đầy đủ xuống trình duyệt — trang danh sách chỉ cần tiêu đề/tóm tắt
+  const listItems = news.map(({ id, title, slug, date, tag, image, images, excerpt, source }) => ({
+    id, title, slug, date, tag, image, images, excerpt, source,
+  }))
 
-  return <NewsPageClient news={news} />
+  return (
+    <Suspense>
+      <NewsPageClient news={listItems} />
+    </Suspense>
+  )
 }

@@ -9,6 +9,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, CalendarDays, PlayCircle } from 'lucide-react'
 import { getPortalTuyenTruyenData } from '@/lib/portal-db'
+import { notFound } from 'next/navigation'
+import { Pagination, PageRangeInfo } from '@/components/Pagination'
+import { paginate, parsePage, type PageSearchParams } from '@/lib/pagination'
 
 export const metadata: Metadata = {
   title: 'Video hướng dẫn',
@@ -40,9 +43,13 @@ function getYoutubeEmbedUrl(url: string): string | null {
   return null
 }
 
-export default async function VideoGuidePage() {
+export default async function VideoGuidePage({ searchParams }: { searchParams: PageSearchParams }) {
   const items = await getPortalTuyenTruyenData()
-  const videos = items.filter((item) => item.mediaType === 'video' && item.mediaUrl)
+  const { items: videos, page, totalPages, total, offset, outOfRange } = paginate(
+    items.filter((item) => item.mediaType === 'video' && item.mediaUrl),
+    parsePage((await searchParams).page),
+  )
+  if (outOfRange) notFound()
 
   return (
     <>
@@ -63,7 +70,7 @@ export default async function VideoGuidePage() {
 
       <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px] py-10 md:py-14">
         <div className="container-main">
-          {videos.length === 0 ? (
+          {total === 0 ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-white px-6 text-center shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
               <PlayCircle className="h-14 w-14 text-primary" aria-hidden="true" />
               <h2 className="mt-4 text-lg font-bold text-text-primary">Chưa có video hướng dẫn</h2>
@@ -72,6 +79,8 @@ export default async function VideoGuidePage() {
               </p>
             </div>
           ) : (
+            <>
+            <div className="mb-5"><PageRangeInfo offset={offset} count={videos.length} total={total} unit="video" /></div>
             <div className="grid gap-6 lg:grid-cols-2">
               {videos.map((item) => {
                 const youtubeEmbedUrl = item.mediaUrl ? getYoutubeEmbedUrl(item.mediaUrl) : null
@@ -119,6 +128,8 @@ export default async function VideoGuidePage() {
                 )
               })}
             </div>
+            <Pagination currentPage={page} totalPages={totalPages} basePath="/video-huong-dan" />
+            </>
           )}
         </div>
       </section>
