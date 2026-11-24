@@ -25,6 +25,7 @@ Sửa `.env.production`:
 - `NEXTAUTH_SECRET`, `ENCRYPTION_KEY`, `SEED_ADMIN_PASSWORD` đổi sang chuỗi mạnh.
 - `AUTH_COOKIE_SECURE=true` khi chạy HTTPS; chỉ đặt `false` nếu tạm vận hành qua HTTP/IP nội bộ.
 - `UPLOAD_DIR=/app/uploads` để file CMS được lưu vào Docker volume.
+- Cấu hình `SMTP_*` và `FEEDBACK_NOTIFY_EMAIL` nếu muốn gửi phản ánh mới tới email cán bộ.
 
 ## 3. Khởi động DB và seed dữ liệu
 

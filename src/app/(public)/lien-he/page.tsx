@@ -7,7 +7,9 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { connection } from 'next/server'
 import { ContactForm } from '@/components/ContactForm'
+import { getTurnstileSiteKey, isTurnstileEnabled } from '@/lib/turnstile'
 
 export const metadata: Metadata = {
   title: 'Liên hệ',
@@ -25,13 +27,17 @@ const SCHEDULE = [
 ]
 
 const CONTACTS = [
-  { icon: '📞', label: 'Điện thoại', value: '028 3526220', href: 'tel:02835262200' },
+  { icon: '📞', label: 'Điện thoại', value: '028 35262206', href: 'tel:02835262206' },
   { icon: '✉️', label: 'Email', value: 'xuanhoa@tphcm.gov.vn', href: 'mailto:xuanhoa@tphcm.gov.vn' },
   { icon: '📍', label: 'Địa chỉ', value: '99 Trần Quốc Thảo, P. Xuân Hòa, TP.HCM', href: undefined },
   { icon: '🕐', label: 'Giờ làm việc', value: 'Sáng: 7h30–11h30 | Chiều: 13h00–17h00', href: undefined },
 ]
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  // Đọc cấu hình Turnstile lúc chạy (không phải lúc build Docker image)
+  await connection()
+  const turnstileSiteKey = isTurnstileEnabled() ? getTurnstileSiteKey() : undefined
+
   return (
     <>
       {/* Hero */}
@@ -56,15 +62,29 @@ export default function ContactPage() {
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Cột trái: Contact cards + Map + Lịch */}
             <div className="space-y-6">
-              {/* 4 contact cards — kế thừa backup */}
+              {/* Contact cards — kế thừa backup */}
               <div className="grid gap-4 sm:grid-cols-2">
                 {CONTACTS.map((c) => {
+                  if (c.label === 'Email') {
+                    return (
+                      <a key={c.label} href={c.href}>
+                        <div className="rounded-2xl border border-border bg-white p-5 hover:bg-cream btn-transition">
+                          <div className="flex items-center gap-3">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cream text-xl">{c.icon}</div>
+                            <p className="text-xs font-semibold uppercase text-text-muted">{c.label}</p>
+                          </div>
+                          <p className="mt-3 whitespace-nowrap text-[13px] font-bold leading-snug text-text-primary sm:text-sm">{c.value}</p>
+                        </div>
+                      </a>
+                    )
+                  }
+
                   const inner = (
                     <div className="flex items-start gap-3 rounded-2xl border border-border bg-white p-5 hover:bg-cream btn-transition">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cream text-xl">{c.icon}</div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-xs font-semibold uppercase text-text-muted">{c.label}</p>
-                        <p className="mt-1 text-sm font-bold text-text-primary">{c.value}</p>
+                        <p className="mt-1 break-words text-sm font-bold text-text-primary">{c.value}</p>
                       </div>
                     </div>
                   )
@@ -119,7 +139,7 @@ export default function ContactPage() {
                 Gửi phản ánh, kiến nghị đến UBND Phường Xuân Hòa. Nội dung sẽ được gửi qua email, không lưu trữ dữ liệu cá nhân.
               </p>
               <div className="mt-6">
-                <ContactForm />
+                <ContactForm turnstileSiteKey={turnstileSiteKey} />
               </div>
               <p className="mt-4 text-xs font-semibold leading-relaxed text-text-secondary">
                 * Phản ánh sẽ được gửi qua email đến bộ phận tiếp nhận. Theo Luật BVDLCN, chúng tôi không lưu trữ thông tin cá nhân của bạn trong cơ sở dữ liệu.

@@ -53,9 +53,9 @@ export default function UsefulLinksPage() {
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white text-primary text-xs font-bold rounded-xl hover:bg-white/90 btn-transition">
                     🌐 dichvucong.gov.vn
                   </a>
-                  <a href="https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html" target="_blank" rel="noopener noreferrer"
+                  <a href="https://vpcp.dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html" target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 text-white text-xs font-semibold rounded-xl hover:bg-white/30 btn-transition">
-                    🔎 Tra cứu hồ sơ
+                    🔎 Tra cứu hồ sơ trước 29/05/2026
                   </a>
                   <a href="https://kiosk.hochiminhcity.gov.vn/vi/kiosk/danhgiahcm" target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 text-white text-xs font-semibold rounded-xl hover:bg-white/30 btn-transition">

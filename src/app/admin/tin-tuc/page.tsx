@@ -7,9 +7,11 @@
  * @alias       : admin-articles, quan-ly-tin-tuc
  */
 
-import { useState, useEffect } from 'react'
-import { Plus, Search, Edit3, Trash2, Eye, Calendar, Tag, Save, ArrowLeft } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Plus, Search, Edit3, Trash2, Eye, Calendar, Tag, Save, ArrowLeft, UploadCloud, Image as ImageIcon, Star, StarOff, MessageCircle } from 'lucide-react'
 import { useAdminRole } from '@/components/admin/AdminRoleContext'
+import RichTextEditor, { type RichTextEditorHandle } from '@/components/admin/RichTextEditor'
+import { uploadCmsFile } from '@/lib/cms-upload-client'
 
 // Type bài viết
 interface NewsItem {
@@ -23,6 +25,9 @@ interface NewsItem {
   excerpt: string
   content: string
   source: string
+  isFeatured?: boolean
+  commentsEnabled?: boolean
+  commentCount?: number
 }
 
 // Tags có sẵn
@@ -34,6 +39,7 @@ const AVAILABLE_TAGS = [
 
 export default function AdminArticlesPage() {
   const { canEdit, canDelete } = useAdminRole()
+  const editorRef = useRef<RichTextEditorHandle | null>(null)
   const [articles, setArticles] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -45,8 +51,10 @@ export default function AdminArticlesPage() {
   const [formData, setFormData] = useState({
     title: '', slug: '', date: '', tag: AVAILABLE_TAGS[0],
     image: '', excerpt: '', content: '', source: 'UBND Phường Xuân Hòa',
+    commentsEnabled: true,
   })
   const [saving, setSaving] = useState(false)
+  const [uploadingCover, setUploadingCover] = useState(false)
 
   async function fetchArticles() {
     try {
@@ -96,6 +104,7 @@ export default function AdminArticlesPage() {
       title: '', slug: '', date: today, tag: AVAILABLE_TAGS[0],
       image: '/images/news/post-01.jpg', excerpt: '', content: '',
       source: 'UBND Phường Xuân Hòa',
+      commentsEnabled: true,
     })
     setShowEditor(true)
   }
@@ -108,21 +117,42 @@ export default function AdminArticlesPage() {
       title: article.title, slug: article.slug, date: article.date,
       tag: article.tag, image: article.image, excerpt: article.excerpt,
       content: article.content, source: article.source,
+      commentsEnabled: article.commentsEnabled !== false,
     })
     setShowEditor(true)
+  }
+
+  const handleCoverUpload = async (file: File | undefined) => {
+    if (!file || !canEdit) return
+
+    setUploadingCover(true)
+    try {
+      const uploaded = await uploadCmsFile(file, {
+        folder: 'tin-tuc',
+        allowedMimePrefixes: ['image/'],
+      })
+      setFormData((current) => ({ ...current, image: uploaded.url }))
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Không thể tải ảnh lên')
+    } finally {
+      setUploadingCover(false)
+    }
   }
 
   // Lưu bài viết
   const handleSave = async () => {
     if (!canEdit) return
-    if (!formData.title.trim() || !formData.content.trim()) return
+    const currentContent = editorRef.current?.getContent() || formData.content
+    if (!formData.title.trim() || !currentContent.trim()) return
     setSaving(true)
 
     try {
+      await editorRef.current?.uploadImages()
+      const content = editorRef.current?.getContent() || currentContent
       const method = editingArticle ? 'PUT' : 'POST'
       const body = editingArticle
-        ? { ...formData, id: editingArticle.id }
-        : { ...formData, slug: formData.slug || generateSlug(formData.title) }
+        ? { ...formData, content, id: editingArticle.id }
+        : { ...formData, content, slug: formData.slug || generateSlug(formData.title) }
 
       const res = await fetch('/api/admin/articles', {
         method,
@@ -131,6 +161,7 @@ export default function AdminArticlesPage() {
       })
 
       if (res.ok) {
+        editorRef.current?.resetDirty()
         await fetchArticles()
         setShowEditor(false)
       }
@@ -155,6 +186,54 @@ export default function AdminArticlesPage() {
       await fetchArticles()
     } catch {
       console.error('Lỗi xóa bài viết')
+    }
+  }
+
+  const handleToggleFeatured = async (article: NewsItem) => {
+    if (!canEdit) return
+
+    try {
+      const res = await fetch('/api/admin/articles', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: article.id,
+          isFeatured: !article.isFeatured,
+        }),
+      })
+
+      if (!res.ok) {
+        alert('Không thể cập nhật tin nổi bật')
+        return
+      }
+
+      await fetchArticles()
+    } catch {
+      console.error('Lỗi cập nhật tin nổi bật')
+    }
+  }
+
+  const handleToggleComments = async (article: NewsItem) => {
+    if (!canEdit) return
+
+    try {
+      const res = await fetch('/api/admin/articles', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: article.id,
+          commentsEnabled: article.commentsEnabled === false,
+        }),
+      })
+
+      if (!res.ok) {
+        alert('Không thể cập nhật trạng thái bình luận')
+        return
+      }
+
+      await fetchArticles()
+    } catch {
+      console.error('Lỗi cập nhật trạng thái bình luận')
     }
   }
 
@@ -230,12 +309,44 @@ export default function AdminArticlesPage() {
           {/* Ảnh đại diện */}
           <div>
             <label className="block text-xs font-semibold text-gray-600 mb-1.5">Đường dẫn ảnh đại diện</label>
-            <input
-              type="text" value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
-              placeholder="/images/news/post-xx.jpg"
-            />
+            <div className="grid gap-3 lg:grid-cols-[180px_1fr]">
+              <div className="flex min-h-32 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+                {formData.image ? (
+                  <div
+                    aria-label="Ảnh đại diện"
+                    className="h-40 w-full bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url("${formData.image}")` }}
+                  />
+                ) : (
+                  <ImageIcon className="h-8 w-8 text-gray-300" />
+                )}
+              </div>
+              <div className="space-y-3">
+                <input
+                  type="text" value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
+                  placeholder="/images/news/post-xx.jpg"
+                />
+                <label className={`inline-flex cursor-pointer items-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold transition ${
+                  uploadingCover ? 'pointer-events-none text-gray-400' : 'text-gray-700 hover:border-primary hover:text-primary'
+                }`}>
+                  <UploadCloud className="h-4 w-4" />
+                  {uploadingCover ? 'Đang tải ảnh...' : 'Tải ảnh lên'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    disabled={uploadingCover}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      e.currentTarget.value = ''
+                      handleCoverUpload(file)
+                    }}
+                  />
+                </label>
+              </div>
+            </div>
           </div>
 
           {/* Tóm tắt */}
@@ -252,11 +363,12 @@ export default function AdminArticlesPage() {
           {/* Nội dung */}
           <div>
             <label className="block text-xs font-semibold text-gray-600 mb-1.5">Nội dung *</label>
-            <textarea
-              rows={12} value={formData.content}
-              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-              className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary resize-y font-mono"
-              placeholder="Nội dung bài viết (hỗ trợ HTML)..."
+            <RichTextEditor
+              ref={editorRef}
+              value={formData.content}
+              disabled={saving}
+              placeholder="Nhập nội dung bài viết..."
+              onChange={(content) => setFormData((current) => ({ ...current, content }))}
             />
           </div>
 
@@ -270,10 +382,33 @@ export default function AdminArticlesPage() {
             />
           </div>
 
+          {/* Bình luận */}
+          <div className="flex items-center justify-between gap-4 rounded-xl border border-gray-200 px-4 py-3">
+            <div>
+              <label className="block text-sm font-semibold text-gray-800">Cho phép bình luận</label>
+              <p className="mt-0.5 text-xs text-gray-500">Người dân có thể nhập tên và bình luận dưới bài viết.</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={formData.commentsEnabled}
+              onClick={() => setFormData((current) => ({ ...current, commentsEnabled: !current.commentsEnabled }))}
+              className={`relative h-7 w-12 rounded-full transition ${
+                formData.commentsEnabled ? 'bg-primary' : 'bg-gray-300'
+              }`}
+            >
+              <span
+                className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow-sm transition ${
+                  formData.commentsEnabled ? 'left-6' : 'left-1'
+                }`}
+              />
+            </button>
+          </div>
+
           {/* Actions */}
           <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
             <button
-              onClick={handleSave} disabled={saving || !formData.title.trim() || !formData.content.trim()}
+              onClick={handleSave} disabled={saving || uploadingCover || !formData.title.trim() || !formData.content.trim()}
               className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-all disabled:opacity-50"
             >
               <Save className="w-4 h-4" />
@@ -351,7 +486,23 @@ export default function AdminArticlesPage() {
                 {filtered.map((article) => (
                   <tr key={article.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                     <td className="px-5 py-4">
-                      <p className="font-medium text-gray-900 line-clamp-1">{article.title}</p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="font-medium text-gray-900 line-clamp-1">{article.title}</p>
+                        {article.isFeatured && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700">
+                            <Star className="h-3 w-3 fill-current" />
+                            Nổi bật
+                          </span>
+                        )}
+                        <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                          article.commentsEnabled === false
+                            ? 'bg-gray-100 text-gray-500'
+                            : 'bg-green-50 text-green-700'
+                        }`}>
+                          <MessageCircle className="h-3 w-3" />
+                          {article.commentsEnabled === false ? 'Tắt bình luận' : `${article.commentCount || 0} bình luận`}
+                        </span>
+                      </div>
                       <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{article.excerpt}</p>
                     </td>
                     <td className="px-5 py-4 hidden md:table-cell">
@@ -382,6 +533,32 @@ export default function AdminArticlesPage() {
                             title="Sửa"
                           >
                             <Edit3 className="w-4 h-4" />
+                          </button>
+                        )}
+                        {canEdit && (
+                          <button
+                            onClick={() => handleToggleFeatured(article)}
+                            className={`p-2 rounded-lg transition-all ${
+                              article.isFeatured
+                                ? 'text-amber-600 hover:bg-amber-50'
+                                : 'text-gray-400 hover:text-amber-600 hover:bg-amber-50'
+                            }`}
+                            title={article.isFeatured ? 'Bỏ tin nổi bật' : 'Đặt làm tin nổi bật'}
+                          >
+                            {article.isFeatured ? <StarOff className="w-4 h-4" /> : <Star className="w-4 h-4" />}
+                          </button>
+                        )}
+                        {canEdit && (
+                          <button
+                            onClick={() => handleToggleComments(article)}
+                            className={`p-2 rounded-lg transition-all ${
+                              article.commentsEnabled === false
+                                ? 'text-gray-400 hover:text-green-600 hover:bg-green-50'
+                                : 'text-green-600 hover:bg-green-50'
+                            }`}
+                            title={article.commentsEnabled === false ? 'Bật bình luận' : 'Tắt bình luận'}
+                          >
+                            <MessageCircle className="w-4 h-4" />
                           </button>
                         )}
                         {canDelete && (

@@ -13,17 +13,24 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Newspaper, MessageSquare, FileText, HelpCircle,
-  Settings, LogOut, Menu, X, ChevronRight, Building2, Megaphone
+  Settings, LogOut, Menu, X, ChevronRight, Building2, Megaphone, CalendarDays,
+  ClipboardList, ScrollText, MonitorSmartphone, UtensilsCrossed
 } from 'lucide-react'
 import { AdminRoleProvider, type AdminRole } from '@/components/admin/AdminRoleContext'
+import { useAdminSessionGuard } from '@/components/admin/useAdminSessionGuard'
 
 // Menu sidebar
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, minRole: 'VIEWER' },
   { label: 'Tin tức', href: '/admin/tin-tuc', icon: Newspaper, minRole: 'VIEWER' },
   { label: 'Tuyên truyền', href: '/admin/tuyen-truyen', icon: Megaphone, minRole: 'VIEWER' },
+  { label: 'Ẩm thực', href: '/admin/am-thuc', icon: UtensilsCrossed, minRole: 'VIEWER' },
   { label: 'Phản ánh', href: '/admin/phan-anh', icon: MessageSquare, minRole: 'VIEWER' },
   { label: 'Thủ tục HC', href: '/admin/thu-tuc', icon: FileText, minRole: 'VIEWER' },
+  { label: 'Chuyển đổi số', href: '/admin/chuyen-doi-so', icon: MonitorSmartphone, minRole: 'VIEWER' },
+  { label: 'Lịch công tác', href: '/admin/lich-cong-tac', icon: CalendarDays, minRole: 'VIEWER' },
+  { label: 'Niêm yết', href: '/admin/niem-yet', icon: ClipboardList, minRole: 'VIEWER' },
+  { label: 'Văn bản', href: '/admin/van-ban', icon: ScrollText, minRole: 'VIEWER' },
   { label: 'Giới thiệu', href: '/admin/gioi-thieu', icon: Building2, minRole: 'VIEWER' },
   { label: 'FAQ', href: '/admin/faq', icon: HelpCircle, minRole: 'VIEWER' },
   { label: 'Cài đặt', href: '/admin/cai-dat', icon: Settings, minRole: 'ADMIN' },
@@ -46,6 +53,7 @@ export function AdminShell({ children, userName, userEmail, userRole }: AdminShe
   const pathname = usePathname()
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  useAdminSessionGuard(pathname !== '/admin/login')
 
   // Trang login không cần shell
   if (pathname === '/admin/login') return <>{children}</>

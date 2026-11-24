@@ -267,7 +267,7 @@ export async function PUT(request: NextRequest) {
 /** DELETE — Xóa node và các node con trực tiếp */
 export async function DELETE(request: NextRequest) {
   try {
-    const auth = await requireAdminSession('ADMIN')
+    const auth = await requireAdminSession('EDITOR')
     if (auth.response) return auth.response
 
     const body = await request.json()

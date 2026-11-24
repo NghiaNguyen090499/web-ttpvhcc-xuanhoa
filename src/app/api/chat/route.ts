@@ -1,6 +1,6 @@
 /**
  * @nhom        : API / Chat
- * @chucnang    : POST /api/chat — gửi tin nhắn đến Gemini, trả về streaming response
+ * @chucnang    : POST /api/chat — gửi tin nhắn đến OpenRouter/Gemini, trả về streaming response
  * @input       : { message: string, history?: Array<{role, content}> }
  * @output      : Streaming text (ReadableStream)
  * @lienquan    : src/lib/chatbot.ts
@@ -18,6 +18,10 @@ import { buildSystemPrompt } from '@/lib/chatbot'
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT = 20 // tin nhắn
 const RATE_WINDOW = 60_000 // 1 phút
+const OPENROUTER_CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions'
+const DEFAULT_OPENROUTER_MODEL = 'google/gemini-2.5-flash'
+
+type ChatHistoryItem = { role: 'user' | 'model'; content: string }
 
 /**
  * @chucnang    : Kiểm tra rate limit theo IP
@@ -46,11 +50,144 @@ function getClientIP(req: NextRequest): string {
     || 'unknown'
 }
 
+function toHeaderAscii(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .replace(/[^\x20-\x7E]/g, '')
+}
+
+function toOpenRouterMessages(systemPrompt: string, message: string, history?: ChatHistoryItem[]) {
+  return [
+    { role: 'system', content: systemPrompt },
+    ...(history || []).slice(-10).map((msg) => ({
+      role: msg.role === 'model' ? 'assistant' : 'user',
+      content: msg.content,
+    })),
+    { role: 'user', content: message },
+  ]
+}
+
+async function createOpenRouterStream({
+  apiKey,
+  message,
+  history,
+  systemPrompt,
+}: {
+  apiKey: string
+  message: string
+  history?: ChatHistoryItem[]
+  systemPrompt: string
+}) {
+  const model = process.env.OPENROUTER_MODEL?.trim() || DEFAULT_OPENROUTER_MODEL
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://ttpvhcc-xuanhoa-hcm.gov.vn'
+  const siteName = toHeaderAscii(process.env.NEXT_PUBLIC_APP_NAME || 'TTPVHCC Phường Xuân Hòa')
+
+  const response = await fetch(OPENROUTER_CHAT_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': siteUrl,
+      'X-Title': siteName,
+    },
+    body: JSON.stringify({
+      model,
+      messages: toOpenRouterMessages(systemPrompt, message, history),
+      stream: true,
+      temperature: 0.3,
+      max_tokens: 1024,
+      top_p: 0.8,
+    }),
+  })
+
+  if (!response.ok || !response.body) {
+    const detail = await response.text().catch(() => '')
+    console.error('[Chat API] OpenRouter error:', response.status, detail.slice(0, 500))
+    return NextResponse.json(
+      { error: 'Không thể kết nối OpenRouter. Vui lòng kiểm tra API key/model.' },
+      { status: 502 }
+    )
+  }
+
+  const encoder = new TextEncoder()
+  const decoder = new TextDecoder()
+  const reader = response.body.getReader()
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      let buffer = ''
+
+      try {
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+
+          buffer += decoder.decode(value, { stream: true })
+          const lines = buffer.split('\n')
+          buffer = lines.pop() || ''
+
+          for (const rawLine of lines) {
+            const line = rawLine.trim()
+            if (!line.startsWith('data:')) continue
+
+            const data = line.slice(5).trim()
+            if (!data) continue
+
+            if (data === '[DONE]') {
+              controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+              controller.close()
+              return
+            }
+
+            const parsed = JSON.parse(data) as {
+              choices?: Array<{ delta?: { content?: string }; message?: { content?: string } }>
+              error?: { message?: string }
+            }
+
+            if (parsed.error?.message) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ error: parsed.error.message })}\n\n`)
+              )
+              continue
+            }
+
+            const text = parsed.choices?.[0]?.delta?.content || parsed.choices?.[0]?.message?.content || ''
+            if (text) {
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+            }
+          }
+        }
+
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+        controller.close()
+      } catch (err) {
+        console.error('[Chat API] OpenRouter stream error:', err)
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify({ error: 'Lỗi kết nối AI. Vui lòng thử lại.' })}\n\n`)
+        )
+        controller.close()
+      }
+    },
+  })
+
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+    },
+  })
+}
+
 export async function POST(req: NextRequest) {
   try {
     // Validate API key
-    const apiKey = process.env.GEMINI_API_KEY
-    if (!apiKey) {
+    const openRouterApiKey = process.env.OPENROUTER_API_KEY?.trim()
+    const geminiApiKey = process.env.GEMINI_API_KEY?.trim()
+    if (!openRouterApiKey && !geminiApiKey) {
       return NextResponse.json(
         { error: 'Chatbot chưa được cấu hình. Vui lòng liên hệ quản trị viên.' },
         { status: 503 }
@@ -70,7 +207,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { message, history } = body as {
       message: string
-      history?: Array<{ role: 'user' | 'model'; content: string }>
+      history?: ChatHistoryItem[]
     }
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
@@ -82,8 +219,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Tin nhắn quá dài (tối đa 500 ký tự).' }, { status: 400 })
     }
 
+    const systemPrompt = await buildSystemPrompt()
+
+    if (openRouterApiKey) {
+      return createOpenRouterStream({
+        apiKey: openRouterApiKey,
+        message,
+        history,
+        systemPrompt,
+      })
+    }
+
     // Khởi tạo Gemini
-    const ai = new GoogleGenAI({ apiKey })
+    const ai = new GoogleGenAI({ apiKey: geminiApiKey as string })
 
     // Build conversation history cho Gemini
     const contents = []
@@ -106,8 +254,6 @@ export async function POST(req: NextRequest) {
     })
 
     // Gọi Gemini với streaming
-    const systemPrompt = await buildSystemPrompt()
-
     const response = await ai.models.generateContentStream({
       model: 'gemini-2.0-flash',
       contents,

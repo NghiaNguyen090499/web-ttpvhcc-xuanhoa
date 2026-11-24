@@ -8,7 +8,7 @@
 
 import Link from 'next/link'
 import { getPortalLichCongTac } from '@/lib/portal-db'
-import type { LichNgay } from '@/lib/static-data'
+import type { LichNgay, LichTrucEntry } from '@/lib/static-data'
 
 /**
  * @chucnang    : Format ngày từ ISO sang DD/MM
@@ -21,39 +21,21 @@ function formatShortDate(dateStr: string): string {
 }
 
 /**
- * @chucnang    : Kiểm tra ngày có phải hôm nay không
- * @input       : dateStr (string)
- * @output      : boolean
- */
-function isToday(dateStr: string): boolean {
-  const today = new Date()
-  const d = new Date(dateStr)
-  return today.toDateString() === d.toDateString()
-}
-
-/**
  * @chucnang    : Render 1 ngày trong lịch tuần (widget trang chủ — hiển thị gọn)
  * @input       : lichNgay (LichNgay) — dữ liệu 1 ngày
  * @output      : JSX row
  */
 function DayRow({ lichNgay }: { lichNgay: LichNgay }) {
-  const today = isToday(lichNgay.ngay)
-
   return (
-    <div className={`px-3 py-2.5 rounded-xl ${today ? 'bg-primary/5 ring-1 ring-primary/20' : 'hover:bg-cream'} btn-transition`}>
+    <div className="rounded-xl px-3 py-2.5 btn-transition hover:bg-cream">
       {/* Header ngày */}
       <div className="flex items-center gap-2 mb-1.5">
-        <span className={`text-sm font-bold uppercase tracking-wide ${today ? 'text-primary' : 'text-text-muted'}`}>
+        <span className="text-sm font-bold uppercase tracking-wide text-text-muted">
           {lichNgay.thu}
         </span>
-        <span className={`text-xs px-1.5 py-0.5 rounded ${today ? 'bg-primary text-white' : 'bg-gray-100 text-text-muted'}`}>
+        <span className="rounded bg-gray-100 px-1.5 py-0.5 text-xs text-text-muted">
           {formatShortDate(lichNgay.ngay)}
         </span>
-        {today && (
-          <span className="text-xs px-1.5 py-0.5 rounded-full bg-success text-white font-bold ml-auto">
-            HÔM NAY
-          </span>
-        )}
       </div>
 
       {/* Danh sách công việc — hiển thị tối đa 2 mục */}
@@ -80,12 +62,39 @@ function DayRow({ lichNgay }: { lichNgay: LichNgay }) {
   )
 }
 
+function DutyRow({ item }: { item: LichTrucEntry }) {
+  return (
+    <div className="rounded-xl px-3 py-2.5 btn-transition hover:bg-cream">
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-bold uppercase tracking-wide text-text-muted">
+          {item.thu}
+        </span>
+        <span className="rounded bg-gray-100 px-1.5 py-0.5 text-xs text-text-muted">
+          {formatShortDate(item.ngay)}
+        </span>
+      </div>
+      <div className="mt-1.5 flex items-start gap-2">
+        <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-primary/40" />
+        <div className="min-w-0">
+          <p className="line-clamp-1 text-sm font-semibold text-text-primary">
+            {item.lanhDaoTruc || 'Không có lịch trực'}
+          </p>
+          {item.chucVu && (
+            <p className="line-clamp-1 text-sm text-text-muted">{item.chucVu}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /**
  * @chucnang    : Widget lịch công tác tuần — hiển thị trên trang chủ
  * @output      : JSX section
  */
 export async function WorkSchedule() {
   const data = await getPortalLichCongTac()
+  const dutySchedule = data.lichTruc || []
 
   return (
     <div className="bg-white rounded-2xl border border-border overflow-hidden h-full flex flex-col">
@@ -107,7 +116,11 @@ export async function WorkSchedule() {
 
       {/* Danh sách ngày */}
       <div className="flex-1 p-3 space-y-0.5">
-        {data.lichTuan.length === 0 ? (
+        {dutySchedule.length > 0 ? (
+          dutySchedule.slice(0, 6).map((item) => (
+            <DutyRow key={item.ngay} item={item} />
+          ))
+        ) : data.lichTuan.length === 0 ? (
           <p className="text-sm text-text-muted text-center py-8">
             Chưa có lịch công tác
           </p>

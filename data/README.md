@@ -29,10 +29,10 @@ Tư pháp, Công thương, Xây dựng, Nông nghiệp & MT, Giáo dục, Bảo 
 | Dịch vụ | URL |
 |---------|-----|
 | Biểu mẫu TTHC | https://drive.google.com/drive/folders/1FHrz0OVdExpG8zpzZ0xQhY82BePZUx1Q |
-| DVC Tra cứu hồ sơ | https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html |
-| DVC Thủ tục HC | https://thutuc.dichvucong.gov.vn/p/home/dvc-tthc-trang-chu.html |
+| DVC Tra cứu hồ sơ | https://vpcp.dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html |
+| DVC Thủ tục HC | https://dichvucong.gov.vn |
 | DVC Đánh giá | https://kiosk.hochiminhcity.gov.vn/vi/kiosk/danhgiahcm |
-| DVC Hướng dẫn | https://dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html |
+| DVC Hướng dẫn | https://vpcp.dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html |
 | Facebook | https://www.facebook.com/phuongxuanhoatphochiminh |
 
 ## Liên hệ

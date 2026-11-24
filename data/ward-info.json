@@ -28,10 +28,10 @@
   },
   "dvcLinks": {
     "national": "https://dichvucong.gov.vn",
-    "hcm": "https://dichvucong.hochiminhcity.gov.vn",
-    "traCuu": "https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html",
-    "thuTuc": "https://thutuc.dichvucong.gov.vn/p/home/dvc-tthc-trang-chu.html",
+    "hcm": "https://dichvucong.gov.vn",
+    "traCuu": "https://vpcp.dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html",
+    "thuTuc": "https://dichvucong.gov.vn",
     "danhGia": "https://kiosk.hochiminhcity.gov.vn/vi/kiosk/danhgiahcm",
-    "huongDan": "https://dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html"
+    "huongDan": "https://vpcp.dichvucong.gov.vn/p/home/dvc-huong-dan-cong-dan-doanh-nghiep.html"
   }
 }

@@ -5,6 +5,7 @@
  * @alias       : portal-db, public-data
  */
 
+import { normalizeDvcLinksDeep } from '@/lib/dvc-links'
 import { prisma } from '@/lib/db'
 import {
   getNewsData as getStaticNewsData,
@@ -17,6 +18,7 @@ import {
   getWardInfo as getStaticWardInfo,
   getTuyenTruyenData as getStaticTuyenTruyenData,
   getVanBanData as getStaticVanBanData,
+  withDefaultWorkScheduleFile,
 } from '@/lib/static-data'
 import type {
   LichCongTacData,
@@ -40,6 +42,14 @@ export interface UsefulLinkItem {
   iconClass: string
 }
 
+export interface ArticleCommentItem {
+  id: string
+  articleId: string
+  authorName: string
+  content: string
+  createdAt: string
+}
+
 interface UsefulLinksData {
   items: UsefulLinkItem[]
 }
@@ -59,6 +69,21 @@ function toNoticeFileType(value: string): 'pdf' | 'image' | 'doc' {
   return 'pdf'
 }
 
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'])
+
+function hasImageExtension(value?: string | null) {
+  if (!value) return false
+
+  try {
+    const parsed = new URL(value, 'http://local.invalid')
+    const pathname = parsed.pathname.toLowerCase()
+    return [...IMAGE_EXTENSIONS].some((extension) => pathname.endsWith(extension))
+  } catch {
+    const clean = value.split('?')[0]?.split('#')[0]?.toLowerCase() || ''
+    return [...IMAGE_EXTENSIONS].some((extension) => clean.endsWith(extension))
+  }
+}
+
 function isOrganizationData(value: unknown): value is OrganizationData {
   if (!value || typeof value !== 'object') return false
   const data = value as Partial<OrganizationData>
@@ -76,7 +101,7 @@ function hasArrayKey<T>(value: unknown, key: string): value is T {
 }
 
 async function getPageMetadata<T>(pageKey: string, fallback: T, isValid: (value: unknown) => value is T): Promise<T> {
-  if (!prisma) return fallback
+  if (!prisma) return normalizeDvcLinksDeep(fallback)
 
   try {
     const content = await prisma.pageContent.findUnique({
@@ -85,10 +110,10 @@ async function getPageMetadata<T>(pageKey: string, fallback: T, isValid: (value:
     })
 
     const metadata = content?.metadata
-    return isValid(metadata) ? metadata : fallback
+    return normalizeDvcLinksDeep(isValid(metadata) ? metadata : fallback)
   } catch (err) {
     console.warn(`[PortalDB] Fallback ${pageKey} JSON:`, err)
-    return fallback
+    return normalizeDvcLinksDeep(fallback)
   }
 }
 
@@ -112,6 +137,8 @@ export async function getPortalNewsData(): Promise<NewsItem[]> {
       excerpt: article.excerpt || '',
       content: article.content,
       source: article.source || 'UBND Phường Xuân Hòa',
+      isFeatured: article.isFeatured,
+      commentsEnabled: article.commentsEnabled,
     }))
   } catch (err) {
     console.warn('[PortalDB] Fallback news JSON:', err)
@@ -122,6 +149,51 @@ export async function getPortalNewsData(): Promise<NewsItem[]> {
 export async function getPortalNewsBySlug(slug: string): Promise<NewsItem | undefined> {
   const news = await getPortalNewsData()
   return news.find((item) => item.slug === slug)
+}
+
+async function getStaticArticleComments(articleId: string): Promise<ArticleCommentItem[]> {
+  try {
+    const { readFileSync } = await import('fs')
+    const { join } = await import('path')
+    const raw = readFileSync(join(process.cwd(), 'data', 'article-comments.json'), 'utf-8')
+    const comments = JSON.parse(raw) as Array<ArticleCommentItem & { isVisible?: boolean }>
+
+    return comments
+      .filter((comment) => comment.articleId === articleId && comment.isVisible !== false)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .map((comment) => ({
+        id: comment.id,
+        articleId: comment.articleId,
+        authorName: comment.authorName,
+        content: comment.content,
+        createdAt: comment.createdAt,
+      }))
+  } catch {
+    return []
+  }
+}
+
+export async function getPortalArticleComments(articleId: string): Promise<ArticleCommentItem[]> {
+  if (!prisma) return getStaticArticleComments(articleId)
+
+  try {
+    const comments = await prisma.articleComment.findMany({
+      where: { articleId, isVisible: true },
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    })
+
+    return comments.map((comment) => ({
+      id: comment.id,
+      articleId: comment.articleId,
+      authorName: comment.authorName,
+      content: comment.content,
+      createdAt: comment.createdAt.toISOString(),
+    }))
+  } catch (err) {
+    console.warn('[PortalDB] Fallback article comments JSON:', err)
+    return getStaticArticleComments(articleId)
+  }
 }
 
 export async function getPortalFaqData() {
@@ -180,7 +252,8 @@ export async function getPortalProcedureLinkGroupBySlug(slug: string): Promise<P
 
 export async function getPortalLichCongTac(): Promise<LichCongTacData> {
   const fallback = getStaticLichCongTac()
-  return getPageMetadata('lich-cong-tac', fallback, (value): value is LichCongTacData => hasArrayKey(value, 'lichTuan'))
+  const data = await getPageMetadata('lich-cong-tac', fallback, (value): value is LichCongTacData => hasArrayKey(value, 'lichTuan'))
+  return withDefaultWorkScheduleFile(data)
 }
 
 export async function getPortalLichTiepDan(): Promise<LichTiepDanData> {
@@ -290,6 +363,7 @@ export async function getPortalNiemYetData(): Promise<NiemYetItem[]> {
       title: item.title,
       category: item.category || '',
       fileUrl: item.fileUrl,
+      attachments: Array.isArray(item.attachments) ? item.attachments.filter((attachment): attachment is { url: string; name?: string; fileType?: string } => Boolean(attachment && typeof attachment === 'object' && typeof (attachment as { url?: unknown }).url === 'string')) : undefined,
       fileType: toNoticeFileType(item.fileType),
       publishedAt: formatDate(item.publishedAt),
       description: item.description || '',
@@ -318,7 +392,13 @@ export async function getPortalTuyenTruyenData(): Promise<TuyenTruyenItem[]> {
       summary: item.summary,
       content: item.content,
       publishedAt: formatDate(item.publishedAt),
-      mediaType: item.mediaType === 'VIDEO' ? 'video' : item.mediaType === 'FILE' ? 'file' : 'article',
+      mediaType: item.mediaType === 'VIDEO'
+        ? 'video'
+        : item.mediaType === 'FILE' && (hasImageExtension(item.mediaUrl) || hasImageExtension(item.fileName))
+          ? 'image'
+          : item.mediaType === 'FILE'
+            ? 'file'
+            : 'article',
       mediaUrl: item.mediaUrl || undefined,
       fileName: item.fileName || undefined,
       fileSize: item.fileSize || undefined,

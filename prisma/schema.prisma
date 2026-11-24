@@ -35,6 +35,7 @@ model User {
   googleId      String?  @unique @map("google_id")
   isActive      Boolean  @default(true) @map("is_active")
   lastLoginAt   DateTime? @map("last_login_at")
+  sessionVersion Int     @default(0) @map("session_version") // Tăng để thu hồi mọi phiên đăng nhập
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
@@ -140,17 +141,36 @@ model Article {
   publishedAt   DateTime?     @map("published_at")
   viewCount     Int           @default(0) @map("view_count")
   isFeatured    Boolean       @default(false) @map("is_featured")
+  commentsEnabled Boolean     @default(true) @map("comments_enabled")
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt @map("updated_at")
 
   // Quan hệ
   authorId      String        @map("author_id")
   author        User          @relation(fields: [authorId], references: [id])
+  comments      ArticleComment[]
 
   @@index([status])
   @@index([slug])
   @@index([publishedAt])
   @@map("articles")
+}
+
+/// Bình luận công khai dưới bài viết tin tức
+model ArticleComment {
+  id          String   @id @default(cuid())
+  authorName  String   @map("author_name")
+  content     String   @db.Text
+  isVisible   Boolean  @default(true) @map("is_visible")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Quan hệ
+  articleId   String   @map("article_id")
+  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@index([articleId, isVisible, createdAt])
+  @@map("article_comments")
 }
 
 // ============================================================
@@ -210,6 +230,7 @@ model PublicNotice {
   title         String
   category      String?
   fileUrl       String   @map("file_url")
+  attachments   Json?
   fileType      String   @default("pdf") @map("file_type")
   publishedAt   DateTime @default(now()) @map("published_at")
   description   String?  @db.Text
@@ -285,8 +306,10 @@ model Feedback {
   phone         String?        // SĐT (tùy chọn)
   subject       String         // Tiêu đề
   content       String         @db.Text // Nội dung phản ánh
+  attachments   Json?          // Ảnh người dân đính kèm: [{ id, name, size, mimeType }]
   status        FeedbackStatus @default(PENDING)
   response      String?        @db.Text // Phản hồi từ cán bộ
+  responseAttachments Json?    @map("response_attachments") // Tệp cán bộ đính kèm khi trả lời
   respondedAt   DateTime?      @map("responded_at")
   createdAt     DateTime       @default(now()) @map("created_at")
   updatedAt     DateTime       @updatedAt @map("updated_at")

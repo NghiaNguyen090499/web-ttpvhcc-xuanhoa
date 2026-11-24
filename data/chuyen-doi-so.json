@@ -1,0 +1,68 @@
+{
+  "title": "Chuyển đổi số",
+  "content": "<h2>Chuyển đổi số vì người dân</h2><p>Phường Xuân Hòa từng bước ứng dụng dữ liệu và công nghệ số để cung cấp dịch vụ công thuận tiện hơn, minh bạch hơn và gần người dân hơn.</p><h3>Người dân có thể bắt đầu từ đâu?</h3><ul><li>Tra cứu thủ tục, thành phần hồ sơ và biểu mẫu trước khi đến Trung tâm.</li><li>Nộp hồ sơ trực tuyến khi thủ tục đã được cung cấp trên Cổng Dịch vụ công.</li><li>Sử dụng định danh điện tử, thanh toán trực tuyến và theo dõi trạng thái hồ sơ.</li><li>Gửi phản ánh, kiến nghị để chính quyền tiếp nhận và cải thiện chất lượng phục vụ.</li></ul><h3>Định hướng tại cơ sở</h3><p>Chuyển đổi số được triển khai gắn với dữ liệu số, dịch vụ công trực tuyến, kỹ năng số cộng đồng và an toàn thông tin. Mục tiêu cuối cùng là giúp cán bộ xử lý công việc hiệu quả hơn và giúp người dân tiếp cận dịch vụ công dễ dàng hơn.</p>",
+  "metadata": {
+    "summary": "Thông tin, hướng dẫn và tài nguyên chuyển đổi số phục vụ người dân, doanh nghiệp trên địa bàn phường Xuân Hòa.",
+    "updatedAt": "2026-07-24",
+    "highlights": [
+      {
+        "value": "01",
+        "label": "Dịch vụ công",
+        "note": "Tra cứu và nộp hồ sơ trực tuyến"
+      },
+      {
+        "value": "02",
+        "label": "Dữ liệu số",
+        "note": "Đúng, đủ, sạch, sống, thống nhất"
+      },
+      {
+        "value": "03",
+        "label": "Công dân số",
+        "note": "Kỹ năng số thiết thực cho cộng đồng"
+      },
+      {
+        "value": "04",
+        "label": "An toàn số",
+        "note": "Bảo vệ tài khoản và thông tin cá nhân"
+      }
+    ],
+    "resources": [
+      {
+        "id": "dvc-quoc-gia",
+        "title": "Cổng Dịch vụ công Quốc gia",
+        "description": "Tra cứu và thực hiện dịch vụ công trực tuyến.",
+        "url": "https://dichvucong.gov.vn",
+        "kind": "Dịch vụ công",
+        "isActive": true,
+        "sortOrder": 1
+      },
+      {
+        "id": "trung-tam-cds-tphcm",
+        "title": "Trung tâm Chuyển đổi số TP.HCM",
+        "description": "Tin tức, hướng dẫn và hoạt động chuyển đổi số của Thành phố.",
+        "url": "https://dxcenter.hochiminhcity.gov.vn/",
+        "kind": "Thông tin chính thức",
+        "isActive": true,
+        "sortOrder": 2
+      },
+      {
+        "id": "van-ban-chuyen-doi-so",
+        "title": "Văn bản chuyển đổi số TP.HCM",
+        "description": "Danh mục văn bản, kế hoạch và hướng dẫn liên quan.",
+        "url": "https://dxcenter.hochiminhcity.gov.vn/van-ban/",
+        "kind": "Văn bản",
+        "isActive": true,
+        "sortOrder": 3
+      },
+      {
+        "id": "so-khoa-hoc-cong-nghe",
+        "title": "Sở Khoa học và Công nghệ TP.HCM",
+        "description": "Thông tin chuyên ngành và chính sách chuyển đổi số của Thành phố.",
+        "url": "https://dost.hochiminhcity.gov.vn/chuyen-doi-so/",
+        "kind": "Cổng chuyên ngành",
+        "isActive": true,
+        "sortOrder": 4
+      }
+    ]
+  }
+}

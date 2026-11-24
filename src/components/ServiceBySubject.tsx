@@ -6,7 +6,14 @@
  * @alias       : service-subject, cong-dan-doanh-nghiep, phan-loai
  */
 
-/* Tất cả link đều external → dichvucong.gov.vn, không cần next/link */
+/* Link chi tiết TTHC dùng subdomain chính thức để tránh route /p/home trên domain chính bị WAF chặn. */
+
+const DVC_DETAIL_URL = 'https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc='
+const DVC_VERTICAL_DETAIL_URL = 'https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc='
+
+function dvcDetail(code: string, vertical = false) {
+  return `${vertical ? DVC_VERTICAL_DETAIL_URL : DVC_DETAIL_URL}${code}`
+}
 
 /* Danh mục dịch vụ cho Công dân — theo sự kiện đời sống */
 const CITIZEN_SERVICES = [
@@ -18,7 +25,7 @@ const CITIZEN_SERVICES = [
     ),
     label: 'Hộ tịch & Gia đình',
     desc: 'Khai sinh, khai tử, kết hôn',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=khai+sinh+khai+tu+ket+hon',
+    href: dvcDetail('1.001193'),
   },
   {
     icon: (
@@ -27,8 +34,8 @@ const CITIZEN_SERVICES = [
       </svg>
     ),
     label: 'Cư trú & Giấy tờ',
-    desc: 'CCCD, sổ hộ khẩu, tạm trú',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=cu+tru+tam+tru+ho+khau',
+    desc: 'Thường trú, BHYT trẻ em',
+    href: dvcDetail('2.002621', true),
   },
   {
     icon: (
@@ -38,7 +45,7 @@ const CITIZEN_SERVICES = [
     ),
     label: 'Đất đai & Xây dựng',
     desc: 'Sổ đỏ, giấy phép xây dựng',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=dat+dai+xay+dung+so+do',
+    href: dvcDetail('1.013978'),
   },
   {
     icon: (
@@ -47,8 +54,8 @@ const CITIZEN_SERVICES = [
       </svg>
     ),
     label: 'Sức khỏe & Y tế',
-    desc: 'Giấy xác nhận, BHYT',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=y+te+bao+hiem+y+te',
+    desc: 'Giấy xác nhận khuyết tật',
+    href: dvcDetail('1.001699'),
   },
   {
     icon: (
@@ -58,7 +65,7 @@ const CITIZEN_SERVICES = [
     ),
     label: 'Chính sách xã hội',
     desc: 'Trợ cấp, bảo trợ xã hội',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=bao+tro+xa+hoi+tro+cap',
+    href: dvcDetail('1.001776'),
   },
   {
     icon: (
@@ -68,7 +75,7 @@ const CITIZEN_SERVICES = [
     ),
     label: 'Khiếu nại & Tố cáo',
     desc: 'Thanh tra, giải quyết đơn thư',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=khieu+nai+to+cao+thanh+tra',
+    href: dvcDetail('2.002409'),
   },
 ]
 
@@ -82,7 +89,7 @@ const BUSINESS_SERVICES = [
     ),
     label: 'Đăng ký kinh doanh',
     desc: 'Hộ kinh doanh cá thể',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=dang+ky+kinh+doanh+ho+ca+the',
+    href: dvcDetail('1.001612'),
   },
   {
     icon: (
@@ -91,8 +98,8 @@ const BUSINESS_SERVICES = [
       </svg>
     ),
     label: 'Thuế & Tài chính',
-    desc: 'Kê khai, nộp thuế, phí lệ phí',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=thue+tai+chinh+le+phi',
+    desc: 'Kê khai phí, tài chính',
+    href: dvcDetail('1.008603'),
   },
   {
     icon: (
@@ -102,7 +109,7 @@ const BUSINESS_SERVICES = [
     ),
     label: 'Giấy phép xây dựng',
     desc: 'Cấp phép, gia hạn, điều chỉnh',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=giay+phep+xay+dung',
+    href: dvcDetail('1.013225'),
   },
   {
     icon: (
@@ -111,8 +118,8 @@ const BUSINESS_SERVICES = [
       </svg>
     ),
     label: 'Lao động & BHXH',
-    desc: 'Hợp đồng lao động, bảo hiểm',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=lao+dong+bao+hiem+xa+hoi',
+    desc: 'Nội quy, hợp đồng lao động',
+    href: dvcDetail('2.001955'),
   },
   {
     icon: (
@@ -122,7 +129,7 @@ const BUSINESS_SERVICES = [
     ),
     label: 'Chứng thực & Công chứng',
     desc: 'Xác nhận bản sao, chữ ký',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=chung+thuc+cong+chung',
+    href: dvcDetail('2.000884'),
   },
   {
     icon: (
@@ -131,8 +138,8 @@ const BUSINESS_SERVICES = [
       </svg>
     ),
     label: 'Môi trường',
-    desc: 'Cam kết bảo vệ môi trường',
-    href: 'https://dichvucong.gov.vn/p/home/dvc-tim-kiem-thu-tuc-hanh-chinh.html?key=moi+truong+bao+ve',
+    desc: 'Đánh giá tác động môi trường',
+    href: dvcDetail('1.010736'),
   },
 ]
 

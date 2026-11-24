@@ -40,12 +40,23 @@ const CATEGORY_META: Record<string, { logo: string; color: string }> = {
   },
 }
 
-export async function ProcedureGrid({ embedded = false }: { embedded?: boolean }) {
+export async function ProcedureGrid({
+  embedded = false,
+  className = '',
+}: {
+  embedded?: boolean
+  className?: string
+}) {
   const data = await getPortalProceduresData()
   const categories = data.categories
 
   const content = (
-    <div className={embedded ? 'rounded-2xl border border-border bg-white p-5 md:p-6 shadow-[0_8px_24px_rgba(15,23,42,0.08)]' : ''}>
+    <div
+      className={[
+        embedded ? 'flex flex-col rounded-2xl border border-border bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)] md:p-6' : '',
+        className,
+      ].filter(Boolean).join(' ')}
+    >
       {/* Heading */}
       <div className="text-center mb-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Tra cứu nhanh</p>
@@ -53,20 +64,20 @@ export async function ProcedureGrid({ embedded = false }: { embedded?: boolean }
           Lĩnh vực Thủ tục Hành chính
         </h2>
         <div className="w-12 h-1 bg-accent mx-auto mt-3 rounded-full" />
-        <p className="mt-3 text-sm text-text-secondary max-w-lg mx-auto">
+        <p className="mx-auto mt-3 max-w-full text-sm text-text-secondary md:whitespace-nowrap">
           6 lĩnh vực thủ tục hành chính cấp phường — tra cứu nhanh theo lĩnh vực
         </p>
       </div>
 
       {/* Grid — dạng card logo tròn + nút truy cập */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:auto-rows-fr">
         {categories.map((cat) => {
           const meta = CATEGORY_META[cat.slug]
           return (
             <Link
               key={cat.name}
               href={`/thu-tuc/${cat.slug}`}
-              className="group flex min-h-[226px] flex-col items-center rounded-2xl border border-border bg-white p-5 text-center shadow-[0_8px_22px_rgba(8,79,143,0.06)] hover:shadow-xl hover:-translate-y-1 btn-transition md:p-6"
+              className="group flex min-h-[226px] flex-col items-center rounded-2xl border border-border bg-white p-5 text-center shadow-[0_8px_22px_rgba(8,79,143,0.06)] hover:shadow-xl hover:-translate-y-1 btn-transition md:p-6 lg:h-full"
             >
               {/* Logo tròn */}
               <div

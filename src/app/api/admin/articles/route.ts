@@ -20,8 +20,10 @@ import {
   toArticleStatus,
   writeAuditLog,
 } from '@/lib/admin-db'
+import { articleHtmlToPlainText, createArticleExcerpt, normalizeArticleHtml } from '@/lib/html'
 
 const NEWS_FILE = join(process.cwd(), 'data', 'news.json')
+const COMMENTS_FILE = join(process.cwd(), 'data', 'article-comments.json')
 
 // Đọc dữ liệu từ JSON
 function readNews() {
@@ -38,12 +40,24 @@ function writeNews(data: Array<Record<string, unknown>>) {
   writeFileSync(NEWS_FILE, JSON.stringify(data, null, 2), 'utf-8')
 }
 
+function readArticleComments() {
+  try {
+    const raw = readFileSync(COMMENTS_FILE, 'utf-8')
+    return JSON.parse(raw) as Array<Record<string, unknown>>
+  } catch {
+    return []
+  }
+}
+
 /** GET — Lấy danh sách bài viết */
 export async function GET() {
   if (hasDatabase()) {
     const articles = await getAdminDb().article.findMany({
       orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
-      include: { author: { select: { name: true, email: true } } },
+      include: {
+        author: { select: { name: true, email: true } },
+        _count: { select: { comments: true } },
+      },
     })
 
     return NextResponse.json({
@@ -59,13 +73,26 @@ export async function GET() {
         content: article.content,
         source: article.source || article.author.name || 'UBND Phường Xuân Hòa',
         status: article.status,
+        isFeatured: article.isFeatured,
+        commentsEnabled: article.commentsEnabled,
+        commentCount: article._count.comments,
       })),
       total: articles.length,
     })
   }
 
   const articles = readNews()
-  return NextResponse.json({ articles, total: articles.length })
+  const comments = readArticleComments()
+  return NextResponse.json({
+    articles: articles.map((article) => ({
+      ...article,
+      commentsEnabled: article.commentsEnabled !== false,
+      commentCount: comments.filter((comment) => (
+        comment.articleId === article.id && comment.isVisible !== false
+      )).length,
+    })),
+    total: articles.length,
+  })
 }
 
 /** POST — Tạo bài viết mới */
@@ -75,8 +102,10 @@ export async function POST(request: NextRequest) {
     if (auth.response) return auth.response
 
     const body = await request.json()
+    const title = String(body.title || '').trim()
+    const content = normalizeArticleHtml(String(body.content || ''))
 
-    if (!body.title?.trim() || !body.content?.trim()) {
+    if (!title || !articleHtmlToPlainText(content)) {
       return NextResponse.json({ error: 'Tiêu đề và nội dung là bắt buộc' }, { status: 400 })
     }
 
@@ -90,19 +119,29 @@ export async function POST(request: NextRequest) {
       const publishedAt = body.date ? new Date(`${body.date}T00:00:00.000Z`) : new Date()
       const article = await getAdminDb().article.create({
         data: {
-          title: body.title.trim(),
-          slug: body.slug || generateSlug(body.title),
+          title,
+          slug: body.slug || generateSlug(title),
           tag: body.tag || 'Hành chính',
-          excerpt: body.excerpt?.trim() || `${body.content.trim().slice(0, 150)}...`,
-          content: body.content.trim(),
+          excerpt: body.excerpt?.trim() || createArticleExcerpt(content),
+          content,
           coverImage: body.image || '/images/news/post-01.jpg',
           images: body.images,
           source: body.source || 'UBND Phường Xuân Hòa',
           status: toArticleStatus(body.status),
+          isFeatured: body.isFeatured === true,
+          commentsEnabled: body.commentsEnabled !== false,
           publishedAt,
           authorId: user.id,
         },
       })
+
+      if (article.isFeatured) {
+        await getAdminDb().article.updateMany({
+          where: { id: { not: article.id }, isFeatured: true },
+          data: { isFeatured: false },
+        })
+      }
+
       await writeAuditLog({
         ...auth.session,
         action: 'CREATE',
@@ -118,14 +157,22 @@ export async function POST(request: NextRequest) {
 
     const newArticle = {
       id: newId,
-      title: body.title.trim(),
+      title,
       slug: body.slug || newId,
       date: body.date || new Date().toISOString().split('T')[0],
       tag: body.tag || 'Hành chính',
       image: body.image || '/images/news/post-01.jpg',
-      excerpt: body.excerpt?.trim() || body.content.trim().slice(0, 150) + '...',
-      content: body.content.trim(),
+      excerpt: body.excerpt?.trim() || createArticleExcerpt(content),
+      content,
       source: body.source || 'UBND Phường Xuân Hòa',
+      isFeatured: body.isFeatured === true,
+      commentsEnabled: body.commentsEnabled !== false,
+    }
+
+    if (newArticle.isFeatured) {
+      articles.forEach((article) => {
+        article.isFeatured = false
+      })
     }
 
     articles.unshift(newArticle)
@@ -150,22 +197,45 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Thiếu ID bài viết' }, { status: 400 })
     }
 
+    const content = typeof body.content === 'string' ? normalizeArticleHtml(body.content) : undefined
+    const isFeatured = typeof body.isFeatured === 'boolean' ? body.isFeatured : undefined
+    const commentsEnabled = typeof body.commentsEnabled === 'boolean' ? body.commentsEnabled : undefined
+    if (typeof body.content === 'string' && !articleHtmlToPlainText(content || '')) {
+      return NextResponse.json({ error: 'Nội dung là bắt buộc' }, { status: 400 })
+    }
+
     if (hasDatabase()) {
-      const article = await getAdminDb().article.update({
-        where: { id: body.id },
-        data: {
-          title: body.title?.trim(),
-          slug: body.slug,
-          tag: body.tag,
-          excerpt: body.excerpt?.trim(),
-          content: body.content?.trim(),
-          coverImage: body.image,
-          images: body.images,
-          source: body.source,
-          status: body.status ? toArticleStatus(body.status) : undefined,
-          publishedAt: body.date ? new Date(`${body.date}T00:00:00.000Z`) : undefined,
-        },
-      })
+      const data = {
+        title: body.title?.trim(),
+        slug: body.slug,
+        tag: body.tag,
+        excerpt: body.excerpt?.trim(),
+        content,
+        coverImage: body.image,
+        images: body.images,
+        source: body.source,
+        status: body.status ? toArticleStatus(body.status) : undefined,
+        publishedAt: body.date ? new Date(`${body.date}T00:00:00.000Z`) : undefined,
+        isFeatured,
+        commentsEnabled,
+      }
+
+      const article = isFeatured === true
+        ? (await getAdminDb().$transaction([
+            getAdminDb().article.updateMany({
+              where: { id: { not: String(body.id) }, isFeatured: true },
+              data: { isFeatured: false },
+            }),
+            getAdminDb().article.update({
+              where: { id: body.id },
+              data,
+            }),
+          ]))[1]
+        : await getAdminDb().article.update({
+            where: { id: body.id },
+            data,
+          })
+
       await writeAuditLog({
         ...auth.session,
         action: 'UPDATE',
@@ -192,8 +262,16 @@ export async function PUT(request: NextRequest) {
       tag: body.tag || articles[index].tag,
       image: body.image || articles[index].image,
       excerpt: body.excerpt?.trim() || articles[index].excerpt,
-      content: body.content?.trim() || articles[index].content,
+      content: content || articles[index].content,
       source: body.source || articles[index].source,
+      isFeatured: isFeatured ?? articles[index].isFeatured,
+      commentsEnabled: commentsEnabled ?? articles[index].commentsEnabled ?? true,
+    }
+
+    if (isFeatured === true) {
+      articles.forEach((article, articleIndex) => {
+        if (articleIndex !== index) article.isFeatured = false
+      })
     }
 
     writeNews(articles)
@@ -208,7 +286,7 @@ export async function PUT(request: NextRequest) {
 /** DELETE — Xóa bài viết */
 export async function DELETE(request: NextRequest) {
   try {
-    const auth = await requireAdminSession('ADMIN')
+    const auth = await requireAdminSession('EDITOR')
     if (auth.response) return auth.response
 
     const body = await request.json()

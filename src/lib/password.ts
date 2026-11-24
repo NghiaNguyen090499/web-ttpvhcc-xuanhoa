@@ -26,6 +26,11 @@ export function verifyPassword(password: string, storedHash: string): boolean {
   return timingSafeEqual(actual, expected)
 }
 
+export const MIN_PASSWORD_LENGTH = 12
+
+/** Tối thiểu 12 ký tự, có chữ và số */
 export function isStrongEnoughPassword(password: string): boolean {
-  return password.length >= 8
+  return password.length >= MIN_PASSWORD_LENGTH && /[A-Za-zÀ-ỹ]/.test(password) && /\d/.test(password)
 }
+
+export const PASSWORD_POLICY_MESSAGE = `Mật khẩu phải có ít nhất ${MIN_PASSWORD_LENGTH} ký tự, gồm cả chữ và số`

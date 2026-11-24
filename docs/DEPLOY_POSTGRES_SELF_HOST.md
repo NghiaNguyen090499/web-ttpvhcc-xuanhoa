@@ -150,7 +150,7 @@ Kiểm tra bảo mật:
 Hệ thống có 3 vai trò:
 
 - `ADMIN`: toàn quyền, quản lý người dùng, phân quyền, xóa dữ liệu.
-- `EDITOR`: tạo/sửa nội dung, FAQ, thủ tục, phản hồi phản ánh; không được xóa và không được quản lý user.
+- `EDITOR`: tạo/sửa/xóa nội dung, FAQ, thủ tục, phản hồi phản ánh; không được quản lý user.
 - `VIEWER`: chỉ xem dữ liệu CMS, không được tạo/sửa/xóa.
 
 Trang quản lý phân quyền nằm tại `/admin/cai-dat`, chỉ `ADMIN` truy cập được.

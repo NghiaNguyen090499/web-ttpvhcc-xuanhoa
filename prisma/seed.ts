@@ -23,6 +23,7 @@ type NewsItem = {
   excerpt?: string
   content: string
   source?: string
+  commentsEnabled?: boolean
 }
 
 type FaqItem = {
@@ -80,7 +81,7 @@ type PropagandaItem = {
   summary?: string
   content?: string
   publishedAt?: string
-  mediaType?: 'article' | 'video' | 'file'
+  mediaType?: 'article' | 'video' | 'file' | 'image'
   mediaUrl?: string
   fileName?: string
   fileSize?: number
@@ -184,7 +185,7 @@ async function upsertProcedure(db: PrismaClient, input: {
 
 function toMediaType(value?: string) {
   if (value === 'video') return 'VIDEO' as const
-  if (value === 'file') return 'FILE' as const
+  if (value === 'file' || value === 'image') return 'FILE' as const
   return 'ARTICLE' as const
 }
 
@@ -225,6 +226,7 @@ async function main() {
         coverImage: item.image,
         images: item.images || undefined,
         source: item.source,
+        commentsEnabled: item.commentsEnabled !== false,
         status: 'PUBLISHED',
         publishedAt: item.date ? new Date(`${item.date}T00:00:00.000Z`) : new Date(),
       },
@@ -237,6 +239,7 @@ async function main() {
         coverImage: item.image,
         images: item.images || undefined,
         source: item.source,
+        commentsEnabled: item.commentsEnabled !== false,
         status: 'PUBLISHED',
         publishedAt: item.date ? new Date(`${item.date}T00:00:00.000Z`) : new Date(),
         authorId: admin.id,

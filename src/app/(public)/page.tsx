@@ -1,6 +1,6 @@
 /**
  * @nhom        : Pages / Trang chủ
- * @chucnang    : Trang chủ — Hero, AnnouncementBanner, QuickAccess, TransparencyStats,
+ * @chucnang    : Trang chủ — Hero, AnnouncementBanner, QuickAccess, HomeExploreXuanHoa,
  *                HomeContentLayout, ServiceBySubject, CTA, UsefulLinks
  * @lienquan    : src/components/*
  * @alias       : home, trang-chu
@@ -9,28 +9,66 @@
 import { HeroBanner } from '@/components/HeroBanner'
 import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { QuickAccess } from '@/components/QuickAccess'
-import { TransparencyStats } from '@/components/TransparencyStats'
+import { DvcTransitionNotice } from '@/components/DvcTransitionNotice'
 import { ServiceBySubject } from '@/components/ServiceBySubject'
 import UsefulLinks from '@/components/UsefulLinks'
 import { HomeContentLayout } from '@/components/HomeContentLayout'
+import { HomeExploreXuanHoa } from '@/components/HomeExploreXuanHoa'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getPortalTuyenTruyenData } from '@/lib/portal-db'
+import { getFeaturedPropagandaImage } from '@/lib/propaganda-media'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
-function PartyResolutionBanner() {
+async function PartyResolutionBanner() {
+  const propaganda = await getPortalTuyenTruyenData()
+  const featuredImage = getFeaturedPropagandaImage(propaganda)
+  const imageSrc = featuredImage?.mediaUrl || '/images/bannermoi.png'
+  const imageAlt = featuredImage?.title || 'Trung tâm Phục vụ Hành chính công phường Xuân Hòa — Hành chính phục vụ'
+  const isLocalImage = imageSrc.startsWith('/')
+  const isExternalImage = /^https?:\/\//i.test(imageSrc) || /^data:image\//i.test(imageSrc) || /^blob:/i.test(imageSrc)
+  const isUploadImage = imageSrc.startsWith('/uploads/')
+  const isOfficialServiceBanner = imageSrc === '/images/bannermoi.png'
+  const bannerAspectClass = isUploadImage
+    ? 'aspect-[75/14]'
+    : isOfficialServiceBanner
+      ? 'aspect-[2172/560]'
+      : 'aspect-[1408/230]'
+  const bannerImageClass = isUploadImage || isOfficialServiceBanner ? 'object-cover' : 'object-contain'
+  const bannerSizes = '(max-width: 1200px) 100vw, 1200px'
+
   return (
     <section className="bg-[radial-gradient(#d8e7f2_1.2px,transparent_1.2px)] [background-size:22px_22px]">
       <div className="mx-auto max-w-[1200px] px-4 pb-8">
-        <div className="overflow-hidden rounded-xl border border-[#f1d27a] bg-[#d71920] shadow-[0_10px_28px_rgba(160,23,23,0.12)]">
-          <Image
-            src="/images/banner.jpg"
-            alt="Banner tuyên truyền Xuân Hòa"
-            width={1408}
-            height={230}
-            className="h-auto w-full"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
+        <div className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+          <div className={`relative ${bannerAspectClass} w-full`}>
+            {isLocalImage ? (
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                className={bannerImageClass}
+                sizes={bannerSizes}
+                unoptimized={isUploadImage}
+              />
+            ) : isExternalImage ? (
+              <div
+                role="img"
+                aria-label={imageAlt}
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url("${imageSrc.replace(/"/g, '\\"')}")` }}
+              />
+            ) : (
+              <Image
+                src="/images/bannermoi.png"
+                alt="Trung tâm Phục vụ Hành chính công phường Xuân Hòa — Hành chính phục vụ"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+              />
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -46,11 +84,14 @@ export default function HomePage() {
       {/* Thanh thông báo trượt — carousel auto-slide (P0-1) */}
       <AnnouncementBanner />
 
+      {/* Thông báo chuyển giao Cổng DVC Quốc gia (29/05/2026) */}
+      <DvcTransitionNotice />
+
       {/* 6 ô truy cập nhanh + tra cứu hồ sơ inline (P0-3 & P1-8) */}
       <QuickAccess />
 
-      {/* Thống kê minh bạch — count-up animation (P0-4) */}
-      <TransparencyStats />
+      {/* Khám phá địa điểm và ẩm thực Xuân Hòa */}
+      <HomeExploreXuanHoa />
 
       {/* Nội dung chính — tin tức, tuyên truyền, lĩnh vực TTHC + sidebar */}
       <HomeContentLayout />

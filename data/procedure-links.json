@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "sourceFile": "Link Thủ tục hành chính.xlsx",
-    "importedAt": "2026-05-20",
+    "sourceFile": "Link Thủ tục hành chính-2.xlsx",
+    "importedAt": "2026-05-29",
     "totalGroups": 11,
     "totalLinks": 334,
     "note": "Danh sách đường dẫn thủ tục hành chính DVC Quốc gia do người dùng cung cấp qua Excel."
@@ -15,103 +15,103 @@
           "id": "cong-thuong-001",
           "name": "Thủ tục cấp Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh",
           "code": "2.000633",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000633"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000633"
         },
         {
           "id": "cong-thuong-002",
           "name": "Thủ tục cấp sửa đổi, bổ sung Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh",
           "code": "1.001279",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001279"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001279"
         },
         {
           "id": "cong-thuong-003",
           "name": "Thủ tục cấp lại Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh",
           "code": "2.000629",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000629"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000629"
         },
         {
           "id": "cong-thuong-004",
           "name": "Thủ tục cấp Giấy phép bán lẻ rượu",
           "code": "2.000620",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000620"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000620"
         },
         {
           "id": "cong-thuong-005",
           "name": "Thủ tục cấp sửa đổi, bổ sung Giấy phép bán lẻ rượu",
           "code": "2.000615",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000615"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000615"
         },
         {
           "id": "cong-thuong-006",
           "name": "Thủ tục cấp lại Giấy phép bán lẻ rượu",
           "code": "2.001240",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001240"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001240"
         },
         {
           "id": "cong-thuong-007",
           "name": "Thủ tục cấp Giấy phép bán lẻ sản phẩm thuốc lá",
           "code": "2.000181",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000181"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000181"
         },
         {
           "id": "cong-thuong-008",
           "name": "Thủ tục cấp sửa đổi, bổ sung Giấy phép bán lẻ sản phẩm thuốc lá",
           "code": "2.000162",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000162"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000162"
         },
         {
           "id": "cong-thuong-009",
           "name": "Thủ tục cấp lại Giấy phép bán lẻ sản phẩm thuốc lá",
           "code": "2.000150",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000150"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000150"
         },
         {
           "id": "cong-thuong-010",
           "name": "Thông báo về việc thực hiện hoạt động bán hàng không tại địa điểm giao dịch thường xuyên",
           "code": "2.002620",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002620"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002620"
         },
         {
           "id": "cong-thuong-011",
           "name": "Phê duyệt phương án cắm mốc chỉ giới xác định phạm vi bảo vệ đập thủy điện",
           "code": "2.001384",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001384"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001384"
         },
         {
           "id": "cong-thuong-012",
           "name": "Thẩm định, phê duyệt phương án ứng phó thiên tai cho công trình vùng hạ du đập thủy điện thuộc thẩm quyền phê duyệt của Ủy ban nhân dân cấp huyện",
           "code": "2.000206",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000206"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000206"
         },
         {
           "id": "cong-thuong-013",
           "name": "Thủ tục cấp Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai",
           "code": "2.001283",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001283"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001283"
         },
         {
           "id": "cong-thuong-014",
           "name": "Thủ tục cấp lại Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai",
           "code": "2.001270",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001270"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001270"
         },
         {
           "id": "cong-thuong-015",
           "name": "Cấp điều chỉnh Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai",
           "code": "2.001261",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001261"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001261"
         },
         {
           "id": "cong-thuong-016",
           "name": "Cấp Giấy chứng nhận sản phẩm công nghiệp nông thôn tiêu biểu cấp xã",
           "code": "2.002096",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002096"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002096"
         },
         {
           "id": "cong-thuong-017",
           "name": "Thu hồi tài sản kết cấu hạ tầng chợ",
           "code": "1.012569",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012569"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012569"
         }
       ]
     },
@@ -123,67 +123,67 @@
           "id": "dan-toc-va-ton-giao-001",
           "name": "Thủ tục đề nghị tổ chức đại hội của tổ chức tôn giáo, tổ chức tôn giáo trực thuộc, tổ Chức được cấp chứng nhận đăng ký hoạt động tôn giáo có địa bàn hoạt động ở một xã",
           "code": "1.013796",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013796"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013796"
         },
         {
           "id": "dan-toc-va-ton-giao-002",
           "name": "Thủ tục đề nghị tổ chức cuộc lễ ngoài cơ sở tôn giáo, địa điểm hợp pháp đã đăng ký có quy mô tổ chức ở một xã",
           "code": "1.013797",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013797"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013797"
         },
         {
           "id": "dan-toc-va-ton-giao-003",
           "name": "Thủ tục đề nghị giảng đạo ngoài địa bàn phụ trách, cơ sở tôn giáo, địa điểm hợp pháp đã đăng ký có quy mô tổ chức ở một xã",
           "code": "1.012605",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012605"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012605"
         },
         {
           "id": "dan-toc-va-ton-giao-004",
           "name": "Thủ tục đăng ký hoạt động tín ngưỡng",
           "code": "1.012592",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012592"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012592"
         },
         {
           "id": "dan-toc-va-ton-giao-005",
           "name": "Thủ tục đăng ký bổ sung hoạt động tín ngưỡng",
           "code": "1.012591",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012591"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012591"
         },
         {
           "id": "dan-toc-va-ton-giao-006",
           "name": "Thủ tục đăng ký sinh hoạt tôn giáo tập trung",
           "code": "1.012590",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012590"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012590"
         },
         {
           "id": "dan-toc-va-ton-giao-007",
           "name": "Thủ tục đăng ký thay đổi người đại diện của nhóm sinh hoạt tôn giáo tập trung",
           "code": "1.012585",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012585"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012585"
         },
         {
           "id": "dan-toc-va-ton-giao-008",
           "name": "Thủ tục đề nghị thay đổi địa điểm sinh hoạt tôn giáo tập trung trong địa bàn một xã",
           "code": "1.012584",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012584"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012584"
         },
         {
           "id": "dan-toc-va-ton-giao-009",
           "name": "Thủ tục đề nghị thay đổi địa điểm sinh hoạt tôn giáo tập trung đến địa bàn xã khác",
           "code": "1.012582",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012582"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012582"
         },
         {
           "id": "dan-toc-va-ton-giao-010",
           "name": "Công nhận người có uy tín",
           "code": "1.012222",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012222"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012222"
         },
         {
           "id": "dan-toc-va-ton-giao-011",
           "name": "Đưa ra khỏi danh sách và thay thế, bổ sung người có uy tín",
           "code": "1.012223",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012223"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012223"
         }
       ]
     },
@@ -195,247 +195,247 @@
           "id": "giao-duc-va-dao-tao-001",
           "name": "Chuyển đổi nhà trẻ, trường mẫu giáo, trường mầm non tư thục do nhà đầu tư trong nước đầu tư sang nhà trẻ, trường mẫu giáo, trường mầm non tư thục hoạt động không vì lợi nhuận",
           "code": "1.008724",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008724"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008724"
         },
         {
           "id": "giao-duc-va-dao-tao-002",
           "name": "Thủ tục xét, cấp học bổng chính sách",
           "code": "1.002407",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.002407"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.002407"
         },
         {
           "id": "giao-duc-va-dao-tao-003",
           "name": "Thủ tục chuyển trường đối với học sinh tiểu học",
           "code": "1.005099",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005099"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005099"
         },
         {
           "id": "giao-duc-va-dao-tao-004",
           "name": "Chuyển trường đối với học sinh trung học cơ sở",
           "code": "2.002481",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002481"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002481"
         },
         {
           "id": "giao-duc-va-dao-tao-005",
           "name": "Tiếp nhận học sinh trung học cơ sở Việt Nam về nước",
           "code": "2.002482",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002482"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002482"
         },
         {
           "id": "giao-duc-va-dao-tao-006",
           "name": "Tiếp nhận học sinh trung học cơ sở người nước ngoài",
           "code": "2.002483",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002483"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002483"
         },
         {
           "id": "giao-duc-va-dao-tao-007",
           "name": "Tuyển sinh trung học cơ sở",
           "code": "3.000182",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000182"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000182"
         },
         {
           "id": "giao-duc-va-dao-tao-008",
           "name": "Thành lập hoặc cho phép thành lập trường mẫu giáo, trường mầm non, nhà trẻ",
           "code": "1.012961",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012961"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012961"
         },
         {
           "id": "giao-duc-va-dao-tao-009",
           "name": "Cho phép trường mẫu giáo, trường mầm non, nhà trẻ hoạt động giáo dục",
           "code": "1.006390",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006390"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006390"
         },
         {
           "id": "giao-duc-va-dao-tao-010",
           "name": "Sáp nhập, chia, tách trường mẫu giáo, trường mầm non, nhà trẻ",
           "code": "1.006445",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006445"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006445"
         },
         {
           "id": "giao-duc-va-dao-tao-011",
           "name": "Cho phép trường mẫu giáo, trường mầm non, nhà trẻ hoạt động giáo dục trở lại",
           "code": "1.006444",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006444"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006444"
         },
         {
           "id": "giao-duc-va-dao-tao-012",
           "name": "Giải thể trường mẫu giáo, trường mầm non, nhà trẻ (Theo đề nghị của tổ chức, cá nhân thành lập trường)",
           "code": "1.012962",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012962"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012962"
         },
         {
           "id": "giao-duc-va-dao-tao-013",
           "name": "Thành lập hoặc cho phép thành lập trường tiểu học",
           "code": "1.012963",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012963"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012963"
         },
         {
           "id": "giao-duc-va-dao-tao-014",
           "name": "Cho phép trường tiểu học hoạt động giáo dục",
           "code": "2.001842",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001842"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001842"
         },
         {
           "id": "giao-duc-va-dao-tao-015",
           "name": "Sáp nhập, chia, tách trường tiểu học.",
           "code": "1.004563",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004563"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004563"
         },
         {
           "id": "giao-duc-va-dao-tao-016",
           "name": "Cho phép trường tiểu học hoạt động giáo dục trở lại",
           "code": "1.004552",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004552"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004552"
         },
         {
           "id": "giao-duc-va-dao-tao-017",
           "name": "Giải thể trường tiểu học (theo đề nghị của tổ chức, cá nhân đề nghị thành lập trường tiểu học)",
           "code": "1.001639",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001639"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001639"
         },
         {
           "id": "giao-duc-va-dao-tao-018",
           "name": "Thành lập hoặc cho phép thành lập trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở",
           "code": "1.012964",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012964"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012964"
         },
         {
           "id": "giao-duc-va-dao-tao-019",
           "name": "Cho phép trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở hoạt động giáo dục",
           "code": "1.012965",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012965"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012965"
         },
         {
           "id": "giao-duc-va-dao-tao-020",
           "name": "Sáp nhập, chia, tách trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở",
           "code": "1.012967",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012967"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012967"
         },
         {
           "id": "giao-duc-va-dao-tao-021",
           "name": "Cho phép trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở hoạt động giáo dục trở lại",
           "code": "1.012966",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012966"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012966"
         },
         {
           "id": "giao-duc-va-dao-tao-022",
           "name": "Giải thể trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở (Theo đề nghị của cá nhân, tổ chức thành lập trường)",
           "code": "1.012968",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012968"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012968"
         },
         {
           "id": "giao-duc-va-dao-tao-023",
           "name": "Chuyển đổi trường tiểu học tư thục, trường trung học cơ sở tư thục và trường phổ thông tư thục có nhiều cấp học có cấp học cao nhất là trung học cơ sở do nhà đầu tư trong nước đầu tư sang trường phổ thông tư thục hoạt động không vì lợi nhuận",
           "code": "1.008725",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008725"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008725"
         },
         {
           "id": "giao-duc-va-dao-tao-024",
           "name": "Thành lập hoặc cho phép thành lập cơ sở giáo dục mầm non độc lập",
           "code": "1.012971",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012971"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012971"
         },
         {
           "id": "giao-duc-va-dao-tao-025",
           "name": "Cho phép cơ sở giáo dục mầm non độc lập hoạt động giáo dục trở lại",
           "code": "1.012972",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012972"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012972"
         },
         {
           "id": "giao-duc-va-dao-tao-026",
           "name": "Sáp nhập, chia, tách cơ sở giáo dục mầm non độc lập",
           "code": "1.012973",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012973"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012973"
         },
         {
           "id": "giao-duc-va-dao-tao-027",
           "name": "Cho phép cơ sở giáo dục khác thực hiện chương trình giáo dục phổ thông cấp tiểu học",
           "code": "1.012975",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012975"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012975"
         },
         {
           "id": "giao-duc-va-dao-tao-028",
           "name": "Hỗ trợ đối với giáo viên mầm non làm việc tại cơ sở giáo dục mầm non dân lập, tư thục ở địa bàn có khu công nghiệp",
           "code": "1.008951",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008951"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008951"
         },
         {
           "id": "giao-duc-va-dao-tao-029",
           "name": "Hỗ trợ ăn trưa đối với trẻ em mẫu giáo",
           "code": "1.001622",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001622"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001622"
         },
         {
           "id": "giao-duc-va-dao-tao-030",
           "name": "Trợ cấp đối với trẻ em mầm non là con công nhân, người lao động làm việc tại khu công nghiệp",
           "code": "1.008950",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008950"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008950"
         },
         {
           "id": "giao-duc-va-dao-tao-031",
           "name": "Xét duyệt học sinh bán trú, học viên bán trú hỗ trợ kinh phí, hỗ trợ gạo",
           "code": "2.002770",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002770"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002770"
         },
         {
           "id": "giao-duc-va-dao-tao-032",
           "name": "Xét duyệt trẻ em nhà trẻ bán trú hỗ trợ kinh phí, hỗ trợ gạo",
           "code": "2.002771",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002771"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002771"
         },
         {
           "id": "giao-duc-va-dao-tao-033",
           "name": "Thành lập hoặc cho phép thành lập trung tâm học tập cộng đồng",
           "code": "1.012969",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012969"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012969"
         },
         {
           "id": "giao-duc-va-dao-tao-034",
           "name": "Cho phép trung tâm học tập cộng đồng hoạt động trở lại",
           "code": "5.000691",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=5.000691"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=5.000691"
         },
         {
           "id": "giao-duc-va-dao-tao-035",
           "name": "Sáp nhập, chia, tách trung tâm học tập cộng đồng",
           "code": "3.000307",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000307"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000307"
         },
         {
           "id": "giao-duc-va-dao-tao-036",
           "name": "Giải thể trung tâm học tập cộng đồng (Theo đề nghị của tổ chức, cá nhân thành lập trung tâm)",
           "code": "3.000308",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000308"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000308"
         },
         {
           "id": "giao-duc-va-dao-tao-037",
           "name": "Thành lập lớp dành cho người khuyết tật trong trường mầm non, trường tiểu học, trường trung học cơ sở và trung tâm giáo dục thường xuyên, trung tâm giáo dục nghề nghiệp - giáo dục thường xuyên thực hiện các chương trình xóa mù chữ và chương trình giáo dục thường xuyên cấp trung học cơ sở",
           "code": "3.000309",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000309"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000309"
         },
         {
           "id": "giao-duc-va-dao-tao-038",
           "name": "Giải thể cơ sở giáo dục mầm non độc lập (theo đề nghị của tổ chức, cá nhân thành lập trường)",
           "code": "1.012974",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012974"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012974"
         },
         {
           "id": "giao-duc-va-dao-tao-039",
           "name": "Cấp bản sao văn bằng, chứng chỉ từ số gốc",
           "code": "3.000467",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000467"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000467"
         },
         {
           "id": "giao-duc-va-dao-tao-040",
           "name": "Thủ tục chỉnh sửa nội dung văn bằng, chứng chỉ",
           "code": "3.000468",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000468"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000468"
         },
         {
           "id": "giao-duc-va-dao-tao-041",
           "name": "Hỗ trợ học tập đối với trẻ mẫu giáo, học sinh tiểu học, học sinh trung học cơ sở, sinh viên các dân tộc thiểu số rất ít người",
           "code": "1.003702",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003702"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003702"
         }
       ]
     },
@@ -447,289 +447,289 @@
           "id": "nong-nghiep-va-moi-truong-001",
           "name": "Giải quyết tranh chấp đất đai thuộc thẩm quyền của Chủ tịch Ủy ban nhân dân cấp xã",
           "code": "1.013967",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013967"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013967"
         },
         {
           "id": "nong-nghiep-va-moi-truong-002",
           "name": "Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với tổ chức đang sử dụng đất",
           "code": "1.012753",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012753"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012753"
         },
         {
           "id": "nong-nghiep-va-moi-truong-003",
           "name": "Giao đất, cho thuê đất, chuyển mục đích sử dụng đất đối với trường hợp giao đất, cho thuê đất không đấu giá quyền sử dụng đất, không đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất; trường hợp giao đất, cho thuê đất thông qua đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất; giao đất và giao rừng; cho thuê đất và cho thuê rừng, gia hạn sử dụng đất khi hết thời hạn sử dụng đất",
           "code": "1.013823",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013823"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013823"
         },
         {
           "id": "nong-nghiep-va-moi-truong-004",
           "name": "Chuyển hình thức giao đất, cho thuê đất",
           "code": "1.013825",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013825"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013825"
         },
         {
           "id": "nong-nghiep-va-moi-truong-005",
           "name": "Điều chỉnh quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất do thay đổi căn cứ quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất; điều chỉnh thời hạn sử dụng đất của dự án đầu tư",
           "code": "1.013952",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013952"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013952"
         },
         {
           "id": "nong-nghiep-va-moi-truong-006",
           "name": "Điều chỉnh quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất do sai sót về ranh giới, vị trí, diện tích, mục đích sử dụng giữa bản đồ quy hoạch, bản đồ địa chính, quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất và số liệu bàn giao đất trên thực địa",
           "code": "1.013953",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013953"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013953"
         },
         {
           "id": "nong-nghiep-va-moi-truong-007",
           "name": "Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư, người gốc Việt Nam định cư ở nước ngoài",
           "code": "1.013978",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013978"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013978"
         },
         {
           "id": "nong-nghiep-va-moi-truong-008",
           "name": "Đính chính Giấy chứng nhận đã cấp lần đầu có sai sót",
           "code": "1.012796",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012796"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012796"
         },
         {
           "id": "nong-nghiep-va-moi-truong-009",
           "name": "Thu hồi Giấy chứng nhận đã cấp không đúng quy định của pháp luật đất đai do người sử dụng đất, chủ sở hữu tài sản gắn liền với đất phát hiện và cấp lại Giấy chứng nhận sau khi thu hồi",
           "code": "1.012791",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012791"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012791"
         },
         {
           "id": "nong-nghiep-va-moi-truong-010",
           "name": "Sử dụng đất kết hợp đa mục đích, gia hạn phương án sử dụng đất kết hợp đa mục đích",
           "code": "1.013965",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013965"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013965"
         },
         {
           "id": "nong-nghiep-va-moi-truong-011",
           "name": "Tặng cho quyền sử dụng đất cho Nhà nước hoặc cộng đồng dân cư hoặc mở rộng đường giao thông đối với trường hợp thửa đất chưa được cấp Giấy chứng nhận.",
           "code": "1.013979",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013979"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013979"
         },
         {
           "id": "nong-nghiep-va-moi-truong-012",
           "name": "Hỗ trợ dự án liên kết (cấp huyện)",
           "code": "1.003434",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003434"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003434"
         },
         {
           "id": "nong-nghiep-va-moi-truong-013",
           "name": "Chuyển đổi cơ cấu cây trồng, vật nuôi trên đất trồng lúa",
           "code": "1.008004",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008004"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008004"
         },
         {
           "id": "nong-nghiep-va-moi-truong-014",
           "name": "Công nhận hộ nghèo, hộ cận nghèo; hộ thoát nghèo, hộ thoát cận nghèo định kỳ hằng năm",
           "code": "1.011606",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011606"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011606"
         },
         {
           "id": "nong-nghiep-va-moi-truong-015",
           "name": "Công nhận hộ nghèo, hộ cận nghèo thường xuyên hằng năm",
           "code": "1.011607",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011607"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011607"
         },
         {
           "id": "nong-nghiep-va-moi-truong-016",
           "name": "Công nhận hộ thoát nghèo, hộ thoát cận nghèo thường xuyên hằng năm",
           "code": "1.011608",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011608"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011608"
         },
         {
           "id": "nong-nghiep-va-moi-truong-017",
           "name": "Công nhận hộ làm nông nghiệp, lâm nghiệp, ngư nghiệp và diêm nghiệp có mức sống trung bình",
           "code": "1.011609",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011609"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011609"
         },
         {
           "id": "nong-nghiep-va-moi-truong-018",
           "name": "Hỗ trợ chi phí về vật tư phối giống nhân tạo gia súc gồm tinh đông lạnh, Nitơ lỏng, găng tay và dụng cụ dẫn tinh để phối giống cho trâu, bò cái; chi phí về liều tinh để thực hiện phối giống cho lợn nái, công cho người làm dịch vụ phối giống nhân tạo gia súc (trâu, bò)",
           "code": "1.012836",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012836"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012836"
         },
         {
           "id": "nong-nghiep-va-moi-truong-019",
           "name": "Phê duyệt hỗ trợ kinh phí đào tạo, tập huấn để chuyển đổi từ chăn nuôi sang các nghề khác; chi phí cho cá nhân được đào tạo về kỹ thuật phối giống nhân tạo gia súc (trâu, bò); chi phí mua bình chứa Nitơ lỏng bảo quản tinh cho người làm dịch vụ phối giống nhân tạo gia súc (trâu, bò) đối với các chính sách sử dụng vốn sự nghiệp nguồn ngân sách nhà nước",
           "code": "1.012837",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012837"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012837"
         },
         {
           "id": "nong-nghiep-va-moi-truong-020",
           "name": "Hỗ trợ cơ sở sản xuất bị thiệt hại do dịch bệnh động vật (cơ sở sản xuất không thuộc lực lượng vũ trang nhân dân)",
           "code": "1.013997",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013997"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013997"
         },
         {
           "id": "nong-nghiep-va-moi-truong-021",
           "name": "Cấp giấy xác nhận nguyên liệu thủy sản khai thác trong nước (theo yêu cầu)",
           "code": "1.003593",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003593"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003593"
         },
         {
           "id": "nong-nghiep-va-moi-truong-022",
           "name": "Cấp Giấy chứng nhận thẩm định thiết kế tàu cá",
           "code": "1.003590",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003590"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003590"
         },
         {
           "id": "nong-nghiep-va-moi-truong-023",
           "name": "Cấp giấy chứng nhận an toàn kỹ thuật tàu cá",
           "code": "1.003563",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003563"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003563"
         },
         {
           "id": "nong-nghiep-va-moi-truong-024",
           "name": "Công nhận và giao quyền quản lý cho tổ chức cộng đồng (thuộc địa bàn quản lý)",
           "code": "1.003956",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003956"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003956"
         },
         {
           "id": "nong-nghiep-va-moi-truong-025",
           "name": "Sửa đổi, bổ sung nội dung quyết định công nhận và giao quyền quản lý cho tổ chức cộng đồng (thuộc địa bàn quản lý)",
           "code": "1.004498",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004498"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004498"
         },
         {
           "id": "nong-nghiep-va-moi-truong-026",
           "name": "Công bố mở cảng cá loại III",
           "code": "1.004478",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004478"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004478"
         },
         {
           "id": "nong-nghiep-va-moi-truong-027",
           "name": "Đăng ký khai thác, sử dụng nước dưới đất",
           "code": "1.001662",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001662"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001662"
         },
         {
           "id": "nong-nghiep-va-moi-truong-028",
           "name": "Giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản",
           "code": "3.000439",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000439"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000439"
         },
         {
           "id": "nong-nghiep-va-moi-truong-029",
           "name": "Gia hạn thời hạn giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản",
           "code": "3.000440",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000440"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000440"
         },
         {
           "id": "nong-nghiep-va-moi-truong-030",
           "name": "Trả lại khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản",
           "code": "3.000441",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000441"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000441"
         },
         {
           "id": "nong-nghiep-va-moi-truong-031",
           "name": "Sửa đổi, bổ sung Quyết định giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản",
           "code": "3.000442",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000442"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000442"
         },
         {
           "id": "nong-nghiep-va-moi-truong-032",
           "name": "Công nhận khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản",
           "code": "3.000443",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000443"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000443"
         },
         {
           "id": "nong-nghiep-va-moi-truong-033",
           "name": "Quyết định chuyển mục đích sử dụng rừng sang mục đích khác đối với cá nhân",
           "code": "1.012694",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012694"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012694"
         },
         {
           "id": "nong-nghiep-va-moi-truong-034",
           "name": "Phê duyệt hoặc điều chỉnh phương án quản lý rừng bền vững của chủ rừng là hộ gia đình, cá nhân, cộng đồng dân cư hoặc hộ gia đình cá nhân liên kết thành nhóm hộ, tổ hợp tác trường hợp có tổ chức các hoạt động du lịch sinh thái",
           "code": "3.000250",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000250"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000250"
         },
         {
           "id": "nong-nghiep-va-moi-truong-035",
           "name": "Lập biên bản kiểm tra hiện trường xác định nguyên nhân, mức độ thiệt hại rừng trồng",
           "code": "1.012922",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012922"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012922"
         },
         {
           "id": "nong-nghiep-va-moi-truong-036",
           "name": "Hỗ trợ tín dụng đầu tư trồng rừng gỗ lớn đối với chủ rừng là hộ gia đình, cá nhân",
           "code": "1.012531",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012531"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012531"
         },
         {
           "id": "nong-nghiep-va-moi-truong-037",
           "name": "Quyết định thu hồi rừng đối với hộ gia đình, cá nhân và cộng đồng dân cư tự nguyện trả lại rừng",
           "code": "1.012695",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012695"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012695"
         },
         {
           "id": "nong-nghiep-va-moi-truong-038",
           "name": "Phê duyệt Phương án khai thác thực vật rừng loài thông thường thuộc thẩm quyền giải quyết của Ủy ban nhân dân cấp xã",
           "code": "1.011471",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011471"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011471"
         },
         {
           "id": "nong-nghiep-va-moi-truong-039",
           "name": "Tham vấn trong đánh giá tác động môi trường",
           "code": "1.010736",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010736"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010736"
         },
         {
           "id": "nong-nghiep-va-moi-truong-040",
           "name": "Xác nhận Hợp đồng tiếp cận nguồn gen và chia sẻ lợi ích (cấp xã)",
           "code": "1.004082",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004082"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004082"
         },
         {
           "id": "nong-nghiep-va-moi-truong-041",
           "name": "Trợ cấp tiền tuất, tai nạn (đối với trường hợp tai nạn suy giảm khả năng lao động từ 5% trở lên) cho lực lượng xung kích phòng chống thiên tai cấp xã chưa tham gia bảo hiểm xã hội",
           "code": "1.010534",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010534"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010534"
         },
         {
           "id": "nong-nghiep-va-moi-truong-042",
           "name": "Cấp giấy phép hoạt động của phương tiện thủy nội địa, phương tiện cơ giới, trừ xe mô tô, xe gắn máy, phương tiện thủy nội địa thô sơ trong phạm vi bảo vệ công trình thủy lợi của Chủ tịch UBND cấp tỉnh",
           "code": "2.001793",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001793"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001793"
         },
         {
           "id": "nong-nghiep-va-moi-truong-043",
           "name": "Phê duyệt phương án bảo vệ đập, hồ chứa nước trên địa bàn do Ủy ban nhân dân cấp tỉnh phân cấp",
           "code": "1.013768",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013768"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013768"
         },
         {
           "id": "nong-nghiep-va-moi-truong-044",
           "name": "Phê duyệt, công bố công khai quy trình vận hành đối với công trình thủy lợi lớn và công trình thủy lợi vừa do UBND cấp tỉnh phân cấp",
           "code": "2.001627",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001627"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001627"
         },
         {
           "id": "nong-nghiep-va-moi-truong-045",
           "name": "Phê duyệt đê cương, kết quả kiểm định an toàn đập, hồ chứa thủy lợi thuộc thẩm quyền của Chủ tịch UBND cấp xã",
           "code": "1.003471",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003471"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003471"
         },
         {
           "id": "nong-nghiep-va-moi-truong-046",
           "name": "Hỗ trợ đầu tư xây dựng phát triển thủy lợi nhỏ, thủy lợi nội đồng và tưới tiên tiến, tiết kiệm nước (Đối với nguồn vốn hỗ trợ trực tiếp, ngân sách địa phương và nguồn vốn hợp pháp khác của địa phương phân bổ dự toán cho UBND cấp xã thực hiện)",
           "code": "2.001621",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001621"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001621"
         },
         {
           "id": "nong-nghiep-va-moi-truong-047",
           "name": "Thẩm định, phê duyệt phương án ứng phó với tình huống khẩn cấp thuộc thẩm quyền của UBND cấp xã",
           "code": "1.003440",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003440"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003440"
         },
         {
           "id": "nong-nghiep-va-moi-truong-048",
           "name": "Phê duyệt kế hoạch khuyến nông địa phương (cấp xã)",
           "code": "1.003596",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003596"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003596"
         }
       ]
     },
@@ -741,313 +741,313 @@
           "id": "noi-vu-001",
           "name": "Tổ chức phát động học tập tấm gương trong phạm vi cả nước đối với trường hợp hy sinh, bị thương quy định tại điểm k khoản 1 Điều 14 và điểm k khoản 1 Điều 23 Pháp lệnh.",
           "code": "1.010773",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010773"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010773"
         },
         {
           "id": "noi-vu-002",
           "name": "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh thuộc các trường hợp quy định tại Điều 14 Pháp lệnh nhưng chưa được cấp Bằng “Tổ quốc ghi công” mà thân nhân đã được giải quyết chế độ ưu đãi từ ngày 01 tháng 01 năm 1995 đến ngày 30 tháng 9 năm 2006.",
           "code": "1.010775",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010775"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010775"
         },
         {
           "id": "noi-vu-003",
           "name": "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh nhưng chưa được cấp Bằng “Tổ quốc ghi công” mà thân nhân đã được giải quyết chế độ ưu đãi từ ngày 31 tháng 12 năm 1994 trở về trước.",
           "code": "1.010774",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010774"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010774"
         },
         {
           "id": "noi-vu-004",
           "name": "Đăng ký nội quy lao động của doanh nghiệp.",
           "code": "2.001955",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001955"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001955"
         },
         {
           "id": "noi-vu-005",
           "name": "Cấp Bằng “Tổ quốc ghi công”",
           "code": "1.010772",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010772"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010772"
         },
         {
           "id": "noi-vu-006",
           "name": "Xác nhận và giải quyết chế độ ưu đãi người có công với cách mạng và thân nhân.",
           "code": "1.013745",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013745"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013745"
         },
         {
           "id": "noi-vu-007",
           "name": "Thăm viếng mộ liệt sĩ",
           "code": "1.013750",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013750"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013750"
         },
         {
           "id": "noi-vu-008",
           "name": "Tiếp nhận người có công vào cơ sở nuôi dưỡng, điều dưỡng người có công do Bộ Nội vụ quản lý.",
           "code": "1.010783",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010783"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010783"
         },
         {
           "id": "noi-vu-009",
           "name": "Cấp tiền mua phương tiện trợ giúp, dụng cụ chỉnh hình, phương tiện, thiết bị phục hồi chức năng đối với trường hợp đang sống tại gia đình hoặc đang được nuôi dưỡng tập trung tại các cơ sở nuôi dưỡng, điều dưỡng do địa phương quản lý.",
           "code": "1.010811",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010811"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010811"
         },
         {
           "id": "noi-vu-010",
           "name": "Giải quyết chế độ trợ cấp một lần đối với người được cử làm chuyên gia sang giúp Lào, Căm-pu-chi-a",
           "code": "1.004964",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004964"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004964"
         },
         {
           "id": "noi-vu-011",
           "name": "Đăng ký hợp đồng lao động trực tiếp giao kết",
           "code": "1.013734",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013734"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013734"
         },
         {
           "id": "noi-vu-012",
           "name": "Vay vốn hỗ trợ tạo việc làm, duy trì và mở rộng việc làm từ Quỹ quốc gia về việc làm đối với người lao động",
           "code": "1.011546",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011546"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011546"
         },
         {
           "id": "noi-vu-013",
           "name": "Vay vốn hỗ trợ tạo việc làm, duy trì và mở rộng việc làm từ Quỹ quốc gia về việc làm đối với cơ sở sản xuất, kinh doanh.",
           "code": "1.011547",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011547"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011547"
         },
         {
           "id": "noi-vu-014",
           "name": "Thủ tục tặng, truy tặng “Huy chương Thanh niên xung phong vẻ vang” cho cá nhân theo công trạng.",
           "code": "1.012426",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012426"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012426"
         },
         {
           "id": "noi-vu-015",
           "name": "Xét tặng danh hiệu vinh dự Nhà nước “Bà mẹ Việt Nam anh hùng”",
           "code": "1.014149",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014149"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014149"
         },
         {
           "id": "noi-vu-016",
           "name": "Truy tặng danh hiệu vinh dự Nhà nước “Bà mẹ Việt Nam anh hùng”",
           "code": "1.014150",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014150"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014150"
         },
         {
           "id": "noi-vu-017",
           "name": "Thủ tục công nhận ban vận động thành lập hội.",
           "code": "1.012926",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012926"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012926"
         },
         {
           "id": "noi-vu-018",
           "name": "Thủ tục thành lập hội.",
           "code": "1.012928",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012928"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012928"
         },
         {
           "id": "noi-vu-019",
           "name": "Thủ tục báo cáo tổ chức đại hội thành lập, đại hội nhiệm kỳ, đại hội bất thường của hội",
           "code": "1.012930",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012930"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012930"
         },
         {
           "id": "noi-vu-020",
           "name": "Thủ tục thông báo kết quả đại hội và phê duyệt đổi tên hội, phê duyệt điều lệ hội",
           "code": "1.012931",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012931"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012931"
         },
         {
           "id": "noi-vu-021",
           "name": "Thủ tục chia, tách; sáp nhập; hợp nhất hội.",
           "code": "1.012936",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012936"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012936"
         },
         {
           "id": "noi-vu-022",
           "name": "Thủ tục hội tự giải thể.",
           "code": "1.012937",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012937"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012937"
         },
         {
           "id": "noi-vu-023",
           "name": "Thủ tục hỗ trợ chi phí y tế và thu nhập thực tế bị mất hoặc giảm sút cho người đang trực tiếp tham gia hoạt động chữ thập đỏ bị tai nạn dẫn đến thiệt hại về sức khỏe",
           "code": "1.013710",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013710"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013710"
         },
         {
           "id": "noi-vu-024",
           "name": "Thủ tục cấp giấy phép thành lập và công nhận điều lệ quỹ",
           "code": "1.013017",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013017"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013017"
         },
         {
           "id": "noi-vu-025",
           "name": "Thủ tục công nhận quỹ đủ điều kiện hoạt động và công nhận thành viên Hội đồng quản lý quỹ; công nhận thay đổi, bổ sung thành viên Hội đồng quản lý quỹ.",
           "code": "1.013018",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013018"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013018"
         },
         {
           "id": "noi-vu-026",
           "name": "Thủ tục công nhận điều lệ (sửa đổi, bổ sung) quỹ; đổi tên quỹ",
           "code": "1.013019",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013019"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013019"
         },
         {
           "id": "noi-vu-027",
           "name": "Thủ tục cấp lại giấy phép thành lập và công nhận điều lệ quỹ",
           "code": "1.013020",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013020"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013020"
         },
         {
           "id": "noi-vu-028",
           "name": "Thủ tục cho phép quỹ hoạt động trở lại sau khi bị tạm đình chỉ hoạt động",
           "code": "1.013021",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013021"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013021"
         },
         {
           "id": "noi-vu-029",
           "name": "Thủ tục quỹ tự giải thể",
           "code": "1.013023",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013023"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013023"
         },
         {
           "id": "noi-vu-030",
           "name": "Cấp đổi Bằng “Tổ quốc ghi công”",
           "code": "1.010777",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010777"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010777"
         },
         {
           "id": "noi-vu-031",
           "name": "Cấp lại Bằng “Tổ quốc ghi công”",
           "code": "1.010778",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010778"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010778"
         },
         {
           "id": "noi-vu-032",
           "name": "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh hoặc mất tích trong chiến tranh",
           "code": "1.010781",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010781"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010781"
         },
         {
           "id": "noi-vu-033",
           "name": "Công nhận đối với người bị thương trong chiến tranh không thuộc quân đội, công an.",
           "code": "1.010810",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010810"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010810"
         },
         {
           "id": "noi-vu-034",
           "name": "Tiếp nhận người có công vào cơ sở nuôi dưỡng, điều dưỡng người có công do tỉnh quản lý.",
           "code": "1.010812",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010812"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010812"
         },
         {
           "id": "noi-vu-035",
           "name": "Cấp bổ sung hoặc cấp lại giấy chứng nhận người có công do ngành Lao động - Thương binh và Xã hội quản lý và giấy chứng nhận thân nhân liệt sĩ.",
           "code": "1.010814",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010814"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010814"
         },
         {
           "id": "noi-vu-036",
           "name": "Công nhận và giải quyết chế độ ưu đãi người hoạt động cách mạng.",
           "code": "1.010815",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010815"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010815"
         },
         {
           "id": "noi-vu-037",
           "name": "Công nhận và giải quyết chế độ con đẻ của người hoạt động kháng chiến bị nhiễm chất độc hóa học.",
           "code": "1.010817",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010817"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010817"
         },
         {
           "id": "noi-vu-038",
           "name": "Công nhận và giải quyết chế độ người hoạt động cách mạng, kháng chiến, bảo vệ tổ quốc, làm nghĩa vụ quốc tế bị địch bắt tù, đày.",
           "code": "1.010818",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010818"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010818"
         },
         {
           "id": "noi-vu-039",
           "name": "Cấp giấy xác nhận thân nhân của người có công.",
           "code": "1.010833",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010833"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010833"
         },
         {
           "id": "noi-vu-040",
           "name": "Giải quyết chế độ trợ cấp thờ cúng liệt sĩ.",
           "code": "1.010803",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010803"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010803"
         },
         {
           "id": "noi-vu-041",
           "name": "Giải quyết chế độ ưu đãi đối với trường hợp tặng hoặc truy tặng danh hiệu vinh dự nhà nước “Bà mẹ Việt Nam anh hùng”.",
           "code": "1.010804",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010804"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010804"
         },
         {
           "id": "noi-vu-042",
           "name": "Giải quyết chế độ người có công giúp đỡ cách mạng.",
           "code": "1.010820",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010820"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010820"
         },
         {
           "id": "noi-vu-043",
           "name": "Bổ sung tình hình thân nhân trong hồ sơ liệt sĩ.",
           "code": "1.010825",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010825"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010825"
         },
         {
           "id": "noi-vu-044",
           "name": "Giải quyết chế độ hỗ trợ để theo học đến trình độ đại học tại các cơ sở giáo dục thuộc hệ thống giáo dục quốc dân.",
           "code": "1.010821",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010821"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010821"
         },
         {
           "id": "noi-vu-045",
           "name": "Công nhận và giải quyết chế độ ưu đãi người hoạt động kháng chiến bị nhiễm chất độc hóa học.",
           "code": "1.010816",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010816"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010816"
         },
         {
           "id": "noi-vu-046",
           "name": "Hưởng trợ cấp khi người có công đang hưởng trợ cấp ưu đãi từ trần.",
           "code": "1.010824",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010824"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010824"
         },
         {
           "id": "noi-vu-047",
           "name": "Giải quyết chế độ người hoạt động kháng chiến giải phóng dân tộc, bảo vệ tổ quốc và làm nghĩa vụ quốc tế.",
           "code": "1.010819",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010819"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010819"
         },
         {
           "id": "noi-vu-048",
           "name": "Giải quyết trợ cấp một lần đối với người có thành tích tham gia kháng chiến đã được tặng Bằng khen của Thủ tướng Chính phủ, Bằng khen của Chủ tịch Hội đồng Bộ trưởng hoặc Bằng khen của Bộ trưởng, Thủ trưởng cơ quan ngang bộ, Thủ trưởng cơ quan thuộc Chính phủ, Bằng khen của Chủ tịch Ủy ban nhân dân tỉnh, thành phố trực thuộc Trung ương.",
           "code": "1.001257",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001257"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001257"
         },
         {
           "id": "noi-vu-049",
           "name": "Trợ cấp một lần đối với thanh niên xung phong đã hoàn thành nhiệm vụ trong kháng chiến.",
           "code": "2.001157",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001157"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001157"
         },
         {
           "id": "noi-vu-050",
           "name": "Trợ cấp hàng tháng đối với thanh niên xung phong đã hoàn thành nhiệm vụ trong kháng chiến.",
           "code": "2.001396",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001396"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001396"
         },
         {
           "id": "noi-vu-051",
           "name": "Giải quyết chế độ mai táng phí đối với cựu chiến binh.",
           "code": "2.002307",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002307"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002307"
         },
         {
           "id": "noi-vu-052",
           "name": "Giải quyết chế độ mai táng phí đối với thanh niên xung phong thời kỳ chống Pháp.",
           "code": "2.002308",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002308"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002308"
         }
       ]
     },
@@ -1059,277 +1059,277 @@
           "id": "tai-chinh-001",
           "name": "Đề nghị thay đổi tên tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã, chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã do xâm phạm quyền sở hữu công nghiệp",
           "code": "2.002635",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002635"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002635"
         },
         {
           "id": "tai-chinh-002",
           "name": "Đề nghị thu hồi Giấy chứng nhận đăng ký tổ hợp tác, Giấy chứng nhận đăng ký hợp tác xã, Giấy chứng nhận đăng ký chi nhánh, văn phòng đại diện đối với trường hợp nội dung kê khai trong hồ sơ đăng ký thành lập là giả mạo",
           "code": "2.002636",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002636"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002636"
         },
         {
           "id": "tai-chinh-003",
           "name": "Đăng ký thành lập tổ hợp tác; đăng ký tổ hợp tác trong trường hợp đã được thành lập trước ngày Luật Hợp tác xã có hiệu lực thi hành, thuộc đối tượng phải đăng ký theo quy định tại khoản 2 Điều 107 Luật Hợp tác xã 2023",
           "code": "2.002637",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002637"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002637"
         },
         {
           "id": "tai-chinh-004",
           "name": "Cấp lại Giấy chứng nhận đăng ký tổ hợp tác do bị mất, cháy, rách, nát hoặc bị tiêu hủy",
           "code": "2.002638",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002638"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002638"
         },
         {
           "id": "tai-chinh-005",
           "name": "Đăng ký thay đổi nội dung đăng ký tổ hợp tác",
           "code": "2.002639",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002639"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002639"
         },
         {
           "id": "tai-chinh-006",
           "name": "Hiệu đính, cập nhật, bổ sung thông tin đăng ký tổ hợp tác",
           "code": "2.002640",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002640"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002640"
         },
         {
           "id": "tai-chinh-007",
           "name": "Thông báo tạm ngừng kinh doanh, tiếp tục kinh doanh trở lại đối với tổ hợp tác",
           "code": "2.002641",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002641"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002641"
         },
         {
           "id": "tai-chinh-008",
           "name": "Chấm dứt hoạt động tổ hợp tác",
           "code": "2.002642",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002642"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002642"
         },
         {
           "id": "tai-chinh-009",
           "name": "Dừng thực hiện thủ tục đăng ký hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002643",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002643"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002643"
         },
         {
           "id": "tai-chinh-010",
           "name": "Dừng thực hiện thủ tục đăng ký tổ hợp tác",
           "code": "2.002644",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002644"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002644"
         },
         {
           "id": "tai-chinh-011",
           "name": "Dừng thực hiện thủ tục giải thể hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002645",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002645"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002645"
         },
         {
           "id": "tai-chinh-012",
           "name": "Thông báo lập chi nhánh, văn phòng đại diện ở nước ngoài",
           "code": "2.002646",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002646"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002646"
         },
         {
           "id": "tai-chinh-013",
           "name": "Hiệu đính, cập nhật, bổ sung thông tin đăng ký hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002648",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002648"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002648"
         },
         {
           "id": "tai-chinh-014",
           "name": "Thông báo bổ sung, cập nhật thông tin trong hồ sơ đăng ký hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002649",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002649"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002649"
         },
         {
           "id": "tai-chinh-015",
           "name": "Hiệu đính, cập nhật, bổ sung thông tin đăng ký chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002650",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002650"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002650"
         },
         {
           "id": "tai-chinh-016",
           "name": "Đăng ký thành lập hợp tác xã, liên hiệp hợp tác xã; đăng ký chuyển đổi tổ hợp tác thành hợp tác xã; đăng ký khi hợp tác xã, liên hiệp hợp tác xã chia, tách, hợp nhất",
           "code": "1.005280",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005280"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005280"
         },
         {
           "id": "tai-chinh-017",
           "name": "Đăng ký hoạt động chi nhánh, văn phòng đại diện, thông báo địa điểm kinh doanh",
           "code": "2.002123",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002123"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002123"
         },
         {
           "id": "tai-chinh-018",
           "name": "Đăng ký thay đổi nội dung đăng ký hợp tác xã, liên hiệp hợp tác xã; Đăng ký thay đổi nội dung đối với trường hợp hợp tác xã, liên hiệp hợp tác xã bị tách, nhận sáp nhập",
           "code": "1.005277",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005277"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005277"
         },
         {
           "id": "tai-chinh-019",
           "name": "Cấp đổi Giấy chứng nhận đăng ký hợp tác xã, liên hiệp hợp tác xã",
           "code": "1.004901",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004901"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004901"
         },
         {
           "id": "tai-chinh-020",
           "name": "Thông báo thay đổi nội dung đăng ký hợp tác xã, liên hiệp hợp tác xã; Thông báo thay đổi nội dung đăng ký đối với hợp tác xã, liên hiệp hợp tác xã bị tách, nhận sáp nhập",
           "code": "1.004979",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004979"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004979"
         },
         {
           "id": "tai-chinh-021",
           "name": "Thông báo về việc thành lập doanh nghiệp của hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.001958",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001958"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001958"
         },
         {
           "id": "tai-chinh-022",
           "name": "Đăng ký thay đổi nội dung đăng ký hoạt động của chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã;",
           "code": "1.005378",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005378"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005378"
         },
         {
           "id": "tai-chinh-023",
           "name": "Thông báo tạm ngừng kinh doanh/ tiếp tục kinh doanh trở lại đối với hợp tác xã, liên hiệp hợp tác xã, chi nhánh, văn phòng đại diện, địa điểm kinh doanh",
           "code": "1.005377",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005377"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005377"
         },
         {
           "id": "tai-chinh-024",
           "name": "Cấp lại Giấy chứng nhận đăng ký hợp tác xã, Giấy chứng nhận đăng ký hoạt động chi nhánh, văn phòng đại diện, Giấy chứng nhận đăng ký địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.001973",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001973"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001973"
         },
         {
           "id": "tai-chinh-025",
           "name": "Đăng ký giải thể hợp tác xã, liên hiệp hợp tác xã",
           "code": "1.004982",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004982"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004982"
         },
         {
           "id": "tai-chinh-026",
           "name": "Chấm dứt hoạt động chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã",
           "code": "1.005010",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005010"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005010"
         },
         {
           "id": "tai-chinh-027",
           "name": "Đăng ký thành lập hộ kinh doanh",
           "code": "1.001612",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001612"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001612"
         },
         {
           "id": "tai-chinh-028",
           "name": "Đăng ký thay đổi nội dung đăng ký hộ kinh doanh",
           "code": "2.000720",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000720"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000720"
         },
         {
           "id": "tai-chinh-029",
           "name": "Tạm ngừng kinh doanh, tiếp tục kinh doanh trước thời hạn đã thông báo của hộ kinh doanh",
           "code": "1.001570",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001570"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001570"
         },
         {
           "id": "tai-chinh-030",
           "name": "Chấm dứt hoạt động hộ kinh doanh",
           "code": "1.001266",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001266"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001266"
         },
         {
           "id": "tai-chinh-031",
           "name": "Cấp lại Giấy chứng nhận đăng ký hộ kinh doanh",
           "code": "2.000575",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000575"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000575"
         },
         {
           "id": "tai-chinh-032",
           "name": "Thông báo chấm dứt hoạt động của Tổ hợp tác",
           "code": "2.002228",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002228"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002228"
         },
         {
           "id": "tai-chinh-033",
           "name": "Đăng ký nhu cầu hỗ trợ của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002668",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002668"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002668"
         },
         {
           "id": "tai-chinh-034",
           "name": "Phê duyệt đối tượng được hỗ trợ phí bảo hiểm nông nghiệp",
           "code": "1.005412",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005412"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005412"
         },
         {
           "id": "tai-chinh-035",
           "name": "Giao tài sản kết cấu hạ tầng thủy lợi",
           "code": "3.000327",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000327"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000327"
         },
         {
           "id": "tai-chinh-036",
           "name": "Thanh lý tài sản kết cấu hạ tầng thủy lợi; xử lý tài sản kết cấu hạ tầng thủy lợi trong trường hợp bị mất, hủy hoại",
           "code": "3.000326",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000326"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000326"
         },
         {
           "id": "tai-chinh-037",
           "name": "Kê khai, thẩm định tờ khai phí bảo vệ môi trường đối với nước thải",
           "code": "1.008603",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008603"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008603"
         },
         {
           "id": "tai-chinh-038",
           "name": "Thủ tục khai, nộp phí bảo vệ môi trường đối với khí thải",
           "code": "1.013040",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013040"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013040"
         },
         {
           "id": "tai-chinh-039",
           "name": "Khấu trừ kinh phí bồi thường, hỗ trợ, tái định cư",
           "code": "1.012994",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012994"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012994"
         },
         {
           "id": "tai-chinh-040",
           "name": "Đăng ký nhu cầu hỗ trợ của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã",
           "code": "2.002668",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002668"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002668"
         },
         {
           "id": "tai-chinh-041",
           "name": "Phê duyệt đối tượng được hỗ trợ phí bảo hiểm nông nghiệp",
           "code": "1.005412",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005412"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005412"
         },
         {
           "id": "tai-chinh-042",
           "name": "Giao tài sản kết cấu hạ tầng thủy lợi",
           "code": "3.000327",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000327"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000327"
         },
         {
           "id": "tai-chinh-043",
           "name": "Thanh lý tài sản kết cấu hạ tầng thủy lợi; xử lý tài sản kết cấu hạ tầng thủy lợi trong trường hợp bị mất, hủy hoại",
           "code": "3.000326",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000326"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000326"
         },
         {
           "id": "tai-chinh-044",
           "name": "Kê khai, thẩm định tờ khai phí bảo vệ môi trường đối với nước thải",
           "code": "1.008603",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008603"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008603"
         },
         {
           "id": "tai-chinh-045",
           "name": "Thủ tục khai, nộp phí bảo vệ môi trường đối với khí thải",
           "code": "1.013040",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013040"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013040"
         },
         {
           "id": "tai-chinh-046",
           "name": "Khấu trừ kinh phí bồi thường, hỗ trợ, tái định cư",
           "code": "1.012994",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012994"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012994"
         }
       ]
     },
@@ -1341,289 +1341,289 @@
           "id": "tu-phap-001",
           "name": "Cấp bản sao trích lục hộ tịch, bản sao giấy khai sinh",
           "code": "2.000635",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000635"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000635"
         },
         {
           "id": "tu-phap-002",
           "name": "Thủ tục xác nhận thông tin hộ tịch",
           "code": "2.002516",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002516"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002516"
         },
         {
           "id": "tu-phap-003",
           "name": "Thủ tục Đăng ký khai sinh có yếu tố nước ngoài.",
           "code": "2.000528",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000528"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000528"
         },
         {
           "id": "tu-phap-004",
           "name": "Thủ tục Đăng ký kết hôn có yếu tố nước ngoài",
           "code": "2.000806",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000806"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000806"
         },
         {
           "id": "tu-phap-005",
           "name": "Thủ tục Đăng ký khai tử có yếu tố nước ngoài",
           "code": "1.001766",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001766"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001766"
         },
         {
           "id": "tu-phap-006",
           "name": "Thủ tục Đăng ký nhận cha, mẹ, con có yếu tố nước ngoài",
           "code": "2.000779",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000779"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000779"
         },
         {
           "id": "tu-phap-007",
           "name": "Thủ tục Đăng ký khai sinh kết hợp đăng ký nhận cha, mẹ, con có yếu tố nước ngoài.",
           "code": "1.001695",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001695"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001695"
         },
         {
           "id": "tu-phap-008",
           "name": "Thủ tục Đăng ký giám hộ có yếu tố nước ngoài",
           "code": "1.001669",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001669"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001669"
         },
         {
           "id": "tu-phap-009",
           "name": "Thủ tục Đăng ký chấm dứt giám hộ có yếu tố nước ngoài",
           "code": "2.000756",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000756"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000756"
         },
         {
           "id": "tu-phap-010",
           "name": "Thủ tục Thay đổi, cải chính, bổ sung thông tin hộ tịch, xác định lại dân tộc",
           "code": "1.004859",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004859"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004859"
         },
         {
           "id": "tu-phap-011",
           "name": "Thủ tục Ghi vào sổ hộ tịch việc kết hôn của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài.",
           "code": "2.002189",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002189"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002189"
         },
         {
           "id": "tu-phap-012",
           "name": "Thủ tục Ghi vào sổ hộ tịch việc ly hôn, hủy việc kết hôn của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài",
           "code": "2.000554",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000554"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000554"
         },
         {
           "id": "tu-phap-013",
           "name": "Thủ tục Đăng ký lại khai sinh có yếu tố nước ngoài",
           "code": "2.000522",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000522"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000522"
         },
         {
           "id": "tu-phap-014",
           "name": "Thủ tục Đăng ký khai sinh có yếu tố nước ngoài cho người đã có hồ sơ, giấy tờ cá nhân",
           "code": "1.000893",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000893"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000893"
         },
         {
           "id": "tu-phap-015",
           "name": "Thủ tục Đăng ký lại kết hôn có yếu tố nước ngoài",
           "code": "2.000513",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000513"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000513"
         },
         {
           "id": "tu-phap-016",
           "name": "Thủ tục Đăng ký lại khai tử có yếu tố nước ngoài",
           "code": "2.000497",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000497"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000497"
         },
         {
           "id": "tu-phap-017",
           "name": "Thủ tục Ghi vào sổ hộ tịch việc hộ tịch khác của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài (khai sinh; giám hộ; nhận cha, mẹ, con; xác định cha, mẹ, con; khai tử; thay đổi hộ tịch)",
           "code": "2.000547",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000547"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000547"
         },
         {
           "id": "tu-phap-018",
           "name": "Thủ tục Đăng ký khai sinh.",
           "code": "1.001193",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001193"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001193"
         },
         {
           "id": "tu-phap-019",
           "name": "Thủ tục Đăng ký khai tử",
           "code": "1.000656",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000656"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000656"
         },
         {
           "id": "tu-phap-020",
           "name": "Thủ tục Đăng ký kết hôn",
           "code": "1.000894",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000894"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000894"
         },
         {
           "id": "tu-phap-021",
           "name": "Thủ tục Đăng ký nhận cha, mẹ, con",
           "code": "1.001022",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001022"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001022"
         },
         {
           "id": "tu-phap-022",
           "name": "Thủ tục Đăng ký khai sinh kết hợp đăng ký nhận cha, mẹ, con",
           "code": "1.000689",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000689"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000689"
         },
         {
           "id": "tu-phap-023",
           "name": "Thủ tục Đăng ký lại khai sinh",
           "code": "1.004884",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004884"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004884"
         },
         {
           "id": "tu-phap-024",
           "name": "Thủ tục Đăng ký lại khai tử",
           "code": "1.005461",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005461"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005461"
         },
         {
           "id": "tu-phap-025",
           "name": "Thủ tục Đăng ký lại kết hôn",
           "code": "1.004746",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004746"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004746"
         },
         {
           "id": "tu-phap-026",
           "name": "Thủ tục Đăng ký khai sinh lưu động",
           "code": "1.003583",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003583"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003583"
         },
         {
           "id": "tu-phap-027",
           "name": "Thủ tục Đăng ký khai tử lưu động",
           "code": "1.000419",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000419"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000419"
         },
         {
           "id": "tu-phap-028",
           "name": "Thủ tục Đăng ký kết hôn lưu động",
           "code": "1.000593",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000593"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000593"
         },
         {
           "id": "tu-phap-029",
           "name": "Thủ tục Đăng ký khai sinh cho người đã có hồ sơ, giấy tờ cá nhân",
           "code": "1.004772",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004772"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004772"
         },
         {
           "id": "tu-phap-030",
           "name": "Thủ tục Đăng ký giám hộ",
           "code": "1.004837",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004837"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004837"
         },
         {
           "id": "tu-phap-031",
           "name": "Thủ tục Đăng ký chấm dứt giám hộ",
           "code": "1.004845",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004845"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004845"
         },
         {
           "id": "tu-phap-032",
           "name": "Thủ tục Đăng ký giám sát việc giám hộ",
           "code": "3.000323",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000323"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000323"
         },
         {
           "id": "tu-phap-033",
           "name": "Thủ tục Đăng ký chấm dứt giám sát việc giám hộ",
           "code": "3.000322",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000322"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000322"
         },
         {
           "id": "tu-phap-034",
           "name": "Thủ tục Cấp giấy xác nhận tình trạng hôn nhân",
           "code": "1.004873",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004873"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004873"
         },
         {
           "id": "tu-phap-035",
           "name": "Ghi vào Sổ đăng ký nuôi con nuôi việc nuôi con nuôi đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài",
           "code": "2.002363",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002363"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002363"
         },
         {
           "id": "tu-phap-036",
           "name": "Đăng ký việc nuôi con nuôi trong nước",
           "code": "2.001263",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001263"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001263"
         },
         {
           "id": "tu-phap-037",
           "name": "Đăng ký lại việc nuôi con nuôi trong nước",
           "code": "2.001255",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001255"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001255"
         },
         {
           "id": "tu-phap-038",
           "name": "Thủ tục Giải quyết yêu cầu bồi thường tại cơ quan trực tiếp quản lý người thi hành công vụ gây thiệt hại",
           "code": "2.002165",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002165"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002165"
         },
         {
           "id": "tu-phap-039",
           "name": "Thủ tục Thôi làm hòa giải viên",
           "code": "2.000930",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000930"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000930"
         },
         {
           "id": "tu-phap-040",
           "name": "Thủ tục Thanh toán thù lao cho hòa giải viên",
           "code": "2.002080",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002080"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002080"
         },
         {
           "id": "tu-phap-041",
           "name": "Thủ tục thực hiện hỗ trợ khi hòa giải viên gặp tai nạn hoặc rủi ro ảnh hưởng đến sức khỏe, tính mạng trong khi thực hiện hoạt động hòa giải",
           "code": "2.000424",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000424"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000424"
         },
         {
           "id": "tu-phap-042",
           "name": "Chứng thực chữ ký người dịch mà người dịch không phải là cộng tác viên dịch thuật của Ủy ban nhân dân cấp xã",
           "code": "2.001008",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001008"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001008"
         },
         {
           "id": "tu-phap-043",
           "name": "Chứng thực di chúc",
           "code": "2.001019",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001019"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001019"
         },
         {
           "id": "tu-phap-044",
           "name": "Thủ tục chứng thực văn bản từ chối nhận di sản",
           "code": "2.001016",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001016"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001016"
         },
         {
           "id": "tu-phap-045",
           "name": "Cấp bản sao từ sổ gốc",
           "code": "2.000908",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000908"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000908"
         },
         {
           "id": "tu-phap-046",
           "name": "Chứng thực chữ ký trong các giấy tờ, văn bản (áp dụng cho cả trường hợp chứng thực điểm chỉ và trường hợp người yêu cầu chứng thực không thể ký, không thể điểm chỉ được)",
           "code": "2.000884",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000884"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000884"
         },
         {
           "id": "tu-phap-047",
           "name": "Chứng thực việc sửa đổi, bổ sung, hủy bỏ hợp đồng, giao dịch",
           "code": "2.000913",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000913"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000913"
         },
         {
           "id": "tu-phap-048",
           "name": "Cấp bản sao có chứng thực từ bản chính hợp đồng, giao dịch đã được chứng thực",
           "code": "2.000942",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000942"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000942"
         }
       ]
     },
@@ -1635,55 +1635,55 @@
           "id": "van-hoa-va-the-thao-001",
           "name": "Thủ tục thông báo tổ chức lễ hội cấp xã",
           "code": "1.003622",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003622"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003622"
         },
         {
           "id": "van-hoa-va-the-thao-002",
           "name": "Thủ tục tiếp nhận hồ sơ đăng ký lễ hội quy mô cấp xã",
           "code": "1.013791",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013791"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013791"
         },
         {
           "id": "van-hoa-va-the-thao-003",
           "name": "Thủ tục công nhận câu lạc bộ thể thao cơ sở (thẩm quyền CT UBND cấp xã)",
           "code": "2.000794",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000794"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000794"
         },
         {
           "id": "van-hoa-va-the-thao-004",
           "name": "Cấm tiếp xúc theo Quyết định của Chủ tịch Ủy ban nhân dân cấp xã (Chủ tịch Ủy ban nhân dân cấp huyện đối với địa phương không tổ chức chính quyền cấp xã)",
           "code": "1.012084",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012084"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012084"
         },
         {
           "id": "van-hoa-va-the-thao-005",
           "name": "Thủ tục Hủy bỏ Quyết định cấm tiếp xúc",
           "code": "1.012085",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012085"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012085"
         },
         {
           "id": "van-hoa-va-the-thao-006",
           "name": "Cấp giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng",
           "code": "1.013792",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013792"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013792"
         },
         {
           "id": "van-hoa-va-the-thao-007",
           "name": "Sửa đổi, bổ sung giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng",
           "code": "1.013793",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013793"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013793"
         },
         {
           "id": "van-hoa-va-the-thao-008",
           "name": "Gia hạn giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng",
           "code": "1.013794",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013794"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013794"
         },
         {
           "id": "van-hoa-va-the-thao-009",
           "name": "Cấp lại giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng",
           "code": "1.013795",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013795"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013795"
         }
       ]
     },
@@ -1695,217 +1695,217 @@
           "id": "xay-dung-001",
           "name": "Công nhận Ban quản trị nhà chung cư",
           "code": "1.012888",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012888"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012888"
         },
         {
           "id": "xay-dung-002",
           "name": "Thẩm định thiết kế xây dựng triển khai sau thiết kế cơ sở/thiết kế xây dựng triển khai sau thiết kế cơ sở điều chỉnh",
           "code": "1.013234",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013234"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013234"
         },
         {
           "id": "xay-dung-003",
           "name": "Thẩm định Báo cáo nghiên cứu khả thi đầu tư xây dựng/ Báo cáo nghiên cứu khả thi đầu tư xây dựng điều chỉnh",
           "code": "1.013239",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013239"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013239"
         },
         {
           "id": "xay-dung-004",
           "name": "Cấp giấy phép xây dựng mới đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013225",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013225"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013225"
         },
         {
           "id": "xay-dung-005",
           "name": "Cấp giấy phép xây dựng sửa chữa, cải tạo đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013229",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013229"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013229"
         },
         {
           "id": "xay-dung-006",
           "name": "Cấp giấy phép di dời đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013232",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013232"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013232"
         },
         {
           "id": "xay-dung-007",
           "name": "Cấp điều chỉnh giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013226",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013226"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013226"
         },
         {
           "id": "xay-dung-008",
           "name": "Gia hạn giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013227",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013227"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013227"
         },
         {
           "id": "xay-dung-009",
           "name": "Cấp lại giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và Nhà ở riêng lẻ",
           "code": "1.013228",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013228"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013228"
         },
         {
           "id": "xay-dung-010",
           "name": "Đăng ký phương tiện lần đầu đối với phương tiện chưa khai thác trên đường thủy nội địa.",
           "code": "1.004088",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004088"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004088"
         },
         {
           "id": "xay-dung-011",
           "name": "Đăng ký phương tiện lần đầu đối với phương tiện đang khai thác trên đường thủy nội địa.",
           "code": "1.004047",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004047"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004047"
         },
         {
           "id": "xay-dung-012",
           "name": "Đăng ký lại phương tiện trong trường hợp chuyển từ cơ quan đăng ký khác sang cơ quan đăng ký phương tiện thủy nội địa",
           "code": "1.004036",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004036"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004036"
         },
         {
           "id": "xay-dung-013",
           "name": "Đăng ký lại phương tiện trong trường hợp phương tiện thay đổi tên, tính năng kỹ thuật",
           "code": "2.001711",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001711"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001711"
         },
         {
           "id": "xay-dung-014",
           "name": "Đăng ký lại phương tiện trong trường hợp chuyển quyền sở hữu phương tiện nhưng không thay đổi cơ quan đăng ký phương tiện",
           "code": "1.004002",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004002"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004002"
         },
         {
           "id": "xay-dung-015",
           "name": "Đăng ký lại phương tiện trong trường hợp chuyển quyền sở hữu phương tiện đồng thời thay đổi cơ quan đăng ký phương tiện",
           "code": "1.003970",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003970"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003970"
         },
         {
           "id": "xay-dung-016",
           "name": "Đăng ký lại phương tiện trong trường hợp chủ phương tiện thay đổi trụ sở hoặc nơi đăng ký hộ khẩu thường trú của chủ phương tiện sang đơn vị hành chính cấp tỉnh khác",
           "code": "1.006391",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006391"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006391"
         },
         {
           "id": "xay-dung-017",
           "name": "Đổi tên cảng, bến thủy nội địa, khu neo đậu",
           "code": "1.009443",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009443"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009443"
         },
         {
           "id": "xay-dung-018",
           "name": "Gia hạn hoạt động cảng, bến thủy nội địa",
           "code": "1.009444",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009444"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009444"
         },
         {
           "id": "xay-dung-019",
           "name": "Thỏa thuận nâng cấp bến thủy nội địa thành cảng thủy nội địa",
           "code": "1.009445",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009445"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009445"
         },
         {
           "id": "xay-dung-020",
           "name": "Công bố đóng cảng, bến thủy nội địa",
           "code": "1.009447",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009447"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009447"
         },
         {
           "id": "xay-dung-021",
           "name": "Xác nhận trình báo đường thủy nội địa hoặc trình báo đường thủy nội địa bổ sung",
           "code": "1.005040",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005040"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005040"
         },
         {
           "id": "xay-dung-022",
           "name": "Đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước lần đầu",
           "code": "2.001215",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001215"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001215"
         },
         {
           "id": "xay-dung-023",
           "name": "Đăng ký lại phương tiện hoạt động vui chơi, giải trí dưới nước",
           "code": "2.001214",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001214"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001214"
         },
         {
           "id": "xay-dung-024",
           "name": "Cấp lại Giấy chứng nhận đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước",
           "code": "2.001212",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001212"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001212"
         },
         {
           "id": "xay-dung-025",
           "name": "Xóa đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước",
           "code": "2.001211",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001211"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001211"
         },
         {
           "id": "xay-dung-026",
           "name": "Thỏa thuận thông số kỹ thuật xây dựng bến thủy nội địa",
           "code": "1.009452",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009452"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009452"
         },
         {
           "id": "xay-dung-027",
           "name": "Thỏa thuận thông số kỹ thuật xây dựng bến khách ngang sông, bến thủy nội địa phục vụ thi công công trình chính",
           "code": "1.009453",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009453"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009453"
         },
         {
           "id": "xay-dung-028",
           "name": "Công bố hoạt động bến thủy nội địa",
           "code": "1.009454",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009454"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009454"
         },
         {
           "id": "xay-dung-029",
           "name": "Công bố hoạt động bến khách ngang sông, bến thủy nội địa phục vụ thi công công trình chính",
           "code": "1.009455",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009455"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009455"
         },
         {
           "id": "xay-dung-030",
           "name": "Công bố lại hoạt động bến thủy nội địa",
           "code": "1.003658",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003658"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003658"
         },
         {
           "id": "xay-dung-031",
           "name": "Công bố mở, cho phép hoạt động tại vùng nước khác không thuộc vùng nước trên tuyến đường thủy nội địa, vùng nước cảng biển hoặc khu vực hàng hải, được đánh dấu, xác định vị trí bằng phao hoặc cờ hiệu có màu sắc dễ quan sát",
           "code": "2.001218",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001218"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001218"
         },
         {
           "id": "xay-dung-032",
           "name": "Đóng, không cho phép hoạt động tại vùng nước khác không thuộc vùng nước trên tuyến đường thủy nội địa, vùng nước cảng biển hoặc khu vực hàng hải, được đánh dấu, xác định vị trí bằng phao hoặc cờ hiệu có màu sắc dễ quan sát",
           "code": "2.001217",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001217"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001217"
         },
         {
           "id": "xay-dung-033",
           "name": "Chấp thuận vị trí đấu nối tạm vào đường bộ đang khai thác",
           "code": "1.000314",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000314"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000314"
         },
         {
           "id": "xay-dung-034",
           "name": "Cấp Giấy phép nhập khẩu pháo hiệu hàng hải",
           "code": "1.001223",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001223"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001223"
         },
         {
           "id": "xay-dung-035",
           "name": "Chấp thuận vị trí, quy mô, kích thước, phương án tổ chức thi công biển quảng cáo, biển thông tin cổ động, tuyên truyền chính trị; chấp thuận xây dựng, lắp đặt công trình hạ tầng, công trình hạ tầng kỹ thuật sử dụng chung trong phạm vi bảo vệ kết cấu hạ tầng đường bộ; chấp thuận gia cường công trình đường bộ khi cần thiết để cho phép xe quá khổ giới hạn, xe quá tải trọng, xe bánh xích lưu hành trên đường bộ",
           "code": "2.001921",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001921"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001921"
         },
         {
           "id": "xay-dung-036",
           "name": "Cấp phép sử dụng tạm thời lòng đường, vỉa hè vào mục đích khác",
           "code": "1.013274",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013274"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013274"
         }
       ]
     },
@@ -1917,145 +1917,145 @@
           "id": "y-te-001",
           "name": "Đăng ký hoạt động đối với cơ sở trợ giúp xã hội dưới 10 đối tượng có hoàn cảnh khó khăn",
           "code": "2.000355",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000355"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000355"
         },
         {
           "id": "y-te-002",
           "name": "Thủ tục hỗ trợ chi phí khuyến khích hỏa táng (TTHC đặc thù của TP do UBNDTP công bố)",
           "code": "1.014036",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014036"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014036"
         },
         {
           "id": "y-te-003",
           "name": "Hỗ trợ chi phí mai táng cho đối tượng bảo trợ xã hội",
           "code": "1.001731",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001731"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001731"
         },
         {
           "id": "y-te-004",
           "name": "Xác định, xác định lại mức độ khuyết tật và cấp giấy xác nhận khuyết tật",
           "code": "1.001699",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001699"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001699"
         },
         {
           "id": "y-te-005",
           "name": "Cấp đổi, cấp lại giấy xác nhận khuyết tật",
           "code": "1.001653",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001653"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001653"
         },
         {
           "id": "y-te-006",
           "name": "Thực hiện, điều chỉnh, thôi hưởng trợ cấp xã hội hàng tháng, hỗ trợ kinh phí chăm sóc, nuôi dưỡng hàng tháng",
           "code": "1.001776",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001776"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001776"
         },
         {
           "id": "y-te-007",
           "name": "Tiếp nhận đối tượng bảo trợ xã hội có hoàn cảnh đặc biệt khó khăn vào cơ sở trợ giúp xã hội",
           "code": "2.000286",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000286"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000286"
         },
         {
           "id": "y-te-008",
           "name": "Tiếp nhận đối tượng cần bảo vệ khẩn cấp vào cơ sở trợ giúp xã hội",
           "code": "2.000282",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000282"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000282"
         },
         {
           "id": "y-te-009",
           "name": "Thực hiện, điều chỉnh, thôi hưởng trợ cấp hưu trí xã hội",
           "code": "1.014027",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014027"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014027"
         },
         {
           "id": "y-te-010",
           "name": "Hỗ trợ chi phí mai táng đối với đối tượng hưởng trợ cấp hưu trí xã hội",
           "code": "1.014028",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014028"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014028"
         },
         {
           "id": "y-te-011",
           "name": "Chuyển trẻ em đang được chăm sóc thay thế tại cơ sở trợ giúp xã hội đến cá nhân, gia đình nhận chăm sóc thay thế",
           "code": "2.001942",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001942"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001942"
         },
         {
           "id": "y-te-012",
           "name": "Chấm dứt việc chăm sóc thay thế cho trẻ em",
           "code": "1.004944",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004944"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004944"
         },
         {
           "id": "y-te-013",
           "name": "Áp dụng các biện pháp can thiệp khẩn cấp hoặc tạm thời cách ly trẻ em khỏi môi trường hoặc người gây tổn hại cho trẻ em",
           "code": "1.004946",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004946"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004946"
         },
         {
           "id": "y-te-014",
           "name": "Phê duyệt kế hoạch hỗ trợ, can thiệp đối với trẻ em bị xâm hại hoặc có nguy cơ bị bạo lực, bóc lột, bỏ rơi và trẻ em có hoàn cảnh đặc biệt",
           "code": "2.001947",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001947"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001947"
         },
         {
           "id": "y-te-015",
           "name": "Đăng ký nhận chăm sóc thay thế cho trẻ em đối với cá nhân, người đại diện gia đình nhận chăm sóc thay thế không phải là người thân thích của trẻ em",
           "code": "1.004941",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004941"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004941"
         },
         {
           "id": "y-te-016",
           "name": "Thông báo nhận chăm sóc thay thế cho trẻ em đối với cá nhân, người đại diện gia đình nhận chăm sóc thay thế là người thân thích của trẻ em",
           "code": "2.001944",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001944"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001944"
         },
         {
           "id": "y-te-017",
           "name": "Hỗ trợ học văn hóa, học nghề, trợ cấp khó khăn ban đầu cho nạn nhân",
           "code": "2.001661",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001661"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001661"
         },
         {
           "id": "y-te-018",
           "name": "Thủ tục tiếp công dân cấp xã",
           "code": "1.010945",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010945"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010945"
         },
         {
           "id": "y-te-019",
           "name": "Thủ tục giải quyết khiếu nại lần đầu cấp xã",
           "code": "2.002409",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002409"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002409"
         },
         {
           "id": "y-te-020",
           "name": "Thủ tục giải quyết tố cáo tại cấp xã",
           "code": "2.002396",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002396"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002396"
         },
         {
           "id": "y-te-021",
           "name": "Thủ tục xử lý đơn tại cấp xã",
           "code": "2.002501",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002501"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002501"
         },
         {
           "id": "y-te-022",
           "name": "Thủ tục kê khai tài sản, thu nhập",
           "code": "2.002400",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002400"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002400"
         },
         {
           "id": "y-te-023",
           "name": "Thủ tục tiếp nhận yêu cầu giải trình",
           "code": "2.002402",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002402"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002402"
         },
         {
           "id": "y-te-024",
           "name": "Thủ tục thực hiện việc giải trình",
           "code": "2.002403",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002403"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002403"
         }
       ]
     },
@@ -2067,13 +2067,13 @@
           "id": "lien-thong-dien-tu-001",
           "name": "Đăng ký khai sinh, đăng ký thường trú, cấp thẻ bảo hiểm y tế cho trẻ em dưới 6 tuổi",
           "code": "2.002621",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002621"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002621"
         },
         {
           "id": "lien-thong-dien-tu-002",
           "name": "Đăng ký khai tử, xóa đăng ký thường trú, giải quyết mai táng phí, tử tuất",
           "code": "2.002622",
-          "url": "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002622"
+          "url": "https://vpcp.dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002622"
         }
       ]
     }

@@ -7,12 +7,27 @@
  * @alias       : login-api, dang-nhap
  *
  * Production: xác thực bằng email + mật khẩu hash trong database
+ * Chống dò mật khẩu: src/lib/login-rate-limit.ts · Chống open redirect: safeAdminRedirect()
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createSession } from '@/lib/auth'
 import { getAdminDb, hasDatabase, writeAuditLog } from '@/lib/admin-db'
 import { verifyPassword } from '@/lib/password'
+import { safeAdminRedirect } from '@/lib/session-token'
+import {
+  clearLoginFailures,
+  getClientIp,
+  getLockRemainingSeconds,
+  recordLoginFailure,
+} from '@/lib/login-rate-limit'
+
+function lockedResponse(seconds: number) {
+  return NextResponse.json(
+    { error: `Đăng nhập sai quá nhiều lần. Vui lòng thử lại sau ${Math.ceil(seconds / 60)} phút.` },
+    { status: 429, headers: { 'Retry-After': String(seconds) } }
+  )
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,16 +40,27 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const normalizedEmail = email.toLowerCase().trim()
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      return NextResponse.json({ error: 'Dữ liệu không hợp lệ' }, { status: 400 })
+    }
+
+    const normalizedEmail = email.toLowerCase().trim().slice(0, 200)
+    const ip = getClientIp(request.headers)
+    const lockSeconds = getLockRemainingSeconds(ip, normalizedEmail)
+    if (lockSeconds > 0) return lockedResponse(lockSeconds)
+
     let user = null
 
     if (hasDatabase()) {
       user = await getAdminDb().user.findUnique({
         where: { email: normalizedEmail },
-        select: { id: true, email: true, name: true, role: true, isActive: true, passwordHash: true },
+        select: { id: true, email: true, name: true, role: true, isActive: true, passwordHash: true, sessionVersion: true },
       })
 
       if (!user || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
+        recordLoginFailure(ip, normalizedEmail)
+        const lockedNow = getLockRemainingSeconds(ip, normalizedEmail)
+        if (lockedNow > 0) return lockedResponse(lockedNow)
         return NextResponse.json({ error: 'Email hoặc mật khẩu không đúng' }, { status: 401 })
       }
 
@@ -69,18 +95,21 @@ export async function POST(request: NextRequest) {
       role: user?.role || 'ADMIN',
     } as const
 
+    clearLoginFailures(normalizedEmail)
+
     if (hasDatabase()) {
       await writeAuditLog({
         ...session,
         action: 'LOGIN',
         entity: 'auth',
+        ipAddress: ip,
       })
     }
 
-    await createSession(session)
+    await createSession(session, user?.sessionVersion ?? 0)
 
-    // Lấy redirect URL từ query hoặc mặc định /admin
-    const from = request.nextUrl.searchParams.get('from') || '/admin'
+    // Chỉ chuyển hướng nội bộ trong /admin
+    const from = safeAdminRedirect(request.nextUrl.searchParams.get('from'))
 
     return NextResponse.json({ success: true, redirect: from })
   } catch (err) {

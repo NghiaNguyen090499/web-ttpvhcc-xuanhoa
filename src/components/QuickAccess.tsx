@@ -11,13 +11,15 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { DVC_LEGACY_LOOKUP_URL, DVC_PORTAL_URL } from '@/lib/dvc-links'
+import { DvcTransitionNotice } from '@/components/DvcTransitionNotice'
 
 /* 6 mục truy cập nhanh */
 const ITEMS = [
   {
     title: 'Nộp hồ sơ trực tuyến',
     desc: 'Nộp qua Cổng DVC Quốc gia',
-    href: 'https://dichvucong.gov.vn',
+    href: DVC_PORTAL_URL,
     external: true,
     color: '#0878c9',
     bgColor: 'rgba(8, 120, 201, 0.08)',
@@ -121,11 +123,14 @@ export function QuickAccess() {
    */
   const handleLookup = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!lookupCode.trim()) return
-    window.open(
-      `https://dichvucong.gov.vn/p/home/dvc-tra-cuu-ho-so.html?maBienNhan=${encodeURIComponent(lookupCode.trim())}`,
-      '_blank'
-    )
+    const code = lookupCode.trim()
+    if (!code) return
+    /* Nút submit quyết định hệ thống: hồ sơ cũ (trước 29/05/2026) → vpcp, hồ sơ mới → Cổng DVC mới */
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null
+    const url = submitter?.value === 'new'
+      ? DVC_PORTAL_URL
+      : `${DVC_LEGACY_LOOKUP_URL}?maBienNhan=${encodeURIComponent(code)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -232,7 +237,7 @@ export function QuickAccess() {
                 </button>
               </div>
 
-              <form onSubmit={handleLookup} className="flex gap-3">
+              <form onSubmit={handleLookup} className="flex flex-col gap-3 sm:flex-row">
                 <input
                   type="text"
                   value={lookupCode}
@@ -243,15 +248,21 @@ export function QuickAccess() {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-dark btn-transition shrink-0"
+                  value="new"
+                  className="px-4 py-3 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-dark btn-transition shrink-0"
                 >
-                  Tra cứu
+                  Hồ sơ từ 29/05/2026
+                </button>
+                <button
+                  type="submit"
+                  value="legacy"
+                  className="px-4 py-3 bg-white border border-primary text-primary text-sm font-bold rounded-xl hover:bg-primary/5 btn-transition shrink-0"
+                >
+                  Hồ sơ trước 29/05/2026
                 </button>
               </form>
 
-              <p className="mt-3 text-xs text-text-muted text-center">
-                Kết quả sẽ được tra cứu trên Cổng Dịch vụ công Quốc gia
-              </p>
+              <DvcTransitionNotice compact className="mt-3" />
             </div>
           </div>
         )}

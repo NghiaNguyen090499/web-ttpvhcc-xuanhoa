@@ -7,6 +7,7 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SiteSearchForm from '@/components/SiteSearchForm'
 import { getPortalProcedureLinksData, getPortalProceduresData } from '@/lib/portal-db'
 
 export const metadata: Metadata = {
@@ -36,13 +37,8 @@ export default async function ProceduresPage() {
             Bấm vào từng thủ tục để mở trực tiếp trên Cổng Dịch vụ công Quốc gia.
           </p>
 
-          {/* Search bar */}
-          <div className="mt-6 flex max-w-2xl overflow-hidden rounded-2xl bg-white shadow-lg">
-            <div className="flex flex-1 items-center gap-3 px-4">
-              <svg className="h-5 w-5 shrink-0 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-              <input type="text" placeholder="Tìm theo tên thủ tục hoặc mã số..." className="w-full border-0 bg-transparent py-4 text-sm text-text-primary outline-none placeholder:text-text-muted" />
-            </div>
-            <button className="bg-accent px-6 text-sm font-bold text-[#5a3200] hover:bg-accent-dark btn-transition">Tìm kiếm</button>
+          <div className="mt-6 max-w-2xl">
+            <SiteSearchForm placeholder="Tìm theo tên thủ tục hoặc mã số..." />
           </div>
         </div>
       </section>

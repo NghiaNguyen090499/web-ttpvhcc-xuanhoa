@@ -1,6 +1,6 @@
 /**
  * @nhom        : API Routes / Admin
- * @chucnang    : CRUD nội dung Video/File/Tuyên truyền
+ * @chucnang    : CRUD nội dung Ảnh/Video/File/Tuyên truyền
  * @lienquan    : data/tuyen-truyen.json, src/lib/static-data.ts
  * @alias       : admin-propaganda-api, crud-tuyen-truyen
  */
@@ -22,11 +22,31 @@ type PropagandaItem = {
   summary: string
   content: string
   publishedAt: string
-  mediaType?: 'article' | 'video' | 'file'
+  mediaType?: 'article' | 'video' | 'file' | 'image'
   mediaUrl?: string
   fileName?: string
   fileSize?: number
   isFeatured?: boolean
+}
+
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'])
+
+function hasImageExtension(value?: string | null) {
+  if (!value) return false
+
+  try {
+    const parsed = new URL(value, 'http://local.invalid')
+    const pathname = parsed.pathname.toLowerCase()
+    return [...IMAGE_EXTENSIONS].some((extension) => pathname.endsWith(extension))
+  } catch {
+    const clean = value.split('?')[0]?.split('#')[0]?.toLowerCase() || ''
+    return [...IMAGE_EXTENSIONS].some((extension) => clean.endsWith(extension))
+  }
+}
+
+function isImageMedia(item: Pick<PropagandaItem, 'mediaType' | 'mediaUrl' | 'fileName'>) {
+  return item.mediaType === 'image'
+    || (item.mediaType === 'file' && (hasImageExtension(item.mediaUrl) || hasImageExtension(item.fileName)))
 }
 
 function readItems(): PropagandaItem[] {
@@ -43,19 +63,21 @@ function writeItems(items: PropagandaItem[]) {
 }
 
 function normalizeMediaType(value: unknown): PropagandaItem['mediaType'] {
-  if (value === 'video' || value === 'file') return value
+  if (value === 'video' || value === 'file' || value === 'image') return value
   return 'article'
 }
 
 function toDbMediaType(value: unknown) {
   if (value === 'video') return 'VIDEO' as const
+  // Prisma enum hiện tại chưa có IMAGE; ảnh dùng cùng media_type FILE và phân biệt bằng đuôi file.
   if (value === 'file') return 'FILE' as const
+  if (value === 'image') return 'FILE' as const
   return 'ARTICLE' as const
 }
 
-function fromDbMediaType(value: 'ARTICLE' | 'VIDEO' | 'FILE'): PropagandaItem['mediaType'] {
+function fromDbMediaType(value: 'ARTICLE' | 'VIDEO' | 'FILE', mediaUrl?: string | null, fileName?: string | null): PropagandaItem['mediaType'] {
   if (value === 'VIDEO') return 'video'
-  if (value === 'FILE') return 'file'
+  if (value === 'FILE') return hasImageExtension(mediaUrl) || hasImageExtension(fileName) ? 'image' : 'file'
   return 'article'
 }
 
@@ -78,6 +100,7 @@ function buildItem(body: Record<string, unknown>, fallback?: PropagandaItem): Pr
     mediaUrl: mediaUrl || undefined,
     fileName: body.fileName ? String(body.fileName) : fallback?.fileName,
     fileSize: typeof body.fileSize === 'number' ? body.fileSize : fallback?.fileSize,
+    isFeatured: fallback?.isFeatured,
   }
 }
 
@@ -96,7 +119,7 @@ export async function GET() {
         summary: item.summary,
         content: item.content,
         publishedAt: item.publishedAt.toISOString().slice(0, 10),
-        mediaType: fromDbMediaType(item.mediaType),
+        mediaType: fromDbMediaType(item.mediaType, item.mediaUrl, item.fileName),
         mediaUrl: item.mediaUrl,
         fileName: item.fileName,
         fileSize: item.fileSize,
@@ -169,11 +192,21 @@ export async function PUT(request: NextRequest) {
     }
 
     if (hasDatabase()) {
-      if (body.action === 'feature-video' || body.action === 'unfeature-video') {
+      if (
+        body.action === 'feature-video'
+        || body.action === 'unfeature-video'
+        || body.action === 'feature-image'
+        || body.action === 'unfeature-image'
+      ) {
         const db = getAdminDb()
         const existing = await db.propagandaContent.findUnique({ where: { id: String(body.id) } })
-        if (!existing || existing.mediaType !== 'VIDEO') {
-          return NextResponse.json({ error: 'Không tìm thấy video' }, { status: 404 })
+        const isVideoAction = body.action === 'feature-video' || body.action === 'unfeature-video'
+        const existingMediaType = existing
+          ? fromDbMediaType(existing.mediaType, existing.mediaUrl, existing.fileName)
+          : undefined
+
+        if (!existing || (isVideoAction ? existingMediaType !== 'video' : existingMediaType !== 'image')) {
+          return NextResponse.json({ error: isVideoAction ? 'Không tìm thấy video' : 'Không tìm thấy ảnh' }, { status: 404 })
         }
 
         if (body.action === 'feature-video') {
@@ -187,6 +220,33 @@ export async function PUT(request: NextRequest) {
               data: { sortOrder: -1 },
             }),
           ])
+        } else if (body.action === 'unfeature-video') {
+          await db.propagandaContent.update({
+            where: { id: String(body.id) },
+            data: { sortOrder: 0 },
+          })
+        } else if (body.action === 'feature-image') {
+          const fileItems = await db.propagandaContent.findMany({
+            where: { mediaType: 'FILE' },
+            select: { id: true, mediaUrl: true, fileName: true },
+          })
+          const imageIds = fileItems
+            .filter((item) => item.id !== String(body.id) && (hasImageExtension(item.mediaUrl) || hasImageExtension(item.fileName)))
+            .map((item) => item.id)
+          const operations = [
+            ...(imageIds.length > 0
+              ? [db.propagandaContent.updateMany({
+                  where: { id: { in: imageIds }, sortOrder: { lt: 0 } },
+                  data: { sortOrder: 0 },
+                })]
+              : []),
+            db.propagandaContent.update({
+              where: { id: String(body.id) },
+              data: { sortOrder: -1 },
+            }),
+          ]
+
+          await db.$transaction(operations)
         } else {
           await db.propagandaContent.update({
             where: { id: String(body.id) },
@@ -237,14 +297,27 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Không tìm thấy nội dung' }, { status: 404 })
     }
 
-    if (body.action === 'feature-video' || body.action === 'unfeature-video') {
-      if (items[index].mediaType !== 'video') {
-        return NextResponse.json({ error: 'Không tìm thấy video' }, { status: 404 })
+    if (
+      body.action === 'feature-video'
+      || body.action === 'unfeature-video'
+      || body.action === 'feature-image'
+      || body.action === 'unfeature-image'
+    ) {
+      const isVideoAction = body.action === 'feature-video' || body.action === 'unfeature-video'
+      if (isVideoAction ? items[index].mediaType !== 'video' : !isImageMedia(items[index])) {
+        return NextResponse.json({ error: isVideoAction ? 'Không tìm thấy video' : 'Không tìm thấy ảnh' }, { status: 404 })
       }
 
       if (body.action === 'feature-video') {
         items.forEach((item) => {
           if (item.mediaType === 'video') item.isFeatured = false
+        })
+        items[index].isFeatured = true
+      } else if (body.action === 'unfeature-video') {
+        items[index].isFeatured = false
+      } else if (body.action === 'feature-image') {
+        items.forEach((item) => {
+          if (isImageMedia(item)) item.isFeatured = false
         })
         items[index].isFeatured = true
       } else {
@@ -267,7 +340,7 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const auth = await requireAdminSession('ADMIN')
+    const auth = await requireAdminSession('EDITOR')
     if (auth.response) return auth.response
 
     const body = await request.json()

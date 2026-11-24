@@ -21,7 +21,7 @@ RUN npx prisma generate
 CMD ["sh", "-c", "npm run db:push && npm run db:seed"]
 
 FROM base AS runner
-RUN apk add --no-cache libc6-compat openssl
+RUN apk add --no-cache libc6-compat openssl poppler-utils
 ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

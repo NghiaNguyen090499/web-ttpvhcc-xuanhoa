@@ -5,7 +5,7 @@
  * @lienquan    : src/lib/queries.ts, src/components/VisitCounter.tsx
  * @alias       : visits-api, luot-truy-cap
  *
- * Tổng hiển thị = VISIT_COUNTER_BASE (mặc định 30000) + số lượt đếm thực trong DB.
+ * Tổng hiển thị = VISIT_COUNTER_BASE (mặc định 0) + số lượt đếm trong DB.
  * Mỗi lần tải/chuyển trang đếm 1 lượt; bot/crawler bị bỏ qua.
  * Không lưu IP hay bất kỳ dữ liệu cá nhân nào.
  */
@@ -21,7 +21,7 @@ const BOT_UA = /bot|crawl|spider|slurp|preview|monitor|curl|wget|python|headless
 
 function getBase() {
   const base = Number.parseInt(process.env.VISIT_COUNTER_BASE || '', 10)
-  return Number.isFinite(base) && base >= 0 ? base : 30000
+  return Number.isFinite(base) && base >= 0 ? base : 0
 }
 
 function respond(counted: number) {

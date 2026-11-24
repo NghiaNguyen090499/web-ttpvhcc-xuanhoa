@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "_backup/**",
     "knowledge/**",
+    "public/tinymce/**",
     "next-env.d.ts",
   ]),
 ]);

@@ -216,6 +216,7 @@ export async function createFeedback(data: {
   phone?: string
   subject: string
   content: string
+  attachments?: { id: string; name: string; size: number; mimeType: string }[]
 }) {
   return getPrisma().feedback.create({ data })
 }

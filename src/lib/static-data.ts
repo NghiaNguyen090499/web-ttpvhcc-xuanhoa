@@ -10,8 +10,9 @@
  * - Seed data cho phát triển local
  */
 
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync, statSync } from 'fs'
 import { join } from 'path'
+import { buildWorkScheduleFileMeta, parseWorkScheduleFileName, type WorkScheduleFileMeta } from '@/lib/work-schedule-file'
 
 // Đường dẫn thư mục dữ liệu
 const DATA_DIR = join(process.cwd(), 'data')
@@ -272,6 +273,8 @@ export interface NewsItem {
   excerpt: string
   content: string
   source: string
+  isFeatured?: boolean
+  commentsEnabled?: boolean
 }
 
 // Cache tin tức
@@ -308,6 +311,7 @@ export interface NiemYetItem {
   title: string
   category?: string
   fileUrl: string
+  attachments?: { url: string; name?: string; fileType?: 'pdf' | 'image' | 'doc' | string }[]
   fileType: 'pdf' | 'image' | 'doc'
   publishedAt: string
   description?: string
@@ -346,6 +350,15 @@ export interface LichCongTacEntry {
   ghiChu: string
 }
 
+/** Một dòng lịch lãnh đạo trực trong PDF lịch công tác */
+export interface LichTrucEntry {
+  thu: string
+  ngay: string
+  lanhDaoTruc: string
+  chucVu: string
+  noiDung: string
+}
+
 /** Lịch 1 ngày trong tuần */
 export interface LichNgay {
   thu: string
@@ -361,12 +374,70 @@ export interface LichCongTacData {
     tuanDen: string
     capNhat: string
     nguoiDuyet: string
+    file?: WorkScheduleFileMeta
+    fileDisabled?: boolean
+    gioLamViec?: string[]
+    diaDiemTruSo?: string[]
   }
+  lichTruc?: LichTrucEntry[]
   lichTuan: LichNgay[]
 }
 
 // Cache lịch công tác
 let _lichCongTacCache: LichCongTacData | null = null
+
+function getDefaultWorkScheduleFile(): WorkScheduleFileMeta | undefined {
+  try {
+    const lichDir = join(process.cwd(), 'public', 'files', 'Lich')
+    const files = readdirSync(lichDir)
+      .filter((fileName) => fileName.toLowerCase().endsWith('.pdf'))
+      .map((fileName) => {
+        const filePath = join(lichDir, fileName)
+        const fileStat = statSync(filePath)
+        return { fileName, fileStat }
+      })
+      .filter(({ fileStat }) => fileStat.isFile())
+      .sort((a, b) => b.fileStat.mtimeMs - a.fileStat.mtimeMs)
+
+    const latest = files[0]
+    if (!latest) return undefined
+
+    return buildWorkScheduleFileMeta({
+      url: `/files/Lich/${encodeURIComponent(latest.fileName)}`,
+      fileName: latest.fileName,
+      fileSize: latest.fileStat.size,
+      mimeType: 'application/pdf',
+    }, latest.fileStat.mtime)
+  } catch {
+    return undefined
+  }
+}
+
+export function withDefaultWorkScheduleFile(data: LichCongTacData): LichCongTacData {
+  if (data.metadata.fileDisabled) return data
+  if (data.metadata.file?.fileUrl) return data
+
+  const file = getDefaultWorkScheduleFile()
+  if (!file) return data
+
+  const parsed = parseWorkScheduleFileName(file.fileName, new Date(file.uploadedAt))
+
+  return {
+    ...data,
+    metadata: {
+      ...data.metadata,
+      tuanSo: parsed.tuanSo ?? data.metadata.tuanSo,
+      tuanTu: parsed.tuanTu ?? data.metadata.tuanTu,
+      tuanDen: parsed.tuanDen ?? data.metadata.tuanDen,
+      capNhat: file.uploadedAt.slice(0, 10),
+      file,
+    },
+  }
+}
+
+export function clearLichCongTacCache() {
+  _lichCongTacCache = null
+}
 
 /**
  * @chucnang    : Đọc lịch công tác tuần từ JSON
@@ -376,12 +447,12 @@ export function getLichCongTac(): LichCongTacData {
   if (!_lichCongTacCache) {
     try {
       const raw = readFileSync(join(DATA_DIR, 'lich-cong-tac.json'), 'utf-8')
-      _lichCongTacCache = JSON.parse(raw) as LichCongTacData
+      _lichCongTacCache = withDefaultWorkScheduleFile(JSON.parse(raw) as LichCongTacData)
     } catch {
-      _lichCongTacCache = {
+      _lichCongTacCache = withDefaultWorkScheduleFile({
         metadata: { tuanSo: 0, tuanTu: '', tuanDen: '', capNhat: '', nguoiDuyet: '' },
         lichTuan: []
-      }
+      })
     }
   }
   return _lichCongTacCache
@@ -498,7 +569,7 @@ export interface TuyenTruyenItem {
   summary: string
   content: string       // Nội dung HTML đầy đủ cho modal
   publishedAt: string
-  mediaType?: 'article' | 'video' | 'file'
+  mediaType?: 'article' | 'video' | 'file' | 'image'
   mediaUrl?: string
   fileName?: string
   fileSize?: number

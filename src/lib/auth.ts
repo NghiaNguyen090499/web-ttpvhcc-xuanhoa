@@ -7,28 +7,17 @@
  *
  * Sử dụng jose (edge-compatible) thay vì jsonwebtoken
  * Session lưu trong httpOnly cookie — bảo mật hơn localStorage
+ * Chính sách hết hạn / thu hồi phiên: xem src/lib/session-token.ts
  */
 
-import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import { prisma } from '@/lib/db'
-
-// --- Hằng số ---
-const COOKIE_NAME = 'admin-session'
-// Thời gian sống session: 8 giờ
-const SESSION_TTL = '8h'
-const SESSION_MAX_AGE = 8 * 60 * 60
-
-/** Lấy JWT secret key dạng Uint8Array */
-function getJwtSecret(): Uint8Array {
-  const secret = process.env.NEXTAUTH_SECRET || 'dev-secret-thay-doi-trong-production'
-  return new TextEncoder().encode(secret)
-}
-
-function shouldUseSecureCookie(): boolean {
-  if (process.env.AUTH_COOKIE_SECURE === 'false') return false
-  return process.env.NODE_ENV === 'production'
-}
+import {
+  SESSION_COOKIE,
+  sessionCookieOptions,
+  signSessionToken,
+  verifySessionToken,
+} from '@/lib/session-token'
 
 /** Thông tin session admin */
 export interface SessionPayload {
@@ -39,64 +28,54 @@ export interface SessionPayload {
 }
 
 /**
- * @chucnang    : Tạo session mới — ký JWT và set cookie
- * @input       : payload (SessionPayload) — thông tin người dùng
+ * @chucnang    : Tạo session mới — ký JWT và set cookie phiên (mất khi đóng trình duyệt)
+ * @input       : payload (SessionPayload), sessionVersion — phiên bản phiên hiện tại của user
  * @output      : string — JWT token
  */
-export async function createSession(payload: SessionPayload): Promise<string> {
-  const token = await new SignJWT({ ...payload })
-    .setProtectedHeader({ alg: 'HS256' })
-    .setIssuedAt()
-    .setExpirationTime(SESSION_TTL)
-    .sign(getJwtSecret())
+export async function createSession(payload: SessionPayload, sessionVersion = 0): Promise<string> {
+  const token = await signSessionToken({
+    ...payload,
+    sv: sessionVersion,
+    authAt: Math.floor(Date.now() / 1000),
+  })
 
   const cookieStore = await cookies()
-  cookieStore.set(COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: shouldUseSecureCookie(),
-    sameSite: 'lax',
-    maxAge: SESSION_MAX_AGE,
-    path: '/',
-  })
+  cookieStore.set(SESSION_COOKIE, token, sessionCookieOptions())
 
   return token
 }
 
 /**
- * @chucnang    : Đọc session hiện tại từ cookie
+ * @chucnang    : Đọc session hiện tại từ cookie — đối chiếu DB (khóa tài khoản, phiên đã thu hồi)
  * @output      : SessionPayload | null
  */
 export async function getSession(): Promise<SessionPayload | null> {
   const cookieStore = await cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
+  const token = cookieStore.get(SESSION_COOKIE)?.value
 
   if (!token) return null
 
+  const session = await verifySessionToken(token)
+  if (!session) return null
+
+  if (!prisma || !session.email) return session
+
   try {
-    const { payload } = await jwtVerify(token, getJwtSecret())
-    const session = payload as unknown as SessionPayload
+    const user = await prisma.user.findUnique({
+      where: { email: session.email.toLowerCase().trim() },
+      select: { id: true, email: true, name: true, role: true, isActive: true, sessionVersion: true },
+    })
 
-    if (!prisma || !session.email) return session
+    if (!user || !user.isActive || user.sessionVersion !== (session.sv ?? 0)) return null
 
-    try {
-      const user = await prisma.user.findUnique({
-        where: { email: session.email.toLowerCase().trim() },
-        select: { id: true, email: true, name: true, role: true, isActive: true },
-      })
-
-      if (!user || !user.isActive) return null
-
-      return {
-        userId: user.id,
-        email: user.email,
-        name: user.name || session.name || 'Admin',
-        role: user.role,
-      }
-    } catch {
-      return session
+    return {
+      userId: user.id,
+      email: user.email,
+      name: user.name || session.name || 'Admin',
+      role: user.role,
     }
   } catch {
-    return null
+    return session
   }
 }
 
@@ -105,5 +84,17 @@ export async function getSession(): Promise<SessionPayload | null> {
  */
 export async function destroySession(): Promise<void> {
   const cookieStore = await cookies()
-  cookieStore.delete(COOKIE_NAME)
+  cookieStore.delete(SESSION_COOKIE)
+}
+
+/**
+ * @chucnang    : Thu hồi mọi phiên đang mở của user (token cũ không còn hợp lệ)
+ * @input       : userId (string)
+ */
+export async function revokeUserSessions(userId: string): Promise<void> {
+  if (!prisma) return
+  await prisma.user.update({
+    where: { id: userId },
+    data: { sessionVersion: { increment: 1 } },
+  })
 }

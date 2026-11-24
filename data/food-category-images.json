@@ -1,0 +1,47 @@
+{
+  "updatedAt": "2026-08-21",
+  "visuals": {
+    "restaurant": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Nem_n%C6%B0%E1%BB%9Bng_by_Baoothersks.jpg/1280px-Nem_n%C6%B0%E1%BB%9Bng_by_Baoothersks.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa món ăn Việt Nam",
+      "credit": "Baoothersks",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nem_n%C6%B0%E1%BB%9Bng_by_Baoothersks.jpg"
+    },
+    "cafe": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Ca_Phe_Sua_Da.jpg/1280px-Ca_Phe_Sua_Da.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa cà phê sữa đá Việt Nam",
+      "credit": "Clarin",
+      "license": "CC BY 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
+    },
+    "bakery": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Banh_mi_-_flickr5607479129.jpg/1280px-Banh_mi_-_flickr5607479129.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa bánh mì Việt Nam",
+      "credit": "Chris Conway, Hilleary Osheroff (flickr user \"chrisandhilleary\")",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_mi_-_flickr5607479129.jpg"
+    },
+    "vegetarian": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/G%E1%BB%8Fi_Cu%E1%BB%91n_Chay_Vietnamese_Fresh_Vegetarian_Spring_Roll_2019-1599.jpg/1280px-G%E1%BB%8Fi_Cu%E1%BB%91n_Chay_Vietnamese_Fresh_Vegetarian_Spring_Roll_2019-1599.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa gỏi cuốn chay Việt Nam",
+      "credit": "Paul R. Burley",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%E1%BB%8Fi_Cu%E1%BB%91n_Chay_Vietnamese_Fresh_Vegetarian_Spring_Roll_2019-1599.jpg"
+    },
+    "takeaway": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Special_Baguette_%28B%C3%A1nh_m%C3%AC%29_-_Banh_Mi_Ancient_Saigon_2024-12-20.jpg/1280px-Special_Baguette_%28B%C3%A1nh_m%C3%AC%29_-_Banh_Mi_Ancient_Saigon_2024-12-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa bánh mì mang đi",
+      "credit": "Andy Li",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Special_Baguette_(B%C3%A1nh_m%C3%AC)_-_Banh_Mi_Ancient_Saigon_2024-12-20.jpg"
+    },
+    "other": {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Ch%C3%A8_B%E1%BA%AFp.jpg/1280px-Ch%C3%A8_B%E1%BA%AFp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "alt": "Ảnh minh họa món chè Việt Nam",
+      "credit": "Zxcvasdfqwer888",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%A8_B%E1%BA%AFp.jpg"
+    }
+  }
+}

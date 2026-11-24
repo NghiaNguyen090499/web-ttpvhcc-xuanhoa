@@ -7,7 +7,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExternalLink, FileSearch, FileText, Search } from 'lucide-react'
+import { ExternalLink, FileSearch, FileText } from 'lucide-react'
+import SiteSearchForm from '@/components/SiteSearchForm'
 
 export function HeroBanner() {
   return (
@@ -46,20 +47,11 @@ export function HeroBanner() {
               Tra cứu thủ tục hành chính, tải biểu mẫu, theo dõi hồ sơ và nhận hỗ trợ trực tuyến 24/7
             </p>
 
-            <div className="mt-8 flex w-full overflow-hidden rounded-xl bg-white shadow-xl shadow-blue-950/25 animate-fade-in-up stagger-3 md:mt-10 md:w-[48vw] md:min-w-[620px] md:max-w-[760px]">
-              <div className="flex min-w-0 flex-1 items-center gap-3 px-4 md:gap-4 md:px-6">
-                <Search className="h-5 w-5 shrink-0 text-text-muted" strokeWidth={2.2} />
-                <input
-                  type="text"
-                  placeholder="Tìm theo tên thủ tục hoặc lĩnh vực..."
-                  className="w-full min-w-0 border-0 bg-transparent py-4 text-sm text-text-primary outline-none placeholder:text-text-muted md:py-5 md:text-lg"
-                  aria-label="Tìm kiếm thủ tục"
-                />
-              </div>
-              <Link href="/thu-tuc" className="flex min-w-28 items-center justify-center bg-[#ffd044] px-4 text-sm font-bold text-[#5a3b00] hover:bg-accent-dark btn-transition md:min-w-44 md:px-8 md:text-lg">
-                Tìm kiếm
-              </Link>
-            </div>
+            <SiteSearchForm
+              className="mt-8 animate-fade-in-up stagger-3 md:mt-10 md:w-[48vw] md:min-w-[620px] md:max-w-[760px]"
+              placeholder="Tìm thủ tục, tin tức, văn bản..."
+              tone="hero"
+            />
 
             <div className="mt-7 flex w-full flex-col items-center justify-center gap-4 animate-fade-in-up stagger-4 sm:flex-row md:gap-5">
               <Link href="/thu-tuc" className="inline-flex w-full max-w-72 items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-primary shadow-lg shadow-blue-950/18 hover:-translate-y-0.5 hover:bg-primary-50 btn-transition sm:w-auto sm:min-w-60 md:min-w-[17rem] md:text-lg" id="cta-tra-cuu">
@@ -67,7 +59,7 @@ export function HeroBanner() {
                 Tra cứu thủ tục
               </Link>
               <a href="https://dichvucong.gov.vn" target="_blank" rel="noopener noreferrer"
-                className="inline-flex w-full max-w-80 items-center justify-center gap-3 whitespace-nowrap rounded-full border border-white/60 bg-primary/45 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-950/12 backdrop-blur-sm hover:bg-primary/70 btn-transition sm:w-auto sm:min-w-64 md:min-w-[21rem] md:text-lg" id="cta-nop-ho-so">
+                className="inline-flex w-full max-w-80 items-center justify-center gap-3 whitespace-nowrap rounded-full border border-accent-dark bg-accent px-8 py-4 text-sm font-bold text-[#4a3000] shadow-xl shadow-yellow-950/25 hover:bg-accent-light btn-transition sm:w-auto sm:min-w-64 md:min-w-[21rem] md:text-lg" id="cta-nop-ho-so">
                 <FileText className="h-6 w-6" strokeWidth={2.2} />
                 Nộp hồ sơ trực tuyến
                 <ExternalLink className="h-5 w-5" strokeWidth={2.1} />

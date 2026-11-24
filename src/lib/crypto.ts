@@ -29,6 +29,9 @@ const IV_LENGTH = 16
 // Salt cố định cho key derivation (dẫn xuất khóa)
 const SALT = 'ttpvhcc-xuanhoa-aes256-salt-v1'
 
+// Cache khóa đã dẫn xuất — scrypt tốn ~60ms/lần, không chạy lại cho mỗi bản ghi
+let cachedKey: { secret: string; key: Buffer } | null = null
+
 /**
  * @chucnang    : Dẫn xuất khóa 32 bytes từ ENCRYPTION_KEY
  * @output      : Buffer 32 bytes
@@ -41,8 +44,11 @@ function getKey(): Buffer {
       'Cần chuỗi bí mật ≥ 32 ký tự để mã hóa AES-256'
     )
   }
+  if (cachedKey?.secret === secret) return cachedKey.key
   // scrypt: hàm dẫn xuất khóa chống brute-force
-  return scryptSync(secret, SALT, 32)
+  const key = scryptSync(secret, SALT, 32)
+  cachedKey = { secret, key }
+  return key
 }
 
 /**
@@ -108,6 +114,8 @@ export function encryptOptional(value: string | null | undefined): string | null
  */
 export function decryptOptional(value: string | null | undefined): string | null {
   if (!value) return null
+  // Giá trị không có dạng iv:authTag:ciphertext (hex) → dữ liệu cũ chưa mã hóa
+  if (!/^[0-9a-f]{32}:[0-9a-f]{32}:[0-9a-f]*$/i.test(value)) return value
   try {
     return decrypt(value)
   } catch {

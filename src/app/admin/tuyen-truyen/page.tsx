@@ -2,19 +2,19 @@
 
 /**
  * @nhom        : Admin / Pages
- * @chucnang    : Quản lý Video/File/Tuyên truyền — upload file/video và CRUD nội dung
+ * @chucnang    : Quản lý Ảnh/Video/File/Tuyên truyền — upload media và CRUD nội dung
  * @lienquan    : src/app/api/admin/propaganda/route.ts, src/app/api/admin/uploads/route.ts
  * @alias       : admin-tuyen-truyen, media-propaganda
  */
 
 import { useEffect, useMemo, useState } from 'react'
 import {
-  ArrowLeft, Calendar, Edit3, FileText, Link as LinkIcon,
+  ArrowLeft, Calendar, Edit3, FileText, Image as ImageIcon, Link as LinkIcon,
   Plus, Save, Search, Star, StarOff, Trash2, UploadCloud, Video
 } from 'lucide-react'
 import { useAdminRole } from '@/components/admin/AdminRoleContext'
 
-type MediaType = 'article' | 'video' | 'file'
+type MediaType = 'article' | 'video' | 'file' | 'image'
 
 interface PropagandaItem {
   id: string
@@ -64,6 +64,26 @@ function formatSize(size?: number) {
 
 function titleFromFileName(name: string) {
   return name.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ').trim()
+}
+
+function getMediaTypeFromFile(file: File): MediaType {
+  if (file.type.startsWith('video/')) return 'video'
+  if (file.type.startsWith('image/')) return 'image'
+  return 'file'
+}
+
+function getMediaIcon(mediaType: MediaType) {
+  if (mediaType === 'video') return '🎬'
+  if (mediaType === 'image') return '🖼️'
+  if (mediaType === 'file') return '📄'
+  return '📢'
+}
+
+function getMediaTypeLabel(mediaType?: MediaType) {
+  if (mediaType === 'video') return 'Video'
+  if (mediaType === 'image') return 'Ảnh'
+  if (mediaType === 'file') return 'File'
+  return 'Bài viết'
 }
 
 async function readUploadError(res: Response) {
@@ -207,7 +227,7 @@ export default function AdminPropagandaPage() {
 
     setFormData((current) => ({
       ...current,
-      mediaType: file.type.startsWith('video/') ? 'video' : 'file',
+      mediaType: getMediaTypeFromFile(file),
       mediaUrl: data.url,
       fileName: data.fileName,
       fileSize: data.fileSize,
@@ -223,12 +243,12 @@ export default function AdminPropagandaPage() {
     setEditingItem(null)
     setFormData({
       ...DEFAULT_FORM,
-      icon: file.type.startsWith('video/') ? '🎬' : '📄',
+      icon: getMediaIcon(getMediaTypeFromFile(file)),
       title,
       summary: title,
       content: `<p>${title}</p>`,
       publishedAt: new Date().toISOString().slice(0, 10),
-      mediaType: file.type.startsWith('video/') ? 'video' : 'file',
+      mediaType: getMediaTypeFromFile(file),
       mediaUrl: data.url,
       fileName: data.fileName,
       fileSize: data.fileSize,
@@ -272,14 +292,15 @@ export default function AdminPropagandaPage() {
     await fetchItems()
   }
 
-  const toggleFeaturedVideo = async (item: PropagandaItem) => {
-    if (!canEdit || item.mediaType !== 'video') return
+  const toggleFeaturedMedia = async (item: PropagandaItem) => {
+    if (!canEdit || (item.mediaType !== 'video' && item.mediaType !== 'image')) return
+    const mediaKind = item.mediaType === 'image' ? 'image' : 'video'
     await fetch('/api/admin/propaganda', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: item.id,
-        action: item.isFeatured ? 'unfeature-video' : 'feature-video',
+        action: item.isFeatured ? `unfeature-${mediaKind}` : `feature-${mediaKind}`,
       }),
     })
     await fetchItems()
@@ -293,7 +314,7 @@ export default function AdminPropagandaPage() {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="text-xl font-bold text-gray-900">
-            {editingItem ? 'Sửa nội dung tuyên truyền' : 'Thêm Video/File/Tuyên truyền'}
+            {editingItem ? 'Sửa nội dung tuyên truyền' : 'Thêm Ảnh/Video/File/Tuyên truyền'}
           </h1>
         </div>
 
@@ -337,6 +358,7 @@ export default function AdminPropagandaPage() {
               >
                 <option value="article">Bài tuyên truyền</option>
                 <option value="video">Video</option>
+                <option value="image">Ảnh</option>
                 <option value="file">File/PDF</option>
               </select>
             </div>
@@ -361,7 +383,7 @@ export default function AdminPropagandaPage() {
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs font-semibold text-gray-600">Tải video/file</label>
+            <label className="mb-1.5 block text-xs font-semibold text-gray-600">Tải ảnh/video/file</label>
             <label
               onDragOver={(e) => {
                 e.preventDefault()
@@ -397,7 +419,7 @@ export default function AdminPropagandaPage() {
               value={formData.mediaUrl}
               onChange={(e) => setFormData({ ...formData, mediaUrl: e.target.value })}
               className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-primary"
-              placeholder="Dán link video/PDF hoặc dùng vùng upload phía trên"
+              placeholder="Dán link ảnh/video/PDF hoặc dùng vùng upload phía trên"
             />
             {formData.fileName && (
               <p className="mt-1.5 text-xs text-gray-500">
@@ -452,7 +474,7 @@ export default function AdminPropagandaPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Video/File/Tuyên truyền</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Ảnh/Video/File/Tuyên truyền</h1>
           <p className="mt-1 text-sm text-gray-500">{items.length} nội dung</p>
         </div>
         {canEdit && (
@@ -486,7 +508,7 @@ export default function AdminPropagandaPage() {
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-sm font-semibold text-gray-900">
-              {uploading ? 'Đang tải lên...' : 'Kéo thả video/file vào đây hoặc chọn tệp'}
+              {uploading ? 'Đang tải lên...' : 'Kéo thả ảnh/video/file vào đây hoặc chọn tệp'}
             </span>
             <span className="mt-1 block text-sm text-gray-500">
               Sau khi upload, hệ thống sẽ mở form để nhập tiêu đề và lưu nội dung.
@@ -502,7 +524,7 @@ export default function AdminPropagandaPage() {
         </label>
       ) : (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800">
-          Tài khoản hiện tại chỉ có quyền xem. Cần quyền EDITOR hoặc ADMIN để tải video/file.
+          Tài khoản hiện tại chỉ có quyền xem. Cần quyền EDITOR hoặc ADMIN để tải ảnh/video/file.
         </div>
       )}
 
@@ -534,7 +556,7 @@ export default function AdminPropagandaPage() {
               </thead>
               <tbody>
                 {filtered.map((item) => {
-                  const TypeIcon = item.mediaType === 'video' ? Video : item.mediaType === 'file' ? FileText : LinkIcon
+                  const TypeIcon = item.mediaType === 'video' ? Video : item.mediaType === 'image' ? ImageIcon : item.mediaType === 'file' ? FileText : LinkIcon
                   return (
                     <tr key={item.id} className="border-b border-gray-50 transition-colors hover:bg-gray-50/50">
                       <td className="px-5 py-4">
@@ -544,7 +566,7 @@ export default function AdminPropagandaPage() {
                       <td className="hidden px-5 py-4 md:table-cell">
                         <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-600">
                           <TypeIcon className="h-3 w-3" />
-                          {item.mediaType === 'video' ? 'Video' : item.mediaType === 'file' ? 'File' : 'Bài viết'}
+                          {getMediaTypeLabel(item.mediaType)}
                         </span>
                         {item.isFeatured && (
                           <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
@@ -571,15 +593,15 @@ export default function AdminPropagandaPage() {
                               <LinkIcon className="h-4 w-4" />
                             </a>
                           )}
-                          {canEdit && item.mediaType === 'video' && (
+                          {canEdit && (item.mediaType === 'video' || item.mediaType === 'image') && (
                             <button
-                              onClick={() => toggleFeaturedVideo(item)}
+                              onClick={() => toggleFeaturedMedia(item)}
                               className={`rounded-lg p-2 transition-all ${
                                 item.isFeatured
                                   ? 'text-amber-600 hover:bg-amber-50 hover:text-amber-700'
                                   : 'text-gray-400 hover:bg-amber-50 hover:text-amber-600'
                               }`}
-                              title={item.isFeatured ? 'Bỏ nổi bật' : 'Đặt video nổi bật'}
+                              title={item.isFeatured ? 'Bỏ nổi bật' : item.mediaType === 'image' ? 'Đặt ảnh nổi bật' : 'Đặt video nổi bật'}
                             >
                               {item.isFeatured ? <StarOff className="h-4 w-4" /> : <Star className="h-4 w-4" />}
                             </button>

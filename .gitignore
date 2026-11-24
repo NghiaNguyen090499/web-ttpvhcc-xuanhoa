@@ -9,6 +9,7 @@ coverage/
 # Next.js
 .next/
 out/
+/public/tinymce/
 
 # Production
 build/
@@ -52,3 +53,15 @@ facebook-xuan-hoa-final/
 
 # Tri thức nội bộ agent (không deploy)
 knowledge/
+
+# Bản sao file env (chứa secrets) — không commit
+.env*.bak*
+*.bak-*
+
+# Tài liệu nội bộ / bảo mật — không commit
+*.xlsx
+website-security-check-*.json
+
+# Ảnh demo, file tạm ở thư mục gốc
+/images/demo*
+/files/

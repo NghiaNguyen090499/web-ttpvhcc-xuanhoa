@@ -15,8 +15,8 @@ const UNIT_INFO = `
 - Tổng đài hỗ trợ TP.HCM: 1022
 
 ## Cổng Dịch vụ công
-- Cổng DVC Quốc gia: https://dichvucong.gov.vn/
-- Cổng DVC TP.HCM: https://dichvucong.hochiminhcity.gov.vn/
+- Cổng DVC Quốc gia: https://dichvucong.gov.vn/ — từ ngày 29/05/2026 do Trung tâm Dữ liệu Quốc gia vận hành; dùng để nộp và tra cứu hồ sơ nộp từ 29/05/2026.
+- Hồ sơ đã nộp TRƯỚC ngày 29/05/2026: tra cứu tại hệ thống cũ https://vpcp.dichvucong.gov.vn/p/home/dvc-trang-chu.html
 
 ## Hướng dẫn chung
 - Người dân có thể nộp hồ sơ trực tuyến qua Cổng Dịch vụ công cho các thủ tục hỗ trợ online.
@@ -61,7 +61,7 @@ Thứ 2-6: Sáng 07:30-11:30, Chiều 13:00-17:00. Thứ 7: Sáng 07:30-11:30. C
 Tổng đài 1022 là kênh tiếp nhận phản ánh, kiến nghị và hỗ trợ thông tin cho người dân TP.HCM.
 
 ### Làm sao nộp hồ sơ online?
-Truy cập Cổng DVC Quốc gia (dichvucong.gov.vn) hoặc DVC TP.HCM (dichvucong.hochiminhcity.gov.vn), tìm thủ tục cần làm và làm theo hướng dẫn.
+Truy cập Cổng DVC Quốc gia (dichvucong.gov.vn), tìm thủ tục cần làm và làm theo hướng dẫn.
 `;
 
 export function buildSystemPrompt(): string {

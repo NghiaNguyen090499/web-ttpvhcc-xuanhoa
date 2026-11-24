@@ -39,7 +39,7 @@ export function useAdminRole() {
   return {
     role,
     canEdit: ROLE_RANK[role] >= ROLE_RANK.EDITOR,
-    canDelete: role === 'ADMIN',
+    canDelete: ROLE_RANK[role] >= ROLE_RANK.EDITOR,
     isAdmin: role === 'ADMIN',
     hasAtLeast(requiredRole: AdminRole) {
       return ROLE_RANK[role] >= ROLE_RANK[requiredRole]

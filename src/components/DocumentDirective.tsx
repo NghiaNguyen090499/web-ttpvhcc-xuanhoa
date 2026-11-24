@@ -8,6 +8,7 @@
 
 import Link from 'next/link'
 import { getPortalVanBanData } from '@/lib/portal-db'
+import { getVerticalMarqueeDuration } from '@/lib/marquee'
 import type { VanBanItem } from '@/lib/static-data'
 
 /**
@@ -90,7 +91,10 @@ export async function DocumentDirective() {
         </p>
       ) : (
         <div className="directive-marquee directive-scroll-mask h-[320px] overflow-hidden px-4">
-          <div className="animate-directive-scroll">
+          <div
+            className="animate-directive-scroll"
+            style={{ animationDuration: getVerticalMarqueeDuration(latest.length) }}
+          >
             {scrollItems.map((item, index) => (
               <DocumentRow key={`${item.id}-${index}`} item={item} />
             ))}

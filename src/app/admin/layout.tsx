@@ -6,6 +6,8 @@
  */
 
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import { AdminShell } from '@/components/admin/AdminShell'
 import type { AdminRole } from '@/components/admin/AdminRoleContext'
@@ -17,6 +19,13 @@ export const metadata: Metadata = {
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession()
+  const pathname = (await headers()).get('x-admin-pathname') || ''
+
+  // Phiên bị khóa / thu hồi / hết hạn (proxy chỉ kiểm tra chữ ký JWT) → về trang đăng nhập
+  if (!session && !pathname.startsWith('/admin/login')) {
+    redirect('/admin/login')
+  }
+
   return (
     <AdminShell
       userName={session?.name || 'Admin'}

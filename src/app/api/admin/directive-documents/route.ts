@@ -6,6 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { requireAdminSession } from '@/lib/admin-auth'
@@ -36,6 +37,12 @@ function readItems(): DirectiveItem[] {
 
 function writeItems(items: DirectiveItem[]) {
   writeFileSync(DOC_FILE, JSON.stringify(items, null, 2), 'utf-8')
+}
+
+function revalidateDirectivePages() {
+  revalidatePath('/')
+  revalidatePath('/van-ban')
+  revalidatePath('/tim-kiem')
 }
 
 function buildItem(body: Record<string, unknown>, fallback?: DirectiveItem): DirectiveItem {
@@ -105,12 +112,14 @@ export async function POST(request: NextRequest) {
         },
       })
       await writeAuditLog({ ...auth.session, action: 'CREATE', entity: 'directive_document', entityId: created.id, details: { soKyHieu: created.soKyHieu } })
+      revalidateDirectivePages()
       return NextResponse.json({ success: true, item: created })
     }
 
     const items = readItems()
     items.unshift(item)
     writeItems(items)
+    revalidateDirectivePages()
     return NextResponse.json({ success: true, item })
   } catch (err) {
     console.error('[Admin/DirectiveDocuments] Lỗi tạo:', err)
@@ -156,6 +165,7 @@ export async function PUT(request: NextRequest) {
         },
       })
       await writeAuditLog({ ...auth.session, action: 'UPDATE', entity: 'directive_document', entityId: updated.id, details: { soKyHieu: updated.soKyHieu } })
+      revalidateDirectivePages()
       return NextResponse.json({ success: true, item: updated })
     }
 
@@ -164,6 +174,7 @@ export async function PUT(request: NextRequest) {
     if (index === -1) return NextResponse.json({ error: 'Không tìm thấy văn bản' }, { status: 404 })
     items[index] = buildItem(body, items[index])
     writeItems(items)
+    revalidateDirectivePages()
     return NextResponse.json({ success: true, item: items[index] })
   } catch (err) {
     console.error('[Admin/DirectiveDocuments] Lỗi cập nhật:', err)
@@ -173,7 +184,7 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const auth = await requireAdminSession('ADMIN')
+    const auth = await requireAdminSession('EDITOR')
     if (auth.response) return auth.response
 
     const body = await request.json()
@@ -182,6 +193,7 @@ export async function DELETE(request: NextRequest) {
     if (hasDatabase()) {
       await getAdminDb().directiveDocument.delete({ where: { id: String(body.id) } })
       await writeAuditLog({ ...auth.session, action: 'DELETE', entity: 'directive_document', entityId: String(body.id) })
+      revalidateDirectivePages()
       return NextResponse.json({ success: true })
     }
 
@@ -189,6 +201,7 @@ export async function DELETE(request: NextRequest) {
     const filtered = items.filter((item) => item.id !== body.id)
     if (filtered.length === items.length) return NextResponse.json({ error: 'Không tìm thấy văn bản' }, { status: 404 })
     writeItems(filtered)
+    revalidateDirectivePages()
     return NextResponse.json({ success: true })
   } catch (err) {
     console.error('[Admin/DirectiveDocuments] Lỗi xóa:', err)
