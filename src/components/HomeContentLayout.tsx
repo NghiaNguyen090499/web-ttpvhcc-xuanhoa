@@ -9,6 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
+  CalendarClock,
   Download,
   ExternalLink,
   FileText,
@@ -463,6 +464,13 @@ export async function HomeContentLayout() {
 
             <aside className="flex flex-col gap-5">
               <HotlineCard />
+              <Link
+                href="/dat-lich-tai-nha"
+                className="-mt-2 flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_24px_rgba(15,23,42,0.12)] transition hover:bg-primary-dark"
+              >
+                <CalendarClock className="h-5 w-5" aria-hidden="true" />
+                Đặt lịch tại nhà
+              </Link>
               <PublicNoticesSidebarCard data={notices} />
               <DocumentDirective />
               <VideoGuideSidebarCard data={propaganda} featuredVideoId={featuredVideoId} />
