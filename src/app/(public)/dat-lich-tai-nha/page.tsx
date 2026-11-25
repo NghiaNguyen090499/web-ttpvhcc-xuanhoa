@@ -27,7 +27,7 @@ export default function DatLichTaiNhaPage() {
             Đặt lịch tại nhà
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-text-muted">
-            Dịch vụ đang được xây dựng và sẽ sớm ra mắt. Trong thời gian này, vui lòng liên hệ Tổng đài 1022 hoặc đến trực tiếp Trung tâm để được hỗ trợ.
+            Dịch vụ đang được xây dựng và sẽ sớm ra mắt. Trong thời gian này, vui lòng đến trực tiếp Trung tâm để được hỗ trợ.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -36,12 +36,6 @@ export default function DatLichTaiNhaPage() {
             >
               Về trang chủ
             </Link>
-            <a
-              href="tel:1022"
-              className="inline-flex items-center rounded-full border border-border bg-cream px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
-            >
-              Gọi 1022
-            </a>
           </div>
         </div>
       </div>
